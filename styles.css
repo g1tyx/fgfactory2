@@ -1,0 +1,246 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;600;700;800;900&display=swap');
+
+:root {
+    --bs-body-font-family: "Segoe UI", "Roboto";
+    --bs-body-font-size: 0.875rem;
+    --bs-body-font-weight: 400;
+    --bs-body-line-height: 1.5;
+    --bs-body-color: #a2afbb;
+    --bs-body-bg: #222222;
+    --bs-body-bg-rgb: 34,34,34;
+
+    --bs-link-color: #ffc107;
+    --bs-link-hover-color: #c27d0e;
+    
+    --bs-dark: #444444;
+    --bs-danger: #ff3e51;
+    --bs-primary: #ffc107;
+    
+    --bs-dark-rgb: 68,68,68;
+    --bs-danger-rgb: 255,62,81;
+    --bs-primary-rgb: 255,193,7;
+    
+    --bs-border-color: #444444;
+}
+
+html, body {
+    width: 100%; height: 100%;
+    overflow: hidden;
+}
+
+#screen {
+    width: 100%; height: 100%;
+    overflow: hidden;
+    display: flex; align-items: center; justify-content: center;
+}
+
+::-webkit-scrollbar { width: .35rem; height: .35rem; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { border-radius: .25rem; background: rgba(255, 255, 255, .125); }
+
+.scrollbar { height: 100%; overflow-y: auto; overflow-x: hidden; scrollbar-color: $border-color rgba(255, 255, 255, .075); scrollbar-width: thin; }
+
+a { text-decoration: none; }
+
+ul {
+    padding-left: 1rem;
+    margin-bottom: 0rem;
+}
+
+.h1, .h2, .h3, .h4, .h5, .h6, h1, h2, h3, h4, h5, h6 {
+    margin-bottom: 0rem;
+    font-weight: 500;
+}
+
+.btn {
+    --bs-btn-color: #ffffff;
+    --bs-btn-font-size: var(--bs-body-font-size);
+    --bs-btn-border-color: var(--bs-body-bg);
+    --bs-btn-border-radius: 0.375rem;
+    --bs-btn-bg: #444444;
+    --bs-btn-border-width: 2px;
+
+    --bs-btn-hover-color: #000;
+    --bs-btn-hover-bg: #ffc107;
+    --bs-btn-hover-border-color: var(--bs-body-bg);
+    
+    --bs-btn-disabled-opacity: 0.5;
+
+    --bs-btn-active-color: var(--bs-body-color);
+    --bs-btn-active-border-color: var(--bs-body-color);
+}
+
+.btn-primary {
+    --bs-btn-color: #000;
+    --bs-btn-bg: var(--bs-primary);
+}
+
+.form-control {
+    color: #fff;
+    font-size: 0.85rem;
+    border: 1px solid #444444;
+    background-color: #212529;
+}
+
+.form-control:focus {
+    color: #ffffff;
+    background-color: #212529;
+    border-color: #f39c12;
+    outline: 0;
+    box-shadow: 0 0 0 0.25rem rgb(255 193 7 / 25%);
+}
+
+.form-control:disabled {
+    background-color: #212529;
+    opacity: .5;
+}
+
+.form-check {
+    margin-bottom: 0;
+}
+
+.form-check-input:checked {
+    background-color: var(--bs-primary);
+    border-color: var(--bs-primary);
+}
+.form-check-input:focus {
+    box-shadow: 0 0 0 0.25rem rgb(255 193 7 / 25%);
+}
+
+.toast {
+    --bs-toast-padding-x: 0.75rem;
+    --bs-toast-padding-y: 0.5rem;
+    --bs-toast-max-width: auto;
+    --bs-toast-spacing: 0;
+}
+
+.toast-body {
+    padding: var(--bs-toast-padding-y) var(--bs-toast-padding-x);
+}
+
+.modal {
+    --bs-modal-bg: var(--bs-body-bg);
+    --bs-modal-border-color: var(--bs-border-color);
+    --bs-modal-border-width: 2px;
+    
+    --bs-modal-header-padding: .5rem 1rem;
+    --bs-modal-header-border-width: 0;
+    
+    --bs-modal-footer-border-width: 0;
+    --bs-modal-footer-gap: 0;
+}
+
+.modal-header {
+    background-color: #444444;
+}
+
+.modal-footer {
+    padding: 0 1rem .5rem;
+}
+
+.badge {
+    --bs-badge-font-weight: 400;
+}
+
+.nav {
+    --bs-nav-link-color: var(--bs-link-color);
+    --bs-nav-link-hover-color: var(--bs-link-hover-color);
+}
+
+.nav-item { height: 100%; }
+
+.nav-tabs {
+    --bs-nav-tabs-border-width: 1px;
+    --bs-nav-tabs-border-color: #444444;
+    --bs-nav-tabs-border-radius: 0;
+
+    --bs-nav-tabs-link-hover-border-color: transparent;
+
+    --bs-nav-tabs-link-active-color: #ffffff;
+    --bs-nav-tabs-link-active-bg: #222222;
+    --bs-nav-tabs-link-active-border-color: #222222;
+    
+    flex-wrap: nowrap; overflow-x: auto; overflow-y: hidden;
+}
+
+.nav-tabs .nav-link {
+    width:100%; height: 100%;
+}
+
+.nav-tabs .nav-link.active {
+    border-bottom: 3px solid var(--bs-primary);
+}
+
+.nav-pills {
+    --bs-nav-pills-border-radius: 0.375rem;
+    --bs-nav-pills-link-active-color: #000;
+    --bs-nav-pills-link-active-bg: var(--bs-link-color);
+}
+
+.nav-pills .nav-link { 
+    text-align: left;
+}
+
+.tab-content > .tab-pane {
+    height: 100%;
+}
+
+.card {
+    --bs-card-border-color: var(--bs-body-bg);
+    --bs-card-cap-bg: #444444;
+    --bs-card-bg: #303030;
+}
+
+.list-group {
+    --bs-list-group-color: #a2afbb;
+    --bs-list-group-bg: #444444;
+    --bs-list-group-border-width: 2px;
+    --bs-list-group-border-color: var(--bs-border-color);
+    --bs-list-group-item-padding-x: 1rem;
+    --bs-list-group-item-padding-y: .5rem;
+    --bs-list-group-action-color: #fff;
+    --bs-list-group-action-hover-color: #000;
+    --bs-list-group-action-hover-bg: var(--bs-link-color);
+    --bs-list-group-action-active-color: #000;
+    --bs-list-group-action-active-bg: var(--bs-link-color);
+    --bs-list-group-disabled-color: #a2afbb;
+    --bs-list-group-disabled-bg: #303030;
+    --bs-list-group-active-color: #000;
+    --bs-list-group-active-bg: var(--bs-link-color);
+    --bs-list-group-active-border-color: var(--bs-body-bg);    
+}
+
+.list-group-item-action {
+    --bs-list-group-color: #fff;
+}
+
+.list-group-item:disabled {
+    opacity: .5;
+}
+
+.progress {
+    --bs-progress-bg: #444;
+    --bs-progress-bar-transition: width .01s ease;
+}
+
+.tooltip {
+    --bs-tooltip-font-size: var(--bs-body-font-size);
+    --bs-tooltip-color: var(--bs-body-color);
+    --bs-tooltip-opacity: 1;
+    --bs-tooltip-max-width: auto;
+}
+
+.dropdown-menu {
+    --bs-dropdown-min-width: 15rem;
+    --bs-dropdown-font-size: var(--bs-body-font-size);
+    --bs-dropdown-color: var(--bs-body-color);
+    --bs-dropdown-bg: var(--bs-body-bg);
+    --bs-dropdown-border-color: var(--bs-border-color);
+    --bs-dropdown-border-width: 2px;
+
+    --bs-dropdown-link-color: var(--bs-link-color);
+    --bs-dropdown-link-hover-color: #000;
+    --bs-dropdown-link-hover-bg: var(--bs-primary);
+    
+    --bs-dropdown-divider-bg: var(--bs-border-color);
+}
