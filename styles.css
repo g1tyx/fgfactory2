@@ -176,6 +176,8 @@ ul {
 
 .badge {
     --bs-badge-font-weight: 400;
+    --bs-badge-padding-x: 0.5em;
+    --bs-badge-padding-y: 0.25em;
 }
 
 .nav {

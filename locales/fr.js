@@ -31,6 +31,7 @@ var fr_translations = {
     'btn_importSave': 'Importer',
     'btn_wipeSave': 'Effacer',
     //---
+    'text_iconsBy': 'Icônes fournis par',
     'text_love': 'Ce jeu a été conçu et réalisé avec tout l\'amour <i class="fa-fw fas fa-heart text-danger"></i> du monde par <span class="text-white">Freddec</span>',
     //---
     'text_patreon': 'Devenez un supporter',

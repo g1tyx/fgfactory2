@@ -24,8 +24,16 @@ var TplScreenGame = function(data) {
                             html += '<div class="dropdown-menu">'
                                 html += '<div class="px-2 py-1">'
                                     html += '<div class="pb-2 text-center small">'
+                                        html += '<span>' + i18next.t('text_iconsBy') + '</span>'
+                                        html += ' <a href="https://icons8.com/" target="_blank">Icons8</a>'
+                                    html += '</div>'
+                                html += '</div>'
+                                html += '<div class="px-2 py-1">'
+                                    html += '<div class="pb-2 text-center small">'
                                         html += '<span>' + i18next.t('text_love') + '</span>'
                                     html += '</div>'
+                                html += '</div>'
+                                html += '<div class="px-2 py-1">'
                                     html += '<div class="row gx-4 align-items-center justify-content-around flex-nowrap">'
                                         html += '<div class="col-auto">'
                                             html += '<a href="https://www.patreon.com/bePatron?u=61283131" target="_blank" data-bs-toggle="tooltip" data-bs-title="' + i18next.t('text_patreon') + '">'
@@ -228,8 +236,8 @@ class ScreenGame {
                     elem.costs.forEach(cost => {
                         //---
                         let style = ''
-                        if (window.App.game.getAvailableCount(cost.id) < cost.count) style = 'position-absolute end-0 bottom-0 text-danger lh-1'
-                        else style = 'position-absolute end-0 bottom-0 text-white lh-1'
+                        if (window.App.game.getAvailableCount(cost.id) < cost.count) style = 'position-absolute end-0 top-100 translate-middle-y badge text-bg-danger lh-1'
+                        else style = 'position-absolute end-0 top-100 translate-middle-y lh-1'
                         //---
                         let node = document.getElementById('missionNeedCount-' + elem.id + '-' + cost.id)
                         if (node.className != style) node.className = style
@@ -380,8 +388,8 @@ class ScreenGame {
                                 let inputElem = window.App.game.getElem(input.id)
                                 //---
                                 let style = ''
-                                if (input.count > window.App.game.getAvailableCount(input.id)) style = 'position-absolute end-0 bottom-0 text-danger lh-1'
-                                else style = 'position-absolute end-0 bottom-0 text-white lh-1'
+                                if (input.count > window.App.game.getAvailableCount(input.id)) style = 'position-absolute end-0 top-100 translate-middle-y badge text-bg-danger lh-1'
+                                else style = 'position-absolute end-0 top-100 translate-middle-y text-white lh-1'
                                 //---
                                 let node = document.getElementById('manualInputCount-' + manual.id + '-' + input.id)
                                 if (node.className != style) node.className = style
@@ -395,8 +403,8 @@ class ScreenGame {
                             let max = window.App.game.getMax(output.id)
                             //---
                             let style = ''
-                            if (max > 0 && outputElem.count >= max) style = 'position-absolute end-0 bottom-0 text-danger lh-1'
-                            else style = 'position-absolute end-0 bottom-0 text-white lh-1'
+                            if (max > 0 && outputElem.count >= max) style = 'position-absolute end-0 top-100 translate-middle-y badge text-bg-danger lh-1'
+                            else style = 'position-absolute end-0 top-100 translate-middle-y text-white lh-1'
                             //---
                             let node = document.getElementById('manualOutputCount-' + manual.id + '-' + output.id)
                             if (node.className != style) node.className = style
@@ -419,8 +427,8 @@ class ScreenGame {
                             let machine = window.App.game.getElem(line.machineId)
                             //---
                             let style = ''
-                            if (window.App.game.getAvailableCount(machine.id) < 1) style = 'position-absolute end-0 bottom-0 text-danger lh-1'
-                            else style = 'position-absolute end-0 bottom-0 text-white lh-1'
+                            if (window.App.game.getAvailableCount(machine.id) < 1) style = 'position-absolute end-0 top-100 translate-middle-y badge text-bg-danger lh-1'
+                            else style = 'position-absolute end-0 top-100 translate-middle-y lh-1'
                             //---
                             node = document.getElementById('lineMachineCount-' + line.id)
                             if (node.className != style) node.className = style
@@ -430,8 +438,8 @@ class ScreenGame {
                                 let inputElem = window.App.game.getElem(input.id)
                                 //---
                                 let style = ''
-                                if (input.count > window.App.game.getAvailableCount(input.id)) style = 'position-absolute end-0 bottom-0 text-danger lh-1'
-                                else style = 'position-absolute end-0 bottom-0 text-white lh-1'
+                                if (input.count > window.App.game.getAvailableCount(input.id)) style = 'position-absolute end-0 top-100 translate-middle-y badge text-bg-danger lh-1'
+                                else style = 'position-absolute end-0 top-100 translate-middle-y lh-1'
                                 //---
                                 let node = document.getElementById('lineInputCount-' + line.id + '-' + input.id)
                                 if (node.className != style) node.className = style
@@ -444,8 +452,8 @@ class ScreenGame {
                                 let max = window.App.game.getMax(output.id)
                                 //---
                                 let style = ''
-                                if (max > 0 && outputElem.count >= max) style = 'position-absolute end-0 bottom-0 text-danger lh-1'
-                                else style = 'position-absolute end-0 bottom-0 text-white lh-1'
+                                if (max > 0 && outputElem.count >= max) style = 'position-absolute end-0 top-100 translate-middle-y badge text-bg-danger lh-1'
+                                else style = 'position-absolute end-0 top-100 translate-middle-y lh-1'
                                 //---
                                 let node = document.getElementById('lineOutputCount-' + line.id + '-' + output.id)
                                 if (node.className != style) node.className = style
@@ -478,8 +486,8 @@ class ScreenGame {
                         if (node.innerHTML != html) node.innerHTML = html
                         //---
                         let style = ''
-                        if (window.App.game.getAvailableCount(storer.id) < 1) style = 'position-absolute end-0 bottom-0 text-danger lh-1'
-                        else style = 'position-absolute end-0 bottom-0 text-white lh-1'
+                        if (window.App.game.getAvailableCount(storer.id) < 1) style = 'position-absolute end-0 top-100 translate-middle-y badge text-bg-danger lh-1'
+                        else style = 'position-absolute end-0 top-100 translate-middle-y lh-1'
                         //---
                         node = document.getElementById('itemStorerCount-' + this.selectedItem.id)
                         if (node.className != style) node.className = style
@@ -527,7 +535,7 @@ class ScreenGame {
                                     let costElem = window.App.game.getElem(cost.id)
                                     html += '<div class="col-auto position-relative small">'
                                         html += '<img src="' + costElem.img + '" width="24px" height="24px">'
-                                        html += '<small id="missionNeedCount-' + elem.id + '-' + cost.id + '" class="position-absolute end-0 bottom-0 text-white lh-1">' + formatNumber(cost.count) + '</small>'
+                                        html += '<small id="missionNeedCount-' + elem.id + '-' + cost.id + '" class="position-absolute end-0 top-100 translate-middle-y lh-1">' + formatNumber(cost.count) + '</small>'
                                     html += '</div>'
                                 })
                             html += '</div>'
@@ -659,7 +667,7 @@ class ScreenGame {
         //---
         let html = ''
         //---
-        let scenarii = window.App.game.scenarii
+        let scenarii = window.App.game.scenarii.filter(scenario => scenario.ready)
         scenarii.forEach(scenario => {
             html += '<div class="col-12">'
                 html += '<button type="button" class="w-100 btn text-start' + (scenario.id == window.App.game.scenario.id ? ' border-success' : '') + '" onclick="window.App.doClick(\'selectScenario\', { scenarioId:\'' + scenario.id + '\' })">'
@@ -795,7 +803,7 @@ class ScreenGame {
                                             let outputElem = window.App.game.getElem(output.id)
                                             html += '<div class="col-auto position-relative small">'
                                                 html += '<img src="' + outputElem.img + '" width="24px" height="24px">'
-                                                html += '<small id="manualOutputCount-' + manual.id + '-' + output.id + '" class="position-absolute end-0 bottom-0 text-white lh-1">' + formatNumber(output.count) + '</small>'
+                                                html += '<small id="manualOutputCount-' + manual.id + '-' + output.id + '" class="position-absolute end-0 top-100 translate-middle-y lh-1">' + formatNumber(output.count) + '</small>'
                                             html += '</div>'
                                         })
                                         if (manual.inputs) {
@@ -804,7 +812,7 @@ class ScreenGame {
                                                 let inputElem = window.App.game.getElem(input.id)
                                                 html += '<div class="col-auto position-relative small">'
                                                     html += '<img src="' + inputElem.img + '" width="24px" height="24px">'
-                                                    html += '<small id="manualInputCount-' + manual.id + '-' + input.id + '" class="position-absolute end-0 bottom-0 text-white lh-1">' + formatNumber(input.count) + '</small>'
+                                                    html += '<small id="manualInputCount-' + manual.id + '-' + input.id + '" class="position-absolute end-0 top-100 translate-middle-y lh-1">' + formatNumber(input.count) + '</small>'
                                                 html += '</div>'
                                             })
                                         }
@@ -866,7 +874,7 @@ class ScreenGame {
                                                             let outputElem = window.App.game.getElem(output.id)
                                                             html += '<div class="col-auto position-relative small">'
                                                                 html += '<img src="' + outputElem.img + '" width="24px" height="24px">'
-                                                                html += '<small id="lineOutputCount-' + line.id + '-' + output.id + '" class="position-absolute end-0 bottom-0 text-white lh-1">' + formatNumber(output.count) + '</small>'
+                                                                html += '<small id="lineOutputCount-' + line.id + '-' + output.id + '" class="position-absolute end-0 top-100 translate-middle-y lh-1">' + formatNumber(output.count) + '</small>'
                                                             html += '</div>'
                                                         })
                                                     html += '</div>'

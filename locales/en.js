@@ -31,6 +31,7 @@ var en_translations = {
     'btn_importSave': 'Import',
     'btn_wipeSave': 'Wipe',
     //---
+    'text_iconsBy': 'Icons provided by',
     'text_love': 'This game has been designed and built with all the love <i class="fa-fw fas fa-heart text-danger"></i> in the world by <span class="text-white">Freddec</span>',
     //---
     'text_patreon': 'Become a supporter',
@@ -70,7 +71,7 @@ var en_translations = {
     'tutMission2Desc': '<div class="mb-2">Well done! Now, with those 5 Stones, you could manually craft a Furnace. This is one of the main mecanism of the game: craft items with items.</div>',
     //---
     'tutMission3': 'Automation 1',
-    'tutMission3Desc': '<div class="mb-2">Good. Now you could use your Furnace to smelt Iron into Iron Plate. But to use your Furnace your need Coal, that is the fuel / energy used by Furnaces. So mine manually Iron and Coad then assign Furnace to smelt Iron Plates.</div>',
+    'tutMission3Desc': '<div class="mb-2">Good. Now you could use your Furnace to smelt Iron into Iron Plate. But to use your Furnace your need Coal, that is the fuel / energy used by Furnaces. So mine manually Iron and Coal then assign Furnace to smelt Iron Plates.</div>',
     //---
     'tutMission4': 'Automation 2',
     'tutMission4Desc': '<div class="mb-2">Mine manually is boring. Automate productions like you did with Iron Plates is better. To automate your ore productions, you need to build Miners. But to build Miner you need Iron Wheel that is crafted from Iron Plates. Think and find a way to build Miner ;)</div>',
