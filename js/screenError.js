@@ -20,7 +20,7 @@ var TplScreenError = function(data) {
                     html += '<span class="text-normal">' + i18next.t('screenError_info1') + '</span>'
                 html += '</div>'
                 html += '<div class="col-4 d-flex justify-content-center">'
-                    html += '<a href="https://discord.gg/3UkgeeT9CV" target="_blank" class="w-100 btn btn-sm btn-primary">'
+                    html += '<a href="https://discord.gg/ZXrggavUpv" target="_blank" class="w-100 btn btn-sm btn-primary">'
                         html += '<span><i class="fab fa-fw fa-discord"></i></span>'
                         html += '<span class="ms-1">Discord</span>'
                     html += '</a>'

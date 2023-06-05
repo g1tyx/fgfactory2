@@ -45,7 +45,7 @@ var TplScreenGame = function(data) {
                                             html += '</button>'
                                         html += '</form>'
                                         html += '<div class="col-auto">'
-                                            html += '<a href="https://discord.gg/3UkgeeT9CV" target="_blank" data-bs-toggle="tooltip" data-bs-title="' + i18next.t('text_discord') + '">'
+                                            html += '<a href="https://discord.gg/ZXrggavUpv" target="_blank" data-bs-toggle="tooltip" data-bs-title="' + i18next.t('text_discord') + '">'
                                                 html += '<img src="img/discord.png" width="24px" height="24px" />'
                                             html += '</a>'
                                         html += '</div>'
