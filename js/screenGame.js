@@ -673,7 +673,7 @@ class ScreenGame {
                         html += '<div class="col-12 small">'
                             if (scenario.victoryDate) {
                                 html += '<span class="text-white">'
-                                    html += '<img src="img/victory.png" width="12px" height="12px" />'
+                                    html += '<img src="img/victory.png" width="12px" height="12px" class="me-2" />'
                                     html += new Date(scenario.victoryDate).toLocaleString()
                                 html += '</span>'
                             }

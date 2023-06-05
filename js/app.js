@@ -120,6 +120,8 @@ class App {
                 this.showModal('modalVictory')
                 //---
                 this.game.scenario.victoryDate = Date.now()
+                //---
+                this.screens['game'].refreshTabScenarii()
             }
             //---
             this.screens['game'].draw()
