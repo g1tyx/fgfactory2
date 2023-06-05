@@ -31,7 +31,7 @@ var en_translations = {
     'btn_importSave': 'Import',
     'btn_wipeSave': 'Wipe',
     //---
-    'text_love': 'This game has been designed and built with all the love <i class="fa-fw fas fa-heart text-danger"></i> in the world by <span class="text-white">Freddec</span>!',
+    'text_love': 'This game has been designed and built with all the love <i class="fa-fw fas fa-heart text-danger"></i> in the world by <span class="text-white">Freddec</span>',
     //---
     'text_patreon': 'Become a supporter',
     'text_kofi': 'Buy me a Ko-fi',

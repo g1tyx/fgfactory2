@@ -294,3 +294,36 @@ ul {
     
     --bs-dropdown-divider-bg: var(--bs-border-color);
 }
+
+////////////////////////////////////////////////////////////////////////////////
+
+@keyframes flicker {
+  0%   { opacity: .9; }
+  50%  { opacity: .1; }
+  100% { opacity: .9; }
+}
+@-o-keyframes flicker{
+  0%   { opacity: .9; }
+  50%  { opacity: .1; }
+  100% { opacity: .9; }
+}
+@-moz-keyframes flicker{
+  0%   { opacity: .9; }
+  50%  { opacity: .1; }
+  100% { opacity: .9; }
+}
+@-webkit-keyframes flicker{
+  0%   { opacity: .9; }
+  50%  { opacity: .1; }
+  100% { opacity: .9; }
+}
+
+.flicker {
+   -webkit-animation: flicker 2s infinite;
+   -moz-animation: flicker 2s infinite;
+   -ms-animation: flicker 2s infinite;
+   -o-animation: flicker 2s infinite;
+    animation: flicker 2s infinite;
+}    
+
+////////////////////////////////////////////////////////////////////////////////

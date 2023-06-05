@@ -198,6 +198,7 @@ class Game {
     loadScenario(scenarioId) {
         //---
         this.scenario = this.scenarii.find(scenario => scenario.id == scenarioId)
+        console.log(this.scenario)
         //---
         this.elems = []
         this.lines = []
