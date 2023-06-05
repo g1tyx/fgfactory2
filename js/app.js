@@ -55,6 +55,8 @@ class App {
                 if (!text) return console.error('Load failed')
                 loadedData = JSON.parse(text)
                 //---
+                console.log(loadedData)
+                //---
                 if (loadedData.lastFrameTimeMs != null) this.lastFrameTimeMs = loadedData.lastFrameTimeMs
                 //---
                 if (loadedData.screens) {
