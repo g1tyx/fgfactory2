@@ -47,7 +47,7 @@ var DATA = {
                 {	id:'recipeMiner1',	    type:'recipe',	reqs:[{ id:'tutMission3', count:1 }],   time:2,	outputs:[{ id:'machineMiner1', count:1 }], inputs:[{ id:'itemIronWheel', count:3 },{ id:'itemIronPlate', count:3 },{ id:'machineFurnace1', count:1 }] },
                 {	id:'manualMiner1',	    type:'manual',	reqs:[{ id:'tutMission3', count:1 }],   recipeId:'recipeMiner1' },
                 //---
-                {	id:'storerChest',	    type:'storer',	reqs:[{ id:'tutMission4', count:1 }],   label:'storerChest', img:'img/storers/Chest.png',	manualId:'manualChest' },
+                {	id:'storerChest',	    type:'storer',	reqs:[{ id:'tutMission4', count:1 }],   label:'storerChest', img:'img/storers/Chest1.png',	manualId:'manualChest' },
                 {	id:'recipeChest',	    type:'recipe',	reqs:[{ id:'tutMission4', count:1 }],   time:1,	outputs:[{ id:'storerChest', count:1 }], inputs:[{ id:'itemIronPlate', count:8 }] },
                 {	id:'manualChest',	    type:'manual',	reqs:[{ id:'tutMission4', count:1 }],   recipeId:'recipeChest' },
             ]
