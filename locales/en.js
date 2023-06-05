@@ -58,6 +58,7 @@ var en_translations = {
     'word_Automation': 'Automation',
     'word_Storers': 'Storers',
     'word_StartDate': 'Start Date',
+    'word_Language': 'Language',
     //---
     'scenario_tut': 'Tutorial',
     'scenarioDesc_tut': 'Learn basic mecanisms before playing other scenarii.',
@@ -78,7 +79,7 @@ var en_translations = {
     'tutMission5Desc': '<div class="mb-2">Great. With Miners and Furnaces you could automate all your produtions (except Iron Wheel). With automation, you will reach max storage. To upgrade your storage, you have to build Chests.</div>',
     //---
     'tutMission6': 'This is not the end',
-    'tutMission6Desc': '<div class="mb-2">With machines and storers, your factory could grow bigger and bigger. Now you know basic mecanisms to play all the scenarii. Reach the final objective and complete all scenarii. Enjoy!</div>',
+    'tutMission6Desc': '<div class="mb-2">With machines and storers, your factory could grow bigger and bigger. Now you know basic mecanisms to play all the scenarii. Reach the final objective and complete the tutorial. Enjoy!</div>',
     //---
     'itemStone': 'Stone',
     'itemIron': 'Iron',
