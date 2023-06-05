@@ -10,7 +10,7 @@ var TplScreenGame = function(data) {
     //---
     let html = ''
     //---
-    html += '<div class="position-relative border" style="width:100%; max-width:425px; height:100%; max-height:634px;">'
+    html += '<div class="position-relative w-100 h-100">'
         html += '<div class="position-absolute bg-dark d-flex align-items-center border-bottom border-body" style="top:0; width:100%; height:48px;">'
             html += '<div class="container col-12">'
                 html += '<div class="row gx-2 align-items-center">'
@@ -84,7 +84,7 @@ var TplScreenGame = function(data) {
                 html += '<div class="container py-3">'
                     html += '<div class="m-1 fs-6">' + i18next.t('word_Scenarii') + '</div>'
                     html += '<div class="m-1 text-warning small"><i class="fa-fw fas fa-exclamation-triangle"></i> ' + i18next.t('text_scenarioWarning') + '</div>'
-                    html += '<div id="scenariiContainer" class="mt-1 row g-2 justify-content-center">'
+                    html += '<div id="scenariiContainer" class="mt-1 row g-2">'
                     html += '</div>'
                 html += '</div>'
             html += '</div>'
@@ -107,10 +107,10 @@ var TplScreenGame = function(data) {
                 html += '<div class="container py-3">'
                     html += '<div class="m-1 fs-6">' + i18next.t('word_LocalData') + '</div>'
                     html += '<div class="row g-2">'
-                        html += '<div class="col-12 d-flex justify-content-center">'
-                            html += '<textarea spellcheck="false" rows="3" class="form-control small text-center" style="max-width:512px;" disabled readonly>' + window.App.getLocalData() + '</textarea>'
-                        html += '</div>'
-                        html += '<div class="col-12">'
+                        html += '<div class="col-12 col-lg-6">'
+                            html += '<div class="mb-2 d-flex justify-content-center">'
+                                html += '<textarea spellcheck="false" rows="3" class="form-control small text-center" style="max-width:512px;" disabled readonly>' + window.App.getLocalData() + '</textarea>'
+                            html += '</div>'
                             html += '<div class="row g-2 align-items-center justify-content-center">'
                                 html += '<div class="col-4">'
                                     html += '<button type="button" class="w-100 btn btn-sm btn-danger" onclick="window.App.showModal(\'modalWipe\')">'
@@ -132,30 +132,34 @@ var TplScreenGame = function(data) {
                                 html += '</div>'
                             html += '</div>'
                         html += '</div>'
-                        html += '<div class="col-12 d-flex">'
-                            html += '<textarea spellcheck="false" rows="3" id="importData" class="form-control small text-center" style="max-width:512px;"></textarea>'
-                        html += '</div>'
-                        html += '<div class="col-4">'
-                            html += '<button type="button" class="w-100 btn btn-sm btn-primary" onclick="window.App.importSave()">'
-                                html += '<span><i class="fas fa-fw fa-upload"></i></span>'
-                                html += '<span class="ms-1">' + i18next.t('btn_importSave') + '</span>'
-                            html += '</button>'
+                        html += '<div class="col-12 col-lg-6">'
+                            html += '<div class="mb-2 d-flex">'
+                                html += '<textarea spellcheck="false" rows="3" id="importData" class="form-control small text-center" style="max-width:512px;"></textarea>'
+                            html += '</div>'
+                            html += '<div class="col-4">'
+                                html += '<button type="button" class="w-100 btn btn-sm btn-primary" onclick="window.App.importSave()">'
+                                    html += '<span><i class="fas fa-fw fa-upload"></i></span>'
+                                    html += '<span class="ms-1">' + i18next.t('btn_importSave') + '</span>'
+                                html += '</button>'
+                            html += '</div>'
                         html += '</div>'
                     html += '</div>'
                 html += '</div>'
             html += '</div>'
         html += '</div>'
         html += '<div class="position-absolute bg-dark border-top border-body" style="bottom:0; width:100%; height:48px;">'
-            html += '<div class="h-100 nav nav-tabs">'
-                tabs.forEach(tab => {
-                    html += '<div class="col nav-item">'
-                        html += '<button type="button" class="position-relative nav-link p-1' + (data.selectedTab == tab.id ? ' active' : '') + '" data-bs-toggle="tab" data-bs-target="#' + tab.id + '-tab-pane"role="tab" aria-controls="' + tab.id + '-tab-pane" onclick="window.App.doClick(\'selectTab\', { tabId:\'' + tab.id + '\' })">'
-                            html += '<div class="text-center"><i class="' + tab.img + '"></i></div>'
-                            html += '<div class="text-center small"><span>' + i18next.t(tab.label) + '</span></div>'
-                            html += '<div id="tabNotif-' + tab.id + '" class="d-none position-absolute top-0 end-0 m-1 p-1 bg-success rounded-circle"></div>'
-                        html += '</button>'
-                    html += '</div>'
-                })
+            html += '<div class="container px-0">'
+                html += '<div class="h-100 nav nav-tabs">'
+                    tabs.forEach(tab => {
+                        html += '<div class="col nav-item">'
+                            html += '<button type="button" class="position-relative nav-link p-1' + (data.selectedTab == tab.id ? ' active' : '') + '" data-bs-toggle="tab" data-bs-target="#' + tab.id + '-tab-pane"role="tab" aria-controls="' + tab.id + '-tab-pane" onclick="window.App.doClick(\'selectTab\', { tabId:\'' + tab.id + '\' })">'
+                                html += '<div class="text-center"><i class="' + tab.img + '"></i></div>'
+                                html += '<div class="text-center small"><span>' + i18next.t(tab.label) + '</span></div>'
+                                html += '<div id="tabNotif-' + tab.id + '" class="d-none position-absolute top-0 end-0 m-1 p-1 bg-success rounded-circle"></div>'
+                            html += '</button>'
+                        html += '</div>'
+                    })
+                html += '</div>'
             html += '</div>'
         html += '</div>'
     html += '</div>'
@@ -517,7 +521,7 @@ class ScreenGame {
         //---
         let elems = window.App.game.elems.filter(elem => elem.type == 'mission' && elem.unlocked)
         elems.forEach(elem => {
-            html += '<div class="col-12">'
+            html += '<div class="col-12 col-lg-4">'
                 html += '<div class="card">'
                     if (elem.count < 1) {
                         html += '<div class="card-header">'
@@ -530,19 +534,23 @@ class ScreenGame {
                         html += '<div class="card-body">'
                             html += '<div class="mb-2"><span class="text-white">' + i18next.t(elem.desc) + '</span></div>'
                             html += '<div class="mb-2"><span>' + i18next.t('word_Objectives') + '</span></div>'
-                            html += '<div class="row gx-2 align-items-center">'
-                                elem.costs.forEach(cost => {
-                                    let costElem = window.App.game.getElem(cost.id)
-                                    html += '<div class="col-auto position-relative small">'
-                                        html += '<img src="' + costElem.img + '" width="24px" height="24px">'
-                                        html += '<small id="missionNeedCount-' + elem.id + '-' + cost.id + '" class="position-absolute end-0 top-100 translate-middle-y lh-1">' + formatNumber(cost.count) + '</small>'
+                            html += '<div class="row gx-2">'
+                                html += '<div class="col">'
+                                    html += '<div class="row gx-2 align-items-center">'
+                                        elem.costs.forEach(cost => {
+                                            let costElem = window.App.game.getElem(cost.id)
+                                            html += '<div class="col-auto position-relative small">'
+                                                html += '<img src="' + costElem.img + '" width="24px" height="24px">'
+                                                html += '<small id="missionNeedCount-' + elem.id + '-' + cost.id + '" class="position-absolute end-0 top-100 translate-middle-y lh-1">' + formatNumber(cost.count) + '</small>'
+                                            html += '</div>'
+                                        })
                                     html += '</div>'
-                                })
-                            html += '</div>'
-                            html += '<div class="text-end">'
-                                html += '<button type="button" id="missionBtn-' + elem.id + '" class="btn btn-primary" onclick="window.App.doClick(\'completeMission\', { missionId:\'' + elem.id + '\' })">'
-                                    html += '<i class="fa-fw fas fa-check"></i>'
-                                html += '</button>'
+                                html += '</div>'
+                                html += '<div class="col-auto">'
+                                    html += '<button type="button" id="missionBtn-' + elem.id + '" class="btn btn-primary" onclick="window.App.doClick(\'completeMission\', { missionId:\'' + elem.id + '\' })">'
+                                        html += '<i class="fa-fw fas fa-check"></i>'
+                                    html += '</button>'
+                                html += '</div>'
                             html += '</div>'
                         html += '</div>'
                     }
@@ -579,7 +587,7 @@ class ScreenGame {
         html += '<div class="row g-1">'
             let items = window.App.game.elems.filter(elem => elem.type == 'item' && elem.unlocked)
             items.forEach(item => {
-                html += '<div class="col-12">'
+                html += '<div class="col-12 col-lg-4">'
                     html += '<button class="w-100 btn text-start" onclick="window.App.doClick(\'showItemModal\', { itemId:\'' + item.id + '\' })">'
                         html += '<div class="row gx-2 align-items-center">'
                             html += '<div class="col-auto"><img src="' + item.img + '" width="24px" height="24px"></div>'
@@ -605,7 +613,7 @@ class ScreenGame {
             html += '<div class="m-1 fs-6">' + i18next.t('word_Machines') + '</div>'
             html += '<div class="row g-1">'
                 items.forEach(item => {
-                    html += '<div class="col-12">'
+                    html += '<div class="col-12 col-lg-4">'
                         html += '<button class="w-100 btn text-start" onclick="window.App.doClick(\'showItemModal\', { itemId:\'' + item.id + '\' })">'
                             html += '<div class="row gx-2 align-items-center">'
                                 html += '<div class="col-auto"><img src="' + item.img + '" width="24px" height="24px"></div>'
@@ -639,7 +647,7 @@ class ScreenGame {
             html += '<div class="m-1 fs-6">' + i18next.t('word_Storers') + '</div>'
             html += '<div class="row g-1">'
             items.forEach(item => {
-                html += '<div class="col-12">'
+                html += '<div class="col-12 col-lg-4">'
                     html += '<button class="w-100 btn text-start" onclick="window.App.doClick(\'showItemModal\', { itemId:\'' + item.id + '\' })">'
                         html += '<div class="row gx-2 align-items-center">'
                             html += '<div class="col-auto"><img src="' + item.img + '" width="24px" height="24px"></div>'
@@ -669,7 +677,7 @@ class ScreenGame {
         //---
         let scenarii = window.App.game.scenarii.filter(scenario => scenario.ready)
         scenarii.forEach(scenario => {
-            html += '<div class="col-12">'
+            html += '<div class="col-12 col-lg-4">'
                 html += '<button type="button" class="w-100 btn text-start' + (scenario.id == window.App.game.scenario.id ? ' border-success' : '') + '" onclick="window.App.doClick(\'selectScenario\', { scenarioId:\'' + scenario.id + '\' })">'
                     html += '<div class="row g-1 justify-content-center">'
                         html += '<div class="col-12">'
@@ -845,10 +853,10 @@ class ScreenGame {
                     })
                     if (unlocked > 0) {
                         html += '<div class="modal-body">'
-                            html += '<div class="mb-1">'
+                            html += '<div class="mb-2">'
                                  html += '<span>' + i18next.t('word_Automation') + '</span>'
                             html += '</div>'
-                            html += '<div class="row g-2">'
+                            html += '<div class="row gy-4">'
                                 item.lines.forEach(lineId => {
                                     let line = window.App.game.getElem(lineId)
                                     if (line.unlocked) {

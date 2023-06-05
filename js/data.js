@@ -32,18 +32,18 @@ var DATA = {
                 {	id:'lineCoal1',	            type:'line',	reqs:[{ id:'tutMission4', count:1 }],   machineId:'machineMiner1', recipeId:'recipeCoal' },
                 //---
                 {	id:'itemIronPlate',		    type:'item',	reqs:[{ id:'tutMission2', count:1 }],   label:'itemIronPlate', img:'img/items/IronPlate.png', storage:{ base:100, storerId:'storerChest' }, lines:[ 'lineIronPlate1' ] },
-                {	id:'recipeIronPlate',	    type:'recipe',	reqs:[{ id:'tutMission2', count:1 }],   time:3.2, outputs:[{ id:'itemIronPlate', count:1 }],	inputs:[{ id:'itemIron', count:1 }] },
+                {	id:'recipeIronPlate',	    type:'recipe',	reqs:[{ id:'tutMission2', count:1 }],   time:3.2, outputs:[{ id:'itemIronPlate', count:1 }], inputs:[{ id:'itemIron', count:1 }] },
                 {	id:'lineIronPlate1',        type:'line',	reqs:[{ id:'tutMission2', count:1 }],   machineId:'machineFurnace1', recipeId:'recipeIronPlate' },
                 //---
                 {	id:'itemIronWheel',		    type:'item',	reqs:[{ id:'tutMission3', count:1 }],   label:'itemIronWheel', img:'img/items/IronWheel.png', storage:{ base:100, storerId:'storerChest' }, manualId:'manualIronWheel' },
-                {	id:'recipeIronWheel',	    type:'recipe',	reqs:[{ id:'tutMission3', count:1 }],   time:1, outputs:[{ id:'itemIronWheel', count:1 }],	inputs:[{ id:'itemIronPlate', count:2 }]	},
+                {	id:'recipeIronWheel',	    type:'recipe',	reqs:[{ id:'tutMission3', count:1 }],   time:1, outputs:[{ id:'itemIronWheel', count:1 }], inputs:[{ id:'itemIronPlate', count:2 }]	},
                 {	id:'manualIronWheel',	    type:'manual',	reqs:[{ id:'tutMission3', count:1 }],   recipeId:'recipeIronWheel' },
                 //---
-                {	id:'machineFurnace1',	    type:'machine',	reqs:[{ id:'tutMission1', count:1 }],   label:'machineFurnace1', img:'img/machines/Furnace1.png', manualId:'manualFurnace1', speed:0.25,	energy:{ id:'itemCoal', count:0.02 } },
+                {	id:'machineFurnace1',	    type:'machine',	reqs:[{ id:'tutMission1', count:1 }],   label:'machineFurnace1', img:'img/machines/Furnace1.png', manualId:'manualFurnace1', speed:0.25, energy:{ id:'itemCoal', count:0.02 } },
                 {	id:'recipeFurnace1',	    type:'recipe',	reqs:[{ id:'tutMission1', count:1 }],   time:2, outputs:[{ id:'machineFurnace1', count:1 }], inputs:[{ id:'itemStone', count:5 }] },
                 {	id:'manualFurnace1',	    type:'manual',	reqs:[{ id:'tutMission1', count:1 }],   recipeId:'recipeFurnace1' },
                 //---
-                {	id:'machineMiner1',	        type:'machine',	reqs:[{ id:'tutMission3', count:1 }],   label:'machineMiner1', img:'img/machines/Drill1.png', manualId:'manualMiner1', speed:0.25,	energy:{ id:'itemCoal', count:0.04 } },
+                {	id:'machineMiner1',	        type:'machine',	reqs:[{ id:'tutMission3', count:1 }],   label:'machineMiner1', img:'img/machines/Drill1.png', manualId:'manualMiner1', speed:0.25, energy:{ id:'itemCoal', count:0.04 } },
                 {	id:'recipeMiner1',	        type:'recipe',	reqs:[{ id:'tutMission3', count:1 }],   time:2, outputs:[{ id:'machineMiner1', count:1 }], inputs:[{ id:'itemIronWheel', count:3 },{ id:'itemIronPlate', count:3 },{ id:'machineFurnace1', count:1 }] },
                 {	id:'manualMiner1',	        type:'manual',	reqs:[{ id:'tutMission3', count:1 }],   recipeId:'recipeMiner1' },
                 //---
@@ -115,21 +115,68 @@ var DATA = {
                 //---
                 {	id:'itemBattery',	        type:'item',	                                        label:'itemBattery', img:'img/items/Battery.png', storage:{ base:1 } },
                 //---
-                {	id:'itemCircuit3',          type:'item',	                                        label:'itemCircuit3', img:'img/items/Circuit3.png', storage:{ base:1 } },
+                {	id:'itemCircuit3',          type:'item',	                                        label:'itemCircuit', img:'img/items/Circuit3.png', storage:{ base:100 }, lines:[ 'lineCircuit31','lineCircuit32' ] },
+                {	id:'recipeCircuit3',	    type:'recipe',	                                        time:10, outputs:[{ id:'itemCircuit3', count:1 }], inputs:[{ id:'itemCopperPlate', count:40 },{ id:'itemIronPlate', count:24 },{ id:'itemPlastic', count:4 },{ id:'itemSulfuricAcid', count:5 }] },
+                {	id:'lineCircuit31',         type:'line',	                                        machineId:'machineAssembler2', recipeId:'recipeCircuit3' },
+                {	id:'lineCircuit32',         type:'line',	                                        machineId:'machineAssembler3', recipeId:'recipeCircuit3' },
                 //---
-                {	id:'itemEngine2',           type:'item',	                                        label:'itemEngine2', img:'img/items/Engine2.png', storage:{ base:1 } },
+                {	id:'itemEngine2',           type:'item',	                                        label:'itemEngine2', img:'img/items/Engine2.png', storage:{ base:50 }, lines:[ 'lineEngine21','lineEngine22' ] },
+                {	id:'recipeEngine2',	        type:'recipe',	                                        time:10, outputs:[{ id:'itemEngine2', count:1 }], inputs:[{ id:'itemCopperPlate', count:3 },{ id:'itemEngine1', count:1 },{ id:'itemIronPlate', count:2 },{ id:'itemLubricant', count:15 }] },
+                {	id:'lineEngine21',          type:'line',	                                        machineId:'machineAssembler2', recipeId:'recipeEngine2' },
+                {	id:'lineEngine22',          type:'line',	                                        machineId:'machineAssembler3', recipeId:'recipeEngine2' },
                 //---
-                {	id:'itemRocketFuel',        type:'item',	                                        label:'itemRocketFuel', img:'img/items/RocketFuel.png', storage:{ base:1 } },
-                //---
-                {	id:'itemArmor',		        type:'item',	                                        label:'itemArmor', img:'img/items/Armor.png', storage:{ base:1 } },
+                {	id:'itemRocketFuel',        type:'item',	                                        label:'itemRocketFuel', img:'img/items/RocketFuel.png', storage:{ base:10 }, lines:[ 'lineRocketFuel1','lineRocketFuel2' ] },
+                {	id:'recipeRocketFuel',	    type:'recipe',	                                        time:30, outputs:[{ id:'itemRocketFuel', count:1 }], inputs:[{ id:'itemLightOil', count:10 },{ id:'itemSolidFuel', count:10 }] },
+                {	id:'lineRocketFuel1',       type:'line',	                                        machineId:'machineAssembler2', recipeId:'recipeRocketFuel' },
+                {	id:'lineRocketFuel2',       type:'line',	                                        machineId:'machineAssembler3', recipeId:'recipeRocketFuel' },
                 //---
                 {	id:'itemRocketPart',        type:'item',	                                        label:'itemRocketPart', img:'img/items/RocketPart.png', storage:{ base:5 }, lines:[ 'lineRocketPart' ] },
-                {	id:'recipeRocketPart',	    type:'recipe',	                                        time:3, outputs:[{ id:'itemRocketPart', count:1 }],	inputs:[{ id:'itemCopperPlate', count:525 },{ id:'itemIronPlate', count:150 },{ id:'itemPlastic', count:150 },{ id:'itemCircuit3', count:10 },{ id:'itemRocketFuel', count:10 },{ id:'itemSteel', count:20 }] },
+                {	id:'recipeRocketPart',	    type:'recipe',	                                        time:3, outputs:[{ id:'itemRocketPart', count:1 }], inputs:[{ id:'itemCopperPlate', count:525 },{ id:'itemIronPlate', count:150 },{ id:'itemPlastic', count:150 },{ id:'itemCircuit3', count:10 },{ id:'itemRocketFuel', count:10 },{ id:'itemSteel', count:20 }] },
                 {	id:'lineRocketPart',        type:'line',	                                        machineId:'machineRocketSilo', recipeId:'recipeRocketPart' },
                 //---
-                {	id:'itemSatellite',		    type:'item',	                                        label:'itemSatellite', img:'img/items/Satellite.png', storage:{ base:1 }, manualId:'manualSatellite', },
-                {	id:'recipeSatellite',	    type:'recipe',	                                        time:5, outputs:[{ id:'itemSatellite', count:1 }],	inputs:[{ id:'itemBattery', count:500 },{ id:'itemCopperPlate', count:4800 },{ id:'itemIronPlate', count:1800 },{ id:'itemPlastic', count:500 },{ id:'itemCircuit3', count:100 },{ id:'itemRocketFuel', count:50 },{ id:'itemSteel', count:700 }] },
+                {	id:'itemArmor',		        type:'item',	                                        label:'itemArmor', img:'img/items/Armor.png', storage:{ base:1 }, manualId:'manualArmor' },
+                {	id:'recipeArmor',	        type:'recipe',	                                        time:25, outputs:[{ id:'itemArmor', count:1 }], inputs:[{ id:'itemCopperPlate', count:8400 },{ id:'itemEngine2', count:40 },{ id:'itemIronPlate', count:3500 },{ id:'itemPlastic', count:2700 },{ id:'itemCircuit3', count:310 },{ id:'itemSteel', count:60 }] },
+                {	id:'manualArmor',           type:'manual',	                                        recipeId:'recipeArmor' },
+                //---
+                {	id:'itemSatellite',		    type:'item',	                                        label:'itemSatellite', img:'img/items/Satellite.png', storage:{ base:1 }, manualId:'manualSatellite' },
+                {	id:'recipeSatellite',	    type:'recipe',	                                        time:5, outputs:[{ id:'itemSatellite', count:1 }], inputs:[{ id:'itemBattery', count:500 },{ id:'itemCopperPlate', count:4800 },{ id:'itemIronPlate', count:1800 },{ id:'itemPlastic', count:500 },{ id:'itemCircuit3', count:100 },{ id:'itemRocketFuel', count:50 },{ id:'itemSteel', count:700 }] },
                 {	id:'manualSatellite',       type:'manual',	                                        recipeId:'recipeSatellite' },
+                //---
+                {	id:'machineFurnace1',	    type:'machine',	                                        label:'machineFurnace1', img:'img/machines/Furnace1.png', manualId:'manualFurnace1', speed:1, energy:{ id:'itemCoal', count:0.02 } },
+                {	id:'recipeFurnace1',	    type:'recipe',	                                        time:2, outputs:[{ id:'machineFurnace1', count:1 }], inputs:[{ id:'itemStone', count:5 }] },
+                {	id:'manualFurnace1',	    type:'manual',	                                        recipeId:'recipeFurnace1' },
+                //---
+                {	id:'machineFurnace2',	    type:'machine',	                                        label:'machineFurnace2', img:'img/machines/Furnace2.png', manualId:'manualFurnace2', speed:2, energy:{ id:'itemCoal', count:0.02 } },
+                {	id:'recipeFurnace2',	    type:'recipe',	                                        time:3, outputs:[{ id:'machineFurnace2', count:1 }], inputs:[{ id:'itemBrick', count:10 },{ id:'itemSteel', count:6 }] },
+                {	id:'manualFurnace2',	    type:'manual',	                                        recipeId:'recipeFurnace2' },
+                //---
+                {	id:'machineFurnace3',	    type:'machine',	                                        label:'machineFurnace3', img:'img/machines/Furnace3.png', manualId:'manualFurnace3', speed:2, energy:{ id:'itemElectricity', count:180e3 } },
+                {	id:'recipeFurnace3',	    type:'recipe',	                                        time:5, outputs:[{ id:'machineFurnace3', count:1 }], inputs:[{ id:'itemBrick', count:10 },{ id:'itemSteel', count:10 },{ id:'itemPlastic', count:10 },{ id:'itemIronPlate', count:10 },{ id:'itemCopperPlate', count:25 }] },
+                {	id:'manualFurnace3',	    type:'manual',	                                        recipeId:'recipeFurnace3' },
+                //---
+                {	id:'machineMiner1',	        type:'machine',	                                        label:'machineMiner1', img:'img/machines/Drill1.png', manualId:'manualMiner1', speed:0.25, energy:{ id:'itemCoal', count:0.04 } },
+                {	id:'recipeMiner1',	        type:'recipe',	                                        time:2, outputs:[{ id:'machineMiner1', count:1 }], inputs:[{ id:'itemIronPlate', count:9 },{ id:'itemStone', count:5 }] },
+                {	id:'manualMiner1',	        type:'manual',	                                        recipeId:'recipeMiner1' },
+                //---
+                {	id:'machineMiner2',	        type:'machine',	                                        label:'machineMiner2', img:'img/machines/Drill2.png', manualId:'manualMiner2', speed:0.5, energy:{ id:'itemElectricity', count:90e3 } },
+                {	id:'recipeMiner2',	        type:'recipe',	                                        time:2, outputs:[{ id:'machineMiner2', count:1 }], inputs:[{ id:'itemCopperPlate', count:5 },{ id:'itemIronPlate', count:23 }] },
+                {	id:'manualMiner2',	        type:'manual',	                                        recipeId:'recipeMiner2' },
+                //---
+                {	id:'machinePump',           type:'machine',	                                        label:'machinePump', img:'img/machines/Pump.png', manualId:'manualPump', speed:1 },
+                {	id:'recipePump',	        type:'recipe',	                                        time:1, outputs:[{ id:'machinePump', count:1 }], inputs:[{ id:'itemCopperPlate', count:3 },{ id:'itemIronPlate', count:5 }] },
+                {	id:'manualPump',            type:'manual',	                                        recipeId:'recipePump' },
+                //---
+                {	id:'machinePumpjack',       type:'machine',	                                        label:'machinePumpjack', img:'img/machines/Pumpjack.png', manualId:'manualPumpjack', speed:1, energy:{ id:'itemElectricity', count:90e3 } },
+                {	id:'recipePumpjack',	    type:'recipe',	                                        time:5, outputs:[{ id:'machinePumpjack', count:1 }], inputs:[{ id:'itemCopperPlate', count:8 },{ id:'itemIronPlate', count:35 },{ id:'itemSteel', count:5 }] },
+                {	id:'manualPumpjack',        type:'manual',	                                        recipeId:'recipePumpjack' },
+                //---
+                {	id:'machineAssembler1',     type:'machine',	                                        label:'machineAssembler1', img:'img/machines/Assembler1.png', manualId:'manualAssembler1', speed:0.5, energy:{ id:'itemElectricity', count:75e3 } },
+                {	id:'recipeAssembler1',	    type:'recipe',	                                        time:1, outputs:[{ id:'machineAssembler1', count:1 }], inputs:[{ id:'itemCopperPlate', count:5 },{ id:'itemIronPlate', count:22 }] },
+                {	id:'manualAssembler1',      type:'manual',	                                        recipeId:'recipeAssembler1' },
+                //---
+                {	id:'machineAssembler2',     type:'machine',	                                        label:'machineAssembler2', img:'img/machines/Assembler2.png', manualId:'manualAssembler2', speed:0.75, energy:{ id:'itemElectricity', count:150e3 } },
+                {	id:'recipeAssembler2',	    type:'recipe',	                                        time:1, outputs:[{ id:'machineAssembler2', count:1 }], inputs:[{ id:'itemCopperPlate', count:9 },{ id:'itemIronPlate', count:35 },{ id:'itemSteel', count:2 }] },
+                {	id:'manualAssembler2',      type:'manual',	                                        recipeId:'recipeAssembler2' },
                 //---
                 {	id:'machineAssembler3',     type:'machine',	                                        label:'machineAssembler3', img:'img/machines/Assembler3.png', manualId:'manualAssembler3', speed:1.25, energy:{ id:'itemElectricity', count:375e3 } },
                 {	id:'recipeAssembler3',	    type:'recipe',	                                        time:1, outputs:[{ id:'machineAssembler3', count:1 }], inputs:[{ id:'itemCopperPlate', count:148 },{ id:'itemIronPlate', count:130 },{ id:'itemPlastic', count:40 },{ id:'itemSteel', count:4 }] },
