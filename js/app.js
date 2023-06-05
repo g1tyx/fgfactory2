@@ -49,6 +49,8 @@ class App {
             let loadedData = localStorage.getItem(this.localStorageName)
             if (loadedData && loadedData !== null && loadedData.length % 4 == 0) {
                 //---
+                console.log('Loading local data')
+                //---
                 let text = LZString.decompressFromBase64(loadedData)
                 if (!text) return console.error('Load failed')
                 loadedData = JSON.parse(text)
@@ -66,6 +68,8 @@ class App {
                 if (loadedData.game) this.game.load(loadedData.game)
             }
             else {
+                //---
+                console.log('Loading first scenario')
                 //---
                 this.game.loadScenario('tut')
                 this.game.scenario.startDate = Date.now()
