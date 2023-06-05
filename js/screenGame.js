@@ -22,7 +22,7 @@ var TplScreenGame = function(data) {
                                 html += '<i class="fas fa-info-circle"></i>'
                             html += '</button>'
                             html += '<div class="dropdown-menu">'
-                                html += '<div class="px-3 py-1">'
+                                html += '<div class="px-2 py-1">'
                                     html += '<div class="pb-2 text-center small">'
                                         html += '<span>' + i18next.t('text_love') + '</span>'
                                     html += '</div>'
@@ -60,7 +60,7 @@ var TplScreenGame = function(data) {
         html += '<div class="position-absolute tab-content" style="top:48px; bottom:48px; width:100%; ">'
             html += '<div class="tab-pane scrollbar fade' + (data.selectedTab == 'missions' ? ' show active' : '') + '" id="missions-tab-pane" role="tabpanel" aria-labelledby="missions-tab" tabindex="0">'
                 html += '<div class="container py-3">'
-                    html += '<div class="m-1">' + i18next.t('word_Missions') + '</div>'
+                    html += '<div class="m-1 fs-6">' + i18next.t('word_Missions') + '</div>'
                     html += '<div id="missionContainer" class="row g-1"></div>'
                 html += '</div>'
             html += '</div>'
@@ -74,7 +74,7 @@ var TplScreenGame = function(data) {
             html += '</div>'
             html += '<div class="tab-pane scrollbar fade' + (data.selectedTab == 'scenarii' ? ' show active' : '') + '" id="scenarii-tab-pane" role="tabpanel" aria-labelledby="scenarii-tab" tabindex="0">'
                 html += '<div class="container py-3">'
-                    html += '<div class="m-1">' + i18next.t('word_Scenarii') + '</div>'
+                    html += '<div class="m-1 fs-6">' + i18next.t('word_Scenarii') + '</div>'
                     html += '<div class="m-1 text-warning small"><i class="fa-fw fas fa-exclamation-triangle"></i> ' + i18next.t('text_scenarioWarning') + '</div>'
                     html += '<div id="scenariiContainer" class="mt-1 row g-2 justify-content-center">'
                     html += '</div>'
@@ -82,7 +82,7 @@ var TplScreenGame = function(data) {
             html += '</div>'
             html += '<div class="tab-pane scrollbar fade' + (data.selectedTab == 'options' ? ' show active' : '') + '" id="options-tab-pane" role="tabpanel" aria-labelledby="options-tab" tabindex="0">'
                 html += '<div class="container py-3">'
-                    html += '<div class="m-1">' + i18next.t('word_LocalData') + '</div>'
+                    html += '<div class="m-1 fs-6">' + i18next.t('word_LocalData') + '</div>'
                     html += '<div class="row g-2">'
                         html += '<div class="col-12 d-flex justify-content-center">'
                             html += '<textarea spellcheck="false" rows="3" class="form-control small text-center" style="max-width:512px;" disabled readonly>' + window.App.getLocalData() + '</textarea>'
@@ -552,7 +552,7 @@ class ScreenGame {
         //---
         let html = ''
         //---
-        html += '<div class="m-1">' + i18next.t('word_Items') + '</div>'
+        html += '<div class="m-1 fs-6">' + i18next.t('word_Items') + '</div>'
         html += '<div class="row g-1">'
             let items = window.App.game.elems.filter(elem => elem.type == 'item' && elem.unlocked)
             items.forEach(item => {
@@ -579,7 +579,7 @@ class ScreenGame {
         //---
         items = window.App.game.elems.filter(elem => elem.type == 'machine' && elem.unlocked)
         if (items.length > 0) {
-            html += '<div class="m-1">' + i18next.t('word_Machines') + '</div>'
+            html += '<div class="m-1 fs-6">' + i18next.t('word_Machines') + '</div>'
             html += '<div class="row g-1">'
                 items.forEach(item => {
                     html += '<div class="col-12">'
@@ -613,7 +613,7 @@ class ScreenGame {
         //---
         items = window.App.game.elems.filter(elem => elem.type == 'storer' && elem.unlocked)
         if (items.length > 0) {
-            html += '<div class="m-1">' + i18next.t('word_Storers') + '</div>'
+            html += '<div class="m-1 fs-6">' + i18next.t('word_Storers') + '</div>'
             html += '<div class="row g-1">'
             items.forEach(item => {
                 html += '<div class="col-12">'

@@ -15,7 +15,7 @@ class App {
         this.screenSelected = null
         this.resetInProgress = false
         this.lastFrameTimeMs = new Date().getTime()
-        this.localStorageName = 'fgtests'
+        this.localStorageName = 'fgfactory2'
         //---
         this.screens = {
             //---
