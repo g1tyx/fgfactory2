@@ -440,7 +440,7 @@ class Game {
                 //---
                 for (let input of manual.inputs) {
                     //---
-                    if (this.getAvailableCount(input.id) < input.count) return false
+                    if (input.count > this.getAvailableCount(input.id)) return false
                 }
             }
             //---

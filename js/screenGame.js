@@ -380,7 +380,7 @@ class ScreenGame {
                                 let inputElem = window.App.game.getElem(input.id)
                                 //---
                                 let style = ''
-                                if (window.App.game.getAvailableCount(input.id) < input.count) style = 'position-absolute end-0 bottom-0 text-danger lh-1'
+                                if (input.count > window.App.game.getAvailableCount(input.id)) style = 'position-absolute end-0 bottom-0 text-danger lh-1'
                                 else style = 'position-absolute end-0 bottom-0 text-white lh-1'
                                 //---
                                 let node = document.getElementById('manualInputCount-' + manual.id + '-' + input.id)
@@ -395,7 +395,7 @@ class ScreenGame {
                             let max = window.App.game.getMax(output.id)
                             //---
                             let style = ''
-                            if (max > 0 && outputElem.count > max) style = 'position-absolute end-0 bottom-0 text-danger lh-1'
+                            if (max > 0 && outputElem.count >= max) style = 'position-absolute end-0 bottom-0 text-danger lh-1'
                             else style = 'position-absolute end-0 bottom-0 text-white lh-1'
                             //---
                             let node = document.getElementById('manualOutputCount-' + manual.id + '-' + output.id)
@@ -430,7 +430,7 @@ class ScreenGame {
                                 let inputElem = window.App.game.getElem(input.id)
                                 //---
                                 let style = ''
-                                if (window.App.game.getAvailableCount(input.id) < input.count) style = 'position-absolute end-0 bottom-0 text-danger lh-1'
+                                if (input.count > window.App.game.getAvailableCount(input.id)) style = 'position-absolute end-0 bottom-0 text-danger lh-1'
                                 else style = 'position-absolute end-0 bottom-0 text-white lh-1'
                                 //---
                                 let node = document.getElementById('lineInputCount-' + line.id + '-' + input.id)
@@ -444,7 +444,7 @@ class ScreenGame {
                                 let max = window.App.game.getMax(output.id)
                                 //---
                                 let style = ''
-                                if (max > 0 && outputElem.count > max) style = 'position-absolute end-0 bottom-0 text-danger lh-1'
+                                if (max > 0 && outputElem.count >= max) style = 'position-absolute end-0 bottom-0 text-danger lh-1'
                                 else style = 'position-absolute end-0 bottom-0 text-white lh-1'
                                 //---
                                 let node = document.getElementById('lineOutputCount-' + line.id + '-' + output.id)
