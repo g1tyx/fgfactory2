@@ -53,6 +53,8 @@ ul {
     font-weight: 500;
 }
 
+.text-normal { color: var(--bs-body-color)!important; }
+
 .border-body {
     --bs-border-opacity: 1;
     border-color: var(--bs-body-bg)!important;
@@ -168,12 +170,6 @@ ul {
     padding: 0 .75rem .5rem;
 }
 
-.modal-body {
-    border-bottom: 2px solid #444444;;
-}
-
-.modal-body:last-child { border-bottom: 0; }
-
 .badge {
     --bs-badge-font-weight: 400;
     --bs-badge-padding-x: 0.5em;
@@ -271,7 +267,7 @@ ul {
 }
 
 .progress {
-    --bs-progress-bg: #303030;
+    --bs-progress-bg: #444444;
     --bs-progress-bar-transition: width .01s ease;
 }
 

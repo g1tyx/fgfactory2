@@ -107,9 +107,9 @@ var TplScreenGame = function(data) {
                 html += '<div class="container py-3">'
                     html += '<div class="m-1 fs-6">' + i18next.t('word_LocalData') + '</div>'
                     html += '<div class="row g-2">'
-                        html += '<div class="col-12 col-lg-6">'
+                        html += '<div class="col-12 col-md-6">'
                             html += '<div class="mb-2 d-flex justify-content-center">'
-                                html += '<textarea spellcheck="false" rows="3" class="form-control small text-center" style="max-width:512px;" disabled readonly>' + window.App.getLocalData() + '</textarea>'
+                                html += '<textarea spellcheck="false" rows="3" class="w-100 form-control small text-center" disabled readonly>' + window.App.getLocalData() + '</textarea>'
                             html += '</div>'
                             html += '<div class="row g-2 align-items-center justify-content-center">'
                                 html += '<div class="col-4">'
@@ -132,9 +132,9 @@ var TplScreenGame = function(data) {
                                 html += '</div>'
                             html += '</div>'
                         html += '</div>'
-                        html += '<div class="col-12 col-lg-6">'
+                        html += '<div class="col-12 col-md-6">'
                             html += '<div class="mb-2 d-flex">'
-                                html += '<textarea spellcheck="false" rows="3" id="importData" class="form-control small text-center" style="max-width:512px;"></textarea>'
+                                html += '<textarea spellcheck="false" rows="3" id="importData" class="w-100 form-control small text-center"></textarea>'
                             html += '</div>'
                             html += '<div class="col-4">'
                                 html += '<button type="button" class="w-100 btn btn-sm btn-primary" onclick="window.App.importSave()">'
@@ -240,8 +240,8 @@ class ScreenGame {
                     elem.costs.forEach(cost => {
                         //---
                         let style = ''
-                        if (window.App.game.getAvailableCount(cost.id) < cost.count) style = 'position-absolute end-0 top-100 translate-middle-y badge text-bg-danger lh-1'
-                        else style = 'position-absolute end-0 top-100 translate-middle-y lh-1'
+                        if (window.App.game.getAvailableCount(cost.id) < cost.count) style = 'position-absolute end-0 bottom-0 badge text-bg-danger lh-1'
+                        else style = 'position-absolute end-0 bottom-0 badge lh-1'
                         //---
                         let node = document.getElementById('missionNeedCount-' + elem.id + '-' + cost.id)
                         if (node.className != style) node.className = style
@@ -324,10 +324,10 @@ class ScreenGame {
                 let node = document.getElementById('itemModalCount-' + this.selectedItem.id)                
                 if (node.innerHTML != html) node.innerHTML = html
                 //---
-                let style = ''
-                if (this.selectedItem.count == 0) style = 'small'
+                let style = 'badge'
+                if (this.selectedItem.count == 0) style = 'badge text-normal'
                 else if (max > 0 && this.selectedItem.count >= max) style = 'badge text-bg-danger'
-                else style = 'small text-white'
+                else style = 'badge text-white'
                 if (node.className != style) node.className = style
                 //---
                 if (this.selectedItem.type == 'machine' || this.selectedItem.type == 'storer') {
@@ -341,8 +341,8 @@ class ScreenGame {
                     let node = document.getElementById('itemModalAvailableCount-' + this.selectedItem.id)                
                     if (node.innerHTML != html) node.innerHTML = html
                     //---
-                    let style = ''
-                    if (availableCount == 0) style = 'small ms-1'
+                    let style = 'badge'
+                    if (availableCount == 0) style = 'badge ms-1'
                     else if (availableCount > 0) style = 'ms-1 badge text-bg-success'
                     if (node.className != style) node.className = style
                 }
@@ -356,8 +356,8 @@ class ScreenGame {
                     node = document.getElementById('itemModalProd-' + this.selectedItem.id)                
                     if (node.innerHTML != html) node.innerHTML = html
                     //---
-                    style = ''
-                    if (prod == 0) style = 'small'
+                    style = 'badge'
+                    if (prod == 0) style = 'badge text-normal'
                     else if (prod < 0) style = 'badge text-bg-danger'
                     else style = 'badge text-bg-success'
                     if (node.className != style) node.className = style
@@ -392,8 +392,8 @@ class ScreenGame {
                                 let inputElem = window.App.game.getElem(input.id)
                                 //---
                                 let style = ''
-                                if (input.count > window.App.game.getAvailableCount(input.id)) style = 'position-absolute end-0 top-100 translate-middle-y badge text-bg-danger lh-1'
-                                else style = 'position-absolute end-0 top-100 translate-middle-y text-white lh-1'
+                                if (input.count > window.App.game.getAvailableCount(input.id)) style = 'position-absolute end-0 bottom-0 badge text-bg-danger lh-1'
+                                else style = 'position-absolute end-0 bottom-0 badge text-white lh-1'
                                 //---
                                 let node = document.getElementById('manualInputCount-' + manual.id + '-' + input.id)
                                 if (node.className != style) node.className = style
@@ -407,8 +407,8 @@ class ScreenGame {
                             let max = window.App.game.getMax(output.id)
                             //---
                             let style = ''
-                            if (max > 0 && outputElem.count >= max) style = 'position-absolute end-0 top-100 translate-middle-y badge text-bg-danger lh-1'
-                            else style = 'position-absolute end-0 top-100 translate-middle-y text-white lh-1'
+                            if (max > 0 && outputElem.count >= max) style = 'position-absolute end-0 bottom-0 badge text-bg-danger lh-1'
+                            else style = 'position-absolute end-0 bottom-0 badge text-white lh-1'
                             //---
                             let node = document.getElementById('manualOutputCount-' + manual.id + '-' + output.id)
                             if (node.className != style) node.className = style
@@ -431,23 +431,26 @@ class ScreenGame {
                             let machine = window.App.game.getElem(line.machineId)
                             //---
                             let style = ''
-                            if (window.App.game.getAvailableCount(machine.id) < 1) style = 'position-absolute end-0 top-100 translate-middle-y badge text-bg-danger lh-1'
-                            else style = 'position-absolute end-0 top-100 translate-middle-y lh-1'
+                            if (window.App.game.getAvailableCount(machine.id) < 1) style = 'position-absolute end-0 bottom-0 badge text-bg-danger lh-1'
+                            else style = 'position-absolute end-0 bottom-0 badge lh-1'
                             //---
                             node = document.getElementById('lineMachineCount-' + line.id)
                             if (node.className != style) node.className = style
                             //---
-                            line.inputs.forEach(input => {
+                            if (line.inputs && line.inputs.length > 0) {
                                 //---
-                                let inputElem = window.App.game.getElem(input.id)
-                                //---
-                                let style = ''
-                                if (input.count > window.App.game.getAvailableCount(input.id)) style = 'position-absolute end-0 top-100 translate-middle-y badge text-bg-danger lh-1'
-                                else style = 'position-absolute end-0 top-100 translate-middle-y lh-1'
-                                //---
-                                let node = document.getElementById('lineInputCount-' + line.id + '-' + input.id)
-                                if (node.className != style) node.className = style
-                            })
+                                line.inputs.forEach(input => {
+                                    //---
+                                    let inputElem = window.App.game.getElem(input.id)
+                                    //---
+                                    let style = ''
+                                    if (input.count > window.App.game.getAvailableCount(input.id)) style = 'position-absolute end-0 bottom-0 badge text-bg-danger lh-1'
+                                    else style = 'position-absolute end-0 bottom-0 badge lh-1'
+                                    //---
+                                    let node = document.getElementById('lineInputCount-' + line.id + '-' + input.id)
+                                    if (node.className != style) node.className = style
+                                })
+                            }
                             //---
                             line.outputs.forEach(output => {
                                 //---
@@ -456,8 +459,8 @@ class ScreenGame {
                                 let max = window.App.game.getMax(output.id)
                                 //---
                                 let style = ''
-                                if (max > 0 && outputElem.count >= max) style = 'position-absolute end-0 top-100 translate-middle-y badge text-bg-danger lh-1'
-                                else style = 'position-absolute end-0 top-100 translate-middle-y lh-1'
+                                if (max > 0 && outputElem.count >= max) style = 'position-absolute end-0 bottom-0 badge text-bg-danger lh-1'
+                                else style = 'position-absolute end-0 bottom-0 badge text-white lh-1'
                                 //---
                                 let node = document.getElementById('lineOutputCount-' + line.id + '-' + output.id)
                                 if (node.className != style) node.className = style
@@ -490,8 +493,8 @@ class ScreenGame {
                         if (node.innerHTML != html) node.innerHTML = html
                         //---
                         let style = ''
-                        if (window.App.game.getAvailableCount(storer.id) < 1) style = 'position-absolute end-0 top-100 translate-middle-y badge text-bg-danger lh-1'
-                        else style = 'position-absolute end-0 top-100 translate-middle-y lh-1'
+                        if (window.App.game.getAvailableCount(storer.id) < 1) style = 'position-absolute end-0 bottom-0 badge text-bg-danger lh-1'
+                        else style = 'position-absolute end-0 bottom-0 badge lh-1'
                         //---
                         node = document.getElementById('itemStorerCount-' + this.selectedItem.id)
                         if (node.className != style) node.className = style
@@ -521,7 +524,7 @@ class ScreenGame {
         //---
         let elems = window.App.game.elems.filter(elem => elem.type == 'mission' && elem.unlocked)
         elems.forEach(elem => {
-            html += '<div class="col-12 col-lg-4">'
+            html += '<div class="col-12 col-md-6 col-lg-4 col-xl-3">'
                 html += '<div class="card">'
                     if (elem.count < 1) {
                         html += '<div class="card-header">'
@@ -536,12 +539,12 @@ class ScreenGame {
                             html += '<div class="mb-2"><span>' + i18next.t('word_Objectives') + '</span></div>'
                             html += '<div class="row gx-2">'
                                 html += '<div class="col">'
-                                    html += '<div class="row gx-2 align-items-center">'
+                                    html += '<div class="row g-2 align-items-center">'
                                         elem.costs.forEach(cost => {
                                             let costElem = window.App.game.getElem(cost.id)
-                                            html += '<div class="col-auto position-relative small">'
+                                            html += '<div class="col-auto position-relative small pb-2">'
                                                 html += '<img src="' + costElem.img + '" width="24px" height="24px">'
-                                                html += '<small id="missionNeedCount-' + elem.id + '-' + cost.id + '" class="position-absolute end-0 top-100 translate-middle-y lh-1">' + formatNumber(cost.count) + '</small>'
+                                                html += '<small id="missionNeedCount-' + elem.id + '-' + cost.id + '">' + formatNumber(cost.count) + '</small>'
                                             html += '</div>'
                                         })
                                     html += '</div>'
@@ -587,7 +590,7 @@ class ScreenGame {
         html += '<div class="row g-1">'
             let items = window.App.game.elems.filter(elem => elem.type == 'item' && elem.unlocked)
             items.forEach(item => {
-                html += '<div class="col-12 col-lg-4">'
+                html += '<div class="col-12 col-md-6 col-lg-4 col-xl-3">'
                     html += '<button class="w-100 btn text-start" onclick="window.App.doClick(\'showItemModal\', { itemId:\'' + item.id + '\' })">'
                         html += '<div class="row gx-2 align-items-center">'
                             html += '<div class="col-auto"><img src="' + item.img + '" width="24px" height="24px"></div>'
@@ -613,7 +616,7 @@ class ScreenGame {
             html += '<div class="m-1 fs-6">' + i18next.t('word_Machines') + '</div>'
             html += '<div class="row g-1">'
                 items.forEach(item => {
-                    html += '<div class="col-12 col-lg-4">'
+                    html += '<div class="col-12 col-md-6 col-lg-4 col-xl-3">'
                         html += '<button class="w-100 btn text-start" onclick="window.App.doClick(\'showItemModal\', { itemId:\'' + item.id + '\' })">'
                             html += '<div class="row gx-2 align-items-center">'
                                 html += '<div class="col-auto"><img src="' + item.img + '" width="24px" height="24px"></div>'
@@ -647,7 +650,7 @@ class ScreenGame {
             html += '<div class="m-1 fs-6">' + i18next.t('word_Storers') + '</div>'
             html += '<div class="row g-1">'
             items.forEach(item => {
-                html += '<div class="col-12 col-lg-4">'
+                html += '<div class="col-12 col-md-6 col-lg-4 col-xl-3">'
                     html += '<button class="w-100 btn text-start" onclick="window.App.doClick(\'showItemModal\', { itemId:\'' + item.id + '\' })">'
                         html += '<div class="row gx-2 align-items-center">'
                             html += '<div class="col-auto"><img src="' + item.img + '" width="24px" height="24px"></div>'
@@ -677,7 +680,7 @@ class ScreenGame {
         //---
         let scenarii = window.App.game.scenarii.filter(scenario => scenario.ready)
         scenarii.forEach(scenario => {
-            html += '<div class="col-12 col-lg-4">'
+            html += '<div class="col-12 col-md-6 col-lg-4 col-xl-3">'
                 html += '<button type="button" class="w-100 btn text-start' + (scenario.id == window.App.game.scenario.id ? ' border-success' : '') + '" onclick="window.App.doClick(\'selectScenario\', { scenarioId:\'' + scenario.id + '\' })">'
                     html += '<div class="row g-1 justify-content-center">'
                         html += '<div class="col-12">'
@@ -771,27 +774,33 @@ class ScreenGame {
                     html += '</div>'
                 html += '</div>'
                 html += '<div class="modal-body">'
-                    html += '<div class="row gx-3">'
+                    html += '<div class="row gx-1">'
                         html += '<div class="col-4">'
-                             html += '<div class="mb-1">' + i18next.t('word_Count') + '</div>'
-                             html += '<div class="d-flex">'
+                            html += '<div class="m-1">'
+                                 html += '<span class="fs-6">' + i18next.t('word_Count') + '</span>'
+                            html += '</div>'
+                            html += '<div class="card card-body rounded py-2 flex-row">'
                                 html += '<span id="itemModalCount-' + item.id + '"></span>'
                                 if (item.type == 'machine' || item.type == 'storer') html += '<span id="itemModalAvailableCount-' + item.id + '"></span>'
                              html += '</div>'
                         html += '</div>'
                         if (item.storage) {
                             html += '<div class="col-4">'
-                                html += '<div class="mb-1">' + i18next.t('word_Storage') + '</div>'
-                                html += '<div class="d-flex">'
-                                    html += '<span id="itemModalStorage-' + item.id + '" class="small text-white"></span>'
+                                html += '<div class="m-1">'
+                                     html += '<span class="fs-6">' + i18next.t('word_Storage') + '</span>'
+                                html += '</div>'
+                                html += '<div class="card card-body rounded py-2 flex-row">'
+                                    html += '<span id="itemModalStorage-' + item.id + '" class="badge"></span>'
                                 html += '</div>'
                             html += '</div>'
                         }
                         if (item.lines && item.lines.length > 0) {
                             html += '<div class="col-4">'
-                                html += '<div class="mb-1">' + i18next.t('word_Prod') + '</div>'
-                                html += '<div class="d-flex">'
-                                    html += '<span id="itemModalProd-' + item.id + '" class="small"></span>'
+                                html += '<div class="m-1">'
+                                     html += '<span class="fs-6">' + i18next.t('word_Prod') + '</span>'
+                                html += '</div>'
+                                html += '<div class="card card-body rounded py-2 flex-row">'
+                                    html += '<span id="itemModalProd-' + item.id + '"></span>'
                                 html += '</div>'
                             html += '</div>'
                         }
@@ -801,27 +810,27 @@ class ScreenGame {
                     let manual = window.App.game.getElem(item.manualId)
                     if (manual.unlocked) {
                         html += '<div class="modal-body">'
-                            html += '<div class="mb-1">'
-                                 html += '<span>' + i18next.t('word_Manual') + '</span>'
+                            html += '<div class="m-1">'
+                                 html += '<span class="fs-6">' + i18next.t('word_Manual') + '</span>'
                             html += '</div>'
-                            html += '<div class="card card-body p-2 pb-3 rounded">'
+                            html += '<div class="card card-body rounded">'
                                 html += '<div class="row g-2 align-items-center">'
                                     html += '<div class="col">'
                                         html += '<div class="row g-2 align-items-center">'
                                             manual.outputs.forEach(output => {
                                                 let outputElem = window.App.game.getElem(output.id)
-                                                html += '<div class="col-auto position-relative small">'
+                                                html += '<div class="col-auto position-relative small pb-2">'
                                                     html += '<img src="' + outputElem.img + '" width="24px" height="24px">'
-                                                    html += '<small id="manualOutputCount-' + manual.id + '-' + output.id + '" class="position-absolute end-0 top-100 translate-middle-y lh-1">' + formatNumber(output.count) + '</small>'
+                                                    html += '<small id="manualOutputCount-' + manual.id + '-' + output.id + '">' + formatNumber(output.count) + '</small>'
                                                 html += '</div>'
                                             })
                                             if (manual.inputs) {
                                                 html += '<div class="col-auto small"><i class="fas fa-fw fa-long-arrow-alt-left"></i></div>'
                                                 manual.inputs.forEach(input => {
                                                     let inputElem = window.App.game.getElem(input.id)
-                                                    html += '<div class="col-auto position-relative small">'
+                                                    html += '<div class="col-auto position-relative small pb-2">'
                                                         html += '<img src="' + inputElem.img + '" width="24px" height="24px">'
-                                                        html += '<small id="manualInputCount-' + manual.id + '-' + input.id + '" class="position-absolute end-0 top-100 translate-middle-y lh-1">' + formatNumber(input.count) + '</small>'
+                                                        html += '<small id="manualInputCount-' + manual.id + '-' + input.id + '">' + formatNumber(input.count) + '</small>'
                                                     html += '</div>'
                                                 })
                                             }
@@ -855,49 +864,29 @@ class ScreenGame {
                     })
                     if (unlocked > 0) {
                         html += '<div class="modal-body">'
-                            html += '<div class="mb-2">'
-                                 html += '<span>' + i18next.t('word_Automation') + '</span>'
+                            html += '<div class="m-1">'
+                                 html += '<span class="fs-6">' + i18next.t('word_Automation') + '</span>'
                             html += '</div>'
-                            html += '<div class="row gy-2">'
+                            html += '<div class="row g-1">'
                                 item.lines.forEach(lineId => {
                                     let line = window.App.game.getElem(lineId)
                                     if (line.unlocked) {
                                         let machine = window.App.game.getElem(line.machineId)
                                         html += '<div class="col-12">'
-                                            html += '<div class="card card-body p-2 pb-3 rounded">'
-                                                html += '<div class="row gx-3 align-items-center">'
-                                                    html += '<div class="col">'
-                                                        html += '<div class="row g-2 align-items-center">'
-                                                            html += '<div class="col-auto position-relative small">'
-                                                                html += '<img src="' + machine.img + '" width="24px" height="24px">'
-                                                                html += '<small id="lineMachineCount-' + line.id + '" class="position-absolute end-0 bottom-0 lh-1 text-white">1</small>'
-                                                            html += '</div>'
-                                                            html += '<div class="col-auto small">+</div>'
-                                                            line.inputs.forEach(input => {
-                                                                let inputElem = window.App.game.getElem(input.id)
-                                                                html += '<div class="col-auto position-relative small">'
-                                                                    html += '<img src="' + inputElem.img + '" width="24px" height="24px">'
-                                                                    html += '<small id="lineInputCount-' + line.id + '-' + input.id + '" class="position-absolute end-0 bottom-0 lh-1 text-white">' + formatNumber(input.count) + '</small>'
-                                                                html += '</div>'
-                                                            })
-                                                            html += '<div class="col-auto small"><i class="fas fa-fw fa-long-arrow-alt-right"></i></div>'
-                                                            line.outputs.forEach(output => {
-                                                                let outputElem = window.App.game.getElem(output.id)
-                                                                html += '<div class="col-auto position-relative small">'
-                                                                    html += '<img src="' + outputElem.img + '" width="24px" height="24px">'
-                                                                    html += '<small id="lineOutputCount-' + line.id + '-' + output.id + '" class="position-absolute end-0 top-100 translate-middle-y lh-1">' + formatNumber(output.count) + '</small>'
-                                                                html += '</div>'
-                                                            })
-                                                        html += '</div>'
+                                            html += '<div class="card card-body rounded">'
+                                                html += '<div class="row g-2 align-items-center">'
+                                                    html += '<div class="col-auto position-relative small pb-2">'
+                                                        html += '<img src="' + machine.img + '" width="24px" height="24px">'
+                                                        html += '<small id="lineMachineCount-' + line.id + '">1</small>'
                                                     html += '</div>'
-                                                    html += '<div class="col-auto">'
-                                                        html += '<div class="row g-2 align-items-center">'
+                                                    html += '<div class="col">'
+                                                        html += '<div class="row g-2 align-items-center justify-content-end">'
                                                             html += '<div class="col-auto">'
                                                                 html += '<button type="button" id="lineBtnRemove-' + lineId + '" class="btn btn-sm btn-danger" onclick="window.App.doClick(\'removeLine\', { lineId:\'' + lineId + '\' })">'
                                                                     html += '<i class="fa-fw fas fa-minus-circle"></i>'
                                                                 html += '</button>'
                                                             html += '</div>'
-                                                            html += '<div class="col small text-end" style="width:35px;"><small>x</small><span id="lineCount-' + line.id + '">' + formatNumber(line.count) + '</span></div>'
+                                                            html += '<div class="col-auto small text-end" style="width:35px;"><small>x</small><span id="lineCount-' + line.id + '">' + formatNumber(line.count) + '</span></div>'
                                                             html += '<div class="col-auto">'
                                                                 html += '<button type="button" id="lineBtnAdd-' + lineId + '" class="btn btn-sm btn-primary" onclick="window.App.doClick(\'addLine\', { lineId:\'' + lineId + '\' })">'
                                                                     html += '<i class="fa-fw fas fa-plus-circle"></i>'
@@ -905,6 +894,25 @@ class ScreenGame {
                                                             html += '</div>'
                                                         html += '</div>'
                                                     html += '</div>'
+                                                html += '</div>'
+                                                html += '<div class="mt-0 row g-2 align-items-center">'
+                                                    if (line.inputs && line.inputs.length > 0) {
+                                                        line.inputs.forEach(input => {
+                                                            let inputElem = window.App.game.getElem(input.id)
+                                                            html += '<div class="col-auto position-relative small pb-2">'
+                                                                html += '<img src="' + inputElem.img + '" width="24px" height="24px">'
+                                                                html += '<small id="lineInputCount-' + line.id + '-' + input.id + '">' + formatNumber(input.count) + '</small>'
+                                                            html += '</div>'
+                                                        })
+                                                    }
+                                                    html += '<div class="col-auto small"><i class="fas fa-fw fa-long-arrow-alt-right"></i></div>'
+                                                    line.outputs.forEach(output => {
+                                                        let outputElem = window.App.game.getElem(output.id)
+                                                        html += '<div class="col-auto position-relative small pb-2">'
+                                                            html += '<img src="' + outputElem.img + '" width="24px" height="24px">'
+                                                            html += '<small id="lineOutputCount-' + line.id + '-' + output.id + '">' + formatNumber(output.count) + '</small>'
+                                                        html += '</div>'
+                                                    })
                                                 html += '</div>'
                                             html += '</div>'
                                         html += '</div>'
@@ -918,19 +926,19 @@ class ScreenGame {
                     let storer = window.App.game.getElem(item.storage.storerId)
                     if (storer.unlocked) {
                         html += '<div class="modal-body">'
-                            html += '<div class="mb-1">'
-                                 html += '<span>' + i18next.t('word_Storage') + '</span>'
+                            html += '<div class="m-1">'
+                                 html += '<span class="fs-6">' + i18next.t('word_Storage') + '</span>'
                             html += '</div>'
-                            html += '<div class="card card-body p-2 pb-3 rounded">'
+                            html += '<div class="card card-body rounded">'
                                 html += '<div class="row g-2 align-items-center">'
                                     html += '<div class="col">'
                                         html += '<div class="row g-2 align-items-center">'
-                                            html += '<div class="col-auto position-relative small">'
+                                            html += '<div class="col-auto position-relative small pb-2">'
                                                 html += '<img src="' + storer.img + '" width="24px" height="24px">'
-                                                html += '<small id="itemStorerCount-' + item.id + '" class="position-absolute end-0 bottom-0 lh-1 text-white">1</small>'
+                                                html += '<small id="itemStorerCount-' + item.id + '">1</small>'
                                             html += '</div>'
                                             html += '<div class="col-auto small"><i class="fas fa-fw fa-long-arrow-alt-right"></i></div>'
-                                            html += '<div class="col-auto small">+' + formatNumber(item.storage.base) + '</div>'
+                                            html += '<div class="col-auto small text-white">+' + formatNumber(item.storage.base) + '</div>'
                                         html += '</div>'
                                     html += '</div>'
                                     html += '<div class="col-auto">'
