@@ -77,15 +77,14 @@ var TplScreenGame = function(data) {
             html += '</div>'
             html += '<div class="tab-pane scrollbar fade' + (data.selectedTab == 'scenarii' ? ' show active' : '') + '" id="scenarii-tab-pane" role="tabpanel" aria-labelledby="scenarii-tab" tabindex="0">'
                 html += '<div class="container py-3">'
-                    html += '<div class="m-1 fs-6">' + i18next.t('word_Scenarii') + '</div>'
+                    html += '<div class="m-1 h6 pb-2">' + i18next.t('word_Scenarii') + '</div>'
                     html += '<div class="m-1 text-warning small"><i class="fa-fw fas fa-exclamation-triangle"></i> ' + i18next.t('text_scenarioWarning') + '</div>'
-                    html += '<div id="scenariiContainer" class="mt-1 row g-2">'
-                    html += '</div>'
+                    html += '<div id="scenariiContainer" class="mt-1 row g-2"></div>'
                 html += '</div>'
             html += '</div>'
             html += '<div class="tab-pane scrollbar fade' + (data.selectedTab == 'options' ? ' show active' : '') + '" id="options-tab-pane" role="tabpanel" aria-labelledby="options-tab" tabindex="0">'
                 html += '<div class="container py-3">'
-                    html += '<div class="m-1 fs-6">' + i18next.t('word_Language') + '</div>'
+                    html += '<div class="m-1 h6">' + i18next.t('word_Language') + '</div>'
                     html += '<div class="row g-2">'
                         html += '<div class="col-auto">'
                             html += '<button type="button" class="btn btn-sm' + (i18next.language == 'en-US' ? ' border-success' : '') + '" onclick="window.App.changeLocale(\'en-US\')">'
@@ -100,7 +99,7 @@ var TplScreenGame = function(data) {
                     html += '</div>'
                 html += '</div>'
                 html += '<div class="container py-3">'
-                    html += '<div class="m-1 fs-6">' + i18next.t('word_LocalData') + '</div>'
+                    html += '<div class="m-1 h6">' + i18next.t('word_LocalData') + '</div>'
                     html += '<div class="row g-2">'
                         html += '<div class="col-12 col-md-6">'
                             html += '<div class="mb-2 d-flex justify-content-center">'
@@ -520,7 +519,7 @@ class ScreenGame {
         let elems = window.App.game.elems.filter(elem => elem.type == 'mission' && elem.unlocked)
         if (elems.length > 0) {
             //---
-            html += '<div class="m-1 fs-6">' + i18next.t('word_Missions') + '</div>'
+            html += '<div class="m-1 h6">' + i18next.t('word_Missions') + '</div>'
             html += '<div class="row g-1">'
                 elems.forEach(elem => {
                     html += '<div class="col-12 col-md-6 col-lg-4 col-xl-3">'
@@ -534,7 +533,7 @@ class ScreenGame {
                                     html += '</div>'
                                 html += '</div>'
                                 html += '<div class="card-body">'
-                                    html += '<div class="mb-2"><span class="text-white">' + i18next.t(elem.desc) + '</span></div>'
+                                    if (elem.desc) html += '<div class="mb-2"><span class="text-white">' + i18next.t(elem.desc) + '</span></div>'
                                     html += '<div class="mb-2"><span>' + i18next.t('word_Objectives') + '</span></div>'
                                     html += '<div class="row gx-2">'
                                         html += '<div class="col">'
@@ -592,7 +591,7 @@ class ScreenGame {
         elems = window.App.game.elems.filter(elem => elem.type == 'tech' && elem.unlocked)
         if (elems.length > 0) {
             //---
-            html += '<div class="m-1 fs-6">' + i18next.t('word_Techs') + '</div>'
+            html += '<div class="m-1 h6">' + i18next.t('word_Techs') + '</div>'
             html += '<div class="row g-1">'
                 elems.forEach(elem => {
                     html += '<div class="col-12 col-md-6 col-lg-4 col-xl-3">'
@@ -606,7 +605,7 @@ class ScreenGame {
                                     html += '</div>'
                                 html += '</div>'
                                 html += '<div class="card-body">'
-                                    html += '<div class="mb-2"><span class="text-white">' + i18next.t(elem.desc) + '</span></div>'
+                                    if (elem.desc) html += '<div class="mb-2"><span class="text-white">' + i18next.t(elem.desc) + '</span></div>'
                                     html += '<div class="mb-2"><span>' + i18next.t('word_Objectives') + '</span></div>'
                                     html += '<div class="row gx-2">'
                                         html += '<div class="col">'
@@ -667,7 +666,7 @@ class ScreenGame {
         let items = window.App.game.elems.filter(elem => elem.type == 'item' && elem.unlocked)
         if (items.length > 0) {
             //---
-            html += '<div class="m-1 fs-6">' + i18next.t('word_Items') + '</div>'
+            html += '<div class="m-1 h6">' + i18next.t('word_Items') + '</div>'
             html += '<div class="row g-1">'
                 items.forEach(item => {
                     html += '<div class="col-12 col-md-6 col-lg-4 col-xl-3">'
@@ -701,7 +700,7 @@ class ScreenGame {
         //---
         items = window.App.game.elems.filter(elem => elem.type == 'machine' && elem.unlocked)
         if (items.length > 0) {
-            html += '<div class="m-1 fs-6">' + i18next.t('word_Machines') + '</div>'
+            html += '<div class="m-1 h6">' + i18next.t('word_Machines') + '</div>'
             html += '<div class="row g-1">'
                 items.forEach(item => {
                     html += '<div class="col-12 col-md-6 col-lg-4 col-xl-3">'
@@ -738,7 +737,7 @@ class ScreenGame {
         //---
         items = window.App.game.elems.filter(elem => elem.type == 'storer' && elem.unlocked)
         if (items.length > 0) {
-            html += '<div class="m-1 fs-6">' + i18next.t('word_Storers') + '</div>'
+            html += '<div class="m-1 h6">' + i18next.t('word_Storers') + '</div>'
             html += '<div class="row g-1">'
             items.forEach(item => {
                 html += '<div class="col-12 col-md-6 col-lg-4 col-xl-3">'
@@ -779,10 +778,10 @@ class ScreenGame {
         let scenarii = window.App.game.scenarii.filter(scenario => scenario.ready)
         scenarii.forEach(scenario => {
             html += '<div class="col-12 col-md-6 col-lg-4 col-xl-3">'
-                html += '<button type="button" class="w-100 btn text-start' + (scenario.id == window.App.game.scenario.id ? ' border-success' : '') + '" onclick="window.App.doClick(\'selectScenario\', { scenarioId:\'' + scenario.id + '\' })">'
+                html += '<button type="button" class="w-100 btn text-start' + (scenario.id == window.App.game.scenario.id ? ' border-success disabled' : '') + '" onclick="if (confirm(\'' + i18next.t('text_changeScenarioConfirm') + '\')) window.App.doClick(\'selectScenario\', { scenarioId:\'' + scenario.id + '\' })">'
                     html += '<div class="row g-1 justify-content-center">'
                         html += '<div class="col-12">'
-                            html += '<span class="fs-6 text-white">' + i18next.t(scenario.label) + '</span>'
+                            html += '<span class="h6 text-white">' + i18next.t(scenario.label) + '</span>'
                         html += '</div>'
                         html += '<div class="col-12 small">'
                             html += '<span class="text-normal">' + i18next.t(scenario.desc) + '</span>'
@@ -875,7 +874,7 @@ class ScreenGame {
                     html += '<div class="row gx-1">'
                         html += '<div class="col-4">'
                             html += '<div class="m-1">'
-                                 html += '<span class="fs-6">' + i18next.t('word_Count') + '</span>'
+                                 html += '<span class="h6">' + i18next.t('word_Count') + '</span>'
                             html += '</div>'
                             html += '<div class="card card-body rounded py-2 flex-row">'
                                 html += '<span id="itemModalCount-' + item.id + '"></span>'
@@ -885,7 +884,7 @@ class ScreenGame {
                         if (item.storage) {
                             html += '<div class="col-4">'
                                 html += '<div class="m-1">'
-                                     html += '<span class="fs-6">' + i18next.t('word_Storage') + '</span>'
+                                     html += '<span class="h6">' + i18next.t('word_Storage') + '</span>'
                                 html += '</div>'
                                 html += '<div class="card card-body rounded py-2 flex-row">'
                                     html += '<span id="itemModalStorage-' + item.id + '" class="badge"></span>'
@@ -895,7 +894,7 @@ class ScreenGame {
                         if (item.lines && item.lines.length > 0) {
                             html += '<div class="col-4">'
                                 html += '<div class="m-1">'
-                                     html += '<span class="fs-6">' + i18next.t('word_Prod') + '</span>'
+                                     html += '<span class="h6">' + i18next.t('word_Prod') + '</span>'
                                 html += '</div>'
                                 html += '<div class="card card-body rounded py-2 flex-row">'
                                     html += '<span id="itemModalProd-' + item.id + '"></span>'
@@ -909,7 +908,7 @@ class ScreenGame {
                     if (manual.unlocked) {
                         html += '<div class="modal-body">'
                             html += '<div class="m-1">'
-                                 html += '<span class="fs-6">' + i18next.t('word_Manual') + '</span>'
+                                 html += '<span class="h6">' + i18next.t('word_Manual') + '</span>'
                             html += '</div>'
                             html += '<div class="card card-body rounded">'
                                 html += '<div class="row g-2 align-items-center">'
@@ -963,7 +962,7 @@ class ScreenGame {
                     if (unlocked > 0) {
                         html += '<div class="modal-body">'
                             html += '<div class="m-1">'
-                                 html += '<span class="fs-6">' + i18next.t('word_Automation') + '</span>'
+                                 html += '<span class="h6">' + i18next.t('word_Automation') + '</span>'
                             html += '</div>'
                             html += '<div class="row g-1">'
                                 item.lines.forEach(lineId => {
@@ -1025,7 +1024,7 @@ class ScreenGame {
                     if (storer.unlocked) {
                         html += '<div class="modal-body">'
                             html += '<div class="m-1">'
-                                 html += '<span class="fs-6">' + i18next.t('word_Storage') + '</span>'
+                                 html += '<span class="h6">' + i18next.t('word_Storage') + '</span>'
                             html += '</div>'
                             html += '<div class="card card-body rounded">'
                                 html += '<div class="row g-2 align-items-center">'
