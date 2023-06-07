@@ -44,7 +44,7 @@ var en_translations = {
     //---
     'tab_missions': 'Missions',
     'tab_items': 'Items',
-    'tab_scenarii': 'scenarios',
+    'tab_scenarii': 'Scenarios',
     'tab_options': 'Options',
     //---
     'word_Count': 'Count',

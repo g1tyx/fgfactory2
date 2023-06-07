@@ -257,7 +257,7 @@ class ScreenGame {
                 //---
                 let max = window.App.game.getMax(item.id)
                 //---
-                let html = formatNumber(item.count)
+                let html = formatNumber(item.count, 0)
                 //---
                 let node = document.getElementById('itemCount-' + item.id)                
                 if (node.innerHTML != html) node.innerHTML = html
@@ -273,7 +273,7 @@ class ScreenGame {
                     let availableCount = window.App.game.getAvailableCount(item.id)
                     //---
                     let html = ''
-                    if (availableCount > 0) html = formatNumber(availableCount)
+                    if (availableCount > 0) html = formatNumber(availableCount, 0)
                     else html = '(' + formatNumber(availableCount) + ')'
                     //---
                     let node = document.getElementById('itemAvailableCount-' + item.id)                
@@ -313,7 +313,7 @@ class ScreenGame {
                     if (node.innerHTML != html) node.innerHTML = html
                 }
                 //---
-                let html = formatNumber(this.selectedItem.count)
+                let html = formatNumber(this.selectedItem.count, 0)
                 //---
                 let node = document.getElementById('itemModalCount-' + this.selectedItem.id)                
                 if (node.innerHTML != html) node.innerHTML = html
@@ -329,7 +329,7 @@ class ScreenGame {
                     let availableCount = window.App.game.getAvailableCount(this.selectedItem.id)
                     //---
                     let html = ''
-                    if (availableCount > 0) html = formatNumber(availableCount)
+                    if (availableCount > 0) html = formatNumber(availableCount, 0)
                     else html = '(' + formatNumber(availableCount) + ')'
                     //---
                     let node = document.getElementById('itemModalAvailableCount-' + this.selectedItem.id)                

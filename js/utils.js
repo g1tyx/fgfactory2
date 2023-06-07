@@ -31,7 +31,7 @@ function formatTime(value) {
     return val
 }
 //---
-function formatNumber(value, fixed=0) {
+function formatNumber(value, fixed) {
     //---
     let sign = ''
     if (value < 0) sign = '-'
@@ -65,7 +65,7 @@ function formatNumber(value, fixed=0) {
     else if (absValue >= 1e3) { ret = (Math.round(100 * absValue / 1e3) / 100); symbol = 'k'; }
     else ret = (Math.round(100 * absValue) / 100)
     //---
-    if (fixed) ret = ret.toFixed(fixed)
+    if (fixed >= 0) ret = ret.toFixed(fixed)
     //---
     return sign + ret + (symbol ? ' <small class="opacity-50">' + symbol + '</small>' : '')
 }

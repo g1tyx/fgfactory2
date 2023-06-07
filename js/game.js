@@ -324,7 +324,7 @@ class Game {
             }
         }
         //---
-        let elems = this.elems.filter(elem => elem.type == 'item' && elem.unlocked == true)
+        let elems = this.elems.filter(elem => (elem.type == 'item' || elem.type == 'machine' || elem.type == 'storer') && elem.unlocked == true)
         //---
         let prod = {}
         elems.forEach(elem => prod[elem.id] = 0)
