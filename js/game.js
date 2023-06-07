@@ -410,10 +410,13 @@ class Game {
         let lines = this.elems.filter(elem => elem.type == 'line' && elem.unlocked == true && elem.count > 0)
         lines.forEach(line => {
             //---
-            line.inputs.forEach(input => {
+            if (line.inputs && line.inputs.length > 0) {
                 //---
-                if (input.id == elemId) prod -= input.count * line.count
-            })
+                line.inputs.forEach(input => {
+                    //---
+                    if (input.id == elemId) prod -= input.count * line.count
+                })
+            }
             //---
             line.outputs.forEach(output => {
                 //---
