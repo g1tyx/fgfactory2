@@ -49,7 +49,7 @@ var en_translations = {
     //---
     'word_Count': 'Count',
     'word_Missions': 'Missions',
-    'word_Scenarii': 'scenarios',
+    'word_Scenarii': 'Scenarios',
     'word_LocalData': 'Local Data',
     'word_Items': 'Items',
     'word_Objectives': 'Objectives',

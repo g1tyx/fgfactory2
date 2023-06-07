@@ -360,6 +360,8 @@ class Game {
                 //---
                 let max = this.getMax(el.id)
                 if (max > 0 && elem.count > max) elem.count = max
+                //---
+                if (elem.count < 0) elem.count = 0
             }
         })
     }

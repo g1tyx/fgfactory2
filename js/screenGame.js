@@ -257,7 +257,9 @@ class ScreenGame {
                 //---
                 let max = window.App.game.getMax(item.id)
                 //---
-                let html = formatNumber(item.count, 0)
+                let html = ''
+                if (item.type == 'item') html = formatNumber(item.count)
+                else html = Math.floor(item.count)
                 //---
                 let node = document.getElementById('itemCount-' + item.id)                
                 if (node.innerHTML != html) node.innerHTML = html
@@ -270,11 +272,11 @@ class ScreenGame {
                 //---
                 if (item.type == 'machine' || item.type == 'storer') {
                     //---
-                    let availableCount = window.App.game.getAvailableCount(item.id)
+                    let availableCount = Math.floor(window.App.game.getAvailableCount(item.id))
                     //---
                     let html = ''
-                    if (availableCount > 0) html = formatNumber(availableCount, 0)
-                    else html = '(' + formatNumber(availableCount) + ')'
+                    if (availableCount > 0) html = availableCount
+                    else html = '(' + availableCount + ')'
                     //---
                     let node = document.getElementById('itemAvailableCount-' + item.id)                
                     if (node.innerHTML != html) node.innerHTML = html
@@ -313,7 +315,9 @@ class ScreenGame {
                     if (node.innerHTML != html) node.innerHTML = html
                 }
                 //---
-                let html = formatNumber(this.selectedItem.count, 0)
+                let html = ''
+                if (this.selectedItem.type == 'item') html = formatNumber(this.selectedItem.count)
+                else html = Math.floor(this.selectedItem.count,)
                 //---
                 let node = document.getElementById('itemModalCount-' + this.selectedItem.id)                
                 if (node.innerHTML != html) node.innerHTML = html
@@ -326,10 +330,10 @@ class ScreenGame {
                 //---
                 if (this.selectedItem.type == 'machine' || this.selectedItem.type == 'storer') {
                     //---
-                    let availableCount = window.App.game.getAvailableCount(this.selectedItem.id)
+                    let availableCount = Math.floor(window.App.game.getAvailableCount(this.selectedItem.id))
                     //---
                     let html = ''
-                    if (availableCount > 0) html = formatNumber(availableCount, 0)
+                    if (availableCount > 0) html = formatNumber(availableCount)
                     else html = '(' + formatNumber(availableCount) + ')'
                     //---
                     let node = document.getElementById('itemModalAvailableCount-' + this.selectedItem.id)                
