@@ -10,7 +10,7 @@ var fr_translations = {
     //---
     'modalWipe_title': 'Effacer les données locales',
     'modalWipe_text': 'Etes-vous sûr de vouloir effacer vos données locales ?',
-    'modalWipe_info': 'Les progressions de tous les scenarii seront effacées et vous recommencerez depuis le début',
+    'modalWipe_info': 'Les progressions de tous les scénarios seront effacées et vous recommencerez depuis le début',
     //---
     'modalOffline_title': 'Gains hors-ligne',
     'modalOffline_text': 'Bon retour!',
@@ -18,8 +18,8 @@ var fr_translations = {
     //---
     'modalVictory_title': 'Victoire',
     'modalVictory_subTitle': 'Félicitations',
-    'modalVictory_text': 'Vous avez terminé ce scenario!',
-    'modalVictory_info': 'Maintenant vous avez le choix entre continuer avec le scenario actuel ou changer de scenario.',
+    'modalVictory_text': 'Vous avez terminé ce scénario!',
+    'modalVictory_info': 'Maintenant vous avez le choix entre continuer avec le scénario actuel ou changer de scenario.',
     //---
     'toast_export': 'Données copiées dans le presse papier!',
     'toast_importEmpty': 'Aucune donnée à importer!',
@@ -40,16 +40,16 @@ var fr_translations = {
     'text_discord': 'Discord',
     //---
     'text_scenarioWarning': 'Changer de scénario effacera la progression du scénario actuel et vous débuterez le nouveau scénario depuis le début.',
-    'text_changeScenarioConfirm': 'Etes-vous sûr de vouloir changer de scenario ? (Vous allez perdre votre progression actuelle et commencer le nouveau scénario depuis le début)',
+    'text_changeScenarioConfirm': 'Etes-vous sûr de vouloir changer de scénario ? (Vous allez perdre votre progression actuelle et commencer le nouveau scénario depuis le début)',
     //---
     'tab_missions': 'Missions',
     'tab_items': 'Objets',
-    'tab_scenarii': 'Scenarii',
+    'tab_scenarii': 'Scénarios',
     'tab_options': 'Options',
     //---
     'word_Count': 'Nombre',
     'word_Missions': 'Missions',
-    'word_Scenarii': 'Scenarii',
+    'word_Scenarii': 'Scénarios',
     'word_LocalData': 'Données locales',
     'word_Items': 'Objets',
     'word_Objectives': 'Objectifs',
@@ -64,10 +64,10 @@ var fr_translations = {
     'word_Techs': 'Technologies',
     //---
     'scenario_tut': 'Tutoriel',
-    'scenarioDesc_tut': 'Apprendre les bases avant de jouer les autres scénarii. Fortement récommandé pour les nouveaux joueurs.',
+    'scenarioDesc_tut': 'Apprendre les bases avant de jouer les autres scénarios. Fortement récommandé pour les nouveaux joueurs.',
     //---
     'tutMission1': 'Démarrage',
-    'tutMission1Desc': '<div class="mb-2">Bienvenue ! Ce scenario est le tutoriel qui va vous apprendre les bases du jeu. Votre objectif est de terminer toutes les missions. Pour terminer une mission, vous devez atteindre tous les objectifs de celle-ci. Pour votre première mission, votre objectif est de miner manuellement 5 Pierres.</div>',
+    'tutMission1Desc': '<div class="mb-2">Bienvenue ! Ce scénario est le tutoriel qui va vous apprendre les bases du jeu. Votre objectif est de terminer toutes les missions. Pour terminer une mission, vous devez atteindre tous les objectifs de celle-ci. Pour votre première mission, votre objectif est de miner manuellement 5 Pierres.</div>',
     //---
     'tutMission2': 'Assembler',
     'tutMission2Desc': '<div class="mb-2">Bien joué ! Maintenant, avec ces 5 Pierres, vous pouvez manuellement assembler un Four 1. C\'est l\'une des bases de ce jeu: assembler un objet à partir d\'autres objets.</div>',

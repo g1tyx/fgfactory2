@@ -10,7 +10,7 @@ var en_translations = {
     //---
     'modalWipe_title': 'Wipe Local Data',
     'modalWipe_text': 'Are you sure to want to wipe your local data?',
-    'modalWipe_info': 'You will lost all your progression from all scenarii and restart from the beginning',
+    'modalWipe_info': 'You will lost all your progression from all scenarios and restart from the beginning',
     //---
     'modalOffline_title': 'Offline Gains',
     'modalOffline_text': 'Welcome back!',
@@ -44,12 +44,12 @@ var en_translations = {
     //---
     'tab_missions': 'Missions',
     'tab_items': 'Items',
-    'tab_scenarii': 'Scenarii',
+    'tab_scenarii': 'scenarios',
     'tab_options': 'Options',
     //---
     'word_Count': 'Count',
     'word_Missions': 'Missions',
-    'word_Scenarii': 'Scenarii',
+    'word_Scenarii': 'scenarios',
     'word_LocalData': 'Local Data',
     'word_Items': 'Items',
     'word_Objectives': 'Objectives',
@@ -64,7 +64,7 @@ var en_translations = {
     'word_Techs': 'Techs',
     //---
     'scenario_tut': 'Tutorial',
-    'scenarioDesc_tut': 'Learn basic mecanisms before playing other scenarii. Strongly recommended for new players.',
+    'scenarioDesc_tut': 'Learn basic mecanisms before playing other scenarios. Strongly recommended for new players.',
     //---
     'tutMission1': 'Starting',
     'tutMission1Desc': '<div class="mb-2">Welcome! This scenario is the tutorial that will teach you some basics to play. Your goal is to achieve all the missions. To achieve one mission, you have to reach all the objectives. For your first mission, your objective is to mine 5 Stones manually.</div>',
@@ -82,7 +82,7 @@ var en_translations = {
     'tutMission5Desc': '<div class="mb-2">Great. With Miners and Furnaces you could automate all your produtions (except Iron Wheel). With automation, you will reach max storage. To upgrade your storage, you have to build Chests.</div>',
     //---
     'tutMission6': 'This is not the end',
-    'tutMission6Desc': '<div class="mb-2">With machines and storers, your factory could grow bigger and bigger. Now you know basic mecanisms to play all the scenarii. Reach the final objective and complete the tutorial. Enjoy!</div>',
+    'tutMission6Desc': '<div class="mb-2">With machines and storers, your factory could grow bigger and bigger. Now you know basic mecanisms to play all the scenarios. Reach the final objective and complete the tutorial. Enjoy!</div>',
     //---
     'scenario_factorio1': 'Escape 1',
     'scenarioDesc_factorio1': 'Crashed on an hostile planet, you have to escape. Basic scenario inspired by Factorio game.',

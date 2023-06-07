@@ -285,7 +285,7 @@ var DATA = {
                 {	id:'recipePump',	        type:'recipe',	    time:1, outputs:[{ id:'machinePump', count:1 }], inputs:[{ id:'itemCopperPlate', count:3 },{ id:'itemIronPlate', count:5 }] },
                 {	id:'manualPump',            type:'manual',	    recipeId:'recipePump' },
                 //---
-                {	id:'machineBoiler',	        type:'machine',	    label:'machineBoiler', img:'img/machines/Boiler.png', manualId:'manualBoiler', speed:1, energy:{ id:'itemCoal', count:2 } },
+                {	id:'machineBoiler',	        type:'machine',	    label:'machineBoiler', img:'img/machines/Boiler.png', manualId:'manualBoiler', speed:1, energy:{ id:'itemCoal', count:0.45 } },
                 {	id:'recipeBoiler',	        type:'recipe',	    time:1, outputs:[{ id:'machineBoiler', count:1 }], inputs:[{ id:'itemBrick', count:5 },{ id:'itemIronPlate', count:4 }] },
                 {	id:'manualBoiler',	        type:'manual',	    recipeId:'recipeBoiler' },
                 //---
