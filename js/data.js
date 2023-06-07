@@ -261,9 +261,12 @@ var DATA = {
                 {	id:'recipeSatellite',	    type:'recipe',	    reqs:[{ id:'techSpace', count:1 }], time:5, outputs:[{ id:'itemSatellite', count:1 }], inputs:[{ id:'itemBattery', count:500 },{ id:'itemCopperPlate', count:4800 },{ id:'itemIronPlate', count:1800 },{ id:'itemPlastic', count:500 },{ id:'itemCircuit3', count:100 },{ id:'itemRocketFuel', count:50 },{ id:'itemSteel', count:700 }] },
                 {	id:'manualSatellite',       type:'manual',	    reqs:[{ id:'techSpace', count:1 }], recipeId:'recipeSatellite' },
                 //---
-                {	id:'machineFurnace1',	    type:'machine',	    label:'machineFurnace1', img:'img/machines/Furnace1.png', manualId:'manualFurnace1', speed:1, energy:{ id:'itemCoal', count:0.02 } },
+                {	id:'machineFurnace1',	    type:'machine',	    label:'machineFurnace1', img:'img/machines/Furnace1.png', manualId:'manualFurnace1', lines:[ 'lineFurnace11', 'lineFurnace12', 'lineFurnace13' ], speed:1, energy:{ id:'itemCoal', count:0.02 } },
                 {	id:'recipeFurnace1',	    type:'recipe',	    time:2, outputs:[{ id:'machineFurnace1', count:1 }], inputs:[{ id:'itemStone', count:5 }] },
                 {	id:'manualFurnace1',	    type:'manual',	    recipeId:'recipeFurnace1' },
+                {	id:'lineFurnace11',         type:'line',	    reqs:[{ id:'techAutomation1', count:1 }], machineId:'machineAssembler1', recipeId:'recipeFurnace1' },
+                {	id:'lineFurnace12',         type:'line',	    reqs:[{ id:'techAutomation2', count:1 }], machineId:'machineAssembler2', recipeId:'recipeFurnace1' },
+                {	id:'lineFurnace13',         type:'line',	    reqs:[{ id:'techAutomation3', count:1 }], machineId:'machineAssembler3', recipeId:'recipeFurnace1' },
                 //---
                 {	id:'machineFurnace2',	    type:'machine',	    reqs:[{ id:'techMaterial1', count:1 }], label:'machineFurnace2', img:'img/machines/Furnace2.png', manualId:'manualFurnace2', speed:2, energy:{ id:'itemCoal', count:0.02 } },
                 {	id:'recipeFurnace2',	    type:'recipe',	    reqs:[{ id:'techMaterial1', count:1 }], time:3, outputs:[{ id:'machineFurnace2', count:1 }], inputs:[{ id:'itemBrick', count:10 },{ id:'itemSteel', count:6 }] },

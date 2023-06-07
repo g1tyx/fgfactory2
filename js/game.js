@@ -357,7 +357,6 @@ class Game {
                 //---
                 let elem = this.getElem(el.id)
                 elem.count += prod[el.id]
-                elem.count = Math.round((elem.count + Number.EPSILON) * 100) / 100
                 //---
                 let max = this.getMax(el.id)
                 if (max > 0 && elem.count > max) elem.count = max
