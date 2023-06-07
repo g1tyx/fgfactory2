@@ -76,6 +76,13 @@ class GameMission extends GameItem {
     }
 }
 //---
+class GameTech extends GameItem {
+    //---
+    constructor(data) {
+        super(data)
+    }
+}
+//---
 class GameManual extends GameElem {
     //---
     constructor(data) {
@@ -135,11 +142,11 @@ class GameLine extends GameItem {
         if (recipe.inputs) {
             //---
             if (!this.inputs) this.inputs = []
-            recipe.inputs.forEach(input => this.inputs.push({ id:input.id, count: input.count / recipe.time * machine.speed }))
+            recipe.inputs.forEach(input => this.inputs.push({ id:input.id, count: (input.count / recipe.time * machine.speed).toFixed(2) }))
         }
         //---
         this.outputs = []
-        recipe.outputs.forEach(output => this.outputs.push({ id:output.id, count: output.count / recipe.time * machine.speed }))
+        recipe.outputs.forEach(output => this.outputs.push({ id:output.id, count: (output.count / recipe.time * machine.speed).toFixed(2) }))
     }
 }
 //---
@@ -215,6 +222,7 @@ class Game {
             if (elem.type == 'item') el = new GameItem(elem)
             else if (elem.type == 'storer') el = new GameStorer(elem)
             else if (elem.type == 'mission') el = new GameMission(elem)
+            else if (elem.type == 'tech') el = new GameTech(elem)
             else if (elem.type == 'machine') el = new GameMachine(elem)
             else if (elem.type == 'manual') el = new GameManual(elem)
             else if (elem.type == 'recipe') el = new GameRecipe(elem)

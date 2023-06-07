@@ -67,18 +67,13 @@ var TplScreenGame = function(data) {
         html += '</div>'
         html += '<div class="position-absolute tab-content" style="top:48px; bottom:48px; width:100%; ">'
             html += '<div class="tab-pane scrollbar fade' + (data.selectedTab == 'missions' ? ' show active' : '') + '" id="missions-tab-pane" role="tabpanel" aria-labelledby="missions-tab" tabindex="0">'
-                html += '<div class="container py-3">'
-                    html += '<div class="m-1 fs-6">' + i18next.t('word_Missions') + '</div>'
-                    html += '<div id="missionContainer" class="row g-1"></div>'
-                html += '</div>'
+                html += '<div id="missionContainer" class="container py-3"></div>'
+                html += '<div id="techContainer" class="container py-3"></div>'
             html += '</div>'
             html += '<div class="tab-pane scrollbar fade' + (data.selectedTab == 'items' ? ' show active' : '') + '" id="items-tab-pane" role="tabpanel" aria-labelledby="items-tab" tabindex="0">'
-                html += '<div id="itemContainer" class="container py-3">'
-                html += '</div>'
-                html += '<div id="machineContainer" class="container py-3">'
-                html += '</div>'
-                html += '<div id="storerContainer" class="container py-3">'
-                html += '</div>'
+                html += '<div id="itemContainer" class="container py-3"></div>'
+                html += '<div id="machineContainer" class="container py-3"></div>'
+                html += '<div id="storerContainer" class="container py-3"></div>'
             html += '</div>'
             html += '<div class="tab-pane scrollbar fade' + (data.selectedTab == 'scenarii' ? ' show active' : '') + '" id="scenarii-tab-pane" role="tabpanel" aria-labelledby="scenarii-tab" tabindex="0">'
                 html += '<div class="container py-3">'
@@ -232,7 +227,7 @@ class ScreenGame {
         //---
         if (this.selectedTab == 'missions') {
             //---
-            let elems = window.App.game.elems.filter(elem => elem.type == 'mission' && elem.unlocked)
+            let elems = window.App.game.elems.filter(elem => (elem.type == 'mission' || elem.type == 'tech') && elem.unlocked)
             elems.forEach(elem => {
                 //---
                 if (elem.count < 1) {
@@ -523,91 +518,184 @@ class ScreenGame {
         let html = ''
         //---
         let elems = window.App.game.elems.filter(elem => elem.type == 'mission' && elem.unlocked)
-        elems.forEach(elem => {
-            html += '<div class="col-12 col-md-6 col-lg-4 col-xl-3">'
-                html += '<div class="card">'
-                    if (elem.count < 1) {
-                        html += '<div class="card-header">'
-                            html += '<div class="row gx-2 align-items-center">'
-                                html += '<div class="col">'
-                                    html += '<span>' + i18next.t(elem.label) + '</span>'
-                                html += '</div>'
-                            html += '</div>'
-                        html += '</div>'
-                        html += '<div class="card-body">'
-                            html += '<div class="mb-2"><span class="text-white">' + i18next.t(elem.desc) + '</span></div>'
-                            html += '<div class="mb-2"><span>' + i18next.t('word_Objectives') + '</span></div>'
-                            html += '<div class="row gx-2">'
-                                html += '<div class="col">'
-                                    html += '<div class="row g-2 align-items-center">'
-                                        elem.costs.forEach(cost => {
-                                            let costElem = window.App.game.getElem(cost.id)
-                                            html += '<div class="col-auto position-relative small pb-2">'
-                                                html += '<img src="' + costElem.img + '" width="24px" height="24px">'
-                                                html += '<small id="missionNeedCount-' + elem.id + '-' + cost.id + '">' + formatNumber(cost.count) + '</small>'
-                                            html += '</div>'
-                                        })
+        if (elems.length > 0) {
+            //---
+            html += '<div class="m-1 fs-6">' + i18next.t('word_Missions') + '</div>'
+            html += '<div class="row g-1">'
+                elems.forEach(elem => {
+                    html += '<div class="col-12 col-md-6 col-lg-4 col-xl-3">'
+                        html += '<div class="card">'
+                            if (elem.count < 1) {
+                                html += '<div class="card-header">'
+                                    html += '<div class="row gx-2 align-items-center">'
+                                        html += '<div class="col">'
+                                            html += '<span>' + i18next.t(elem.label) + '</span>'
+                                        html += '</div>'
                                     html += '</div>'
                                 html += '</div>'
-                                html += '<div class="col-auto">'
-                                    html += '<button type="button" id="missionBtn-' + elem.id + '" class="btn btn-primary" onclick="window.App.doClick(\'completeMission\', { missionId:\'' + elem.id + '\' })">'
-                                        html += '<i class="fa-fw fas fa-check"></i>'
-                                    html += '</button>'
+                                html += '<div class="card-body">'
+                                    html += '<div class="mb-2"><span class="text-white">' + i18next.t(elem.desc) + '</span></div>'
+                                    html += '<div class="mb-2"><span>' + i18next.t('word_Objectives') + '</span></div>'
+                                    html += '<div class="row gx-2">'
+                                        html += '<div class="col">'
+                                            html += '<div class="row g-2 align-items-center">'
+                                                elem.costs.forEach(cost => {
+                                                    let costElem = window.App.game.getElem(cost.id)
+                                                    html += '<div class="col-auto position-relative small pb-2">'
+                                                        html += '<img src="' + costElem.img + '" width="24px" height="24px">'
+                                                        html += '<small id="missionNeedCount-' + elem.id + '-' + cost.id + '">' + formatNumber(cost.count) + '</small>'
+                                                    html += '</div>'
+                                                })
+                                            html += '</div>'
+                                        html += '</div>'
+                                        html += '<div class="col-auto">'
+                                            html += '<button type="button" id="missionBtn-' + elem.id + '" class="btn btn-primary" onclick="window.App.doClick(\'completeMission\', { missionId:\'' + elem.id + '\' })">'
+                                                html += '<i class="fa-fw fas fa-check"></i>'
+                                            html += '</button>'
+                                        html += '</div>'
+                                    html += '</div>'
                                 html += '</div>'
-                            html += '</div>'
-                        html += '</div>'
-                    }
-                    else {
-                        html += '<div class="card-header" data-bs-toggle="collapse" href="#collapse' + elem.id + '" role="button" aria-expanded="false" aria-controls="collapseExample">'
-                            html += '<div class="row gx-2 align-items-center">'
-                                html += '<div class="col">'
-                                    html += '<span>' + i18next.t(elem.label) + '</span>'
+                            }
+                            else {
+                                html += '<div class="card-header" data-bs-toggle="collapse" href="#collapse' + elem.id + '" role="button" aria-expanded="false" aria-controls="collapseExample">'
+                                    html += '<div class="row gx-2 align-items-center">'
+                                        html += '<div class="col">'
+                                            html += '<span>' + i18next.t(elem.label) + '</span>'
+                                        html += '</div>'
+                                        html += '<div class="col-auto">'
+                                            html += '<i class="text-success fa-fw fas fa-check"></i>'
+                                        html += '</div>'
+                                    html += '</div>'
                                 html += '</div>'
-                                html += '<div class="col-auto">'
-                                    html += '<i class="text-success fa-fw fas fa-check"></i>'
+                                html += '<div id="collapse' + elem.id + '" class="collapse">'
+                                    html += '<div class="card-body">'
+                                        html += '<div><span>' + i18next.t(elem.desc) + '</span></div>'
+                                    html += '</div>'
                                 html += '</div>'
-                            html += '</div>'
+                            }
                         html += '</div>'
-                        html += '<div id="collapse' + elem.id + '" class="collapse">'
-                            html += '<div class="card-body">'
-                                html += '<div><span>' + i18next.t(elem.desc) + '</span></div>'
-                            html += '</div>'
-                        html += '</div>'
-                    }
-                html += '</div>'
+                    html += '</div>'
+                })
             html += '</div>'
-        })
+            //---
+            let node = document.getElementById('missionContainer')                
+            if (node.innerHTML != html) node.innerHTML = html
+        }
+        else {
+            //---
+            let node = document.getElementById('itemContainer')
+            node.className = 'd-none'
+        }
         //---
-        let node = document.getElementById('missionContainer')                
-        if (node.innerHTML != html) node.innerHTML = html
+        html = ''
+        //---
+        elems = window.App.game.elems.filter(elem => elem.type == 'tech' && elem.unlocked)
+        if (elems.length > 0) {
+            //---
+            html += '<div class="m-1 fs-6">' + i18next.t('word_Techs') + '</div>'
+            html += '<div class="row g-1">'
+                elems.forEach(elem => {
+                    html += '<div class="col-12 col-md-6 col-lg-4 col-xl-3">'
+                        html += '<div class="card">'
+                            if (elem.count < 1) {
+                                html += '<div class="card-header">'
+                                    html += '<div class="row gx-2 align-items-center">'
+                                        html += '<div class="col">'
+                                            html += '<span>' + i18next.t(elem.label) + '</span>'
+                                        html += '</div>'
+                                    html += '</div>'
+                                html += '</div>'
+                                html += '<div class="card-body">'
+                                    html += '<div class="mb-2"><span class="text-white">' + i18next.t(elem.desc) + '</span></div>'
+                                    html += '<div class="mb-2"><span>' + i18next.t('word_Objectives') + '</span></div>'
+                                    html += '<div class="row gx-2">'
+                                        html += '<div class="col">'
+                                            html += '<div class="row g-2 align-items-center">'
+                                                elem.costs.forEach(cost => {
+                                                    let costElem = window.App.game.getElem(cost.id)
+                                                    html += '<div class="col-auto position-relative small pb-2">'
+                                                        html += '<img src="' + costElem.img + '" width="24px" height="24px">'
+                                                        html += '<small id="missionNeedCount-' + elem.id + '-' + cost.id + '">' + formatNumber(cost.count) + '</small>'
+                                                    html += '</div>'
+                                                })
+                                            html += '</div>'
+                                        html += '</div>'
+                                        html += '<div class="col-auto">'
+                                            html += '<button type="button" id="missionBtn-' + elem.id + '" class="btn btn-primary" onclick="window.App.doClick(\'completeMission\', { missionId:\'' + elem.id + '\' })">'
+                                                html += '<i class="fa-fw fas fa-check"></i>'
+                                            html += '</button>'
+                                        html += '</div>'
+                                    html += '</div>'
+                                html += '</div>'
+                            }
+                            else {
+                                html += '<div class="card-header" data-bs-toggle="collapse" href="#collapse' + elem.id + '" role="button" aria-expanded="false" aria-controls="collapseExample">'
+                                    html += '<div class="row gx-2 align-items-center">'
+                                        html += '<div class="col">'
+                                            html += '<span>' + i18next.t(elem.label) + '</span>'
+                                        html += '</div>'
+                                        html += '<div class="col-auto">'
+                                            html += '<i class="text-success fa-fw fas fa-check"></i>'
+                                        html += '</div>'
+                                    html += '</div>'
+                                html += '</div>'
+                                html += '<div id="collapse' + elem.id + '" class="collapse">'
+                                    html += '<div class="card-body">'
+                                        html += '<div><span>' + i18next.t(elem.desc) + '</span></div>'
+                                    html += '</div>'
+                                html += '</div>'
+                            }
+                        html += '</div>'
+                    html += '</div>'
+                })
+            html += '</div>'
+            //---
+            let node = document.getElementById('techContainer')                
+            if (node.innerHTML != html) node.innerHTML = html
+        }
+        else {
+            //---
+            let node = document.getElementById('techContainer')
+            node.className = 'd-none'
+        }
     }
     //---
     refreshTabItems() {
         //---
         let html = ''
         //---
-        html += '<div class="m-1 fs-6">' + i18next.t('word_Items') + '</div>'
-        html += '<div class="row g-1">'
-            let items = window.App.game.elems.filter(elem => elem.type == 'item' && elem.unlocked)
-            items.forEach(item => {
-                html += '<div class="col-12 col-md-6 col-lg-4 col-xl-3">'
-                    html += '<button class="w-100 btn text-start" onclick="window.App.doClick(\'showItemModal\', { itemId:\'' + item.id + '\' })">'
-                        html += '<div class="row gx-2 align-items-center">'
-                            html += '<div class="col-auto"><img src="' + item.img + '" width="24px" height="24px"></div>'
-                            html += '<div class="col">' + i18next.t(item.label) + '</div>'
-                            if (item.lines && item.lines.length > 0) {
-                                let prod = window.App.game.getProd(item.id)
-                                html += '<div class="col-auto text-end"><small id="itemProd-' + item.id + '" class="' + (prod == 0 ? '' : (prod < 0 ? 'badge text-bg-danger' : 'text-success')) + '">' + formatNumber(prod) + '/s</small></div>'
-                            }
-                            html += '<div class="col-3 text-end"><small id="itemCount-' + item.id + '"></small></div>'
-                        html += '</div>'
-                    html += '</button>'
-                html += '</div>'
-            })
-        html += '</div>'
-        //---
-        let node = document.getElementById('itemContainer')                
-        if (node.innerHTML != html) node.innerHTML = html
+        let items = window.App.game.elems.filter(elem => elem.type == 'item' && elem.unlocked)
+        if (items.length > 0) {
+            //---
+            html += '<div class="m-1 fs-6">' + i18next.t('word_Items') + '</div>'
+            html += '<div class="row g-1">'
+                items.forEach(item => {
+                    html += '<div class="col-12 col-md-6 col-lg-4 col-xl-3">'
+                        html += '<button class="w-100 btn text-start" onclick="window.App.doClick(\'showItemModal\', { itemId:\'' + item.id + '\' })">'
+                            html += '<div class="row gx-2 align-items-center">'
+                                html += '<div class="col-auto"><img src="' + item.img + '" width="24px" height="24px"></div>'
+                                html += '<div class="col">' + i18next.t(item.label) + '</div>'
+                                if (item.lines && item.lines.length > 0) {
+                                    let prod = window.App.game.getProd(item.id)
+                                    html += '<div class="col-auto text-end"><small id="itemProd-' + item.id + '" class="' + (prod == 0 ? '' : (prod < 0 ? 'badge text-bg-danger' : 'text-success')) + '">' + formatNumber(prod) + '/s</small></div>'
+                                }
+                                html += '<div class="col-3 text-end"><small id="itemCount-' + item.id + '"></small></div>'
+                            html += '</div>'
+                        html += '</button>'
+                    html += '</div>'
+                })
+            html += '</div>'
+            //---
+            let node = document.getElementById('itemContainer')                
+            node.className = 'container py-3'
+            //---
+            if (node.innerHTML != html) node.innerHTML = html
+        }
+        else {
+            //---
+            let node = document.getElementById('itemContainer')
+            node.className = 'd-none'
+        }
         //---
         html = ''
         //---
@@ -635,12 +723,15 @@ class ScreenGame {
                 })
             html += '</div>'
             //---
-            node = document.getElementById('machineContainer')                
+            let node = document.getElementById('machineContainer')                
+            node.className = 'container py-3'
+            //---
             if (node.innerHTML != html) node.innerHTML = html
         }
         else {
             //---
-            node = document.getElementById('machineContainer')
+            let node = document.getElementById('machineContainer')
+            node.className = 'd-none'
         }
         //---
         html = ''
@@ -669,8 +760,15 @@ class ScreenGame {
             })
             html += '</div>'
             //---
-            node = document.getElementById('storerContainer')                
+            let node = document.getElementById('storerContainer')                
+            node.className = 'container py-3'
+            //---
             if (node.innerHTML != html) node.innerHTML = html
+        }
+        else {
+            //---
+            let node = document.getElementById('storerContainer')
+            node.className = 'd-none'
         }
     }
     //---
@@ -817,15 +915,7 @@ class ScreenGame {
                                 html += '<div class="row g-2 align-items-center">'
                                     html += '<div class="col">'
                                         html += '<div class="row g-2 align-items-center">'
-                                            manual.outputs.forEach(output => {
-                                                let outputElem = window.App.game.getElem(output.id)
-                                                html += '<div class="col-auto position-relative small pb-2">'
-                                                    html += '<img src="' + outputElem.img + '" width="24px" height="24px">'
-                                                    html += '<small id="manualOutputCount-' + manual.id + '-' + output.id + '">' + formatNumber(output.count) + '</small>'
-                                                html += '</div>'
-                                            })
                                             if (manual.inputs) {
-                                                html += '<div class="col-auto small"><i class="fas fa-fw fa-long-arrow-alt-left"></i></div>'
                                                 manual.inputs.forEach(input => {
                                                     let inputElem = window.App.game.getElem(input.id)
                                                     html += '<div class="col-auto position-relative small pb-2">'
@@ -833,7 +923,15 @@ class ScreenGame {
                                                         html += '<small id="manualInputCount-' + manual.id + '-' + input.id + '">' + formatNumber(input.count) + '</small>'
                                                     html += '</div>'
                                                 })
+                                                html += '<div class="col-auto small"><i class="fas fa-fw fa-long-arrow-alt-right"></i></div>'
                                             }
+                                            manual.outputs.forEach(output => {
+                                                let outputElem = window.App.game.getElem(output.id)
+                                                html += '<div class="col-auto position-relative small pb-2">'
+                                                    html += '<img src="' + outputElem.img + '" width="24px" height="24px">'
+                                                    html += '<small id="manualOutputCount-' + manual.id + '-' + output.id + '">' + formatNumber(output.count) + '</small>'
+                                                html += '</div>'
+                                            })
                                         html += '</div>'
                                     html += '</div>'
                                     html += '<div class="col-auto">'

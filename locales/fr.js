@@ -60,6 +60,7 @@ var fr_translations = {
     'word_Storers': 'Conteneurs',
     'word_StartDate': 'Début',
     'word_Language': 'Langue',
+    'word_Techs': 'Techs',
     //---
     'scenario_tut': 'Tutoriel',
     'scenarioDesc_tut': 'Apprendre les bases avant de jouer les autres scénarii.',
