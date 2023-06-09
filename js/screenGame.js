@@ -11,8 +11,8 @@ var TplScreenGame = function(data) {
     let html = ''
     //---
     html += '<div class="position-relative w-100 h-100">'
-        html += '<div class="position-absolute bg-card-body border-bottom border-body" style="top:0; width:100%; height:48px;">'
-            html += '<div class="h-100 container col-12 bg-dark d-flex align-items-center">'
+        html += '<div class="position-absolute bg-card-body" style="top:0; width:100%; height:48px;">'
+            html += '<div class="h-100 container col-12 bg-dark border-bottom border-body d-flex align-items-center">'
                 html += '<div class="flex-fill row gx-2 align-items-center">'
                     html += '<div class="col-auto"><img src="logo.png" width="24px" height="24px" class="rounded"></div>'
                     html += '<div class="col"><span class="h6 text-white">' + i18next.t('game_title') + '</span></div>'
@@ -65,24 +65,24 @@ var TplScreenGame = function(data) {
                 html += '</div>'
             html += '</div>'
         html += '</div>'
-        html += '<div class="position-absolute tab-content" style="top:48px; bottom:48px; width:100%; ">'
-            html += '<div class="tab-pane scrollbar fade' + (data.selectedTab == 'missions' ? ' show active' : '') + '" id="missions-tab-pane" role="tabpanel" aria-labelledby="missions-tab" tabindex="0">'
+        html += '<div class="position-absolute bg-card-body  tab-content" style="top:48px; bottom:48px; width:100%; ">'
+            html += '<div class="container px-0 bg-body tab-pane scrollbar fade' + (data.selectedTab == 'missions' ? ' show active' : '') + '" id="missions-tab-pane" role="tabpanel" aria-labelledby="missions-tab" tabindex="0">'
                 html += '<div id="missionContainer" class="container py-3"></div>'
                 html += '<div id="techContainer" class="container py-3"></div>'
             html += '</div>'
-            html += '<div class="tab-pane scrollbar fade' + (data.selectedTab == 'items' ? ' show active' : '') + '" id="items-tab-pane" role="tabpanel" aria-labelledby="items-tab" tabindex="0">'
+            html += '<div class="container px-0 bg-body tab-pane scrollbar fade' + (data.selectedTab == 'items' ? ' show active' : '') + '" id="items-tab-pane" role="tabpanel" aria-labelledby="items-tab" tabindex="0">'
                 html += '<div id="itemContainer" class="container py-3"></div>'
                 html += '<div id="machineContainer" class="container py-3"></div>'
                 html += '<div id="storerContainer" class="container py-3"></div>'
             html += '</div>'
-            html += '<div class="tab-pane scrollbar fade' + (data.selectedTab == 'scenarii' ? ' show active' : '') + '" id="scenarii-tab-pane" role="tabpanel" aria-labelledby="scenarii-tab" tabindex="0">'
+            html += '<div class="container px-0 bg-body tab-pane scrollbar fade' + (data.selectedTab == 'scenarii' ? ' show active' : '') + '" id="scenarii-tab-pane" role="tabpanel" aria-labelledby="scenarii-tab" tabindex="0">'
                 html += '<div class="container py-3">'
                     html += '<div class="m-1 h6 pb-2">' + i18next.t('word_Scenarii') + '</div>'
                     html += '<div class="m-1 text-warning small"><i class="fa-fw fas fa-exclamation-triangle"></i> ' + i18next.t('text_scenarioWarning') + '</div>'
                     html += '<div id="scenariiContainer" class="mt-1 row g-2"></div>'
                 html += '</div>'
             html += '</div>'
-            html += '<div class="tab-pane scrollbar fade' + (data.selectedTab == 'options' ? ' show active' : '') + '" id="options-tab-pane" role="tabpanel" aria-labelledby="options-tab" tabindex="0">'
+            html += '<div class="container px-0 bg-body tab-pane scrollbar fade' + (data.selectedTab == 'options' ? ' show active' : '') + '" id="options-tab-pane" role="tabpanel" aria-labelledby="options-tab" tabindex="0">'
                 html += '<div class="container py-3">'
                     html += '<div class="m-1 h6">' + i18next.t('word_Language') + '</div>'
                     html += '<div class="row g-2">'
@@ -145,8 +145,8 @@ var TplScreenGame = function(data) {
                 html += '</div>'
             html += '</div>'
         html += '</div>'
-        html += '<div class="position-absolute bg-card-body border-top border-body" style="bottom:0; width:100%; height:48px;">'
-            html += '<div class="h-100 container px-0 bg-dark">'
+        html += '<div class="position-absolute bg-card-body" style="bottom:0; width:100%; height:48px;">'
+            html += '<div class="h-100 container px-0 bg-dark border-top border-body">'
                 html += '<div class="h-100 nav nav-tabs">'
                     tabs.forEach(tab => {
                         html += '<div class="col nav-item">'
@@ -292,7 +292,7 @@ class ScreenGame {
                 if (node.className != style) node.className = style
                 //---
                 let prod = item.prod
-                html = (prod > 0 ? '+' : '') + formatNumber(prod) + '/s'
+                html = (prod > 0 ? '+' : '') + formatNumber(prod) + ' <small class="opacity-50">/s</small>'
                 node = document.getElementById('itemProd-' + item.id)                
                 if (node.innerHTML != html) node.innerHTML = html
                 //---
@@ -375,6 +375,10 @@ class ScreenGame {
                 if (item.storage && item.storage.storerId) {
                     let storer = window.App.game.getElem(item.storage.storerId)
                     if (storer.unlocked) {
+                        //---
+                        html = formatNumber(window.App.game.getMax(item.id), 2)
+                        node = document.getElementById('itemMax-' + item.id)
+                        if (node.innerHTML != html) node.innerHTML = html
                         //---
                         html = formatNumber(item.storageCount)
                         node = document.getElementById('itemStorageCount-' + item.id)
@@ -480,13 +484,13 @@ class ScreenGame {
             html += '<div class="m-1 h6">' + i18next.t('word_Techs') + '</div>'
             html += '<div class="row g-1">'
                 elems.forEach(elem => {
-                    html += '<div class="col-12 col-md-6 col-lg-4 col-xl-3">'
+                    html += '<div class="col-12 col-md-6 col-lg-6 col-xl-4">'
                         html += '<div class="card">'
                             if (elem.count < 1) {
                                 html += '<div class="card-header">'
                                     html += '<div class="row gx-2 align-items-center">'
                                         html += '<div class="col">'
-                                            html += '<span>' + i18next.t(elem.label) + '</span>'
+                                            html += '<span class="text-white">' + i18next.t(elem.label) + '</span>'
                                         html += '</div>'
                                     html += '</div>'
                                 html += '</div>'
@@ -514,7 +518,7 @@ class ScreenGame {
                                 html += '</div>'
                             }
                             else {
-                                html += '<div class="card-header" data-bs-toggle="collapse" href="#collapse' + elem.id + '" role="button" aria-expanded="false" aria-controls="collapseExample">'
+                                html += '<div class="card-header">'
                                     html += '<div class="row gx-2 align-items-center">'
                                         html += '<div class="col">'
                                             html += '<span>' + i18next.t(elem.label) + '</span>'
@@ -685,7 +689,7 @@ class ScreenGame {
                                                                             html += '<div class="col-auto small"><small class="opacity-50">x </small><span id="lineCount-' + line.id + '"></span></div>'
                                                                             html += '<div class="col-auto">'
                                                                                 html += '<div class="input-group input-group-sm">'
-                                                                                    html += '<select class="form-control" onchange="window.App.doClick(\'setLineRemoveCount\', { elemId:\'' + lineId + '\', count:this.value })">'
+                                                                                    html += '<select id="lineRemoveSelect-' + lineId + '" class="form-control" onchange="window.App.doClick(\'setLineRemoveCount\', { elemId:\'' + lineId + '\', count:this.value })">'
                                                                                         html += '<option' + (line.removeCount == '1' ? ' selected' : '') + ' value="1">-1</option>'
                                                                                         html += '<option' + (line.removeCount == '10' ? ' selected' : '') + ' value="10">-10</option>'
                                                                                         html += '<option' + (line.removeCount == '100' ? ' selected' : '') + ' value="100">-100</option>'
@@ -696,7 +700,7 @@ class ScreenGame {
                                                                             html += '</div>'
                                                                             html += '<div class="col-auto">'
                                                                                 html += '<div class="input-group input-group-sm">'
-                                                                                    html += '<select class="form-control" onchange="window.App.doClick(\'setLineAddCount\', { elemId:\'' + lineId + '\', count:this.value })">'
+                                                                                    html += '<select id="lineAddSelect-' + lineId + '" class="form-control" onchange="window.App.doClick(\'setLineAddCount\', { elemId:\'' + lineId + '\', count:this.value })">'
                                                                                         html += '<option' + (line.addCount == '1' ? ' selected' : '') + ' value="1">+1</option>'
                                                                                         html += '<option' + (line.addCount == '10' ? ' selected' : '') + ' value="10">+10</option>'
                                                                                         html += '<option' + (line.addCount == '100' ? ' selected' : '') + ' value="100">+100</option>'
@@ -721,7 +725,14 @@ class ScreenGame {
                                             html += '<div class="card-body">'
                                                 html += '<div class="row g-2">'
                                                     html += '<div class="col-12">'
-                                                         html += '<span>' + i18next.t('word_Storage') + '</span>'
+                                                        html += '<div class="row gx-2 align-items-center">'
+                                                            html += '<div class="col">'
+                                                                 html += '<span>' + i18next.t('word_Storage') + '</span>'
+                                                            html += '</div>'
+                                                            html += '<div class="col-auto">'
+                                                                 html += '<span id="itemMax-' + item.id + '" class="small"></span>'
+                                                            html += '</div>'
+                                                        html += '</div>'
                                                     html += '</div>'
                                                     html += '<div class="col-12">'
                                                         html += '<div class="row g-2 align-items-center">'
@@ -734,7 +745,7 @@ class ScreenGame {
                                                             html += '<div class="col-auto small"><small class="opacity-50">x </small><span id="itemStorageCount-' + item.id + '"></span></div>'
                                                             html += '<div class="col-auto">'
                                                                 html += '<div class="input-group input-group-sm">'
-                                                                    html += '<select class="form-control" onchange="window.App.doClick(\'setStorageRemoveCount\', { elemId:\'' + item.id + '\', count:this.value })">'
+                                                                    html += '<select id="itemRemoveStorageSelect-' + item.id + '" class="form-control" onchange="window.App.doClick(\'setStorageRemoveCount\', { elemId:\'' + item.id + '\', count:this.value })">'
                                                                         html += '<option' + (item.removeStorageCount == '1' ? ' selected' : '') + ' value="1">-1</option>'
                                                                         html += '<option' + (item.removeStorageCount == '10' ? ' selected' : '') + ' value="10">-10</option>'
                                                                         html += '<option' + (item.removeStorageCount == '100' ? ' selected' : '') + ' value="100">-100</option>'
@@ -745,7 +756,7 @@ class ScreenGame {
                                                             html += '</div>'
                                                             html += '<div class="col-auto">'
                                                                 html += '<div class="input-group input-group-sm">'
-                                                                    html += '<select class="form-control" onchange="window.App.doClick(\'setStorageAddCount\', { elemId:\'' + item.id + '\', count:this.value })">'
+                                                                    html += '<select id="itemAddStorageSelect-' + item.id + '" class="form-control" onchange="window.App.doClick(\'setStorageAddCount\', { elemId:\'' + item.id + '\', count:this.value })">'
                                                                         html += '<option' + (item.addStorageCount == '1' ? ' selected' : '') + ' value="1">+1</option>'
                                                                         html += '<option' + (item.addStorageCount == '10' ? ' selected' : '') + ' value="10">+10</option>'
                                                                         html += '<option' + (item.addStorageCount == '100' ? ' selected' : '') + ' value="100">+100</option>'

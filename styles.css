@@ -107,6 +107,11 @@ ul {
 .btn-danger {
     --bs-btn-color: #fff;
     --bs-btn-bg: var(--bs-danger);
+    --bs-btn-hover-color: var(--bs-danger);
+
+    --bs-btn-active-bg: var(--bs-danger);
+    --bs-btn-active-color: #fff;
+    --bs-btn-active-border-color: var(--bs-danger);
 }
 
 .btn-outline-danger {
