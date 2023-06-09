@@ -76,8 +76,8 @@ class GameItem extends GameElem {
         //---
         this.collapsed = false
         //---
-        this.addSorageCount = '1'
-        this.removeSorageCount = '1'
+        this.addStorageCount = '1'
+        this.removeStorageCount = '1'
     }
     //---
     load(data) {
@@ -89,8 +89,8 @@ class GameItem extends GameElem {
         //---
         if (data.collapsed != null) this.collapsed = data.collapsed
         //---
-        if (data.addSorageCount != null) this.addSorageCount = data.addSorageCount
-        if (data.removeSorageCount != null) this.removeSorageCount = data.removeSorageCount
+        if (data.addStorageCount != null) this.addStorageCount = data.addStorageCount
+        if (data.removeStorageCount != null) this.removeStorageCount = data.removeStorageCount
     }
     //---
     getSaveData() {
@@ -102,10 +102,26 @@ class GameItem extends GameElem {
         //---
         savedData.collapsed = this.collapsed
         //---
-        savedData.addSorageCount = this.addSorageCount
-        savedData.removeSorageCount = this.removeSorageCount
+        savedData.addStorageCount = this.addStorageCount
+        savedData.removeStorageCount = this.removeStorageCount
         //---
         return savedData
+    }
+    //---
+    getAddStorageCount(game) {
+        //---
+        if (this.addStorageCount == '1') return 1
+        else if (this.addStorageCount == '10') return 10
+        else if (this.addStorageCount == '100') return 100
+        else if (this.addStorageCount == 'all') return game.getAvailableCount(this.storage.storerId)
+    }
+    //---
+    getRemoveStorageCount() {
+        //---
+        if (this.removeStorageCount == '1') return 1
+        else if (this.removeStorageCount == '10') return 10
+        else if (this.removeStorageCount == '100') return 100
+        else if (this.removeStorageCount == 'none') return this.storageCount
     }
 }
 //---
@@ -305,28 +321,10 @@ class Game {
         //---
         let seconds = stepMs / 1000
         //---
+        this.refreshProd()
+        //---
         let elems = this.elems.filter(elem => (elem.type == 'item' || elem.type == 'machine' || elem.type == 'storer') && elem.unlocked == true)
         elems.forEach(elem => {
-            //---
-            if (elem.manualId) {
-                //---
-                let line = this.getElem(elem.manualId)
-                if (line.unlocked && line.count > 0 && this.canProduce(line.id) == false) {
-                    //---
-                    this.refreshProd()
-                }
-            }
-            //---
-            if (elem.lines && elem.lines.length > 0) {
-                elem.lines.forEach(lineId => {
-                    //---
-                    let line = this.getElem(lineId)
-                    if (line.unlocked && line.count > 0 && this.canProduce(line.id) == false) {
-                        //---
-                        this.refreshProd()
-                    }
-                })
-            }
             //---
             let prod = elem.prod * seconds
             let newCount = elem.count + prod
@@ -579,7 +577,9 @@ class Game {
         let item = this.elems.find(elem => elem.id == itemId)
         if (item) {
             //---
-            if (this.getAvailableCount(item.storage.storerId) < 1) return false
+            let addStorageCount = item.getAddStorageCount(this)
+            //---
+            if (this.getAvailableCount(item.storage.storerId) < addStorageCount) return false
             //---
             return true
         }
@@ -594,7 +594,9 @@ class Game {
             let item = this.elems.find(elem => elem.id == itemId)
             if (item) {
                 //---
-                item.storageCount += 1
+                let addStorageCount = item.getAddStorageCount(this)
+                //---
+                item.storageCount += addStorageCount
             }
         }
     }
@@ -604,10 +606,12 @@ class Game {
         let item = this.elems.find(elem => elem.id == itemId)
         if (item) {
             //---
-            if (item.storageCount < 1) return false
+            let removeStorageCount = item.getRemoveStorageCount()
+            //---
+            if (item.storageCount < removeStorageCount) return false
             //---
             let max = this.getMax(item.id)
-            if (max - item.storage.base < item.count) return false
+            if (max - (item.storage.base * removeStorageCount) < item.count) return false
             //---
             return true
         }
@@ -622,7 +626,9 @@ class Game {
             let item = this.elems.find(elem => elem.id == itemId)
             if (item) {
                 //---
-                item.storageCount -= 1
+                let removeStorageCount = item.getRemoveStorageCount()
+                //---
+                item.storageCount -= removeStorageCount
             }
         }
     }
@@ -705,7 +711,7 @@ class Game {
         let item = this.elems.find(elem => elem.id == data.elemId)
         if (item) {
             //---
-            item.addSorageCount = data.count
+            item.addStorageCount = data.count
         }
     }
     //---
@@ -714,7 +720,7 @@ class Game {
         let item = this.elems.find(elem => elem.id == data.elemId)
         if (item) {
             //---
-            item.removeSorageCount = data.count
+            item.removeStorageCount = data.count
         }
     }
 }
