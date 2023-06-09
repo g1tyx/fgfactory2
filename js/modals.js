@@ -23,7 +23,7 @@ var TplModalWipe = function() {
                 html += '<div class="modal-footer justify-content-center">'
                     html += '<button type="button" class="btn btn-sm btn-danger" onclick="window.App.wipeSave()">'
                         html += '<span><i class="fas fa-fw fa-skull"></i></span>'
-                        html += '<span class="ms-1">' + i18next.t('word_Wipe') + '</span>'
+                        html += '<span class="ms-1">' + i18next.t('btn_wipeSave') + '</span>'
                     html += '</button>'
                 html += '</div>'
             html += '</div>'

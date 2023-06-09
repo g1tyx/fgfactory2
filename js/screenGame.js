@@ -291,7 +291,7 @@ class ScreenGame {
                 else if (item.count > 0) style += ' text-white'
                 if (node.className != style) node.className = style
                 //---
-                let prod = window.App.game.getProd(item.id)
+                let prod = item.prod
                 html = (prod > 0 ? '+' : '') + formatNumber(prod) + '/s'
                 node = document.getElementById('itemProd-' + item.id)                
                 if (node.innerHTML != html) node.innerHTML = html

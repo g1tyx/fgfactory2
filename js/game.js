@@ -72,6 +72,8 @@ class GameItem extends GameElem {
         this.count = this.initData.count ? this.initData.count : 0
         this.storageCount = 0
         //---
+        this.prod = 0
+        //---
         this.collapsed = false
         //---
         this.addSorageCount = '1'
@@ -205,16 +207,6 @@ class Game {
         })
     }
     //---
-    reset() {
-        //---
-        this.lines = []
-        this.victory = false
-        //---
-        this.currentManualId = null
-        //---
-        this.elems.forEach(elem => elem.reset())
-    }
-    //---
     loadScenario(scenarioId) {
         //---
         this.scenario = this.scenarii.find(scenario => scenario.id == scenarioId)
@@ -260,7 +252,9 @@ class Game {
         //---
         if (data.scenarii) this.scenarii.forEach(scenario => { if (data.scenarii[scenario.id]) scenario.load(data.scenarii[scenario.id]) })
         //---
+        this.refreshProd()
         this.refreshUnlocked()
+        console.log(this)
     }
     //---
     getSaveData() {
@@ -294,6 +288,12 @@ class Game {
         })
     }
     //---
+    refreshProd() {
+        //---
+        let elems = this.elems.filter(elem => elem.unlocked == true && (elem.type == 'item' || elem.type == 'machine' || elem.type == 'storer'))
+        elems.forEach(elem => { elem.prod = this.getProd(elem.id) })
+    }
+    //---
     isVictoryReached() {
         //---
         if (this.victory) return false
@@ -308,7 +308,27 @@ class Game {
         let elems = this.elems.filter(elem => (elem.type == 'item' || elem.type == 'machine' || elem.type == 'storer') && elem.unlocked == true)
         elems.forEach(elem => {
             //---
-            let prod = this.getProd(elem.id) * seconds
+            if (elem.manualId) {
+                //---
+                let line = this.getElem(elem.manualId)
+                if (line.unlocked && line.count > 0 && this.canProduce(line.id) == false) {
+                    //---
+                    this.refreshProd()
+                }
+            }
+            //---
+            if (elem.lines && elem.lines.length > 0) {
+                elem.lines.forEach(lineId => {
+                    //---
+                    let line = this.getElem(lineId)
+                    if (line.unlocked && line.count > 0 && this.canProduce(line.id) == false) {
+                        //---
+                        this.refreshProd()
+                    }
+                })
+            }
+            //---
+            let prod = elem.prod * seconds
             let newCount = elem.count + prod
             //---
             let max = this.getMax(elem.id)
@@ -373,8 +393,6 @@ class Game {
                     if (input.count > this.getAvailableCount(input.id)) canProduce = false
                 })
             }
-            //---
-            if (!canProduce) return false
             //---
             return canProduce
         }
@@ -469,6 +487,8 @@ class Game {
                 //---
                 manual.count = 1
                 this.currentManualId = manualId
+                //---
+                this.refreshProd()
             }
         }
     }
@@ -487,6 +507,8 @@ class Game {
             let currentManualElem = this.elems.find(elem => elem.id == this.currentManualId)
             currentManualElem.count = 0
             this.currentManualId = null
+            //---
+            this.refreshProd()
         }
     }
     //---
@@ -515,6 +537,8 @@ class Game {
                 let addCount = line.getAddCount(this)
                 //---
                 line.count += addCount
+                //---
+                this.refreshProd()
             }
         }
     }
@@ -544,6 +568,8 @@ class Game {
                 let removeCount = line.getRemoveCount()
                 //---
                 line.count -= removeCount
+                //---
+                this.refreshProd()
             }
         }
     }
