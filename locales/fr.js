@@ -62,6 +62,10 @@ var fr_translations = {
     'word_StartDate': 'Début',
     'word_Language': 'Langue',
     'word_Techs': 'Technologies',
+    'word_All': 'Tout',
+    'word_None': 'Rien',
+    'word_Recipe': 'Recette',
+    'word_Close': 'Fermer',
     //---
     'scenario_tut': 'Tutoriel',
     'scenarioDesc_tut': 'Apprendre les bases avant de jouer les autres scénarios. Fortement récommandé pour les nouveaux joueurs.',

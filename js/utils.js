@@ -46,7 +46,7 @@ function formatNumber(value, fixed) {
             for (let j = 0; j < 26; ++j) {
                 let limit = Math.pow(10, start)
                 if (absValue < limit) {
-                    ret = (Math.round(100 * absValue / (limit / 1e3)) / 100); symbol = String.fromCharCode(97 + i) + String.fromCharCode(97 + j);
+                    ret = (Math.floor(100 * absValue / (limit / 1e3)) / 100); symbol = String.fromCharCode(97 + i) + String.fromCharCode(97 + j);
                     break
                 }
                 else start += 3
@@ -54,16 +54,16 @@ function formatNumber(value, fixed) {
             if (ret != '') break
         }
     }
-    else if (absValue >= 1e27) { ret = (Math.round(100 * absValue / 1e27) / 100); symbol = 'B'; }
-    else if (absValue >= 1e24) { ret = (Math.round(100 * absValue / 1e24) / 100); symbol = 'Y'; }
-    else if (absValue >= 1e21) { ret = (Math.round(100 * absValue / 1e21) / 100); symbol = 'Z'; }
-    else if (absValue >= 1e18) { ret = (Math.round(100 * absValue / 1e18) / 100); symbol = 'E'; }
-    else if (absValue >= 1e15) { ret = (Math.round(100 * absValue / 1e15) / 100); symbol = 'P'; }
-    else if (absValue >= 1e12) { ret = (Math.round(100 * absValue / 1e12) / 100); symbol = 'T'; }
-    else if (absValue >= 1e9) { ret = (Math.round(100 * absValue / 1e9) / 100); symbol = 'G'; }
-    else if (absValue >= 1e6) { ret = (Math.round(100 * absValue / 1e6) / 100); symbol = 'M'; }
-    else if (absValue >= 1e3) { ret = (Math.round(100 * absValue / 1e3) / 100); symbol = 'k'; }
-    else ret = (Math.round(100 * absValue) / 100)
+    else if (absValue >= 1e27) { ret = (Math.floor(100 * absValue / 1e27) / 100); symbol = 'B'; }
+    else if (absValue >= 1e24) { ret = (Math.floor(100 * absValue / 1e24) / 100); symbol = 'Y'; }
+    else if (absValue >= 1e21) { ret = (Math.floor(100 * absValue / 1e21) / 100); symbol = 'Z'; }
+    else if (absValue >= 1e18) { ret = (Math.floor(100 * absValue / 1e18) / 100); symbol = 'E'; }
+    else if (absValue >= 1e15) { ret = (Math.floor(100 * absValue / 1e15) / 100); symbol = 'P'; }
+    else if (absValue >= 1e12) { ret = (Math.floor(100 * absValue / 1e12) / 100); symbol = 'T'; }
+    else if (absValue >= 1e9) { ret = (Math.floor(100 * absValue / 1e9) / 100); symbol = 'G'; }
+    else if (absValue >= 1e6) { ret = (Math.floor(100 * absValue / 1e6) / 100); symbol = 'M'; }
+    else if (absValue >= 1e3) { ret = (Math.floor(100 * absValue / 1e3) / 100); symbol = 'k'; }
+    else ret = (Math.floor(100 * absValue) / 100)
     //---
     if (fixed >= 0) ret = ret.toFixed(fixed)
     //---

@@ -62,6 +62,10 @@ var en_translations = {
     'word_StartDate': 'Start Date',
     'word_Language': 'Language',
     'word_Techs': 'Techs',
+    'word_All': 'All',
+    'word_None': 'None',
+    'word_Recipe': 'Recipe',
+    'word_Close': 'Close',
     //---
     'scenario_tut': 'Tutorial',
     'scenarioDesc_tut': 'Learn basic mecanisms before playing other scenarios. Strongly recommended for new players.',

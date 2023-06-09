@@ -107,12 +107,11 @@ class App {
         let deltaMs = currentTimeMs - this.lastFrameTimeMs
         //---
         let stepMs = 1000 / this.fps
-        let tickCount = Math.floor(deltaMs / stepMs)
-        if (tickCount >= 1) {
+        if (deltaMs >= stepMs) {
             //---
             this.lastFrameTimeMs = currentTimeMs
             //---
-            for (let i = 0; i < tickCount; i++) this.game.doTick(stepMs)
+            this.game.doTick(deltaMs)
             //---
             if (this.game.isVictoryReached()) {
                 //---
