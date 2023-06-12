@@ -265,21 +265,21 @@ var DATA = {
                 //---
                 {	id:'machineManual',	        type:'machine',	    label:'machineManual', img:'img/machines/Manual.png', storage:{ base:1 }, speed:0.25, initCount:1 },
                 //---
-                {	id:'machineFurnace1',	    type:'machine',	    label:'machineFurnace1', img:'img/machines/Furnace1.png', storage:{ base:50, storerId:'storerChest' }, manualId:'manualFurnace1', lines:[ 'lineFurnace11', 'lineFurnace12', 'lineFurnace13' ], speed:1, energy:{ id:'itemCoal', count:0.02 } },
+                {	id:'machineFurnace1',	    type:'machine',	    label:'machineFurnace1', img:'img/machines/Furnace1.png', storage:{ base:50, storerId:'storerChest' }, manualId:'manualFurnace1', lines:[ 'lineFurnace11', 'lineFurnace12', 'lineFurnace13' ], speed:0.25, energy:{ id:'itemCoal', count:0.02 } },
                 {	id:'recipeFurnace1',	    type:'recipe',	    time:2, outputs:[{ id:'machineFurnace1', count:1 }], inputs:[{ id:'itemStone', count:5 }] },
                 {	id:'manualFurnace1',	    type:'manual',	    machineId:'machineManual', recipeId:'recipeFurnace1' },
                 {	id:'lineFurnace11',         type:'line',	    reqs:[{ id:'techAutomation1', count:1 }], machineId:'machineAssembler1', recipeId:'recipeFurnace1' },
                 {	id:'lineFurnace12',         type:'line',	    reqs:[{ id:'techAutomation2', count:1 }], machineId:'machineAssembler2', recipeId:'recipeFurnace1' },
                 {	id:'lineFurnace13',         type:'line',	    reqs:[{ id:'techAutomation3', count:1 }], machineId:'machineAssembler3', recipeId:'recipeFurnace1' },
                 //---
-                {	id:'machineFurnace2',	    type:'machine',	    reqs:[{ id:'techMaterial1', count:1 }], label:'machineFurnace2', storage:{ base:50, storerId:'storerChest' }, img:'img/machines/Furnace2.png', manualId:'manualFurnace2', lines:[ 'lineFurnace21', 'lineFurnace22', 'lineFurnace23' ], speed:2, energy:{ id:'itemCoal', count:0.02 } },
+                {	id:'machineFurnace2',	    type:'machine',	    reqs:[{ id:'techMaterial1', count:1 }], label:'machineFurnace2', storage:{ base:50, storerId:'storerChest' }, img:'img/machines/Furnace2.png', manualId:'manualFurnace2', lines:[ 'lineFurnace21', 'lineFurnace22', 'lineFurnace23' ], speed:0.5, energy:{ id:'itemCoal', count:0.03 } },
                 {	id:'recipeFurnace2',	    type:'recipe',	    reqs:[{ id:'techMaterial1', count:1 }], time:3, outputs:[{ id:'machineFurnace2', count:1 }], inputs:[{ id:'itemBrick', count:10 },{ id:'itemSteel', count:6 }] },
                 {	id:'manualFurnace2',	    type:'manual',	    reqs:[{ id:'techMaterial1', count:1 }], machineId:'machineManual', recipeId:'recipeFurnace2' },
                 {	id:'lineFurnace21',         type:'line',	    reqs:[{ id:'techMaterial1', count:1 },{ id:'techAutomation1', count:1 }], machineId:'machineAssembler1', recipeId:'recipeFurnace2' },
                 {	id:'lineFurnace22',         type:'line',	    reqs:[{ id:'techMaterial1', count:1 },{ id:'techAutomation2', count:1 }], machineId:'machineAssembler2', recipeId:'recipeFurnace2' },
                 {	id:'lineFurnace23',         type:'line',	    reqs:[{ id:'techMaterial1', count:1 },{ id:'techAutomation3', count:1 }], machineId:'machineAssembler3', recipeId:'recipeFurnace2' },
                 //---
-                {	id:'machineFurnace3',	    type:'machine',	    reqs:[{ id:'techMaterial2', count:1 }], label:'machineFurnace3', storage:{ base:50, storerId:'storerChest' }, img:'img/machines/Furnace3.png', manualId:'manualFurnace3', lines:[ 'lineFurnace31', 'lineFurnace32', 'lineFurnace33' ], speed:2, energy:{ id:'itemElectricity', count:180 } },
+                {	id:'machineFurnace3',	    type:'machine',	    reqs:[{ id:'techMaterial2', count:1 }], label:'machineFurnace3', storage:{ base:50, storerId:'storerChest' }, img:'img/machines/Furnace3.png', manualId:'manualFurnace3', lines:[ 'lineFurnace31', 'lineFurnace32', 'lineFurnace33' ], speed:2, energy:{ id:'itemElectricity', count:90 } },
                 {	id:'recipeFurnace3',	    type:'recipe',	    reqs:[{ id:'techMaterial2', count:1 }], time:5, outputs:[{ id:'machineFurnace3', count:1 }], inputs:[{ id:'itemBrick', count:10 },{ id:'itemSteel', count:10 },{ id:'itemPlastic', count:10 },{ id:'itemIronPlate', count:10 },{ id:'itemCopperPlate', count:25 }] },
                 {	id:'manualFurnace3',	    type:'manual',	    reqs:[{ id:'techMaterial2', count:1 }], machineId:'machineManual', recipeId:'recipeFurnace3' },
                 {	id:'lineFurnace31',         type:'line',	    reqs:[{ id:'techMaterial2', count:1 },{ id:'techAutomation1', count:1 }], machineId:'machineAssembler1', recipeId:'recipeFurnace3' },
@@ -293,7 +293,7 @@ var DATA = {
                 {	id:'lineMiner12',           type:'line',	    reqs:[{ id:'techAutomation2', count:1 }], machineId:'machineAssembler2', recipeId:'recipeMiner1' },
                 {	id:'lineMiner13',           type:'line',	    reqs:[{ id:'techAutomation3', count:1 }], machineId:'machineAssembler3', recipeId:'recipeMiner1' },
                 //---
-                {	id:'machineMiner2',	        type:'machine',	    label:'machineMiner2', img:'img/machines/Drill2.png', storage:{ base:50, storerId:'storerChest' }, manualId:'manualMiner2', lines:[ 'lineMiner21', 'lineMiner22', 'lineMiner23' ], speed:0.5, energy:{ id:'itemElectricity', count:90 } },
+                {	id:'machineMiner2',	        type:'machine',	    label:'machineMiner2', img:'img/machines/Drill2.png', storage:{ base:50, storerId:'storerChest' }, manualId:'manualMiner2', lines:[ 'lineMiner21', 'lineMiner22', 'lineMiner23' ], speed:1.5, energy:{ id:'itemElectricity', count:90 } },
                 {	id:'recipeMiner2',	        type:'recipe',	    time:2, outputs:[{ id:'machineMiner2', count:1 }], inputs:[{ id:'itemCopperPlate', count:5 },{ id:'itemIronPlate', count:23 }] },
                 {	id:'manualMiner2',	        type:'manual',	    machineId:'machineManual', recipeId:'recipeMiner2' },
                 {	id:'lineMiner21',           type:'line',	    reqs:[{ id:'techAutomation1', count:1 }], machineId:'machineAssembler1', recipeId:'recipeMiner2' },
@@ -335,14 +335,14 @@ var DATA = {
                 {	id:'lineAssembler12',       type:'line',	    reqs:[{ id:'techAutomation2', count:1 }], machineId:'machineAssembler2', recipeId:'recipeAssembler1' },
                 {	id:'lineAssembler13',       type:'line',	    reqs:[{ id:'techAutomation3', count:1 }], machineId:'machineAssembler3', recipeId:'recipeAssembler1' },
                 //---
-                {	id:'machineAssembler2',     type:'machine',	    reqs:[{ id:'techAutomation2', count:1 }], label:'machineAssembler2', img:'img/machines/Assembler2.png', storage:{ base:50, storerId:'storerChest' }, manualId:'manualAssembler2', lines:[ 'lineAssembler21', 'lineAssembler22', 'lineAssembler23' ], speed:0.75, energy:{ id:'itemElectricity', count:150 } },
+                {	id:'machineAssembler2',     type:'machine',	    reqs:[{ id:'techAutomation2', count:1 }], label:'machineAssembler2', img:'img/machines/Assembler2.png', storage:{ base:50, storerId:'storerChest' }, manualId:'manualAssembler2', lines:[ 'lineAssembler21', 'lineAssembler22', 'lineAssembler23' ], speed:0.75, energy:{ id:'itemElectricity', count:100 } },
                 {	id:'recipeAssembler2',	    type:'recipe',	    reqs:[{ id:'techAutomation2', count:1 }], time:1, outputs:[{ id:'machineAssembler2', count:1 }], inputs:[{ id:'itemCopperPlate', count:9 },{ id:'itemIronPlate', count:35 },{ id:'itemSteel', count:2 }] },
                 {	id:'manualAssembler2',      type:'manual',	    reqs:[{ id:'techAutomation2', count:1 }], machineId:'machineManual', recipeId:'recipeAssembler2' },
                 {	id:'lineAssembler21',       type:'line',	    reqs:[{ id:'techAutomation1', count:1 }], machineId:'machineAssembler1', recipeId:'recipeAssembler2' },
                 {	id:'lineAssembler22',       type:'line',	    reqs:[{ id:'techAutomation2', count:1 }], machineId:'machineAssembler2', recipeId:'recipeAssembler2' },
                 {	id:'lineAssembler23',       type:'line',	    reqs:[{ id:'techAutomation3', count:1 }], machineId:'machineAssembler3', recipeId:'recipeAssembler2' },
                 //---
-                {	id:'machineAssembler3',     type:'machine',	    reqs:[{ id:'techAutomation3', count:1 }], label:'machineAssembler3', img:'img/machines/Assembler3.png', storage:{ base:50, storerId:'storerChest' }, manualId:'manualAssembler3', lines:[ 'lineAssembler31', 'lineAssembler32', 'lineAssembler33' ], speed:1.25, energy:{ id:'itemElectricity', count:375 } },
+                {	id:'machineAssembler3',     type:'machine',	    reqs:[{ id:'techAutomation3', count:1 }], label:'machineAssembler3', img:'img/machines/Assembler3.png', storage:{ base:50, storerId:'storerChest' }, manualId:'manualAssembler3', lines:[ 'lineAssembler31', 'lineAssembler32', 'lineAssembler33' ], speed:1.25, energy:{ id:'itemElectricity', count:150 } },
                 {	id:'recipeAssembler3',	    type:'recipe',	    reqs:[{ id:'techAutomation3', count:1 }], time:1, outputs:[{ id:'machineAssembler3', count:1 }], inputs:[{ id:'itemCopperPlate', count:148 },{ id:'itemIronPlate', count:130 },{ id:'itemPlastic', count:40 },{ id:'itemSteel', count:4 }] },
                 {	id:'manualAssembler3',      type:'manual',	    reqs:[{ id:'techAutomation3', count:1 }], machineId:'machineManual', recipeId:'recipeAssembler3' },
                 {	id:'lineAssembler31',       type:'line',	    reqs:[{ id:'techAutomation1', count:1 }], machineId:'machineAssembler1', recipeId:'recipeAssembler3' },

@@ -76,8 +76,7 @@ class GameItem extends GameElem {
         //---
         this.collapsed = false
         //---
-        this.addStorageCount = '1'
-        this.removeStorageCount = '1'
+        this.selectStorageCount = '1'
     }
     //---
     load(data) {
@@ -89,8 +88,7 @@ class GameItem extends GameElem {
         //---
         if (data.collapsed != null) this.collapsed = data.collapsed
         //---
-        if (data.addStorageCount != null) this.addStorageCount = data.addStorageCount
-        if (data.removeStorageCount != null) this.removeStorageCount = data.removeStorageCount
+        if (data.selectStorageCount != null) this.selectStorageCount = data.selectStorageCount
     }
     //---
     getSaveData() {
@@ -102,26 +100,25 @@ class GameItem extends GameElem {
         //---
         savedData.collapsed = this.collapsed
         //---
-        savedData.addStorageCount = this.addStorageCount
-        savedData.removeStorageCount = this.removeStorageCount
+        savedData.selectStorageCount = this.selectStorageCount
         //---
         return savedData
     }
     //---
     getAddStorageCount(game) {
         //---
-        if (this.addStorageCount == '1') return 1
-        else if (this.addStorageCount == '10') return 10
-        else if (this.addStorageCount == '100') return 100
-        else if (this.addStorageCount == 'all') return game.getAvailableCount(this.storage.storerId)
+        if (this.selectStorageCount == '1') return 1
+        else if (this.selectStorageCount == '10') return 10
+        else if (this.selectStorageCount == '100') return 100
+        else if (this.selectStorageCount == 'max') return game.getAvailableCount(this.storage.storerId)
     }
     //---
     getRemoveStorageCount() {
         //---
-        if (this.removeStorageCount == '1') return 1
-        else if (this.removeStorageCount == '10') return 10
-        else if (this.removeStorageCount == '100') return 100
-        else if (this.removeStorageCount == 'none') return this.storageCount
+        if (this.selectStorageCount == '1') return 1
+        else if (this.selectStorageCount == '10') return 10
+        else if (this.selectStorageCount == '100') return 100
+        else if (this.selectStorageCount == 'max') return this.storageCount
     }
 }
 //---
@@ -138,8 +135,7 @@ class GameLine extends GameElem {
         //---
         this.count = this.initData.count ? this.initData.count : 0
         //---
-        this.addCount = '1'
-        this.removeCount = '1'
+        this.selectCount = '1'
         //---
         let machine = game.scenario.data.elems.find(elem => elem.id == this.machineId)
         if (machine.energy && this.id != 'manualCoal' && this.id != 'lineCoal1') {
@@ -168,8 +164,7 @@ class GameLine extends GameElem {
         //---
         if (data.count != null) this.count = data.count
         //---
-        if (data.addCount != null) this.addCount = data.addCount
-        if (data.removeCount != null) this.removeCount = data.removeCount
+        if (data.selectCount != null) this.selectCount = data.selectCount
     }
     //---
     getSaveData() {
@@ -178,26 +173,25 @@ class GameLine extends GameElem {
         //---
         savedData.count = this.count
         //---
-        savedData.addCount = this.addCount
-        savedData.removeCount = this.removeCount
+        savedData.selectCount = this.selectCount
         //---
         return savedData
     }
     //---
     getAddCount(game) {
         //---
-        if (this.addCount == '1') return 1
-        else if (this.addCount == '10') return 10
-        else if (this.addCount == '100') return 100
-        else if (this.addCount == 'all') return game.getAvailableCount(this.machineId)
+        if (this.selectCount == '1') return 1
+        else if (this.selectCount == '10') return 10
+        else if (this.selectCount == '100') return 100
+        else if (this.selectCount == 'max') return game.getAvailableCount(this.machineId)
     }
     //---
     getRemoveCount() {
         //---
-        if (this.removeCount == '1') return 1
-        else if (this.removeCount == '10') return 10
-        else if (this.removeCount == '100') return 100
-        else if (this.removeCount == 'none') return this.count
+        if (this.selectCount == '1') return 1
+        else if (this.selectCount == '10') return 10
+        else if (this.selectCount == '100') return 100
+        else if (this.selectCount == 'max') return this.count
     }
 }
 //---
@@ -687,39 +681,21 @@ class Game {
         }
     }
     //---
-    setLineAddCount(data) {
+    setLineSelectCount(data) {
         //---
         let line = this.elems.find(elem => elem.id == data.elemId)
         if (line) {
             //---
-            line.addCount = data.count
+            line.selectCount = data.count
         }
     }
     //---
-    setLineRemoveCount(data) {
-        //---
-        let line = this.elems.find(elem => elem.id == data.elemId)
-        if (line) {
-            //---
-            line.removeCount = data.count
-        }
-    }
-    //---
-    setStorageAddCount(data) {
+    setStorageSelectCount(data) {
         //---
         let item = this.elems.find(elem => elem.id == data.elemId)
         if (item) {
             //---
-            item.addStorageCount = data.count
-        }
-    }
-    //---
-    setStorageRemoveCount(data) {
-        //---
-        let item = this.elems.find(elem => elem.id == data.elemId)
-        if (item) {
-            //---
-            item.removeStorageCount = data.count
+            item.selectStorageCount = data.count
         }
     }
 }

@@ -236,17 +236,6 @@ class ScreenGame {
                     if (node.className != style) node.className = style
                 })
             }
-            //---
-            recipe.outputs.forEach(output => {
-                //---
-                let max = window.App.game.getMax(output.id)
-                let outputElem = window.App.game.getElem(output.id)
-                //---
-                let style = 'w-100 badge'
-                if (max > 0 && outputElem.count >= max) style += ' text-bg-danger'
-                let node = document.getElementById('recipeOutputCount-' + recipe.id + '-' + output.id)
-                if (node.className != style) node.className = style
-            })
         }
         //---
         if (this.selectedTab == 'missions') {
@@ -356,12 +345,12 @@ class ScreenGame {
                                 if (line.count > 0) style += 'text-white'
                                 if (node.className != style) node.className = style
                                 //---
-                                style = 'btn btn-danger'
+                                style = 'btn btn-sm btn-danger'
                                 if (!window.App.game.canRemoveLine(line.id)) style += ' disabled'
                                 node = document.getElementById('lineRemoveBtn-' + line.id)
                                 if (node.className != style) node.className = style
                                 //---
-                                style = 'btn btn-primary'
+                                style = 'btn btn-sm btn-primary'
                                 if (!window.App.game.canAddLine(line.id)) style += ' disabled'
                                 node = document.getElementById('lineAddBtn-' + line.id)
                                 if (node.className != style) node.className = style
@@ -387,12 +376,12 @@ class ScreenGame {
                         if (item.storageCount > 0) style += 'text-white'
                         if (node.className != style) node.className = style                        
                         //---
-                        style = 'btn btn-danger'
+                        style = 'btn btn-sm btn-danger'
                         if (!window.App.game.canRemoveStorer(item.id)) style += ' disabled'
                         node = document.getElementById('itemRemoveStorerBtn-' + item.id)
                         if (node.className != style) node.className = style
                         //---
-                        style = 'btn btn-primary'
+                        style = 'btn btn-sm btn-primary'
                         if (!window.App.game.canAddStorer(item.id)) style += ' disabled'
                         node = document.getElementById('itemAddStorerBtn-' + item.id)
                         if (node.className != style) node.className = style
@@ -590,7 +579,7 @@ class ScreenGame {
                                     let outputElem = window.App.game.getElem(output.id)
                                     html += '<div class="col-auto">'
                                         html += '<div class="text-center"><img src="' + outputElem.img + '" width="24px" height="24px"></div>'
-                                        html += '<div class="lh-1"><span id="recipeOutputCount-' + recipe.id + '-' + output.id + '">' + formatNumber(output.count) + ' <small class="opacity-50">/s</small></span></div>'
+                                        html += '<div class="lh-1"><span id="recipeOutputCount-' + recipe.id + '-' + output.id + '" class="badge">' + formatNumber(output.count) + ' <small class="opacity-50">/s</small></span></div>'
                                     html += '</div>'
                                 })
                             html += '</div>'
@@ -661,14 +650,18 @@ class ScreenGame {
                                                             html += '</div>'
                                                             html += '<div class="col-auto small"><small class="opacity-50">x </small><span id="manualCount-' + manual.id + '"></span></div>'
                                                             html += '<div class="col-auto">'
-                                                                html += '<button type="button" id="manualStopBtn-' + manual.id + '" class="btn btn-sm btn-danger" onclick="window.App.doClick(\'stopManual\', { manualId:\'' + manual.id + '\' })">'
-                                                                    html += '<i class="fas fa-fw fa-stop"></i>'
-                                                                html += '</button>'
-                                                            html += '</div>'
-                                                            html += '<div class="col-auto">'
-                                                                html += '<button type="button" id="manualStartBtn-' + manual.id + '" class="btn btn-sm btn-primary" onclick="window.App.doClick(\'startManual\', { manualId:\'' + manual.id + '\' })">'
-                                                                    html += '<i class="fas fa-fw fa-play"></i>'
-                                                                html += '</button>'
+                                                                html += '<div class="row g-1 align-items-center">'
+                                                                    html += '<div class="col-auto">'
+                                                                        html += '<button type="button" id="manualStopBtn-' + manual.id + '" class="btn btn-sm btn-danger" onclick="window.App.doClick(\'stopManual\', { manualId:\'' + manual.id + '\' })">'
+                                                                            html += '<i class="fas fa-fw fa-stop"></i>'
+                                                                        html += '</button>'
+                                                                    html += '</div>'
+                                                                    html += '<div class="col-auto">'
+                                                                        html += '<button type="button" id="manualStartBtn-' + manual.id + '" class="btn btn-sm btn-primary" onclick="window.App.doClick(\'startManual\', { manualId:\'' + manual.id + '\' })">'
+                                                                            html += '<i class="fas fa-fw fa-play"></i>'
+                                                                        html += '</button>'
+                                                                    html += '</div>'
+                                                                html += '</div>'
                                                             html += '</div>'
                                                         html += '</div>'
                                                     html += '</div>'
@@ -702,26 +695,22 @@ class ScreenGame {
                                                                     })
                                                                     html += '<div class="col-auto small"><small class="opacity-50">x </small><span id="lineCount-' + line.id + '"></span></div>'
                                                                     html += '<div class="col-auto">'
-                                                                        html += '<div class="input-group input-group-sm">'
-                                                                            html += '<select id="lineRemoveSelect-' + lineId + '" class="form-control" onchange="window.App.doClick(\'setLineRemoveCount\', { elemId:\'' + lineId + '\', count:this.value })">'
-                                                                                html += '<option' + (line.removeCount == '1' ? ' selected' : '') + ' value="1">-1</option>'
-                                                                                html += '<option' + (line.removeCount == '10' ? ' selected' : '') + ' value="10">-10</option>'
-                                                                                html += '<option' + (line.removeCount == '100' ? ' selected' : '') + ' value="100">-100</option>'
-                                                                                html += '<option' + (line.removeCount == 'none' ? ' selected' : '') + ' value="none">' + i18next.t('word_None') + '</option>'
-                                                                            html += '</select>'
-                                                                            html += '<button id="lineRemoveBtn-' + line.id + '" class="btn btn-danger" type="button" onclick="window.App.doClick(\'removeLine\', { elemId:\'' + lineId + '\' })"><i class="fas fa-fw fa-minus-circle"></i></button>'
-                                                                        html += '</div>'                                                                
-                                                                    html += '</div>'
-                                                                    html += '<div class="col-auto">'
-                                                                        html += '<div class="input-group input-group-sm">'
-                                                                            html += '<select id="lineAddSelect-' + lineId + '" class="form-control" onchange="window.App.doClick(\'setLineAddCount\', { elemId:\'' + lineId + '\', count:this.value })">'
-                                                                                html += '<option' + (line.addCount == '1' ? ' selected' : '') + ' value="1">+1</option>'
-                                                                                html += '<option' + (line.addCount == '10' ? ' selected' : '') + ' value="10">+10</option>'
-                                                                                html += '<option' + (line.addCount == '100' ? ' selected' : '') + ' value="100">+100</option>'
-                                                                                html += '<option' + (line.addCount == 'all' ? ' selected' : '') + ' value="all">' + i18next.t('word_All') + '</option>'
-                                                                            html += '</select>'
-                                                                            html += '<button id="lineAddBtn-' + line.id + '" class="btn btn-primary" type="button" onclick="window.App.doClick(\'addLine\', { elemId:\'' + lineId + '\' })"><i class="fas fa-fw fa-plus-circle"></i></button>'
-                                                                        html += '</div>'                                                                
+                                                                        html += '<div class="row g-1 align-items-center">'
+                                                                            html += '<div class="col-auto">'
+                                                                                html += '<select class="form-control form-control-sm" onchange="window.App.doClick(\'setLineSelectCount\', { elemId:\'' + lineId + '\', count:this.value })">'
+                                                                                    html += '<option' + (line.selectCount == '1' ? ' selected' : '') + ' value="1">1</option>'
+                                                                                    html += '<option' + (line.selectCount == '10' ? ' selected' : '') + ' value="10">10</option>'
+                                                                                    html += '<option' + (line.selectCount == '100' ? ' selected' : '') + ' value="100">100</option>'
+                                                                                    html += '<option' + (line.selectCount == 'max' ? ' selected' : '') + ' value="max">' + i18next.t('word_Max') + '</option>'
+                                                                                html += '</select>'
+                                                                            html += '</div>'
+                                                                            html += '<div class="col-auto">'
+                                                                                html += '<button id="lineRemoveBtn-' + line.id + '" class="btn btn-sm btn-danger" type="button" onclick="window.App.doClick(\'removeLine\', { elemId:\'' + lineId + '\' })"><i class="fas fa-fw fa-minus-circle"></i></button>'
+                                                                            html += '</div>'
+                                                                            html += '<div class="col-auto">'
+                                                                                html += '<button id="lineAddBtn-' + line.id + '" class="btn btn-sm btn-primary" type="button" onclick="window.App.doClick(\'addLine\', { elemId:\'' + lineId + '\' })"><i class="fas fa-fw fa-plus-circle"></i></button>'
+                                                                            html += '</div>'
+                                                                        html += '</div>'
                                                                     html += '</div>'
                                                                 html += '</div>'
                                                             html += '</div>'
@@ -756,26 +745,22 @@ class ScreenGame {
                                                             html += '<div class="col-auto small text-white">+' + formatNumber(item.storage.base) + '</div>'
                                                             html += '<div class="col-auto small"><small class="opacity-50">x </small><span id="itemStorageCount-' + item.id + '"></span></div>'
                                                             html += '<div class="col-auto">'
-                                                                html += '<div class="input-group input-group-sm">'
-                                                                    html += '<select id="itemRemoveStorageSelect-' + item.id + '" class="form-control" onchange="window.App.doClick(\'setStorageRemoveCount\', { elemId:\'' + item.id + '\', count:this.value })">'
-                                                                        html += '<option' + (item.removeStorageCount == '1' ? ' selected' : '') + ' value="1">-1</option>'
-                                                                        html += '<option' + (item.removeStorageCount == '10' ? ' selected' : '') + ' value="10">-10</option>'
-                                                                        html += '<option' + (item.removeStorageCount == '100' ? ' selected' : '') + ' value="100">-100</option>'
-                                                                        html += '<option' + (item.removeStorageCount == 'none' ? ' selected' : '') + ' value="none">' + i18next.t('word_None') + '</option>'
-                                                                    html += '</select>'
-                                                                    html += '<button id="itemRemoveStorerBtn-' + item.id + '" class="btn btn-danger" type="button" onclick="window.App.doClick(\'removeStorer\', { elemId:\'' + item.id + '\' })"><i class="fas fa-fw fa-minus-circle"></i></button>'
-                                                                html += '</div>'                                                                
-                                                            html += '</div>'
-                                                            html += '<div class="col-auto">'
-                                                                html += '<div class="input-group input-group-sm">'
-                                                                    html += '<select id="itemAddStorageSelect-' + item.id + '" class="form-control" onchange="window.App.doClick(\'setStorageAddCount\', { elemId:\'' + item.id + '\', count:this.value })">'
-                                                                        html += '<option' + (item.addStorageCount == '1' ? ' selected' : '') + ' value="1">+1</option>'
-                                                                        html += '<option' + (item.addStorageCount == '10' ? ' selected' : '') + ' value="10">+10</option>'
-                                                                        html += '<option' + (item.addStorageCount == '100' ? ' selected' : '') + ' value="100">+100</option>'
-                                                                        html += '<option' + (item.addStorageCount == 'all' ? ' selected' : '') + ' value="all">' + i18next.t('word_All') + '</option>'
-                                                                    html += '</select>'
-                                                                    html += '<button id="itemAddStorerBtn-' + item.id + '" class="btn btn-primary" type="button" onclick="window.App.doClick(\'addStorer\', { elemId:\'' + item.id + '\' })"><i class="fas fa-fw fa-plus-circle"></i></button>'
-                                                                html += '</div>'                                                                
+                                                                html += '<div class="row g-1 align-items-center">'
+                                                                    html += '<div class="col-auto">'
+                                                                        html += '<select class="form-control form-control-sm" onchange="window.App.doClick(\'setStorageSelectCount\', { elemId:\'' + item.id + '\', count:this.value })">'
+                                                                            html += '<option' + (item.selectStorageCount == '1' ? ' selected' : '') + ' value="1">1</option>'
+                                                                            html += '<option' + (item.selectStorageCount == '10' ? ' selected' : '') + ' value="10">10</option>'
+                                                                            html += '<option' + (item.selectStorageCount == '100' ? ' selected' : '') + ' value="100">100</option>'
+                                                                            html += '<option' + (item.selectStorageCount == 'max' ? ' selected' : '') + ' value="none">' + i18next.t('word_Max') + '</option>'
+                                                                        html += '</select>'
+                                                                    html += '</div>'                                                                
+                                                                    html += '<div class="col-auto">'
+                                                                        html += '<button id="itemRemoveStorerBtn-' + item.id + '" class="btn btn-sm btn-danger" type="button" onclick="window.App.doClick(\'removeStorer\', { elemId:\'' + item.id + '\' })"><i class="fas fa-fw fa-minus-circle"></i></button>'
+                                                                    html += '</div>'                                                                
+                                                                    html += '<div class="col-auto">'
+                                                                        html += '<button id="itemAddStorerBtn-' + item.id + '" class="btn btn-sm btn-primary" type="button" onclick="window.App.doClick(\'addStorer\', { elemId:\'' + item.id + '\' })"><i class="fas fa-fw fa-plus-circle"></i></button>'
+                                                                    html += '</div>'
+                                                                html += '</div>'
                                                             html += '</div>'
                                                         html += '</div>'
                                                     html += '</div>'
@@ -882,11 +867,9 @@ class ScreenGame {
             window.location.replace('')
         }
         //---
-        else if (action == 'setLineAddCount') window.App.game.setLineAddCount(data)
-        else if (action == 'setLineRemoveCount') window.App.game.setLineRemoveCount(data)
+        else if (action == 'setLineSelectCount') window.App.game.setLineSelectCount(data)
         //---
-        else if (action == 'setStorageAddCount') window.App.game.setStorageAddCount(data)
-        else if (action == 'setStorageRemoveCount') window.App.game.setStorageRemoveCount(data)
+        else if (action == 'setStorageSelectCount') window.App.game.setStorageSelectCount(data)
         //---
         else if (action == 'expandAll') {
             //---
