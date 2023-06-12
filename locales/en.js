@@ -66,6 +66,8 @@ var en_translations = {
     'word_None': 'None',
     'word_Recipe': 'Recipe',
     'word_Close': 'Close',
+    'word_CollapseAll': 'Collapse All',
+    'word_ExpandAll': 'Expand All',
     //---
     'scenario_tut': 'Tutorial',
     'scenarioDesc_tut': 'Learn basic mecanisms before playing other scenarios. Strongly recommended for new players.',

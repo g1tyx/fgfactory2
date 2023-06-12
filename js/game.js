@@ -270,7 +270,6 @@ class Game {
         //---
         this.refreshProd()
         this.refreshUnlocked()
-        console.log(this)
     }
     //---
     getSaveData() {

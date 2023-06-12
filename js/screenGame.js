@@ -559,7 +559,9 @@ class ScreenGame {
             //---
             html += '<div class="col">'
                 html += '<div class="dropdown">'
-                    html += '<button type="button" id="recipeBtn-' + recipe.id + '" class="btn btn-sm" data-bs-toggle="dropdown" aria-expanded="false"><img src="' + machine.img + '" width="24px" height="24px"></button>'
+                    html += '<div data-bs-toggle="dropdown" aria-expanded="false">'
+                        html += '<button type="button" id="recipeBtn-' + recipe.id + '" class="btn btn-sm"><img src="' + machine.img + '" width="24px" height="24px"></button>'
+                    html += '</div>'
                     html += '<div class="dropdown-menu">'
                         html += '<div class="px-2">'
                             html += '<div class="mb-2">'
@@ -569,7 +571,7 @@ class ScreenGame {
                                 if (machine.id != 'machineManual') {
                                     html += '<div class="col-auto">'
                                         html += '<div class="text-center"><img src="' + machine.img + '" width="24px" height="24px"></div>'
-                                        html += '<div class=""><span id="recipeMachineCount-' + recipe.id + '">1</span></div>'
+                                        html += '<div class="lh-1"><span id="recipeMachineCount-' + recipe.id + '">1</span></div>'
                                     html += '</div>'
                                 }
                                 if (recipe.inputs) {
@@ -577,7 +579,7 @@ class ScreenGame {
                                         let inputElem = window.App.game.getElem(input.id)
                                         html += '<div class="col-auto">'
                                             html += '<div class="text-center"><img src="' + inputElem.img + '" width="24px" height="24px"></div>'
-                                            html += '<div class=""><span id="recipeInputCount-' + recipe.id + '-' + input.id + '">' + formatNumber(input.count) + '</span></div>'
+                                            html += '<div class="lh-1"><span id="recipeInputCount-' + recipe.id + '-' + input.id + '">' + formatNumber(input.count) + ' <small class="opacity-50">/s</small></span></div>'
                                         html += '</div>'
                                     })
                                 }
@@ -588,7 +590,7 @@ class ScreenGame {
                                     let outputElem = window.App.game.getElem(output.id)
                                     html += '<div class="col-auto">'
                                         html += '<div class="text-center"><img src="' + outputElem.img + '" width="24px" height="24px"></div>'
-                                        html += '<div class=""><span id="recipeOutputCount-' + recipe.id + '-' + output.id + '">' + formatNumber(output.count) + '</span></div>'
+                                        html += '<div class="lh-1"><span id="recipeOutputCount-' + recipe.id + '-' + output.id + '">' + formatNumber(output.count) + ' <small class="opacity-50">/s</small></span></div>'
                                     html += '</div>'
                                 })
                             html += '</div>'
@@ -600,7 +602,7 @@ class ScreenGame {
             return html
         }
         //---
-        let displayContainer = function(containerId, containerName, items) {
+        let displayContainer = function(containerId, containerName, items, type) {
             //---
             if (items.length > 0) {
                 //---
@@ -608,19 +610,33 @@ class ScreenGame {
                 //---
                 html += '<div class="row g-2">'
                     html += '<div class="col-12">'
-                        html += '<span class="h6">' + containerName + '</span>'
+                        html += '<div class="row gx-3 align-items-center">'
+                            html += '<div class="col-auto">'
+                                html += '<span class="h6">' + containerName + '</span>'
+                            html += '</div>'
+                            html += '<div class="col-auto">'
+                                html += '<button class="btn btn-sm btn-link" onclick="window.App.doClick(\'expandAll\', { type:\'' + type + '\' })">' + i18next.t('word_ExpandAll') + '</button>'
+                            html += '</div>'
+                            html += '<div class="col-auto">'
+                                html += '<button class="btn btn-sm btn-link" onclick="window.App.doClick(\'collapseAll\', { type:\'' + type + '\' })">' + i18next.t('word_CollapseAll') + '</button>'
+                            html += '</div>'
+                        html += '</div>'
                     html += '</div>'
                     items.forEach(item => {
                         html += '<div class="col-12 col-md-6 col-lg-6 col-xl-4">'
                             html += '<div class="card">'
-                                html += '<button type="button" class="card-header" data-bs-toggle="collapse" data-bs-target="#collapse-' + item.id + '" aria-expanded="false" aria-controls="collapseExample" onclick="window.App.doClick(\'toggleCollapse\', { elemId:\'' + item.id + '\' })">'
+                                html += '<div class="card-header">'
                                     html += '<div class="row gx-2 align-items-center">'
-                                        html += '<div class="col-auto"><img src="' + item.img + '" width="24px" height="24px"></div>'
-                                        html += '<div class="col text-start text-white">' + i18next.t(item.label) + '</div>'
-                                        html += '<div class="col-auto text-end"><span id="itemProd-' + item.id + '"></span></div>'
+                                        html += '<button type="button" class="col-auto btn px-1 py-0 border-0" data-bs-toggle="collapse" data-bs-target="#collapse-' + item.id + '" aria-expanded="false" aria-controls="collapseExample" onclick="window.App.doClick(\'toggleCollapse\', { elemId:\'' + item.id + '\' })">'
+                                            html += '<div class="row gx-2 align-items-center">'
+                                                html += '<div class="col-auto"><img src="' + item.img + '" width="24px" height="24px"></div>'
+                                                html += '<div class="col text-start text-white">' + i18next.t(item.label) + '</div>'
+                                            html += '</div>'
+                                        html += '</button>'
+                                        html += '<div class="ms-auto col-auto"><span id="itemProd-' + item.id + '"></span></div>'
                                         html += '<div class="col-3 text-end"><span id="itemCount-' + item.id + '"></span></div>'
                                     html += '</div>'
-                                html += '</button>'
+                                html += '</div>'
                                 html += '<div id="collapse-' + item.id + '" class="collapse' + (item.collapsed ? '' : ' show') +'">'
                                     if (item.manualId) {
                                         let manual = window.App.game.getElem(item.manualId)
@@ -670,50 +686,46 @@ class ScreenGame {
                                             html += '<div class="card-body">'
                                                 html += '<div class="row g-2">'
                                                     html += '<div class="col-12">'
-                                                         html += '<span>' + i18next.t('word_Automation') + '</span>'
+                                                        html += '<span>' + i18next.t('word_Automation') + '</span>'
                                                     html += '</div>'
                                                     item.lines.forEach(lineId => {
-                                                        html += '<div class="col-12">'
-                                                            html += '<div class="row g-2">'
-                                                                let line = window.App.game.getElem(lineId)
-                                                                if (line.unlocked) {
-                                                                    html += '<div class="col-12">'
-                                                                        html += '<div class="row g-2 align-items-center">'
-                                                                            html += displayRecipe(line)
-                                                                            line.outputs.forEach(output => {
-                                                                                let outputElem = window.App.game.getElem(output.id)
-                                                                                html += '<div class="col-auto position-relative small">'
-                                                                                    html += '<span class="text-white">+' + formatNumber(output.count) + '<small class="opacity-50"> /s</small></span>'
-                                                                                html += '</div>'
-                                                                            })
-                                                                            html += '<div class="col-auto small"><small class="opacity-50">x </small><span id="lineCount-' + line.id + '"></span></div>'
-                                                                            html += '<div class="col-auto">'
-                                                                                html += '<div class="input-group input-group-sm">'
-                                                                                    html += '<select id="lineRemoveSelect-' + lineId + '" class="form-control" onchange="window.App.doClick(\'setLineRemoveCount\', { elemId:\'' + lineId + '\', count:this.value })">'
-                                                                                        html += '<option' + (line.removeCount == '1' ? ' selected' : '') + ' value="1">-1</option>'
-                                                                                        html += '<option' + (line.removeCount == '10' ? ' selected' : '') + ' value="10">-10</option>'
-                                                                                        html += '<option' + (line.removeCount == '100' ? ' selected' : '') + ' value="100">-100</option>'
-                                                                                        html += '<option' + (line.removeCount == 'none' ? ' selected' : '') + ' value="none">' + i18next.t('word_None') + '</option>'
-                                                                                    html += '</select>'
-                                                                                    html += '<button id="lineRemoveBtn-' + line.id + '" class="btn btn-danger" type="button" onclick="window.App.doClick(\'removeLine\', { elemId:\'' + lineId + '\' })"><i class="fas fa-fw fa-minus-circle"></i></button>'
-                                                                                html += '</div>'                                                                
-                                                                            html += '</div>'
-                                                                            html += '<div class="col-auto">'
-                                                                                html += '<div class="input-group input-group-sm">'
-                                                                                    html += '<select id="lineAddSelect-' + lineId + '" class="form-control" onchange="window.App.doClick(\'setLineAddCount\', { elemId:\'' + lineId + '\', count:this.value })">'
-                                                                                        html += '<option' + (line.addCount == '1' ? ' selected' : '') + ' value="1">+1</option>'
-                                                                                        html += '<option' + (line.addCount == '10' ? ' selected' : '') + ' value="10">+10</option>'
-                                                                                        html += '<option' + (line.addCount == '100' ? ' selected' : '') + ' value="100">+100</option>'
-                                                                                        html += '<option' + (line.addCount == 'all' ? ' selected' : '') + ' value="all">' + i18next.t('word_All') + '</option>'
-                                                                                    html += '</select>'
-                                                                                    html += '<button id="lineAddBtn-' + line.id + '" class="btn btn-primary" type="button" onclick="window.App.doClick(\'addLine\', { elemId:\'' + lineId + '\' })"><i class="fas fa-fw fa-plus-circle"></i></button>'
-                                                                                html += '</div>'                                                                
-                                                                            html += '</div>'
+                                                        let line = window.App.game.getElem(lineId)
+                                                        if (line.unlocked) {
+                                                            html += '<div class="col-12">'
+                                                                html += '<div class="row g-2 align-items-center">'
+                                                                    html += displayRecipe(line)
+                                                                    line.outputs.forEach(output => {
+                                                                        let outputElem = window.App.game.getElem(output.id)
+                                                                        html += '<div class="col-auto position-relative small">'
+                                                                            html += '<span class="text-white">+' + formatNumber(output.count) + '<small class="opacity-50"> /s</small></span>'
                                                                         html += '</div>'
+                                                                    })
+                                                                    html += '<div class="col-auto small"><small class="opacity-50">x </small><span id="lineCount-' + line.id + '"></span></div>'
+                                                                    html += '<div class="col-auto">'
+                                                                        html += '<div class="input-group input-group-sm">'
+                                                                            html += '<select id="lineRemoveSelect-' + lineId + '" class="form-control" onchange="window.App.doClick(\'setLineRemoveCount\', { elemId:\'' + lineId + '\', count:this.value })">'
+                                                                                html += '<option' + (line.removeCount == '1' ? ' selected' : '') + ' value="1">-1</option>'
+                                                                                html += '<option' + (line.removeCount == '10' ? ' selected' : '') + ' value="10">-10</option>'
+                                                                                html += '<option' + (line.removeCount == '100' ? ' selected' : '') + ' value="100">-100</option>'
+                                                                                html += '<option' + (line.removeCount == 'none' ? ' selected' : '') + ' value="none">' + i18next.t('word_None') + '</option>'
+                                                                            html += '</select>'
+                                                                            html += '<button id="lineRemoveBtn-' + line.id + '" class="btn btn-danger" type="button" onclick="window.App.doClick(\'removeLine\', { elemId:\'' + lineId + '\' })"><i class="fas fa-fw fa-minus-circle"></i></button>'
+                                                                        html += '</div>'                                                                
                                                                     html += '</div>'
-                                                                }
+                                                                    html += '<div class="col-auto">'
+                                                                        html += '<div class="input-group input-group-sm">'
+                                                                            html += '<select id="lineAddSelect-' + lineId + '" class="form-control" onchange="window.App.doClick(\'setLineAddCount\', { elemId:\'' + lineId + '\', count:this.value })">'
+                                                                                html += '<option' + (line.addCount == '1' ? ' selected' : '') + ' value="1">+1</option>'
+                                                                                html += '<option' + (line.addCount == '10' ? ' selected' : '') + ' value="10">+10</option>'
+                                                                                html += '<option' + (line.addCount == '100' ? ' selected' : '') + ' value="100">+100</option>'
+                                                                                html += '<option' + (line.addCount == 'all' ? ' selected' : '') + ' value="all">' + i18next.t('word_All') + '</option>'
+                                                                            html += '</select>'
+                                                                            html += '<button id="lineAddBtn-' + line.id + '" class="btn btn-primary" type="button" onclick="window.App.doClick(\'addLine\', { elemId:\'' + lineId + '\' })"><i class="fas fa-fw fa-plus-circle"></i></button>'
+                                                                        html += '</div>'                                                                
+                                                                    html += '</div>'
+                                                                html += '</div>'
                                                             html += '</div>'
-                                                        html += '</div>'
+                                                        }
                                                     })
                                                 html += '</div>'
                                             html += '</div>'
@@ -789,9 +801,9 @@ class ScreenGame {
             }
         }
         //---
-        displayContainer('itemContainer', i18next.t('word_Items'), window.App.game.elems.filter(elem => elem.type == 'item' && elem.unlocked))
-        displayContainer('machineContainer', i18next.t('word_Machines'), window.App.game.elems.filter(elem => elem.id != 'machineManual' && elem.type == 'machine' && elem.unlocked))
-        displayContainer('storerContainer', i18next.t('word_Storers'), window.App.game.elems.filter(elem => elem.type == 'storer' && elem.unlocked))
+        displayContainer('itemContainer', i18next.t('word_Items'), window.App.game.elems.filter(elem => elem.type == 'item' && elem.unlocked), 'item')
+        displayContainer('machineContainer', i18next.t('word_Machines'), window.App.game.elems.filter(elem => elem.id != 'machineManual' && elem.type == 'machine' && elem.unlocked), 'machine')
+        displayContainer('storerContainer', i18next.t('word_Storers'), window.App.game.elems.filter(elem => elem.type == 'storer' && elem.unlocked), 'storer')
     }
     //---
     refreshTabScenarii() {
@@ -875,6 +887,21 @@ class ScreenGame {
         //---
         else if (action == 'setStorageAddCount') window.App.game.setStorageAddCount(data)
         else if (action == 'setStorageRemoveCount') window.App.game.setStorageRemoveCount(data)
+        //---
+        else if (action == 'expandAll') {
+            //---
+            let items = window.App.game.elems.filter(elem => elem.id != 'machineManual' && elem.type == data.type && elem.unlocked)
+            items.forEach(item => { item.collapsed = false })
+            //---
+            this.refreshTabItems()
+        }
+        else if (action == 'collapseAll') {
+            //---
+            let items = window.App.game.elems.filter(elem => elem.id != 'machineManual' && elem.type == data.type && elem.unlocked)
+            items.forEach(item => { item.collapsed = true })
+            //---
+            this.refreshTabItems()
+        }
     }
     //---
     selectTab(data) {

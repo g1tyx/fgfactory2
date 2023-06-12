@@ -66,6 +66,8 @@ var fr_translations = {
     'word_None': 'Rien',
     'word_Recipe': 'Recette',
     'word_Close': 'Fermer',
+    'word_CollapseAll': 'Tout Réduire',
+    'word_ExpandAll': 'Tout Etendre',
     //---
     'scenario_tut': 'Tutoriel',
     'scenarioDesc_tut': 'Apprendre les bases avant de jouer les autres scénarios. Fortement récommandé pour les nouveaux joueurs.',
