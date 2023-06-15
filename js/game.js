@@ -74,6 +74,11 @@ class GameItem extends GameElem {
         //---
         this.prod = 0
         //---
+        this.rawProd = 0
+        this.rawConsum = 0
+        //---
+        this.consumers = []
+        //---
         this.collapsed = false
         //---
         this.selectStorageCount = '1'
@@ -141,7 +146,7 @@ class GameLine extends GameElem {
         if (machine.energy && this.id != 'manualCoal' && this.id != 'lineCoal1') {
             //---
             this.inputs = []
-            this.inputs.push({ id:machine.energy.id, count:machine.energy.count })
+            this.inputs.push({ id:machine.energy.id, count:machine.energy.count, coeff:1.0 })
         }
         //---
         let recipe =  game.scenario.data.elems.find(elem => elem.id == this.recipeId)
@@ -150,12 +155,18 @@ class GameLine extends GameElem {
             if (!this.inputs) this.inputs = []
             recipe.inputs.forEach(input => {
                 //---
-                this.inputs.push({ id:input.id, count:(input.count / recipe.time * machine.speed).toFixed(2) })
+                this.inputs.push({ id:input.id, count:(input.count / recipe.time * machine.speed).toFixed(2), coeff:1.0 })
             })
         }
         //---
         this.outputs = []
-        recipe.outputs.forEach(output => this.outputs.push({ id:output.id, count:(output.count / recipe.time * machine.speed).toFixed(2) }))
+        recipe.outputs.forEach(output => {
+            //---
+            this.outputs.push({ id:output.id, count:(output.count / recipe.time * machine.speed).toFixed(2) })
+            //---
+            let elem = game.getElem(output.id)
+            this.img = elem.img
+        })
     }
     //---
     load(data) {
@@ -299,8 +310,42 @@ class Game {
     //---
     refreshProd() {
         //---
-        let elems = this.elems.filter(elem => elem.unlocked == true && (elem.type == 'item' || elem.type == 'machine' || elem.type == 'storer'))
-        elems.forEach(elem => { elem.prod = this.getProd(elem.id) })
+        let elems = this.elems.filter(elem => elem.id != 'machineManual' && elem.unlocked == true && (elem.type == 'item' || elem.type == 'machine' || elem.type == 'storer'))
+        elems.forEach(elem => {
+            //---
+            elem.prod = 0
+            //---
+            elem.rawProd = 0
+            elem.rawConsum = 0
+            //---
+            elem.consumers = []
+        })
+        //---
+        let lines = this.elems.filter(elem => (elem.type == 'line' || elem.type == 'manual') && elem.unlocked == true && elem.count > 0)
+        lines.forEach(line => {
+            //---
+            if (this.canProduce(line.id)) {
+                //---
+                if (line.inputs && line.inputs.length > 0) {
+                    //---
+                    line.inputs.forEach(input => {
+                        //---
+                        let inputElem = this.elems.find(elem => elem.id == input.id)
+                        inputElem.prod -= input.count * line.count
+                        inputElem.rawConsum += input.count * line.count
+                        //---
+                        if (!inputElem.consumers.includes(line.img)) inputElem.consumers.push(line.img)
+                    })
+                }
+                //---
+                line.outputs.forEach(output => {
+                    //---
+                    let outputElem = this.elems.find(elem => elem.id == output.id)
+                    outputElem.prod += output.count * line.count
+                    outputElem.rawProd += output.count * line.count
+                })
+            }
+        })
     }
     //---
     isVictoryReached() {
@@ -389,33 +434,6 @@ class Game {
         }
         //---
         return false
-    }
-    //---
-    getProd(elemId) {
-        //---
-        let prod = 0
-        //---
-        let lines = this.elems.filter(elem => (elem.type == 'line' || elem.type == 'manual') && elem.unlocked == true && elem.count > 0)
-        lines.forEach(line => {
-            //---
-            if (this.canProduce(line.id)) {
-                //---
-                if (line.inputs && line.inputs.length > 0) {
-                    //---
-                    line.inputs.forEach(input => {
-                        //---
-                        if (input.id == elemId) prod -= input.count * line.count
-                    })
-                }
-                //---
-                line.outputs.forEach(output => {
-                    //---
-                    if (output.id == elemId) prod += output.count * line.count
-                })
-            }
-        })
-        //---
-        return prod
     }
     //---
     getMax(elemId) {

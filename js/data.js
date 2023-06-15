@@ -63,7 +63,7 @@ var DATA = {
                 //---
                 {	id:'factorio1Obj',	        type:'mission',	    label:'factorio1Obj', desc:'factorio1ObjDesc', costs:[{ id:'itemArmor', count:1 },{ id:'itemRocketPart', count:100 },{ id:'itemSatellite', count:1 }] },
                 //---                
-                {	id:'techAutomation1',	    type:'tech',	    label:'techAutomation1', costs:[{ id:'itemRedPack', count:10 }] },
+                {	id:'techAutomation1',	    type:'tech',	    label:'techAutomation1', desc:'desc_techAutomation1', costs:[{ id:'itemRedPack', count:10 }] },
                 {	id:'techSteel',	            type:'tech',	    label:'techSteel', costs:[{ id:'itemRedPack', count:50 }] },
                 {	id:'techGreen',	            type:'tech',	    label:'techGreen', costs:[{ id:'itemRedPack', count:75 }] },
                 {	id:'techAutomation2',	    type:'tech',	    reqs:[{ id:'techGreen', count:1 },{ id:'techSteel', count:1 }], label:'techAutomation2', costs:[{ id:'itemRedPack', count:40 },{ id:'itemGreenPack', count:40 }] },

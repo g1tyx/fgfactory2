@@ -67,6 +67,10 @@ var en_translations = {
     'word_Close': 'Close',
     'word_CollapseAll': 'Collapse All',
     'word_ExpandAll': 'Expand All',
+    'word_None': 'None',
+    'word_RawProduction': 'Raw Production',
+    'word_RawConsumption': 'Raw Consumption',
+    'word_Consumers': 'Consumers',
     //---
     'scenario_tut': 'Tutorial',
     'scenarioDesc_tut': 'Learn basic mecanisms before playing other scenarios. Strongly recommended for new players.',
@@ -96,6 +100,7 @@ var en_translations = {
     'factorio1ObjDesc': '<div class="mb-2">You crashed on an hostile planet. Your goal is to escape from there. To do it you have to build a Rocket (composed by 100 Rocket Parts), an Armor to protect you during travel and a Satellite to navigate to home.</div><div class="mb-2">Below, you will find techs that unlock necessary items, machines and storers. Good luck!</div><div class="mb-2 small text-normal">Inspired by <a href="https://factorio.com/" target="_blank">Factorio</a> game</div>',
     //---
     'techAutomation1': 'Automation 1',
+    'desc_techAutomation1': 'It allows the building of the Assembler 1 machine, which is the start of automated crafting, an essential part for your mission.',
     'techSteel': 'Steel',
     'techGreen': 'Green Science',
     'techAutomation2': 'Automation 2',

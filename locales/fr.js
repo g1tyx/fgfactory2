@@ -67,6 +67,10 @@ var fr_translations = {
     'word_Close': 'Fermer',
     'word_CollapseAll': 'Tout Réduire',
     'word_ExpandAll': 'Tout Etendre',
+    'word_None': 'Aucun',
+    'word_RawProduction': 'Production brute',
+    'word_RawConsumption': 'Consommation brute',
+    'word_Consumers': 'Consommateurs',
     //---
     'scenario_tut': 'Tutoriel',
     'scenarioDesc_tut': 'Apprendre les bases avant de jouer les autres scénarios. Fortement récommandé pour les nouveaux joueurs.',
@@ -96,6 +100,7 @@ var fr_translations = {
     'factorio1ObjDesc': '<div class="mb-2">Vous vous êtes écrasé sur une planète hostile. Votre objectif est de vous échapper de là. Pour ce faire, vous devez construire une Fusée (composée de 100 Pièces de fusée), une Armure pour vous protéger pendant le voyage et un Satellite pour naviguer jusqu\'à votre maison.</div><div class="mb-2">Ci-dessous, vous trouverez les technologies qui débloquent les objets, machines et conteneurs nécessaires. Bonne chance !</div><div class="mb-2 small text-normal">Inspiré du jeu <a href="https://factorio.com/" target="_blank">Factorio</a></div>',
     //---
     'techAutomation1': 'Automatisation 1',
+    'desc_techAutomation1': 'Permet la construction des machines Assembleur 1, ce qui est le début de l\'automatisation, une partie essentielle de votre mission.',
     'techSteel': 'Acier',
     'techGreen': 'Science Vert',
     'techAutomation2': 'Automatisation 2',
