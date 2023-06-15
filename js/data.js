@@ -291,7 +291,7 @@ var DATA = {
                 {	id:'lineFurnace33',         type:'line',	    reqs:[{ id:'techMaterial2', count:1 },{ id:'techAutomation3', count:1 }], machineId:'machineAssembler3', recipeId:'recipeFurnace3' },
                 //---
                 {	id:'machineMinerCoal',	    type:'machine',	    label:'machineMinerCoal', img:'img/machines/DrillCoal.png', storage:{ base:50, storerId:'storerChest' }, manualId:'manualMinerCoal', speed:0.25 },
-                {	id:'recipeMinerCoal',	    type:'recipe',	    time:2, outputs:[{ id:'machineMinerCoal', count:1 }], inputs:[{ id:'itemIronPlate', count:9 },{ id:'itemStone', count:5 }] },
+                {	id:'recipeMinerCoal',	    type:'recipe',	    time:2, outputs:[{ id:'machineMinerCoal', count:1 }], inputs:[{ id:'machineFurnace1', count:1 }] },
                 {	id:'manualMinerCoal',	    type:'manual',	    machineId:'machineManual', recipeId:'recipeMinerCoal' },
                 {	id:'lineMiner11',           type:'line',	    reqs:[{ id:'techAutomation1', count:1 }], machineId:'machineAssembler1', recipeId:'recipeMinerCoal' },
                 {	id:'lineMiner12',           type:'line',	    reqs:[{ id:'techAutomation2', count:1 }], machineId:'machineAssembler2', recipeId:'recipeMinerCoal' },
