@@ -820,7 +820,7 @@ class ScreenGame {
                                                                                     html += '<option' + (item.selectStorageCount == '1' ? ' selected' : '') + ' value="1">1</option>'
                                                                                     html += '<option' + (item.selectStorageCount == '10' ? ' selected' : '') + ' value="10">10</option>'
                                                                                     html += '<option' + (item.selectStorageCount == '100' ? ' selected' : '') + ' value="100">100</option>'
-                                                                                    html += '<option' + (item.selectStorageCount == 'max' ? ' selected' : '') + ' value="none">' + i18next.t('word_Max') + '</option>'
+                                                                                    html += '<option' + (item.selectStorageCount == 'max' ? ' selected' : '') + ' value="max">' + i18next.t('word_Max') + '</option>'
                                                                                 html += '</select>'
                                                                             html += '</div>'                                                                
                                                                             html += '<div class="col-auto">'
