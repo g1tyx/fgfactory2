@@ -345,6 +345,12 @@ class Game {
                     outputElem.rawProd += output.count * line.count
                 })
             }
+            //---
+            else {
+                //---
+                line.count = 0
+                if (this.currentManualId == line.id) this.currentManualId = null
+            }
         })
     }
     //---
@@ -425,8 +431,7 @@ class Game {
             if (line.inputs && line.inputs.length > 0) {
                 //---
                 line.inputs.forEach(input => {
-                    //---
-                    if (input.count > this.getAvailableCount(input.id)) canProduce = false
+                    if (this.getAvailableCount(input.id) <= 1/60) canProduce = false
                 })
             }
             //---
@@ -529,6 +534,15 @@ class Game {
             let addCount = line.getAddCount(this)
             //---
             if (this.getAvailableCount(line.machineId) < addCount) return false
+            //---
+            if (line.inputs) {
+                //---
+                for (let input of line.inputs) {
+                    //---
+                    let inputElem = this.elems.find(elem => elem.id == input.id)
+                    if (input.count * addCount > inputElem.prod) return false
+                }
+            }
             //---
             return true
         }

@@ -231,7 +231,15 @@ class ScreenGame {
                     let inputElem = window.App.game.getElem(input.id)
                     //---
                     let style = 'w-100 badge'
-                    if (input.count > window.App.game.getAvailableCount(input.id)) style += ' text-bg-danger'
+                    if (machine.id == 'machineManual') {
+                        //---
+                        if (input.count > window.App.game.getAvailableCount(input.id)) style += ' text-bg-danger'
+                    }
+                    else {
+                        //---
+                        let elem = window.App.game.getElem(input.id)
+                        if (input.count > elem.prod) style += ' text-bg-danger'
+                    }
                     let node = document.getElementById('recipeInputCount-' + recipe.id + '-' + input.id)
                     if (node.className != style) node.className = style
                 })
@@ -326,7 +334,7 @@ class ScreenGame {
                             if (line.unlocked) {
                                 //---
                                 style = 'btn btn-sm'
-                                if (!window.App.game.canProduce(line.id)) style += ' border-danger'
+                                if (!window.App.game.canProduce(line.id) || window.App.game.getAvailableCount(line.machineId) < 1) style += ' border-danger'
                                 node = document.getElementById('recipeBtn-' + line.id)
                                 if (node.className != style) node.className = style
                                 //---
@@ -600,7 +608,7 @@ class ScreenGame {
                                         let inputElem = window.App.game.getElem(input.id)
                                         html += '<div class="col-auto">'
                                             html += '<div class="text-center"><img src="' + inputElem.img + '" width="24px" height="24px"></div>'
-                                            html += '<div class="lh-1"><span id="recipeInputCount-' + recipe.id + '-' + input.id + '">' + formatNumber(input.count) + ' <small class="opacity-50">/s</small></span></div>'
+                                            html += '<div class="lh-1"><span id="recipeInputCount-' + recipe.id + '-' + input.id + '">' + formatNumber(input.count) + (recipe.machineId == 'machineManual' ? '' : ' <small class="opacity-50">/s</small>') + '</span></div>'
                                         html += '</div>'
                                     })
                                 }
@@ -611,7 +619,7 @@ class ScreenGame {
                                     let outputElem = window.App.game.getElem(output.id)
                                     html += '<div class="col-auto">'
                                         html += '<div class="text-center"><img src="' + outputElem.img + '" width="24px" height="24px"></div>'
-                                        html += '<div class="lh-1"><span id="recipeOutputCount-' + recipe.id + '-' + output.id + '" class="badge">' + formatNumber(output.count) + ' <small class="opacity-50">/s</small></span></div>'
+                                        html += '<div class="lh-1"><span id="recipeOutputCount-' + recipe.id + '-' + output.id + '" class="badge">' + formatNumber(output.count) + (recipe.machineId == 'machineManual' ? '' : ' <small class="opacity-50">/s</small>') + '</span></div>'
                                     html += '</div>'
                                 })
                             html += '</div>'
@@ -774,7 +782,7 @@ class ScreenGame {
                                                                     html += '<div class="col-auto">'
                                                                         html += '<small class="text-normal">' + i18next.t('word_Consumers') + '</small>'
                                                                     html += '</div>'
-                                                                    html += '<div id="itemConsumers-' + item.id + '"class="col"></div>'
+                                                                    html += '<div id="itemConsumers-' + item.id + '"class="col text-end"></div>'
                                                                 html += '</div>'
                                                             html += '</div>'
                                                         html += '</div>'

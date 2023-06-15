@@ -16,6 +16,11 @@ var DATA = {
                 {	id:'tutMission5',	        type:'mission',	    reqs:[{ id:'tutMission4', count:1 }], label:'tutMission5', desc:'tutMission5Desc', costs:[{ id:'storerChest', count:1 }], rewards:[{ id:'storerChest', count:1 }] },
                 {	id:'tutMission6',	        type:'mission',	    reqs:[{ id:'tutMission5', count:1 }], label:'tutMission6', desc:'tutMission6Desc', costs:[{ id:'itemStone', count:100 },{ id:'itemIron', count:100 },{ id:'itemCoal', count:100 }], rewards:[{ id:'itemStone', count:100 },{ id:'itemIron', count:100 },{ id:'itemCoal', count:100 }] },
                 //---
+                {	id:'itemCoal',		        type:'item',	    reqs:[{ id:'tutMission2', count:1 }], label:'itemCoal', img:'img/items/Coal.png', storage:{ base:50, storerId:'storerChest' }, manualId:'manualCoal', lines:[ 'lineCoal1' ] },
+                {	id:'recipeCoal',	        type:'recipe',	    reqs:[{ id:'tutMission2', count:1 }], time:1, outputs:[{ id:'itemCoal', count:1 }] },
+                {	id:'manualCoal',	        type:'manual',      reqs:[{ id:'tutMission2', count:1 }], machineId:'machineManual', recipeId:'recipeCoal' },
+                {	id:'lineCoal1',	            type:'line',	    reqs:[{ id:'tutMission2', count:1 }], machineId:'machineMinerCoal', recipeId:'recipeCoal', initCount:1 },
+                //---
                 {	id:'itemStone',		        type:'item',	    label:'itemStone', img:'img/items/Stone.png', storage:{ base:50, storerId:'storerChest' }, manualId:'manualStone', lines:[ 'lineStone1' ] },
                 {	id:'recipeStone',	        type:'recipe',	    time:1, outputs:[{ id:'itemStone', count:1 }] },
                 {	id:'manualStone',	        type:'manual',	    machineId:'machineManual', recipeId:'recipeStone' },
@@ -25,11 +30,6 @@ var DATA = {
                 {	id:'recipeIron',	        type:'recipe',	    reqs:[{ id:'tutMission2', count:1 }], time:1, outputs:[{ id:'itemIron', count:1 }] },
                 {	id:'manualIron',	        type:'manual',	    reqs:[{ id:'tutMission2', count:1 }], machineId:'machineManual', recipeId:'recipeIron' },
                 {	id:'lineIron1',	            type:'line',	    reqs:[{ id:'tutMission4', count:1 }], machineId:'machineMiner1', recipeId:'recipeIron', initCount:1 },
-                //---
-                {	id:'itemCoal',		        type:'item',	    reqs:[{ id:'tutMission2', count:1 }], label:'itemCoal', img:'img/items/Coal.png', storage:{ base:50, storerId:'storerChest' }, manualId:'manualCoal', lines:[ 'lineCoal1' ] },
-                {	id:'recipeCoal',	        type:'recipe',	    reqs:[{ id:'tutMission2', count:1 }], time:1, outputs:[{ id:'itemCoal', count:1 }] },
-                {	id:'manualCoal',	        type:'manual',      reqs:[{ id:'tutMission2', count:1 }], machineId:'machineManual', recipeId:'recipeCoal' },
-                {	id:'lineCoal1',	            type:'line',	    reqs:[{ id:'tutMission4', count:1 }], machineId:'machineMiner1', recipeId:'recipeCoal', initCount:1 },
                 //---
                 {	id:'itemIronPlate',		    type:'item',	    reqs:[{ id:'tutMission2', count:1 }], label:'itemIronPlate', img:'img/items/IronPlate.png', storage:{ base:100, storerId:'storerChest' }, lines:[ 'lineIronPlate1' ] },
                 {	id:'recipeIronPlate',	    type:'recipe',	    reqs:[{ id:'tutMission2', count:1 }], time:3.2, outputs:[{ id:'itemIronPlate', count:1 }], inputs:[{ id:'itemIron', count:1 }] },
@@ -45,8 +45,12 @@ var DATA = {
                 {	id:'recipeFurnace1',	    type:'recipe',	    reqs:[{ id:'tutMission1', count:1 }], time:2, outputs:[{ id:'machineFurnace1', count:1 }], inputs:[{ id:'itemStone', count:5 }] },
                 {	id:'manualFurnace1',	    type:'manual',	    reqs:[{ id:'tutMission1', count:1 }], machineId:'machineManual', recipeId:'recipeFurnace1' },
                 //---
+                {	id:'machineMinerCoal',	    type:'machine',	    reqs:[{ id:'tutMission2', count:1 }], label:'machineMinerCoal', img:'img/machines/DrillCoal.png', manualId:'manualMinerCoal', speed:0.25 },
+                {	id:'recipeMinerCoal',	    type:'recipe',	    reqs:[{ id:'tutMission2', count:1 }], time:2, outputs:[{ id:'machineMinerCoal', count:1 }], inputs:[{ id:'machineFurnace1', count:1 }] },
+                {	id:'manualMinerCoal',	    type:'manual',	    reqs:[{ id:'tutMission2', count:1 }], machineId:'machineManual', recipeId:'recipeMinerCoal' },
+                //---
                 {	id:'machineMiner1',	        type:'machine',	    reqs:[{ id:'tutMission3', count:1 }], label:'machineMiner1', img:'img/machines/Drill1.png', manualId:'manualMiner1', speed:0.25, energy:{ id:'itemCoal', count:0.04 } },
-                {	id:'recipeMiner1',	        type:'recipe',	    reqs:[{ id:'tutMission3', count:1 }], time:2, outputs:[{ id:'machineMiner1', count:1 }], inputs:[{ id:'itemIronWheel', count:3 },{ id:'itemIronPlate', count:3 },{ id:'machineFurnace1', count:1 }] },
+                {	id:'recipeMiner1',	        type:'recipe',	    reqs:[{ id:'tutMission3', count:1 }], time:2, outputs:[{ id:'machineMiner1', count:1 }], inputs:[{ id:'itemIronPlate', count:3 },{ id:'itemIronWheel', count:3 },{ id:'machineFurnace1', count:1 }] },
                 {	id:'manualMiner1',	        type:'manual',	    reqs:[{ id:'tutMission3', count:1 }], machineId:'machineManual', recipeId:'recipeMiner1' },
                 //---
                 {	id:'storerChest',	        type:'storer',	    reqs:[{ id:'tutMission4', count:1 }], label:'storerChest', img:'img/storers/Chest.png', manualId:'manualChest' },
@@ -63,7 +67,7 @@ var DATA = {
                 //---
                 {	id:'factorio1Obj',	        type:'mission',	    label:'factorio1Obj', desc:'factorio1ObjDesc', costs:[{ id:'itemArmor', count:1 },{ id:'itemRocketPart', count:100 },{ id:'itemSatellite', count:1 }] },
                 //---                
-                {	id:'techAutomation1',	    type:'tech',	    label:'techAutomation1', desc:'desc_techAutomation1', costs:[{ id:'itemRedPack', count:10 }] },
+                {	id:'techAutomation1',	    type:'tech',	    label:'techAutomation1', costs:[{ id:'itemRedPack', count:10 }] },
                 {	id:'techSteel',	            type:'tech',	    label:'techSteel', costs:[{ id:'itemRedPack', count:50 }] },
                 {	id:'techGreen',	            type:'tech',	    label:'techGreen', costs:[{ id:'itemRedPack', count:75 }] },
                 {	id:'techAutomation2',	    type:'tech',	    reqs:[{ id:'techGreen', count:1 },{ id:'techSteel', count:1 }], label:'techAutomation2', costs:[{ id:'itemRedPack', count:40 },{ id:'itemGreenPack', count:40 }] },
@@ -95,7 +99,7 @@ var DATA = {
                 {	id:'itemCoal',	            type:'item',	    label:'itemCoal', img:'img/items/Coal.png', storage:{ base:50, storerId:'storerChest' }, manualId:'manualCoal', lines:[ 'lineCoal1', 'lineCoal2' ] },
                 {	id:'recipeCoal',	        type:'recipe',	    time:1, outputs:[{ id:'itemCoal', count:1 }] },
                 {	id:'manualCoal',	        type:'manual',	    machineId:'machineManual', recipeId:'recipeCoal' },
-                {	id:'lineCoal1',             type:'line',	    machineId:'machineMiner1', recipeId:'recipeCoal' },
+                {	id:'lineCoal1',             type:'line',	    machineId:'machineMinerCoal', recipeId:'recipeCoal' },
                 {	id:'lineCoal2',             type:'line',	    machineId:'machineMiner2', recipeId:'recipeCoal' },
                 //---
                 {	id:'itemStone',		        type:'item',	    label:'itemStone', img:'img/items/Stone.png', storage:{ base:50, storerId:'storerChest' }, manualId:'manualStone', lines:[ 'lineStone1', 'lineStone2' ] },
@@ -285,6 +289,13 @@ var DATA = {
                 {	id:'lineFurnace31',         type:'line',	    reqs:[{ id:'techMaterial2', count:1 },{ id:'techAutomation1', count:1 }], machineId:'machineAssembler1', recipeId:'recipeFurnace3' },
                 {	id:'lineFurnace32',         type:'line',	    reqs:[{ id:'techMaterial2', count:1 },{ id:'techAutomation2', count:1 }], machineId:'machineAssembler2', recipeId:'recipeFurnace3' },
                 {	id:'lineFurnace33',         type:'line',	    reqs:[{ id:'techMaterial2', count:1 },{ id:'techAutomation3', count:1 }], machineId:'machineAssembler3', recipeId:'recipeFurnace3' },
+                //---
+                {	id:'machineMinerCoal',	    type:'machine',	    label:'machineMinerCoal', img:'img/machines/DrillCoal.png', storage:{ base:50, storerId:'storerChest' }, manualId:'manualMinerCoal', speed:0.25 },
+                {	id:'recipeMinerCoal',	    type:'recipe',	    time:2, outputs:[{ id:'machineMinerCoal', count:1 }], inputs:[{ id:'itemIronPlate', count:9 },{ id:'itemStone', count:5 }] },
+                {	id:'manualMinerCoal',	    type:'manual',	    machineId:'machineManual', recipeId:'recipeMinerCoal' },
+                {	id:'lineMiner11',           type:'line',	    reqs:[{ id:'techAutomation1', count:1 }], machineId:'machineAssembler1', recipeId:'recipeMinerCoal' },
+                {	id:'lineMiner12',           type:'line',	    reqs:[{ id:'techAutomation2', count:1 }], machineId:'machineAssembler2', recipeId:'recipeMinerCoal' },
+                {	id:'lineMiner13',           type:'line',	    reqs:[{ id:'techAutomation3', count:1 }], machineId:'machineAssembler3', recipeId:'recipeMinerCoal' },
                 //---
                 {	id:'machineMiner1',	        type:'machine',	    label:'machineMiner1', img:'img/machines/Drill1.png', storage:{ base:50, storerId:'storerChest' }, manualId:'manualMiner1', lines:[ 'lineMiner11', 'lineMiner12', 'lineMiner13' ], speed:0.25, energy:{ id:'itemCoal', count:0.04 } },
                 {	id:'recipeMiner1',	        type:'recipe',	    time:2, outputs:[{ id:'machineMiner1', count:1 }], inputs:[{ id:'itemIronPlate', count:9 },{ id:'itemStone', count:5 }] },

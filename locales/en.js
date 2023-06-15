@@ -82,7 +82,7 @@ var en_translations = {
     'tutMission2Desc': '<div class="mb-2">Well done! Now, with those 5 Stones, you could manually craft a Furnace. This is one of the main mecanism of the game: craft items with items.</div>',
     //---
     'tutMission3': 'Automation 1',
-    'tutMission3Desc': '<div class="mb-2">Good. Now you could use your Furnace to smelt Iron into Iron Plate. But to use your Furnace your need Coal, that is the fuel / energy used by Furnaces. So mine manually Iron and Coal then assign Furnace to smelt Iron Plates.</div>',
+    'tutMission3Desc': '<div class="mb-2">Good. Now you could use your Furnace to smelt Iron into Iron Plate. But to use your Furnace your need Coal, that is the fuel / energy used by Furnaces and Iron which is an input to smelt Iron Plates. So mine manually Iron, build a Coal Miner then assign it to Coal. Finally assign Furnace to smelt Iron Plates.</div>',
     //---
     'tutMission4': 'Automation 2',
     'tutMission4Desc': '<div class="mb-2">Mine manually is boring. Automate productions like you did with Iron Plates is better. To automate your ore productions, you need to build Miners. But to build Miner you need Iron Wheel that is crafted from Iron Plates. Think and find a way to build Miner ;)</div>',
@@ -100,7 +100,6 @@ var en_translations = {
     'factorio1ObjDesc': '<div class="mb-2">You crashed on an hostile planet. Your goal is to escape from there. To do it you have to build a Rocket (composed by 100 Rocket Parts), an Armor to protect you during travel and a Satellite to navigate to home.</div><div class="mb-2">Below, you will find techs that unlock necessary items, machines and storers. Good luck!</div><div class="mb-2 small text-normal">Inspired by <a href="https://factorio.com/" target="_blank">Factorio</a> game</div>',
     //---
     'techAutomation1': 'Automation 1',
-    'desc_techAutomation1': 'It allows the building of the Assembler 1 machine, which is the start of automated crafting, an essential part for your mission.',
     'techSteel': 'Steel',
     'techGreen': 'Green Science',
     'techAutomation2': 'Automation 2',
@@ -169,6 +168,7 @@ var en_translations = {
     'machineFurnace1': 'Furnace 1',    
     'machineFurnace2': 'Furnace 2',
     'machineFurnace3': 'Furnace 3',
+    'machineMinerCoal': 'Coal Miner',
     'machineMiner1': 'Miner 1',
     'machineMiner2': 'Miner 2',
     'machinePump': 'Pump',

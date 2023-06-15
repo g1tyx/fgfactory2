@@ -82,7 +82,7 @@ var fr_translations = {
     'tutMission2Desc': '<div class="mb-2">Bien joué ! Maintenant, avec ces 5 Pierres, vous pouvez manuellement assembler un Four 1. C\'est l\'une des bases de ce jeu: assembler un objet à partir d\'autres objets.</div>',
     //---
     'tutMission3': 'Automatisation 1',
-    'tutMission3Desc': '<div class="mb-2">Cool. Maintenance vous pouvez utiliser votre Four 1 pour transformer du Fer en Plaque de Fer. Mais pour utiliser votre Four 1 vous allez avoir besoin de Charbon, qui le carburant / l\'énergie utilisé par les Fours. Donc vous devez miner manuellement du Fer et du Charbon puis utiliser le Four 1 pour obtenir des Plaques de Fer.</div>',
+    'tutMission3Desc': '<div class="mb-2">Cool. Maintenant, vous pouvez utiliser votre Four pour fondre le Fer en Plaque de fer. Mais pour utiliser votre Four, vous avez besoin de Charbon, qui est le combustible / énergie utilisée par les Fours, et de Fer, qui est un ingrédient pour fabriquer les Plaques de fer. Alors minez manuellement du Fer, construisez une Foreuse à charbon puis assignez-la au Charbon. Enfin assignez le Four à la fabrication des Plaques de fer.</div>',
     //---
     'tutMission4': 'Automatisation 2',
     'tutMission4Desc': '<div class="mb-2">Miner manuellement est ennuyant. Automatisez les productions comme vous l\'avez fait avec les Plaques de Fer, c\'est mieux. Pour automatiser vos productions de minerai, vous devez construire des Foreuses. Mais pour construire une Foreuse 1, vous avez besoin d\'Engrenages fabriqués à partir de Plaques de Fer. Réfléchissez et trouvez un moyen de construire votre Foreuse 1 ;)</div>',
@@ -100,7 +100,6 @@ var fr_translations = {
     'factorio1ObjDesc': '<div class="mb-2">Vous vous êtes écrasé sur une planète hostile. Votre objectif est de vous échapper de là. Pour ce faire, vous devez construire une Fusée (composée de 100 Pièces de fusée), une Armure pour vous protéger pendant le voyage et un Satellite pour naviguer jusqu\'à votre maison.</div><div class="mb-2">Ci-dessous, vous trouverez les technologies qui débloquent les objets, machines et conteneurs nécessaires. Bonne chance !</div><div class="mb-2 small text-normal">Inspiré du jeu <a href="https://factorio.com/" target="_blank">Factorio</a></div>',
     //---
     'techAutomation1': 'Automatisation 1',
-    'desc_techAutomation1': 'Permet la construction des machines Assembleur 1, ce qui est le début de l\'automatisation, une partie essentielle de votre mission.',
     'techSteel': 'Acier',
     'techGreen': 'Science Vert',
     'techAutomation2': 'Automatisation 2',
@@ -169,6 +168,7 @@ var fr_translations = {
     'machineFurnace1': 'Four 1',
     'machineFurnace2': 'Four 2',
     'machineFurnace3': 'Four 3',
+    'machineMinerCoal': 'Foreuse à charbon',
     'machineMiner1': 'Foreuse 1',    
     'machineMiner2': 'Foreuse 2',
     'machinePump': 'Pompe',
