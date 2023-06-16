@@ -169,6 +169,7 @@ var fr_translations = {
     'itemArmor': 'Armure',
     'itemSatellite': 'Satellite',
     //---
+    'machineManual': 'Ouvrier',    
     'machineFurnace1': 'Four 1',
     'machineFurnace2': 'Four 2',
     'machineFurnace3': 'Four 3',

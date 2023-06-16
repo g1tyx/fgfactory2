@@ -216,30 +216,16 @@ class ScreenGame {
             //---
             let machine = window.App.game.getElem(recipe.machineId)
             //---
-            if (machine.id != 'machineManual') {
-                //---
-                let style = 'w-100 badge'
-                if (window.App.game.getAvailableCount(machine.id) < 1) style += ' text-bg-danger'
-                let node = document.getElementById('recipeMachineCount-' + recipe.id)
-                if (node.className != style) node.className = style
-            }
-            //---
             if (recipe.inputs) {
                 //---
                 recipe.inputs.forEach(input => {
                     //---
                     let inputElem = window.App.game.getElem(input.id)
                     //---
-                    let style = 'w-100 badge'
-                    if (machine.id == 'machineManual') {
-                        //---
-                        if (input.count > window.App.game.getAvailableCount(input.id)) style += ' text-bg-danger'
-                    }
-                    else {
-                        //---
-                        let elem = window.App.game.getElem(input.id)
-                        if (input.count > elem.prod) style += ' text-bg-danger'
-                    }
+                    let style = 'badge d-flex align-items-center'
+                    if (input.count > window.App.game.getAvailableCount(input.id)) style += ' text-bg-danger'
+                    else style += ' text-bg-dark'
+                    //---
                     let node = document.getElementById('recipeInputCount-' + recipe.id + '-' + input.id)
                     if (node.className != style) node.className = style
                 })
@@ -301,11 +287,6 @@ class ScreenGame {
                     let manual = window.App.game.getElem(item.manualId)
                     if (manual.unlocked) {
                         //---
-                        style = 'btn btn-sm'
-                        if (!window.App.game.canProduce(manual.id)) style += ' border-danger'
-                        node = document.getElementById('recipeBtn-' + manual.id)
-                        if (node.className != style) node.className = style
-                        //---
                         style = 'btn btn-sm btn-primary'
                         if (!window.App.game.canStartManual(manual.id)) style += ' disabled'
                         node = document.getElementById('manualStartBtn-' + manual.id)
@@ -332,11 +313,6 @@ class ScreenGame {
                             //---
                             let line = window.App.game.getElem(lineId)
                             if (line.unlocked) {
-                                //---
-                                style = 'btn btn-sm'
-                                if (!window.App.game.canProduce(line.id) || window.App.game.getAvailableCount(line.machineId) < 1) style += ' border-danger'
-                                node = document.getElementById('recipeBtn-' + line.id)
-                                if (node.className != style) node.className = style
                                 //---
                                 html = formatNumber(line.count)
                                 node = document.getElementById('lineCount-' + line.id)
@@ -604,45 +580,34 @@ class ScreenGame {
             //---
             let html = ''
             //---
-            html += '<div class="col">'
-                html += '<div class="dropdown">'
-                    html += '<div data-bs-toggle="dropdown" aria-expanded="false">'
-                        html += '<button type="button" id="recipeBtn-' + recipe.id + '" class="btn btn-sm"><img src="' + machine.img + '" width="24px" height="24px"></button>'
-                    html += '</div>'
-                    html += '<div class="dropdown-menu">'
-                        html += '<div class="px-2">'
-                            html += '<div class="mb-1">'
-                                html += '<span>' + i18next.t('word_Recipe') + '</span>'
+            html += '<div class="col-12">'
+                html += '<div class="row g-1 align-items-center justify-content-end">'
+                    if (recipe.inputs) {
+                        recipe.inputs.forEach(input => {
+                            let inputElem = window.App.game.getElem(input.id)
+                            html += '<div class="col-auto">'
+                                html += '<span id="recipeInputCount-' + recipe.id + '-' + input.id + '" class="badge d-flex align-items-center">'
+                                    html += '<img src="' + inputElem.img + '" width="16px" height="16px">'
+                                    html += '<span class="ms-1">' + formatNumber(input.count) + '</span>'
+                                html += '</span>'
                             html += '</div>'
-                            html += '<div class="row g-1 align-items-center">'
-                                if (machine.id != 'machineManual') {
-                                    html += '<div class="col-auto">'
-                                        html += '<div class="text-center"><img src="' + machine.img + '" width="24px" height="24px"></div>'
-                                        html += '<div class="lh-1"><span id="recipeMachineCount-' + recipe.id + '">1</span></div>'
-                                    html += '</div>'
-                                }
-                                if (recipe.inputs) {
-                                    recipe.inputs.forEach(input => {
-                                        let inputElem = window.App.game.getElem(input.id)
-                                        html += '<div class="col-auto">'
-                                            html += '<div class="text-center"><img src="' + inputElem.img + '" width="24px" height="24px"></div>'
-                                            html += '<div class="lh-1"><span id="recipeInputCount-' + recipe.id + '-' + input.id + '">' + formatNumber(input.count) + (recipe.machineId == 'machineManual' ? '' : ' <small class="opacity-50">/s</small>') + '</span></div>'
-                                        html += '</div>'
-                                    })
-                                }
-                                if (machine.id != 'machineManual' || recipe.inputs) {
-                                    html += '<div class="col-auto small"><i class="fas fa-fw fa-long-arrow-alt-right"></i></div>'
-                                }
-                                recipe.outputs.forEach(output => {
-                                    let outputElem = window.App.game.getElem(output.id)
-                                    html += '<div class="col-auto">'
-                                        html += '<div class="text-center"><img src="' + outputElem.img + '" width="24px" height="24px"></div>'
-                                        html += '<div class="lh-1"><span id="recipeOutputCount-' + recipe.id + '-' + output.id + '" class="badge">' + formatNumber(output.count) + (recipe.machineId == 'machineManual' ? '' : ' <small class="opacity-50">/s</small>') + '</span></div>'
-                                    html += '</div>'
-                                })
-                            html += '</div>'
+                        })
+                    }
+                    else {
+                        html += '<div class="col-auto">'
+                            html += '<span>&Oslash;</span>'
                         html += '</div>'
-                    html += '</div>'
+                    }
+                    html += '<div class="col-auto px-0"><span class="badge text-normal px-0"><i class="fas fa-fw fa-long-arrow-alt-right"></i></span></div>'
+                    recipe.outputs.forEach(output => {
+                        let outputElem = window.App.game.getElem(output.id)
+                        html += '<div class="col-auto">'
+                            html += '<span id="recipeOutputCount-' + recipe.id + '-' + output.id + '" class="badge text-bg-dark d-flex align-items-center">'
+                                html += '<img src="' + outputElem.img + '" width="16px" height="16px">'
+                                html += '<span class="ms-1">' + formatNumber(output.count) + '</span>'
+                            html += '</span>'
+                        html += '</div>'
+                    })
                 html += '</div>'
             html += '</div>'
             //---
@@ -687,22 +652,19 @@ class ScreenGame {
                                                 let manual = window.App.game.getElem(item.manualId)
                                                 if (manual && manual.unlocked) {
                                                     html += '<div class="col-12">'
-                                                        html += '<div class="border-bottom mb-2 pb-1">'
-                                                            html += '<span>' + i18next.t('word_Manual') + '</span>'
-                                                        html += '</div>'
-                                                        html += '<div class="row g-1">'
+                                                        html += '<div class="row g-2">'
+                                                            html += '<div class="col-12">'
+                                                                html += '<div class="border-bottom pb-1">'
+                                                                    html += '<span class="small text-uppercase opacity-50 fw-bold">' + i18next.t('word_Manual') + '</span>'
+                                                                html += '</div>'
+                                                            html += '</div>'
                                                             html += '<div class="col-12">'
                                                                 html += '<div class="row gx-2 align-items-center">'
-                                                                    html += displayRecipe(manual)
                                                                     html += '<div class="col-auto">'
-                                                                        html += '<div class="row g-2 align-items-center">'
-                                                                            manual.outputs.forEach(output => {
-                                                                                let outputElem = window.App.game.getElem(output.id)
-                                                                                html += '<div class="col-auto small">'
-                                                                                    html += '<span class="text-white">+' + formatNumber(output.count) + '<small class="opacity-50"> /s</small></span>'
-                                                                                html += '</div>'
-                                                                            })
-                                                                        html += '</div>'
+                                                                        html += '<img src="img/machines/Manual.png" width="24px" height="24px">'
+                                                                    html += '</div>'
+                                                                    html += '<div class="col">'
+                                                                        html += '<span class="small">' + i18next.t('machineManual') + '</span>'
                                                                     html += '</div>'
                                                                     html += '<div class="col-auto">'
                                                                         html += '<div class="row g-1 align-items-center">'
@@ -720,6 +682,7 @@ class ScreenGame {
                                                                     html += '</div>'
                                                                 html += '</div>'
                                                             html += '</div>'
+                                                            html += displayRecipe(manual)
                                                         html += '</div>'
                                                     html += '</div>'
                                                 }
@@ -732,117 +695,92 @@ class ScreenGame {
                                                 })
                                                 if (unlocked > 0) {
                                                     html += '<div class="col-12">'
-                                                        html += '<div class="border-bottom mb-2 pb-1">'
-                                                            html += '<span>' + i18next.t('word_Automation') + '</span>'
-                                                        html += '</div>'
-                                                        html += '<div class="row g-1">'
+                                                        html += '<div class="row g-2">'
+                                                            html += '<div class="col-12">'
+                                                                html += '<div class="border-bottom pb-1">'
+                                                                    html += '<span class="small text-uppercase opacity-50 fw-bold">' + i18next.t('word_Automation') + '</span>'
+                                                                html += '</div>'
+                                                            html += '</div>'
+                                                            html += '<div class="col-12">'
+                                                                html += '<div class="row g-1">'
+                                                                    html += '<div class="col-12">'
+                                                                        html += '<div class="row gx-2 align-items-center">'
+                                                                            html += '<div class="col">'
+                                                                                html += '<small class="text-normal">' + i18next.t('word_RawProduction') + '</small>'
+                                                                            html += '</div>'
+                                                                            html += '<div class="col-auto">'
+                                                                                html += '<small id="itemRawProd-' + item.id + '"></small>'
+                                                                            html += '</div>'
+                                                                        html += '</div>'
+                                                                    html += '</div>'
+                                                                    html += '<div class="col-12">'
+                                                                        html += '<div class="row gx-2 align-items-center">'
+                                                                            html += '<div class="col">'
+                                                                                html += '<small class="text-normal">' + i18next.t('word_RawConsumption') + '</small>'
+                                                                            html += '</div>'
+                                                                            html += '<div class="col-auto">'
+                                                                                html += '<small id="itemRawConsum-' + item.id + '"></small>'
+                                                                            html += '</div>'
+                                                                        html += '</div>'
+                                                                    html += '</div>'
+                                                                    html += '<div class="col-12">'
+                                                                        html += '<div class="row gx-2">'
+                                                                            html += '<div class="col-auto">'
+                                                                                html += '<small class="text-normal">' + i18next.t('word_Consumers') + '</small>'
+                                                                            html += '</div>'
+                                                                            html += '<div id="itemConsumers-' + item.id + '"class="col text-end"></div>'
+                                                                        html += '</div>'
+                                                                    html += '</div>'
+                                                                html += '</div>'
+                                                            html += '</div>'
                                                             item.lines.forEach(lineId => {
                                                                 let line = window.App.game.getElem(lineId)
                                                                 if (line.unlocked) {
                                                                     html += '<div class="col-12">'
-                                                                        html += '<div class="row g-2 align-items-center">'
-                                                                            html += displayRecipe(line)
-                                                                            line.outputs.forEach(output => {
-                                                                                let outputElem = window.App.game.getElem(output.id)
-                                                                                html += '<div class="col-auto position-relative small">'
-                                                                                    html += '<span class="text-white">+' + formatNumber(output.count) + '<small class="opacity-50"> /s</small></span>'
+                                                                        html += '<div class="border-top border-dark py-2">'
+                                                                            html += '<div class="row gx-2 align-items-center">'
+                                                                                let machine = window.App.game.getElem(line.machineId)
+                                                                                html += '<div class="col-auto">'
+                                                                                    html += '<img src="' + machine.img + '" width="24px" height="24px">'
                                                                                 html += '</div>'
-                                                                            })
-                                                                            html += '<div class="col-auto small"><small class="opacity-50">x </small><span id="lineCount-' + line.id + '"></span></div>'
-                                                                            html += '<div class="col-auto">'
-                                                                                html += '<div class="row g-1 align-items-center">'
-                                                                                    html += '<div class="col-auto">'
-                                                                                        html += '<select class="form-control form-control-sm" onchange="window.App.doClick(\'setLineSelectCount\', { elemId:\'' + lineId + '\', count:this.value })">'
-                                                                                            html += '<option' + (line.selectCount == '1' ? ' selected' : '') + ' value="1">1</option>'
-                                                                                            html += '<option' + (line.selectCount == '10' ? ' selected' : '') + ' value="10">10</option>'
-                                                                                            html += '<option' + (line.selectCount == '100' ? ' selected' : '') + ' value="100">100</option>'
-                                                                                            html += '<option' + (line.selectCount == 'max' ? ' selected' : '') + ' value="max">' + i18next.t('word_Max') + '</option>'
-                                                                                        html += '</select>'
-                                                                                    html += '</div>'
-                                                                                    html += '<div class="col-auto">'
-                                                                                        html += '<button id="lineRemoveBtn-' + line.id + '" class="btn btn-sm btn-danger" type="button" onclick="window.App.doClick(\'removeLine\', { elemId:\'' + lineId + '\' })"><i class="fas fa-fw fa-minus-circle"></i></button>'
-                                                                                    html += '</div>'
-                                                                                    html += '<div class="col-auto">'
-                                                                                        html += '<button id="lineAddBtn-' + line.id + '" class="btn btn-sm btn-primary" type="button" onclick="window.App.doClick(\'addLine\', { elemId:\'' + lineId + '\' })"><i class="fas fa-fw fa-plus-circle"></i></button>'
+                                                                                html += '<div class="col text-truncate">'
+                                                                                    html += '<small>' + i18next.t(machine.label) + '</small>'
+                                                                                html += '</div>'
+                                                                                html += '<div class="col-auto small"><small class="opacity-50">x </small><span id="lineCount-' + line.id + '"></span></div>'
+                                                                                html += '<div class="col-auto">'
+                                                                                    html += '<div class="row g-1 align-items-center">'
+                                                                                        html += '<div class="col-auto">'
+                                                                                            html += '<select class="form-control form-control-sm" onchange="window.App.doClick(\'setLineSelectCount\', { elemId:\'' + lineId + '\', count:this.value })">'
+                                                                                                html += '<option' + (line.selectCount == '1' ? ' selected' : '') + ' value="1">1</option>'
+                                                                                                html += '<option' + (line.selectCount == '10' ? ' selected' : '') + ' value="10">10</option>'
+                                                                                                html += '<option' + (line.selectCount == '100' ? ' selected' : '') + ' value="100">100</option>'
+                                                                                                html += '<option' + (line.selectCount == 'max' ? ' selected' : '') + ' value="max">' + i18next.t('word_Max') + '</option>'
+                                                                                            html += '</select>'
+                                                                                        html += '</div>'
+                                                                                        html += '<div class="col-auto">'
+                                                                                            html += '<button id="lineRemoveBtn-' + line.id + '" class="btn btn-sm btn-danger" type="button" onclick="window.App.doClick(\'removeLine\', { elemId:\'' + lineId + '\' })"><i class="fas fa-fw fa-minus-circle"></i></button>'
+                                                                                        html += '</div>'
+                                                                                        html += '<div class="col-auto">'
+                                                                                            html += '<button id="lineAddBtn-' + line.id + '" class="btn btn-sm btn-primary" type="button" onclick="window.App.doClick(\'addLine\', { elemId:\'' + lineId + '\' })"><i class="fas fa-fw fa-plus-circle"></i></button>'
+                                                                                        html += '</div>'
                                                                                     html += '</div>'
                                                                                 html += '</div>'
                                                                             html += '</div>'
                                                                         html += '</div>'
+                                                                        html += displayRecipe(line)
                                                                     html += '</div>'
                                                                 }
                                                             })
-                                                            html += '<div class="col-12">'
-                                                                html += '<div class="row gx-2 align-items-center">'
-                                                                    html += '<div class="col">'
-                                                                        html += '<small class="text-normal">' + i18next.t('word_RawProduction') + '</small>'
-                                                                    html += '</div>'
-                                                                    html += '<div class="col-auto">'
-                                                                        html += '<small id="itemRawProd-' + item.id + '"></small>'
-                                                                    html += '</div>'
-                                                                html += '</div>'
-                                                            html += '</div>'
-                                                            html += '<div class="col-12">'
-                                                                html += '<div class="row gx-2 align-items-center">'
-                                                                    html += '<div class="col">'
-                                                                        html += '<small class="text-normal">' + i18next.t('word_RawConsumption') + '</small>'
-                                                                    html += '</div>'
-                                                                    html += '<div class="col-auto">'
-                                                                        html += '<small id="itemRawConsum-' + item.id + '"></small>'
-                                                                    html += '</div>'
-                                                                html += '</div>'
-                                                            html += '</div>'
-                                                            html += '<div class="col-12">'
-                                                                html += '<div class="row gx-2">'
-                                                                    html += '<div class="col-auto">'
-                                                                        html += '<small class="text-normal">' + i18next.t('word_Consumers') + '</small>'
-                                                                    html += '</div>'
-                                                                    html += '<div id="itemConsumers-' + item.id + '"class="col text-end"></div>'
-                                                                html += '</div>'
-                                                            html += '</div>'
                                                         html += '</div>'
                                                     html += '</div>'
                                                 }
                                             }
                                             if (item.storage) {
                                                 html += '<div class="col-12">'
-                                                    html += '<div class="border-bottom mb-2 pb-1">'
-                                                         html += '<span>' + i18next.t('word_Storage') + '</span>'
+                                                    html += '<div class="border-bottom pb-1 mb-1">'
+                                                         html += '<span class="small text-uppercase opacity-50 fw-bold">' + i18next.t('word_Storage') + '</span>'
                                                     html += '</div>'
                                                     html += '<div class="row g-1">'
-                                                        if (item.storage.storerId) {
-                                                            let storer = window.App.game.getElem(item.storage.storerId)
-                                                            if (storer.unlocked) {
-                                                                html += '<div class="col-12">'
-                                                                    html += '<div class="row g-2 align-items-center">'
-                                                                        html += '<div class="col">'
-                                                                            html += '<div class="">'
-                                                                                html += '<img src="' + storer.img + '" width="24px" height="24px">'
-                                                                            html += '</div>'
-                                                                        html += '</div>'
-                                                                        html += '<div class="col-auto small text-white">+' + formatNumber(item.storage.base) + '</div>'
-                                                                        html += '<div class="col-auto small"><small class="opacity-50">x </small><span id="itemStorageCount-' + item.id + '"></span></div>'
-                                                                        html += '<div class="col-auto">'
-                                                                            html += '<div class="row g-1 align-items-center">'
-                                                                                html += '<div class="col-auto">'
-                                                                                    html += '<select class="form-control form-control-sm" onchange="window.App.doClick(\'setStorageSelectCount\', { elemId:\'' + item.id + '\', count:this.value })">'
-                                                                                        html += '<option' + (item.selectStorageCount == '1' ? ' selected' : '') + ' value="1">1</option>'
-                                                                                        html += '<option' + (item.selectStorageCount == '10' ? ' selected' : '') + ' value="10">10</option>'
-                                                                                        html += '<option' + (item.selectStorageCount == '100' ? ' selected' : '') + ' value="100">100</option>'
-                                                                                        html += '<option' + (item.selectStorageCount == 'max' ? ' selected' : '') + ' value="max">' + i18next.t('word_Max') + '</option>'
-                                                                                    html += '</select>'
-                                                                                html += '</div>'                                                                
-                                                                                html += '<div class="col-auto">'
-                                                                                    html += '<button id="itemRemoveStorerBtn-' + item.id + '" class="btn btn-sm btn-danger" type="button" onclick="window.App.doClick(\'removeStorer\', { elemId:\'' + item.id + '\' })"><i class="fas fa-fw fa-minus-circle"></i></button>'
-                                                                                html += '</div>'                                                                
-                                                                                html += '<div class="col-auto">'
-                                                                                    html += '<button id="itemAddStorerBtn-' + item.id + '" class="btn btn-sm btn-primary" type="button" onclick="window.App.doClick(\'addStorer\', { elemId:\'' + item.id + '\' })"><i class="fas fa-fw fa-plus-circle"></i></button>'
-                                                                                html += '</div>'
-                                                                            html += '</div>'
-                                                                        html += '</div>'
-                                                                    html += '</div>'
-                                                                html += '</div>'
-                                                            }
-                                                        }
                                                         html += '<div class="col-12">'
                                                             html += '<div class="row gx-2 align-items-center">'
                                                                 html += '<div class="col">'
@@ -884,6 +822,41 @@ class ScreenGame {
                                                                     html += '</div>'
                                                                 html += '</div>'
                                                             html += '</div>'
+                                                        }
+                                                        if (item.storage.storerId) {
+                                                            let storer = window.App.game.getElem(item.storage.storerId)
+                                                            if (storer.unlocked) {
+                                                                html += '<div class="col-12 border-top border-dark pt-2">'
+                                                                    html += '<div class="row g-2 align-items-center">'
+                                                                        html += '<div class="col-auto">'
+                                                                            html += '<img src="' + storer.img + '" width="24px" height="24px">'
+                                                                        html += '</div>'
+                                                                        html += '<div class="col text-truncate">'
+                                                                            html += '<small>' + i18next.t(storer.label) + '</small>'
+                                                                        html += '</div>'
+                                                                        html += '<div class="col-auto small text-white">+' + formatNumber(item.storage.base) + '</div>'
+                                                                        html += '<div class="col-auto small"><small class="opacity-50">x </small><span id="itemStorageCount-' + item.id + '"></span></div>'
+                                                                        html += '<div class="col-auto">'
+                                                                            html += '<div class="row g-1 align-items-center">'
+                                                                                html += '<div class="col-auto">'
+                                                                                    html += '<select class="form-control form-control-sm" onchange="window.App.doClick(\'setStorageSelectCount\', { elemId:\'' + item.id + '\', count:this.value })">'
+                                                                                        html += '<option' + (item.selectStorageCount == '1' ? ' selected' : '') + ' value="1">1</option>'
+                                                                                        html += '<option' + (item.selectStorageCount == '10' ? ' selected' : '') + ' value="10">10</option>'
+                                                                                        html += '<option' + (item.selectStorageCount == '100' ? ' selected' : '') + ' value="100">100</option>'
+                                                                                        html += '<option' + (item.selectStorageCount == 'max' ? ' selected' : '') + ' value="max">' + i18next.t('word_Max') + '</option>'
+                                                                                    html += '</select>'
+                                                                                html += '</div>'                                                                
+                                                                                html += '<div class="col-auto">'
+                                                                                    html += '<button id="itemRemoveStorerBtn-' + item.id + '" class="btn btn-sm btn-danger" type="button" onclick="window.App.doClick(\'removeStorer\', { elemId:\'' + item.id + '\' })"><i class="fas fa-fw fa-minus-circle"></i></button>'
+                                                                                html += '</div>'                                                                
+                                                                                html += '<div class="col-auto">'
+                                                                                    html += '<button id="itemAddStorerBtn-' + item.id + '" class="btn btn-sm btn-primary" type="button" onclick="window.App.doClick(\'addStorer\', { elemId:\'' + item.id + '\' })"><i class="fas fa-fw fa-plus-circle"></i></button>'
+                                                                                html += '</div>'
+                                                                            html += '</div>'
+                                                                        html += '</div>'
+                                                                    html += '</div>'
+                                                                html += '</div>'
+                                                            }
                                                         }
                                                     html += '</div>'
                                                 html += '</div>'
