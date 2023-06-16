@@ -71,6 +71,10 @@ var en_translations = {
     'word_RawProduction': 'Raw Production',
     'word_RawConsumption': 'Raw Consumption',
     'word_Consumers': 'Consumers',
+    'word_AvailableCount': 'Available Count',
+    'word_MaxStorage': 'Max Storage',
+    'word_TotalCount': 'Total Count',
+    'word_UsedCount': 'Used Count',
     //---
     'scenario_tut': 'Tutorial',
     'scenarioDesc_tut': 'Learn basic mecanisms before playing other scenarios. Strongly recommended for new players.',
