@@ -71,6 +71,10 @@ var fr_translations = {
     'word_RawProduction': 'Production brute',
     'word_RawConsumption': 'Consommation brute',
     'word_Consumers': 'Consommateurs',
+    'word_AvailableCount': 'Disponible',
+    'word_MaxStorage': 'Max',
+    'word_TotalCount': 'Total',
+    'word_UsedCount': 'Utilisé',
     //---
     'scenario_tut': 'Tutoriel',
     'scenarioDesc_tut': 'Apprendre les bases avant de jouer les autres scénarios. Fortement récommandé pour les nouveaux joueurs.',

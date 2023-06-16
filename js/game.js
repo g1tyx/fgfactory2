@@ -392,33 +392,35 @@ class Game {
         return true
     }
     //---
-    getAvailableCount(elemId) {
+    getUsedCount(elemId) {
+        //---
+        let usedCount = 0
         //---
         let elem = this.getElem(elemId)
         if (elem.type == 'machine') {
             //---
             let lines = this.elems.filter(elem => elem.type == 'line' && elem.unlocked == true && elem.count > 0 && elem.machineId == elemId)
-            //---
-            let usedCount = 0
             lines.forEach(line => { usedCount += line.count })
             //---
-            return elem.count - usedCount
+            if (usedCount > elem.count) elem.count = usedCount
         }
         else if (elem.type == 'storer') {
-            //---
-            let usedCount = 0
             //---
             let items = this.elems.filter(el => el.storage && el.storage.storerId == elemId)
             items.forEach(item => { usedCount += item.storageCount })
             //---
-            return elem.count - usedCount
-        }
-        else {
-            //---
-            return elem.count
+            if (usedCount > elem.count) elem.count = usedCount
         }
         //---
-        return 0
+        return usedCount
+    }
+    //---
+    getAvailableCount(elemId) {
+        //---
+        let usedCount = this.getUsedCount(elemId)
+        //---
+        let elem = this.getElem(elemId)
+        return elem.count - usedCount
     }
     //---
     canProduce(elemId) {

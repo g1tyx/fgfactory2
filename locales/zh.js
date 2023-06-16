@@ -71,6 +71,10 @@ var zh_translations = {
     'word_RawProduction': '原料生产',
     'word_RawConsumption': '原料消耗',
     'word_Consumers': '消耗',
+    'word_AvailableCount': 'Available Count',
+    'word_MaxStorage': 'Max Storage',
+    'word_TotalCount': 'Total Count',
+    'word_UsedCount': 'Used Count',
     //---
     'scenario_tut': '教程',
     'scenarioDesc_tut': 'Learn basic mecanisms before playing other scenarios. Strongly recommended for new players.',

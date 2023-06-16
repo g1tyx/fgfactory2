@@ -406,30 +406,48 @@ class ScreenGame {
                     }
                 }
                 //---
-                if (item.storage && item.storage.storerId) {
-                    let storer = window.App.game.getElem(item.storage.storerId)
-                    if (storer.unlocked) {
+                if (item.storage) {
+                    //---
+                    html = formatNumber(window.App.game.getMax(item.id), 2)
+                    node = document.getElementById('itemMax-' + item.id)
+                    if (node.innerHTML != html) node.innerHTML = html
+                    //---
+                    html = formatNumber(item.count, 2)
+                    node = document.getElementById('itemTotalCount-' + item.id)                
+                    if (node.innerHTML != html) node.innerHTML = html
+                    //---
+                    if (item.type == 'storer' || item.type == 'machine') {
                         //---
-                        html = formatNumber(window.App.game.getMax(item.id), 2)
-                        node = document.getElementById('itemMax-' + item.id)
+                        html = html = formatNumber(window.App.game.getUsedCount(item.id), 2)
+                        node = document.getElementById('itemUsedCount-' + item.id)                
                         if (node.innerHTML != html) node.innerHTML = html
                         //---
-                        html = formatNumber(item.storageCount)
-                        node = document.getElementById('itemStorageCount-' + item.id)
+                        html = html = formatNumber(window.App.game.getAvailableCount(item.id), 2)
+                        node = document.getElementById('itemAvailableCount-' + item.id)                
                         if (node.innerHTML != html) node.innerHTML = html
-                        style = ''
-                        if (item.storageCount > 0) style += 'text-white'
-                        if (node.className != style) node.className = style                        
-                        //---
-                        style = 'btn btn-sm btn-danger'
-                        if (!window.App.game.canRemoveStorer(item.id)) style += ' disabled'
-                        node = document.getElementById('itemRemoveStorerBtn-' + item.id)
-                        if (node.className != style) node.className = style
-                        //---
-                        style = 'btn btn-sm btn-primary'
-                        if (!window.App.game.canAddStorer(item.id)) style += ' disabled'
-                        node = document.getElementById('itemAddStorerBtn-' + item.id)
-                        if (node.className != style) node.className = style
+                    }
+                    //---
+                    if (item.storage.storerId) {
+                        let storer = window.App.game.getElem(item.storage.storerId)
+                        if (storer.unlocked) {
+                            //---
+                            html = formatNumber(item.storageCount)
+                            node = document.getElementById('itemStorageCount-' + item.id)
+                            if (node.innerHTML != html) node.innerHTML = html
+                            style = ''
+                            if (item.storageCount > 0) style += 'text-white'
+                            if (node.className != style) node.className = style                        
+                            //---
+                            style = 'btn btn-sm btn-danger'
+                            if (!window.App.game.canRemoveStorer(item.id)) style += ' disabled'
+                            node = document.getElementById('itemRemoveStorerBtn-' + item.id)
+                            if (node.className != style) node.className = style
+                            //---
+                            style = 'btn btn-sm btn-primary'
+                            if (!window.App.game.canAddStorer(item.id)) style += ' disabled'
+                            node = document.getElementById('itemAddStorerBtn-' + item.id)
+                            if (node.className != style) node.className = style
+                        }
                     }
                 }
             })
@@ -659,18 +677,14 @@ class ScreenGame {
                     items.forEach(item => {
                         html += '<div class="col-12 col-md-6 col-lg-6 col-xl-4">'
                             html += '<div class="card">'
-                                html += '<div class="card-header">'
+                                html += '<button type="button"class="card-header" data-bs-toggle="collapse" data-bs-target="#collapse-' + item.id + '" aria-expanded="false" aria-controls="collapseExample" onclick="window.App.doClick(\'toggleCollapse\', { elemId:\'' + item.id + '\' })">'
                                     html += '<div class="row gx-2 align-items-center">'
-                                        html += '<button type="button" class="col-auto btn px-1 py-0 border-0" data-bs-toggle="collapse" data-bs-target="#collapse-' + item.id + '" aria-expanded="false" aria-controls="collapseExample" onclick="window.App.doClick(\'toggleCollapse\', { elemId:\'' + item.id + '\' })">'
-                                            html += '<div class="row gx-2 align-items-center">'
-                                                html += '<div class="col-auto"><img src="' + item.img + '" width="24px" height="24px"></div>'
-                                                html += '<div class="col text-start text-white">' + i18next.t(item.label) + '</div>'
-                                            html += '</div>'
-                                        html += '</button>'
+                                        html += '<div class="col-auto"><img src="' + item.img + '" width="24px" height="24px"></div>'
+                                        html += '<div class="col text-start text-white">' + i18next.t(item.label) + '</div>'
                                         html += '<div class="ms-auto col-auto"><span id="itemProd-' + item.id + '"></span></div>'
                                         html += '<div class="col-3 text-end"><span id="itemCount-' + item.id + '"></span></div>'
                                     html += '</div>'
-                                html += '</div>'
+                                html += '</button>'
                                 html += '<div id="collapse-' + item.id + '" class="collapse' + (item.collapsed ? '' : ' show') +'">'
                                     html += '<div class="card-body">'
                                         html += '<div class="row g-3">'
@@ -678,10 +692,10 @@ class ScreenGame {
                                                 let manual = window.App.game.getElem(item.manualId)
                                                 if (manual && manual.unlocked) {
                                                     html += '<div class="col-12">'
+                                                        html += '<div class="border-bottom mb-2 pb-1">'
+                                                            html += '<span>' + i18next.t('word_Manual') + '</span>'
+                                                        html += '</div>'
                                                         html += '<div class="row g-1">'
-                                                            html += '<div class="col-12">'
-                                                                 html += '<span>' + i18next.t('word_Manual') + '</span>'
-                                                            html += '</div>'
                                                             html += '<div class="col-12">'
                                                                 html += '<div class="row gx-2 align-items-center">'
                                                                     html += displayRecipe(manual)
@@ -723,10 +737,10 @@ class ScreenGame {
                                                 })
                                                 if (unlocked > 0) {
                                                     html += '<div class="col-12">'
+                                                        html += '<div class="border-bottom mb-2 pb-1">'
+                                                            html += '<span>' + i18next.t('word_Automation') + '</span>'
+                                                        html += '</div>'
                                                         html += '<div class="row g-1">'
-                                                            html += '<div class="col-12">'
-                                                                html += '<span>' + i18next.t('word_Automation') + '</span>'
-                                                            html += '</div>'
                                                             item.lines.forEach(lineId => {
                                                                 let line = window.App.game.getElem(lineId)
                                                                 if (line.unlocked) {
@@ -794,53 +808,90 @@ class ScreenGame {
                                                     html += '</div>'
                                                 }
                                             }
-                                            if (item.storage && item.storage.storerId) {
-                                                let storer = window.App.game.getElem(item.storage.storerId)
-                                                if (storer.unlocked) {
-                                                    html += '<div class="col-12">'
-                                                        html += '<div class="row g-1">'
-                                                            html += '<div class="col-12">'
-                                                                html += '<div class="row gx-2 align-items-center">'
-                                                                    html += '<div class="col">'
-                                                                         html += '<span>' + i18next.t('word_Storage') + '</span>'
-                                                                    html += '</div>'
-                                                                    html += '<div class="col-auto">'
-                                                                         html += '<span id="itemMax-' + item.id + '" class="small"></span>'
-                                                                    html += '</div>'
-                                                                html += '</div>'
-                                                            html += '</div>'
-                                                            html += '<div class="col-12">'
-                                                                html += '<div class="row g-2 align-items-center">'
-                                                                    html += '<div class="col">'
-                                                                        html += '<div class="">'
-                                                                            html += '<img src="' + storer.img + '" width="24px" height="24px">'
+                                            if (item.storage) {
+                                                html += '<div class="col-12">'
+                                                    html += '<div class="border-bottom mb-2 pb-1">'
+                                                         html += '<span>' + i18next.t('word_Storage') + '</span>'
+                                                    html += '</div>'
+                                                    html += '<div class="row g-1">'
+                                                        if (item.storage.storerId) {
+                                                            let storer = window.App.game.getElem(item.storage.storerId)
+                                                            if (storer.unlocked) {
+                                                                html += '<div class="col-12">'
+                                                                    html += '<div class="row g-2 align-items-center">'
+                                                                        html += '<div class="col">'
+                                                                            html += '<div class="">'
+                                                                                html += '<img src="' + storer.img + '" width="24px" height="24px">'
+                                                                            html += '</div>'
                                                                         html += '</div>'
-                                                                    html += '</div>'
-                                                                    html += '<div class="col-auto small text-white">+' + formatNumber(item.storage.base) + '</div>'
-                                                                    html += '<div class="col-auto small"><small class="opacity-50">x </small><span id="itemStorageCount-' + item.id + '"></span></div>'
-                                                                    html += '<div class="col-auto">'
-                                                                        html += '<div class="row g-1 align-items-center">'
-                                                                            html += '<div class="col-auto">'
-                                                                                html += '<select class="form-control form-control-sm" onchange="window.App.doClick(\'setStorageSelectCount\', { elemId:\'' + item.id + '\', count:this.value })">'
-                                                                                    html += '<option' + (item.selectStorageCount == '1' ? ' selected' : '') + ' value="1">1</option>'
-                                                                                    html += '<option' + (item.selectStorageCount == '10' ? ' selected' : '') + ' value="10">10</option>'
-                                                                                    html += '<option' + (item.selectStorageCount == '100' ? ' selected' : '') + ' value="100">100</option>'
-                                                                                    html += '<option' + (item.selectStorageCount == 'max' ? ' selected' : '') + ' value="max">' + i18next.t('word_Max') + '</option>'
-                                                                                html += '</select>'
-                                                                            html += '</div>'                                                                
-                                                                            html += '<div class="col-auto">'
-                                                                                html += '<button id="itemRemoveStorerBtn-' + item.id + '" class="btn btn-sm btn-danger" type="button" onclick="window.App.doClick(\'removeStorer\', { elemId:\'' + item.id + '\' })"><i class="fas fa-fw fa-minus-circle"></i></button>'
-                                                                            html += '</div>'                                                                
-                                                                            html += '<div class="col-auto">'
-                                                                                html += '<button id="itemAddStorerBtn-' + item.id + '" class="btn btn-sm btn-primary" type="button" onclick="window.App.doClick(\'addStorer\', { elemId:\'' + item.id + '\' })"><i class="fas fa-fw fa-plus-circle"></i></button>'
+                                                                        html += '<div class="col-auto small text-white">+' + formatNumber(item.storage.base) + '</div>'
+                                                                        html += '<div class="col-auto small"><small class="opacity-50">x </small><span id="itemStorageCount-' + item.id + '"></span></div>'
+                                                                        html += '<div class="col-auto">'
+                                                                            html += '<div class="row g-1 align-items-center">'
+                                                                                html += '<div class="col-auto">'
+                                                                                    html += '<select class="form-control form-control-sm" onchange="window.App.doClick(\'setStorageSelectCount\', { elemId:\'' + item.id + '\', count:this.value })">'
+                                                                                        html += '<option' + (item.selectStorageCount == '1' ? ' selected' : '') + ' value="1">1</option>'
+                                                                                        html += '<option' + (item.selectStorageCount == '10' ? ' selected' : '') + ' value="10">10</option>'
+                                                                                        html += '<option' + (item.selectStorageCount == '100' ? ' selected' : '') + ' value="100">100</option>'
+                                                                                        html += '<option' + (item.selectStorageCount == 'max' ? ' selected' : '') + ' value="max">' + i18next.t('word_Max') + '</option>'
+                                                                                    html += '</select>'
+                                                                                html += '</div>'                                                                
+                                                                                html += '<div class="col-auto">'
+                                                                                    html += '<button id="itemRemoveStorerBtn-' + item.id + '" class="btn btn-sm btn-danger" type="button" onclick="window.App.doClick(\'removeStorer\', { elemId:\'' + item.id + '\' })"><i class="fas fa-fw fa-minus-circle"></i></button>'
+                                                                                html += '</div>'                                                                
+                                                                                html += '<div class="col-auto">'
+                                                                                    html += '<button id="itemAddStorerBtn-' + item.id + '" class="btn btn-sm btn-primary" type="button" onclick="window.App.doClick(\'addStorer\', { elemId:\'' + item.id + '\' })"><i class="fas fa-fw fa-plus-circle"></i></button>'
+                                                                                html += '</div>'
                                                                             html += '</div>'
                                                                         html += '</div>'
                                                                     html += '</div>'
                                                                 html += '</div>'
+                                                            }
+                                                        }
+                                                        html += '<div class="col-12">'
+                                                            html += '<div class="row gx-2 align-items-center">'
+                                                                html += '<div class="col">'
+                                                                    html += '<small class="text-normal">' + i18next.t('word_MaxStorage') + '</small>'
+                                                                html += '</div>'
+                                                                html += '<div class="col-auto">'
+                                                                    html += '<small id="itemMax-' + item.id + '"></small>'
+                                                                html += '</div>'
                                                             html += '</div>'
                                                         html += '</div>'
+                                                        html += '<div class="col-12">'
+                                                            html += '<div class="row gx-2 align-items-center">'
+                                                                html += '<div class="col">'
+                                                                    html += '<small class="text-normal">' + i18next.t('word_TotalCount') + '</small>'
+                                                                html += '</div>'
+                                                                html += '<div class="col-auto">'
+                                                                    html += '<small id="itemTotalCount-' + item.id + '"></small>'
+                                                                html += '</div>'
+                                                            html += '</div>'
+                                                        html += '</div>'
+                                                        if (item.type == 'storer' || item.type == 'machine') {
+                                                            html += '<div class="col-12">'
+                                                                html += '<div class="row gx-2 align-items-center">'
+                                                                    html += '<div class="col">'
+                                                                        html += '<small class="text-normal">' + i18next.t('word_UsedCount') + '</small>'
+                                                                    html += '</div>'
+                                                                    html += '<div class="col-auto">'
+                                                                        html += '<small id="itemUsedCount-' + item.id + '"></small>'
+                                                                    html += '</div>'
+                                                                html += '</div>'
+                                                            html += '</div>'
+                                                            html += '<div class="col-12">'
+                                                                html += '<div class="row gx-2 align-items-center">'
+                                                                    html += '<div class="col">'
+                                                                        html += '<small class="text-normal">' + i18next.t('word_AvailableCount') + '</small>'
+                                                                    html += '</div>'
+                                                                    html += '<div class="col-auto">'
+                                                                        html += '<small id="itemAvailableCount-' + item.id + '"></small>'
+                                                                    html += '</div>'
+                                                                html += '</div>'
+                                                            html += '</div>'
+                                                        }
                                                     html += '</div>'
-                                                }
+                                                html += '</div>'
                                             }
                                         html += '</div>'
                                     html += '</div>'
