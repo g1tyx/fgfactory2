@@ -537,6 +537,19 @@ class Game {
             //---
             if (this.getAvailableCount(line.machineId) < addCount) return false
             //---
+            if (line.inputs && line.inputs.length > 0) {
+                //---
+                let canAdd = true
+                //---
+                line.inputs.forEach(input => {
+                    //---
+                    let inputElem = this.getElem(input.id)
+                    if (inputElem.prod < input.count * addCount) canAdd = false
+                })
+                //---
+                return canAdd
+            }
+            //---
             return true
         }
         //---
