@@ -388,7 +388,7 @@ var DATA = {
                 {	id:'lineRocketSilo2',       type:'line',	    reqs:[{ id:'techRocket', count:1 },{ id:'techAutomation2', count:1 }], machineId:'machineAssembler2', recipeId:'recipeRocketSilo' },
                 {	id:'lineRocketSilo3',       type:'line',	    reqs:[{ id:'techRocket', count:1 },{ id:'techAutomation3', count:1 }], machineId:'machineAssembler3', recipeId:'recipeRocketSilo' },
                 //---
-                {	id:'storerChest',	        type:'storer',	    label:'storerChest', img:'img/storers/Chest.png', storage:{ base:50, storerId:'storerChest' }, manualId:'manualChest', lines:[ 'lineChest1', 'lineChest2', 'lineChest3' ] },
+                {	id:'storerChest',	        type:'storer',	    label:'storerChest', img:'img/storers/Chest.png', storage:{ base:75, storerId:'storerChest' }, manualId:'manualChest', lines:[ 'lineChest1', 'lineChest2', 'lineChest3' ] },
                 {	id:'recipeChest',	        type:'recipe',	    time:1, outputs:[{ id:'storerChest', count:1 }], inputs:[{ id:'itemSteel', count:8 }] },
                 {	id:'manualChest',	        type:'manual',	    machineId:'machineManual', recipeId:'recipeChest' },
                 {	id:'lineChest1',            type:'line',	    reqs:[{ id:'techAutomation1', count:1 }], machineId:'machineAssembler1', recipeId:'recipeChest' },
