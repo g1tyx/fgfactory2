@@ -367,6 +367,14 @@ class Game {
             //---
             if (newCount != elem.count) elem.count = newCount
         })
+        //---
+        elems.forEach(elem => {
+            //---
+            let max = this.getMax(elem.id)
+            if (max > 0 && elem.count > max) elem.count = max
+            //---
+            if (elem.count < 0) elem.count = 0
+        })
     }
     //---
     checkElems(elems) {
