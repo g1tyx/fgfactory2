@@ -70,7 +70,6 @@ class App {
                 this.game.loadScenario('tut')
                 this.game.scenario.startDate = Date.now()
                 //---
-                this.game.refreshProd()
                 this.game.refreshUnlocked()
             }
             //---            

@@ -203,9 +203,6 @@ class ScreenGame {
         this.refreshTabItems()
         this.refreshTabScenarii()
         //---
-        let tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
-        let tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
-        //---
         let triggerTabList = document.querySelectorAll('[data-bs-toggle="tab"]')
         let tabList = [...triggerTabList].map(tabTriggerEl => new bootstrap.Tab(tabTriggerEl))
     }
@@ -586,7 +583,7 @@ class ScreenGame {
                         recipe.inputs.forEach(input => {
                             let inputElem = window.App.game.getElem(input.id)
                             html += '<div class="col-auto">'
-                                html += '<span id="recipeInputCount-' + recipe.id + '-' + input.id + '" class="badge d-flex align-items-center">'
+                                html += '<span id="recipeInputCount-' + recipe.id + '-' + input.id + '" class="badge d-flex align-items-center" data-bs-toggle="tooltip" data-bs-html="true" data-bs-title="<span class=\'text-white\'>' + i18next.t(inputElem.label) + '</span>">'
                                     html += '<img src="' + inputElem.img + '" width="16px" height="16px">'
                                     html += '<span class="ms-1">' + formatNumber(input.count) + '</span>'
                                 html += '</span>'
@@ -602,7 +599,7 @@ class ScreenGame {
                     recipe.outputs.forEach(output => {
                         let outputElem = window.App.game.getElem(output.id)
                         html += '<div class="col-auto">'
-                            html += '<span id="recipeOutputCount-' + recipe.id + '-' + output.id + '" class="badge text-bg-dark d-flex align-items-center">'
+                            html += '<span id="recipeOutputCount-' + recipe.id + '-' + output.id + '" class="badge text-bg-dark d-flex align-items-center" data-bs-toggle="tooltip" data-bs-html="true" data-bs-title="<span class=\'text-white\'>' + i18next.t(outputElem.label) + '</span>">'
                                 html += '<img src="' + outputElem.img + '" width="16px" height="16px">'
                                 html += '<span class="ms-1">' + formatNumber(output.count) + '</span>'
                             html += '</span>'
@@ -884,6 +881,9 @@ class ScreenGame {
         displayContainer('itemContainer', i18next.t('word_Items'), window.App.game.elems.filter(elem => elem.type == 'item' && elem.unlocked), 'item')
         displayContainer('machineContainer', i18next.t('word_Machines'), window.App.game.elems.filter(elem => elem.id != 'machineManual' && elem.type == 'machine' && elem.unlocked), 'machine')
         displayContainer('storerContainer', i18next.t('word_Storers'), window.App.game.elems.filter(elem => elem.type == 'storer' && elem.unlocked), 'storer')
+        //---
+        let tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
+        let tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
     }
     //---
     refreshTabScenarii() {

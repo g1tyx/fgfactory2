@@ -273,7 +273,6 @@ class Game {
         //---
         if (data.scenarii) this.scenarii.forEach(scenario => { if (data.scenarii[scenario.id]) scenario.load(data.scenarii[scenario.id]) })
         //---
-        this.refreshProd()
         this.refreshUnlocked()
     }
     //---
@@ -308,7 +307,16 @@ class Game {
         })
     }
     //---
-    refreshProd() {
+    isVictoryReached() {
+        //---
+        if (this.victory) return false
+        else if (this.victoryReqs) return this.checkElems(this.victoryReqs)
+        else return false
+    }
+    //---
+    doTick(stepMs) {
+        //---
+        let seconds = stepMs / 1000
         //---
         let elems = this.elems.filter(elem => elem.id != 'machineManual' && elem.unlocked == true && (elem.type == 'item' || elem.type == 'machine' || elem.type == 'storer'))
         elems.forEach(elem => {
@@ -346,22 +354,7 @@ class Game {
                 })
             }
         })
-    }
-    //---
-    isVictoryReached() {
         //---
-        if (this.victory) return false
-        else if (this.victoryReqs) return this.checkElems(this.victoryReqs)
-        else return false
-    }
-    //---
-    doTick(stepMs) {
-        //---
-        let seconds = stepMs / 1000
-        //---
-        this.refreshProd()
-        //---
-        let elems = this.elems.filter(elem => (elem.type == 'item' || elem.type == 'machine' || elem.type == 'storer') && elem.unlocked == true)
         elems.forEach(elem => {
             //---
             let prod = elem.prod * seconds
@@ -373,6 +366,14 @@ class Game {
             if (newCount < 0) newCount = 0
             //---
             if (newCount != elem.count) elem.count = newCount
+        })
+        //---
+        elems.forEach(elem => {
+            //---
+            let max = this.getMax(elem.id)
+            if (max > 0 && elem.count > max) elem.count = max
+            //---
+            if (elem.count < 0) elem.count = 0
         })
     }
     //---
@@ -497,8 +498,6 @@ class Game {
                 //---
                 manual.count = 1
                 this.currentManualId = manualId
-                //---
-                this.refreshProd()
             }
         }
     }
@@ -517,8 +516,6 @@ class Game {
             let currentManualElem = this.elems.find(elem => elem.id == this.currentManualId)
             currentManualElem.count = 0
             this.currentManualId = null
-            //---
-            this.refreshProd()
         }
     }
     //---
