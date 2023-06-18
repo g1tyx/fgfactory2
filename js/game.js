@@ -345,12 +345,6 @@ class Game {
                     outputElem.rawProd += output.count * line.count
                 })
             }
-            //---
-            else {
-                //---
-                line.count = 0
-                if (this.currentManualId == line.id) this.currentManualId = null
-            }
         })
     }
     //---
@@ -536,19 +530,6 @@ class Game {
             let addCount = line.getAddCount(this)
             //---
             if (this.getAvailableCount(line.machineId) < addCount) return false
-            //---
-            if (line.inputs && line.inputs.length > 0) {
-                //---
-                let canAdd = true
-                //---
-                line.inputs.forEach(input => {
-                    //---
-                    let inputElem = this.getElem(input.id)
-                    if (inputElem.prod < input.count * addCount) canAdd = false
-                })
-                //---
-                return canAdd
-            }
             //---
             return true
         }
