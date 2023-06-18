@@ -332,7 +332,7 @@ class Game {
         let lines = this.elems.filter(elem => (elem.type == 'line' || elem.type == 'manual') && elem.unlocked == true && elem.count > 0)
         lines.forEach(line => {
             //---
-            if (this.canProduce(line.id)) {
+            if (this.canProduce(line.id) && (elem.count < this.getMax(elem.id)) {
                 //---
                 if (line.inputs && line.inputs.length > 0) {
                     //---
@@ -366,14 +366,6 @@ class Game {
             if (newCount < 0) newCount = 0
             //---
             if (newCount != elem.count) elem.count = newCount
-        })
-        //---
-        elems.forEach(elem => {
-            //---
-            let max = this.getMax(elem.id)
-            if (max > 0 && elem.count > max) elem.count = max
-            //---
-            if (elem.count < 0) elem.count = 0
         })
     }
     //---
