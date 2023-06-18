@@ -169,6 +169,7 @@ var zh_translations = {
     'itemArmor': '护甲',
     'itemSatellite': '卫星',
     //---
+    'machineManual': '工人',   
     'machineFurnace1': '炉 1',    
     'machineFurnace2': '炉 2',
     'machineFurnace3': '炉 3',

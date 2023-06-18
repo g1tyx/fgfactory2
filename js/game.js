@@ -79,7 +79,7 @@ class GameItem extends GameElem {
         //---
         this.consumers = []
         //---
-        this.collapsed = false
+        this.collapsed = true
         //---
         this.selectStorageCount = '1'
     }
@@ -433,7 +433,7 @@ class Game {
             if (line.inputs && line.inputs.length > 0) {
                 //---
                 line.inputs.forEach(input => {
-                    if (this.getAvailableCount(input.id) <= 1/60) canProduce = false
+                    if (this.getAvailableCount(input.id) <= input.count) canProduce = false
                 })
             }
             //---
@@ -537,13 +537,17 @@ class Game {
             //---
             if (this.getAvailableCount(line.machineId) < addCount) return false
             //---
-            if (line.inputs) {
+            if (line.inputs && line.inputs.length > 0) {
                 //---
-                for (let input of line.inputs) {
+                let canAdd = true
+                //---
+                line.inputs.forEach(input => {
                     //---
-                    let inputElem = this.elems.find(elem => elem.id == input.id)
-                    if (input.count * addCount > inputElem.prod) return false
-                }
+                    let inputElem = this.getElem(input.id)
+                    if (inputElem.prod < input.count * addCount) canAdd = false
+                })
+                //---
+                return canAdd
             }
             //---
             return true
@@ -562,8 +566,6 @@ class Game {
                 let addCount = line.getAddCount(this)
                 //---
                 line.count += addCount
-                //---
-                this.refreshProd()
             }
         }
     }
@@ -593,8 +595,6 @@ class Game {
                 let removeCount = line.getRemoveCount()
                 //---
                 line.count -= removeCount
-                //---
-                this.refreshProd()
             }
         }
     }
