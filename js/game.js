@@ -159,14 +159,11 @@ class GameLine extends GameElem {
             })
         }
         //---
-        this.outputs = []
-        recipe.outputs.forEach(output => {
-            //---
-            this.outputs.push({ id:output.id, count:(output.count / recipe.time * machine.speed).toFixed(2) })
-            //---
-            let elem = game.getElem(output.id)
-            this.img = elem.img
-        })
+        this.output = {}
+        this.output.id = recipe.output.id
+        this.output.count = (recipe.output.count / recipe.time * machine.speed).toFixed(2)
+        //---
+        this.img = game.getElem(recipe.output.id).img
     }
     //---
     load(data) {
@@ -332,6 +329,7 @@ class Game {
         let lines = this.elems.filter(elem => (elem.type == 'line' || elem.type == 'manual') && elem.unlocked == true && elem.count > 0)
         lines.forEach(line => {
             //---
+            let outputElem = this.elems.find(elem => elem.id == line.output.id)
             if (this.canProduce(line.id)) {
                 //---
                 if (line.inputs && line.inputs.length > 0) {
@@ -346,12 +344,8 @@ class Game {
                     })
                 }
                 //---
-                line.outputs.forEach(output => {
-                    //---
-                    let outputElem = this.elems.find(elem => elem.id == output.id)
-                    outputElem.prod += output.count * line.count
-                    outputElem.rawProd += output.count * line.count
-                })
+                outputElem.prod += line.output.count * line.count
+                outputElem.rawProd += line.output.count * line.count
             }
         })
         //---

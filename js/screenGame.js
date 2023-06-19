@@ -596,15 +596,13 @@ class ScreenGame {
                         html += '</div>'
                     }
                     html += '<div class="col-auto px-0"><span class="badge text-normal px-0"><i class="fas fa-fw fa-long-arrow-alt-right"></i></span></div>'
-                    recipe.outputs.forEach(output => {
-                        let outputElem = window.App.game.getElem(output.id)
-                        html += '<div class="col-auto">'
-                            html += '<span id="recipeOutputCount-' + recipe.id + '-' + output.id + '" class="badge text-bg-dark d-flex align-items-center" data-bs-toggle="tooltip" data-bs-html="true" data-bs-title="<span class=\'text-white\'>' + i18next.t(outputElem.label) + '</span>">'
-                                html += '<img src="' + outputElem.img + '" width="16px" height="16px">'
-                                html += '<span class="ms-1">' + formatNumber(output.count) + '</span>'
-                            html += '</span>'
-                        html += '</div>'
-                    })
+                    let outputElem = window.App.game.getElem(recipe.output.id)
+                    html += '<div class="col-auto">'
+                        html += '<span id="recipeOutputCount-' + recipe.id + '-' + recipe.output.id + '" class="badge text-bg-dark d-flex align-items-center" data-bs-toggle="tooltip" data-bs-html="true" data-bs-title="<span class=\'text-white\'>' + i18next.t(outputElem.label) + '</span>">'
+                            html += '<img src="' + outputElem.img + '" width="16px" height="16px">'
+                            html += '<span class="ms-1">' + formatNumber(recipe.output.count) + '</span>'
+                        html += '</span>'
+                    html += '</div>'
                 html += '</div>'
             html += '</div>'
             //---
