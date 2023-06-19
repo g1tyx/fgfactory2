@@ -332,7 +332,7 @@ class Game {
         let lines = this.elems.filter(elem => (elem.type == 'line' || elem.type == 'manual') && elem.unlocked == true && elem.count > 0)
         lines.forEach(line => {
             //---
-            if (this.canProduce(line.id)) {
+            if (this.canProduce(line.id) && (elem.count < this.getMax(elem.id)) {
                 //---
                 if (line.inputs && line.inputs.length > 0) {
                     //---
