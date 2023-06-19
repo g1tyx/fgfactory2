@@ -525,6 +525,7 @@ class Game {
         if (line) {
             //---
             let addCount = line.getAddCount(this)
+            if (addCount <= 0) return false
             //---
             if (this.getAvailableCount(line.machineId) < addCount) return false
             //---
