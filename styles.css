@@ -287,8 +287,8 @@ a { text-decoration: none; }
 }
 
 .badge {
-    --bs-badge-padding-x: 0.5rem;
-    --bs-badge-padding-y: 0.25rem;
+    --bs-badge-padding-x: 0.25rem;
+    --bs-badge-padding-y: 0.125rem;
     --bs-badge-font-size: 0.875em;
     --bs-badge-font-weight: var(--bs-body-font-weight);
     --bs-badge-color: #fff;
