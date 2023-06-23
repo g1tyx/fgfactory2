@@ -204,19 +204,6 @@ class ScreenGame {
     //---
     draw() {
         //---
-        let drawLineProgress = function(line) {
-            //---
-            let node = document.getElementById('lineRemainingTime-' + line.id)
-            //---
-            let html = formatTime(line.remainingTime)
-            if (node.innerHTML != html) node.innerHTML = html
-            //---
-            node = document.getElementById('lineProgress-' + line.id)
-            //---
-            let width = line.getProgress() + '%'
-            if (node.style.width != width) node.style.width = width
-        }
-        //---
         let drawRecipe = function(recipe) {
             //---
             if (recipe.inputs) {
@@ -227,11 +214,11 @@ class ScreenGame {
                     //---
                     let node = document.getElementById('recipeInputCountValue-' + recipe.id + '-' + input.id)
                     //---
-                    let html = formatNumber(input.count * recipe.getMachineCount())
+                    let html = formatNumber(input.count)
                     if (node.innerHTML != html) node.innerHTML = html
                     //---
                     let style = 'badge d-flex align-items-center'
-                    if (input.count * recipe.getMachineCount() > window.App.game.getAvailableCount(input.id)) style += ' text-bg-danger'
+                    if (input.count > window.App.game.getAvailableCount(input.id)) style += ' text-bg-danger'
                     else style += ' text-bg-light'
                     //---
                     node = document.getElementById('recipeInputCount-' + recipe.id + '-' + input.id)
@@ -242,7 +229,7 @@ class ScreenGame {
                 //---
                 let node = document.getElementById('recipeOutputCountValue-' + recipe.id + '-' + recipe.output.id)
                 //---
-                let html = formatNumber(recipe.output.count * recipe.getMachineCount())
+                let html = formatNumber(recipe.output.count)
                 if (node.innerHTML != html) node.innerHTML = html
             }
         }
@@ -277,9 +264,14 @@ class ScreenGame {
             let items = window.App.game.elems.filter(elem => elem.id != 'machineManual' && elem.unlocked && (elem.type == 'item' || elem.type == 'machine' || elem.type == 'storer'))
             items.forEach(item => {
                 //---
-                let html = ''
-                html = formatNumber(item.count)
-                let node = document.getElementById('itemCount-' + item.id)
+                let html = '', node
+                //---
+                html = formatNumber(item.prod)
+                node = document.getElementById('itemProd-' + item.id)
+                if (node.innerHTML != html) node.innerHTML = html
+                //---
+                html = formatNumber(item.count, 2)
+                node = document.getElementById('itemCount-' + item.id)
                 if (node.innerHTML != html) node.innerHTML = html
                 //---
                 let max = window.App.game.getMax(item.id)
@@ -293,7 +285,7 @@ class ScreenGame {
                     let node = document.getElementById('itemAvailableCount-' + item.id)
                     let count = window.App.game.getAvailableCount(item.id)
                     //---
-                    html = formatNumber(count)
+                    html = formatNumber(count, 2)
                     if (node.innerHTML != html) node.innerHTML = html
                     //---
                     style = 'badge'
@@ -318,7 +310,6 @@ class ScreenGame {
                         if (node.className != style) node.className = style
                         //---
                         drawRecipe(manual)
-                        drawLineProgress(manual)
                     }
                 }
                 //---
@@ -353,7 +344,6 @@ class ScreenGame {
                                 if (node.className != style) node.className = style
                                 //---
                                 drawRecipe(line)
-                                drawLineProgress(line)
                             }
                         })
                     }
@@ -571,7 +561,7 @@ class ScreenGame {
                             html += '<div class="col-auto">'
                                 html += '<span id="recipeInputCount-' + recipe.id + '-' + input.id + '" class="badge d-flex align-items-center" data-bs-toggle="tooltip" data-bs-html="true" data-bs-title="<span class=\'text-white\'>' + i18next.t(inputElem.label) + '</span>">'
                                     html += '<img src="' + inputElem.img + '" width="16px" height="16px">'
-                                    html += '<span id="recipeInputCountValue-' + recipe.id + '-' + input.id + '" class="ms-1">' + formatNumber(input.count * recipe.getMachineCount()) + '</span>'
+                                    html += '<span id="recipeInputCountValue-' + recipe.id + '-' + input.id + '" class="ms-1">' + formatNumber(input.count) + '</span>'
                                 html += '</span>'
                             html += '</div>'
                         })
@@ -586,7 +576,7 @@ class ScreenGame {
                     html += '<div class="col-auto">'
                         html += '<span id="recipeOutputCount-' + recipe.id + '-' + recipe.output.id + '" class="badge text-bg-light d-flex align-items-center" data-bs-toggle="tooltip" data-bs-html="true" data-bs-title="<span class=\'text-white\'>' + i18next.t(outputElem.label) + '</span>">'
                             html += '<img src="' + outputElem.img + '" width="16px" height="16px">'
-                            html += '<span id="recipeOutputCountValue-' + recipe.id + '-' + recipe.output.id + '" class="ms-1">' + formatNumber(recipe.output.count * recipe.getMachineCount()) + '</span>'
+                            html += '<span id="recipeOutputCountValue-' + recipe.id + '-' + recipe.output.id + '" class="ms-1">' + formatNumber(recipe.output.count) + '</span>'
                         html += '</span>'
                     html += '</div>'
                 html += '</div>'
@@ -622,6 +612,7 @@ class ScreenGame {
                                     html += '<div class="row gx-2 align-items-center">'
                                         html += '<div class="col-auto"><img src="' + item.img + '" width="24px" height="24px"></div>'
                                         html += '<div class="col text-start text-white">' + i18next.t(item.label) + '</div>'
+                                        html += '<div class="col-auto"><span id="itemProd-' + item.id + '"></span></div>'
                                         html += '<div class="col-auto"><span id="itemCount-' + item.id + '"></span></div>'
                                         if (item.storage) html += '<div class="col-auto small">/<span id="itemMax-' + item.id + '"></span></div>'
                                         if (item.type == 'machine' || item.type == 'storer') html += '<div class="col-auto"><span id="itemAvailableCount-' + item.id + '"></span></div>'
