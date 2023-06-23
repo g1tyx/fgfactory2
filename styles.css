@@ -225,6 +225,8 @@ ul {
     --bs-badge-font-weight: 400;
     --bs-badge-padding-x: 0.5em;
     --bs-badge-padding-y: 0.25em;
+    
+    border: 2px solid transparent;
 }
 
 .nav {
@@ -314,7 +316,7 @@ ul {
 }
 
 .progress {
-    --bs-progress-bg: #444444;
+    --bs-progress-bg: #303030;
     --bs-progress-bar-transition: width .01s ease;
 }
 

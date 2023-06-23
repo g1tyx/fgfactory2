@@ -146,7 +146,7 @@ class GameLine extends GameElem {
         if (machine.energy && this.id != 'manualCoal' && this.id != 'lineCoal1') {
             //---
             this.inputs = []
-            this.inputs.push({ id:machine.energy.id, count:machine.energy.count, coeff:1.0 })
+            this.inputs.push({ id:machine.energy.id, count:machine.energy.count })
         }
         //---
         let recipe =  game.scenario.data.elems.find(elem => elem.id == this.recipeId)
@@ -155,15 +155,19 @@ class GameLine extends GameElem {
             if (!this.inputs) this.inputs = []
             recipe.inputs.forEach(input => {
                 //---
-                this.inputs.push({ id:input.id, count:(input.count / recipe.time * machine.speed).toFixed(2), coeff:1.0 })
+                this.inputs.push({ id:input.id, count:input.count })
             })
         }
         //---
         this.output = {}
         this.output.id = recipe.output.id
-        this.output.count = (recipe.output.count / recipe.time * machine.speed).toFixed(2)
+        this.output.count = recipe.output.count
         //---
         this.img = game.getElem(recipe.output.id).img
+        //---
+        this.time = recipe.time / machine.speed
+        this.remainingTime = this.time
+        this.status = 'paused'
     }
     //---
     load(data) {
@@ -173,6 +177,12 @@ class GameLine extends GameElem {
         if (data.count != null) this.count = data.count
         //---
         if (data.selectCount != null) this.selectCount = data.selectCount
+        //---
+        if (data.status != null) this.status = data.status
+        if (data.remainingTime != null) this.remainingTime = data.remainingTime
+        //---
+        if (this.status == 'paused' && this.count > 0) this.status = 'wait'
+        if (this.status != 'inprogress') this.remainingTime = this.time
     }
     //---
     getSaveData() {
@@ -183,7 +193,15 @@ class GameLine extends GameElem {
         //---
         savedData.selectCount = this.selectCount
         //---
+        savedData.status = this.status
+        savedData.remainingTime = this.remainingTime
+        //---
         return savedData
+    }
+    //---
+    getMachineCount() {
+        //---
+        return this.count ? this.count : 1
     }
     //---
     getAddCount(game) {
@@ -200,6 +218,11 @@ class GameLine extends GameElem {
         else if (this.selectCount == '10') return 10
         else if (this.selectCount == '100') return 100
         else if (this.selectCount == 'max') return this.count
+    }
+    //---
+    getProgress() {
+        //---
+        return 100 * (1 - this.remainingTime / this.time)
     }
 }
 //---
@@ -315,55 +338,106 @@ class Game {
         //---
         let seconds = stepMs / 1000
         //---
-        let elems = this.elems.filter(elem => elem.id != 'machineManual' && elem.unlocked == true && (elem.type == 'item' || elem.type == 'machine' || elem.type == 'storer'))
-        elems.forEach(elem => {
-            //---
-            elem.prod = 0
-            //---
-            elem.rawProd = 0
-            elem.rawConsum = 0
-            //---
-            elem.consumers = []
-        })
-        //---
-        let lines = this.elems.filter(elem => (elem.type == 'line' || elem.type == 'manual') && elem.unlocked == true && elem.count > 0)
+        let lines = this.elems.filter(elem => (elem.type == 'line' || elem.type == 'manual') && elem.unlocked && elem.count > 0 && elem.status != 'paused')
         lines.forEach(line => {
             //---
-            let outputElem = this.elems.find(elem => elem.id == line.output.id)
-            if (this.canProduce(line.id)) {
+            if (line.status == 'wait') {
                 //---
-                if (line.inputs && line.inputs.length > 0) {
+                if (this.canProduce(line.id)) {
                     //---
-                    line.inputs.forEach(input => {
+                    line.remainingTime = line.time
+                    line.status = 'inprogress'
+                    //---
+                    if (line.inputs) {
                         //---
-                        let inputElem = this.elems.find(elem => elem.id == input.id)
-                        inputElem.prod -= input.count * line.count
-                        inputElem.rawConsum += input.count * line.count
-                        //---
-                        if (!inputElem.consumers.includes(line.img)) inputElem.consumers.push(line.img)
-                    })
+                        line.inputs.forEach(input => {
+                            //---
+                            let inputElem = this.getElem(input.id)
+                            inputElem.count -= input.count * line.getMachineCount()
+                        })
+                    }
                 }
+            }
+            //---
+            if (line.status == 'inprogress') {
                 //---
-                outputElem.prod += line.output.count * line.count
-                outputElem.rawProd += line.output.count * line.count
+                let remainingTime = line.remainingTime
+                if (seconds < remainingTime) {
+                    //---
+                    line.remainingTime -= seconds
+                }
+                else {
+                    //---
+                    let cycleCount = 1
+                    if (line.type == 'line') {
+                        //---
+                        cycleCount += Math.floor((seconds - remainingTime) / line.time)
+                        //---
+                        line.remainingTime = seconds - remainingTime - (cycleCount * line.time)
+                        //---
+                        if (line.inputs) {
+                            //---
+                            line.inputs.forEach(input => {
+                                //---
+                                let inputElem = this.getElem(input.id)
+                                let newCycleCount = 1 + Math.floor(inputElem.count / input.count)
+                                if (newCycleCount < cycleCount) cycleCount = newCycleCount
+                            })
+                        }
+                    }
+                    //---
+                    if (cycleCount > 0) {
+                        //---
+                        if (line.inputs) {
+                            //---
+                            line.inputs.forEach(input => {
+                                //---
+                                let inputElem = this.getElem(input.id)
+                                inputElem.count -= (cycleCount - 1) * input.count * line.getMachineCount()
+                                //---
+                                if (inputElem.count < 0) inputElem.count = 0
+                            })
+                        }
+                        //---
+                        if (line.output) {
+                            //---
+                            let outputElem = this.getElem(line.output.id)
+                            outputElem.count += cycleCount * line.output.count * line.getMachineCount()
+                            //---
+                            let max = this.getMax(line.output.id)
+                            if (max && (outputElem.count > max)) outputElem.count = max
+                        }
+                    }
+                    //---
+                    if (this.canProduce(line.id)) {
+                        //---
+                        line.remainingTime = line.time
+                        line.status = 'inprogress'
+                        //---
+                        if (line.inputs) {
+                            //---
+                            line.inputs.forEach(input => {
+                                //---
+                                let inputElem = this.getElem(input.id)
+                                inputElem.count -= input.count * line.getMachineCount()
+                            })
+                        }
+                    }
+                    else {
+                        //---
+                        line.remainingTime = line.time
+                        line.status = 'wait'
+                    }
+                }
             }
         })
+    }
+    //---
+    doVictory() {
         //---
-        elems.forEach(elem => {
-            //---
-            let prod = elem.prod * seconds
-            let newCount = elem.count + prod
-            //---
-            if (newCount != elem.count) elem.count = newCount
-        })
+        this.game.doVictory = true
         //---
-        elems.forEach(elem => {
-            //---
-            let max = this.getMax(elem.id)
-            if (max > 0 && elem.count > max) elem.count = max
-            //---
-            if (elem.count < 0) elem.count = 0
-        })
+        this.game.scenario.victoryDate = Date.now()
     }
     //---
     checkElems(elems) {
@@ -417,9 +491,13 @@ class Game {
             if (line.inputs && line.inputs.length > 0) {
                 //---
                 line.inputs.forEach(input => {
-                    if (this.getAvailableCount(input.id) <= input.count) canProduce = false
+                    if (this.getAvailableCount(input.id) < input.count * line.getMachineCount()) canProduce = false
                 })
             }
+            //---
+            let outputElem = this.getElem(line.output.id)
+            let max = this.getMax(line.output.id)
+            if (max && (outputElem.count >= max)) return false
             //---
             return canProduce
         }
@@ -457,11 +535,9 @@ class Game {
         if (manual) {
             //---
             if (manual.inputs) {
-                //---
                 for (let input of manual.inputs) {
-                    //---
-                    let inputElem = this.elems.find(elem => elem.id == input.id)
-                    if (input.count > inputElem.count) return false
+                    if (this.getAvailableCount(input.id) < input.count)
+                        return false
                 }
             }
             //---
@@ -482,10 +558,16 @@ class Game {
                     //---
                     let currentManualElem = this.elems.find(elem => elem.id == this.currentManualId)
                     currentManualElem.count = 0
+                    currentManualElem.status = 'paused'
+                    currentManualElem.remainingTime = currentManualElem.time
+                    //---
                     this.currentManualId = null
                 }
                 //---
                 manual.count = 1
+                manual.status = 'wait'
+                manual.remainingTime = manual.time
+                //---
                 this.currentManualId = manualId
             }
         }
@@ -504,6 +586,9 @@ class Game {
             //---
             let currentManualElem = this.elems.find(elem => elem.id == this.currentManualId)
             currentManualElem.count = 0
+            currentManualElem.status = 'paused'
+            currentManualElem.remainingTime = currentManualElem.time
+            //---
             this.currentManualId = null
         }
     }
@@ -534,6 +619,12 @@ class Game {
                 let addCount = line.getAddCount(this)
                 //---
                 line.count += addCount
+                //---
+                if (line.status == 'paused') {
+                    //---
+                    line.status = 'wait'
+                    line.remainingTime = line.time
+                }
             }
         }
     }
@@ -563,6 +654,12 @@ class Game {
                 let removeCount = line.getRemoveCount()
                 //---
                 line.count -= removeCount
+                //---
+                if (line.count < 1 && line.status != 'paused') {
+                    //---
+                    line.status = 'paused'
+                    line.remainingTime = line.time
+                }
             }
         }
     }
