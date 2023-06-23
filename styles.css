@@ -309,7 +309,7 @@ a { text-decoration: none; }
     --bs-card-border-width: var(--bs-border-width);
     --bs-card-border-color: var(--bs-border-color);
     --bs-card-border-radius: var(--bs-border-radius);
-    --bs-card-cap-padding-y: 0.25rem;
+    --bs-card-cap-padding-y: 0.5rem;
     --bs-card-cap-padding-x: 0.5rem;
     --bs-card-cap-bg: var(--bs-light);
     --bs-card-bg: var(--bs-secondary);
@@ -341,7 +341,7 @@ a { text-decoration: none; }
     --bs-modal-border-width: var(--bs-border-width);
     --bs-modal-border-radius: var(--bs-border-radius);
     --bs-modal-inner-border-radius: calc(var(--bs-border-radius) - 1px);
-    --bs-modal-header-padding: 0.25rem 0.5rem;
+    --bs-modal-header-padding: 0.5rem 0.5rem;
     --bs-modal-header-border-color: var(--bs-border-color);
     --bs-modal-header-border-width: var(--bs-border-width);
     --bs-modal-title-line-height: var(--bs-body-line-height);
