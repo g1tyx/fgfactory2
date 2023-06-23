@@ -338,6 +338,12 @@ class Game {
         //---
         let seconds = stepMs / 1000
         //---
+        let items = this.elems.filter(elem => (elem.type == 'item' || elem.type == 'machine' || elem.type == 'storer') && elem.unlocked)
+        items.forEach(item => {
+            //---
+            item.prod = 0
+        })
+        //---
         let lines = this.elems.filter(elem => (elem.type == 'line' || elem.type == 'manual') && elem.unlocked && elem.count > 0 && elem.status != 'paused')
         lines.forEach(line => {
             //---
@@ -353,7 +359,7 @@ class Game {
                         line.inputs.forEach(input => {
                             //---
                             let inputElem = this.getElem(input.id)
-                            inputElem.count -= input.count * line.getMachineCount()
+                            inputElem.prod -= input.count * line.getMachineCount()
                         })
                     }
                 }
@@ -380,7 +386,7 @@ class Game {
                             line.inputs.forEach(input => {
                                 //---
                                 let inputElem = this.getElem(input.id)
-                                let newCycleCount = 1 + Math.floor(inputElem.count / input.count)
+                                let newCycleCount = 1 + Math.floor((this.getAvailableCount(input.id) + inputElem.prod) / input.count)
                                 if (newCycleCount < cycleCount) cycleCount = newCycleCount
                             })
                         }
@@ -393,43 +399,40 @@ class Game {
                             line.inputs.forEach(input => {
                                 //---
                                 let inputElem = this.getElem(input.id)
-                                inputElem.count -= (cycleCount - 1) * input.count * line.getMachineCount()
+                                inputElem.prod -= (cycleCount - 1) * input.count * line.getMachineCount()
+                                /*
                                 //---
                                 if (inputElem.count < 0) inputElem.count = 0
+                                */
                             })
                         }
                         //---
                         if (line.output) {
                             //---
                             let outputElem = this.getElem(line.output.id)
-                            outputElem.count += cycleCount * line.output.count * line.getMachineCount()
+                            outputElem.prod += cycleCount * line.output.count * line.getMachineCount()
+                            /*
                             //---
                             let max = this.getMax(line.output.id)
                             if (max && (outputElem.count > max)) outputElem.count = max
+                            */
                         }
-                    }
-                    //---
-                    if (this.canProduce(line.id)) {
-                        //---
-                        line.remainingTime = line.time
-                        line.status = 'inprogress'
-                        //---
-                        if (line.inputs) {
-                            //---
-                            line.inputs.forEach(input => {
-                                //---
-                                let inputElem = this.getElem(input.id)
-                                inputElem.count -= input.count * line.getMachineCount()
-                            })
-                        }
-                    }
-                    else {
                         //---
                         line.remainingTime = line.time
                         line.status = 'wait'
                     }
                 }
             }
+        })
+        //---
+        items.forEach(item => {
+            //---
+            item.count += item.prod
+            //---
+            let max = this.getMax(item.id)
+            if (max && (item.count > max)) item.count = max
+            //---
+            if (item.count < 0) item.count = 0
         })
     }
     //---
@@ -491,13 +494,11 @@ class Game {
             if (line.inputs && line.inputs.length > 0) {
                 //---
                 line.inputs.forEach(input => {
-                    if (this.getAvailableCount(input.id) < input.count * line.getMachineCount()) canProduce = false
+                    //---
+                    let inputElem = this.getElem(input.id)
+                    if (this.getAvailableCount(input.id) + inputElem.prod < input.count * line.getMachineCount()) canProduce = false
                 })
             }
-            //---
-            let outputElem = this.getElem(line.output.id)
-            let max = this.getMax(line.output.id)
-            if (max && (outputElem.count >= max)) return false
             //---
             return canProduce
         }

@@ -12,7 +12,7 @@ var TplScreenLoading = function() {
                 html += '<span class="h5 text-white">' + i18next.t('game_title') + '</span>'
             html += '</div>'
             html += '<div class="col-12 flicker text-center">'
-                html += '<span class="text-primary">' + i18next.t('screenLoading_text') + '</span>'
+                html += '<span class="text-warning">' + i18next.t('screenLoading_text') + '</span>'
             html += '</div>'
         html += '</div>'
     html += '</div>'
