@@ -68,13 +68,13 @@ var fr_translations = {
     'word_CollapseAll': 'Tout Réduire',
     'word_ExpandAll': 'Tout Etendre',
     'word_None': 'Aucun',
-    'word_RawProduction': 'Production brute',
-    'word_RawConsumption': 'Consommation brute',
-    'word_Consumers': 'Consommateurs',
+    'word_RawProd': 'P. brute',
+    'word_RawConsum': 'C. brute',
     'word_AvailableCount': 'Disponible',
     'word_MaxStorage': 'Max',
     'word_TotalCount': 'Total',
     'word_UsedCount': 'Utilisé',
+    'word_NotYetWon': 'Pas encore gagné',
     //---
     'scenario_tut': 'Tutoriel',
     'scenarioDesc_tut': 'Apprendre les bases avant de jouer les autres scénarios. Fortement récommandé pour les nouveaux joueurs.',
@@ -102,6 +102,9 @@ var fr_translations = {
     //---
     'factorio1Obj': 'Evasion',
     'factorio1ObjDesc': '<div class="mb-2">Vous vous êtes écrasé sur une planète hostile. Votre objectif est de vous échapper de là. Pour ce faire, vous devez construire une Fusée (composée de 100 Pièces de fusée), une Armure pour vous protéger pendant le voyage et un Satellite pour naviguer jusqu\'à votre maison.</div><div class="mb-2">Ci-dessous, vous trouverez les technologies qui débloquent les objets, machines et conteneurs nécessaires. Bonne chance !</div><div class="mb-2 small text-normal">Inspiré du jeu <a href="https://factorio.com/" target="_blank">Factorio</a></div>',
+    //---
+    'satisfactory1T0M1': 'Amélioration 1',
+    'satisfactory1T0M1Desc': '<div class="mb-2">En tant que pionnier travaillant pour Nous, vous êtes déposé sur une planète extraterrestre. Pour atteindre les jalons de l\'entreprise, nous attendons de vous que vous construisiez une usine de manière à permettre une expansion et une conplexification faciles. Nous faisons l\'histoire ici! Visez grand ou rentrez chez vous !</div><div class="mb-2 small text-normal">Inspiré du jeu <a href="https://www.satisfactorygame.com/" target="_blank">Satisfactory</a></div>',
     //---
     'techAutomation1': 'Automatisation 1',
     'techSteel': 'Acier',
@@ -168,6 +171,15 @@ var fr_translations = {
     'itemRocketPart': 'Pièce de fusée',
     'itemArmor': 'Armure',
     'itemSatellite': 'Satellite',
+    'itemIronIngot': 'Lingot de fer',
+    'itemIronRod': 'Barre de fer',
+    'itemWire': 'Bobine',
+    'itemLeaves': 'Feuilles',
+    'itemBiomass': 'Biomasse',
+    'itemCopperIngot': 'Lingot de cuivre',
+    'itemScrew': 'Vis',
+    'itemReinforcedPlate': 'Plaque renforcée',
+    'itemCable': 'Cable',
     //---
     'machineManual': 'Ouvrier',    
     'machineFurnace1': 'Four 1',
@@ -187,6 +199,9 @@ var fr_translations = {
     'machineRefinery': 'Raffinerie',
     'machineNuclearPlant': 'Centrale nucléaire',
     'machineRocketSilo': 'Silo à fusée',
+    'machineBioBurner1': 'Incinérateur Bio 1',
+    'machineSmelter': 'Fondrie',
+    'machineConstructor': 'Construteur',
     //---
     'storerChest': 'Coffre',
     'storerBarrel': 'Fût',

@@ -68,13 +68,14 @@ var en_translations = {
     'word_CollapseAll': 'Collapse All',
     'word_ExpandAll': 'Expand All',
     'word_None': 'None',
-    'word_RawProduction': 'Raw Production',
-    'word_RawConsumption': 'Raw Consumption',
+    'word_RawProd': 'Raw P.',
+    'word_RawConsum': 'Raw C.',
     'word_Consumers': 'Consumers',
     'word_AvailableCount': 'Available Count',
     'word_MaxStorage': 'Max Storage',
     'word_TotalCount': 'Total Count',
-    'word_UsedCount': 'Used Count',
+    'word_UsedCount': 'Used',
+    'word_NotYetWon': 'Not Yet Won',
     //---
     'scenario_tut': 'Tutorial',
     'scenarioDesc_tut': 'Learn basic mecanisms before playing other scenarios. Strongly recommended for new players.',
@@ -102,6 +103,12 @@ var en_translations = {
     //---
     'factorio1Obj': 'Escape',
     'factorio1ObjDesc': '<div class="mb-2">You crashed on an hostile planet. Your goal is to escape from there. To do it you have to build a Rocket (composed by 100 Rocket Parts), an Armor to protect you during travel and a Satellite to navigate to home.</div><div class="mb-2">Below, you will find techs that unlock necessary items, machines and storers. Good luck!</div><div class="mb-2 small text-normal">Inspired by <a href="https://factorio.com/" target="_blank">Factorio</a> game</div>',
+    //---
+    'satisfactory1T0M1': 'Upgrade 1',
+    'satisfactory1T0M1Desc': '<div class="mb-2">As a pioneer working for Us, you are dropped onto an alien planet. To achieve company milestones we expect you to construct a factory in such a way that it allows for easy expansion and complexion. We’re making history here! Go big or go home!</div><div class="mb-2 small text-normal">Inspired by <a href="https://www.satisfactorygame.com/" target="_blank">Satisfactory</a> game</div>',
+    //---
+    'satisfactory1T0M2': 'Upgrade 2',
+    'satisfactory1T0M3': 'Upgrade 3',
     //---
     'techAutomation1': 'Automation 1',
     'techSteel': 'Steel',
@@ -168,6 +175,15 @@ var en_translations = {
     'itemRocketPart': 'Rocket Part',
     'itemArmor': 'Armor',
     'itemSatellite': 'Satellite',
+    'itemIronIngot': 'Iron Ingot',
+    'itemIronRod': 'Iron Rod',
+    'itemWire': 'Wire',
+    'itemLeaves': 'Leaves',
+    'itemBiomass': 'Biomass',
+    'itemCopperIngot': 'Copper Ingot',
+    'itemScrew': 'Screw',
+    'itemReinforcedPlate': 'Reinforced Plate',
+    'itemCable': 'Cable',
     //---
     'machineManual': 'Worker',    
     'machineFurnace1': 'Furnace 1',    
@@ -187,6 +203,9 @@ var en_translations = {
     'machineRefinery': 'Refinery',
     'machineNuclearPlant': 'Nuclear Plant',
     'machineRocketSilo': 'Rocket Silo',
+    'machineBioBurner1': 'Bio Burner 1',
+    'machineSmelter': 'Smelter',
+    'machineConstructor': 'Constructor',
     //---
     'storerChest': 'Chest',
     'storerBarrel': 'Barrel',

@@ -8,7 +8,7 @@ var TplToastExport = function() {
             html += '<div class="toast-body">'
                 html += i18next.t('toast_export')
             html += '</div>'
-            html += '<button type="button" class="btn-close me-2 m-auto" data-bs-dismiss="toast" aria-label="' + i18next.t('word_Close') + '"><i class="text-white fas fa-times"></i></button>'
+            html += '<button type="button" class="btn-close p-2" data-bs-dismiss="toast" aria-label="' + i18next.t('word_Close') + '"><i class="text-black fas fa-times"></i></button>'
         html += '</div>'
     html += '</div>'
     //---
@@ -24,7 +24,7 @@ var TplToastImportEmpty = function() {
             html += '<div class="toast-body">'
                 html += i18next.t('toast_importEmpty')
             html += '</div>'
-            html += '<button type="button" class="btn-close me-2 m-auto" data-bs-dismiss="toast" aria-label="' + i18next.t('word_Close') + '"><i class="text-white fas fa-times"></i></button>'
+            html += '<button type="button" class="btn-close p-2" data-bs-dismiss="toast" aria-label="' + i18next.t('word_Close') + '"><i class="text-white fas fa-times"></i></button>'
         html += '</div>'
     html += '</div>'
     //---
@@ -40,7 +40,7 @@ var TplToastImportCorrupted = function() {
             html += '<div class="toast-body">'
                 html += i18next.t('toast_importCorrupted')
             html += '</div>'
-            html += '<button type="button" class="btn-close me-2 m-auto" data-bs-dismiss="toast" aria-label="' + i18next.t('word_Close') + '"><i class="text-white fas fa-times"></i></button>'
+            html += '<button type="button" class="btn-close p-2" data-bs-dismiss="toast" aria-label="' + i18next.t('word_Close') + '"><i class="text-white fas fa-times"></i></button>'
         html += '</div>'
     html += '</div>'
     //---

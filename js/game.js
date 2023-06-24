@@ -77,8 +77,6 @@ class GameItem extends GameElem {
         this.rawProd = 0
         this.rawConsum = 0
         //---
-        this.consumers = []
-        //---
         this.collapsed = true
         //---
         this.selectStorageCount = '1'
@@ -322,8 +320,6 @@ class Game {
             //---
             elem.rawProd = 0
             elem.rawConsum = 0
-            //---
-            elem.consumers = []
         })
         //---
         let lines = this.elems.filter(elem => (elem.type == 'line' || elem.type == 'manual') && elem.unlocked == true && elem.count > 0)
@@ -339,8 +335,6 @@ class Game {
                         let inputElem = this.elems.find(elem => elem.id == input.id)
                         inputElem.prod -= input.count * line.count
                         inputElem.rawConsum += input.count * line.count
-                        //---
-                        if (!inputElem.consumers.includes(line.img)) inputElem.consumers.push(line.img)
                     })
                 }
                 //---
@@ -355,9 +349,6 @@ class Game {
             let newCount = elem.count + prod
             //---
             if (newCount != elem.count) elem.count = newCount
-        })
-        //---
-        elems.forEach(elem => {
             //---
             let max = this.getMax(elem.id)
             if (max > 0 && elem.count > max) elem.count = max
