@@ -74,7 +74,8 @@ var zh_translations = {
     'word_AvailableCount': '可用数量',
     'word_MaxStorage': '最大存储',
     'word_TotalCount': '总计数量',
-    'word_UsedCount': '使用数量',
+    'word_UsedCount': '已使用',
+    'word_NotYetWon': '尚未获胜',
     //---
     'scenario_tut': '教程',
     'scenarioDesc_tut': '在玩其他场景之前学习基本机制。 强烈推荐给新玩家。',
@@ -102,6 +103,12 @@ var zh_translations = {
     //---
     'factorio1Obj': '逃离',
     'factorio1ObjDesc': '<div class="mb-2">你坠毁在一个充满敌意的星球上。 你的目标是逃离那里。 为此，您必须建造一个火箭（由 100 个火箭部件组成）、一个在旅行中保护您的装甲和一个导航回家的卫星。</div><div class="mb-2">下面，您将找到解锁必要物品、机器和储物柜的技术。 祝你好运！</div><div class="mb-2 small text-normal">灵感来自 <a href="https://factorio.com/" target="_blank">Factorio</a> 游戏</div>',
+    //---
+    'satisfactory1T0M1': '升级 1',
+    'satisfactory1T0M1Desc': '<div class="mb-2">作为为我们工作的先驱者，您被降落到一个外星球上。 为了实现公司的里程碑，我们希望您以易于扩展和复杂化的方式建造工厂。 我们在这里创造历史！ 要么做大，要么回家！</div><div class="mb-2 small text-normal">灵感来自于 <a href="https://www.satisfactorygame.com/" target="_blank">Satisfactory</a> 游戏</div>',
+    //---
+    'satisfactory1T0M2': '升级 2',
+    'satisfactory1T0M3': '升级 3',
     //---
     'techAutomation1': '自动化 1',
     'techSteel': '钢',
@@ -168,6 +175,15 @@ var zh_translations = {
     'itemRocketPart': '火箭零件',
     'itemArmor': '护甲',
     'itemSatellite': '卫星',
+    'itemIronIngot': '铁锭',
+    'itemIronRod': '铁棒',
+    'itemWire': '金属丝',
+    'itemLeaves': '树叶',
+    'itemBiomass': '生物质',
+    'itemCopperIngot': '铜锭',
+    'itemScrew': '螺丝',
+    'itemReinforcedPlate': '加强板',
+    'itemCable': '电缆',
     //---
     'machineManual': '工人',   
     'machineFurnace1': '炉 1',    
@@ -187,6 +203,9 @@ var zh_translations = {
     'machineRefinery': '精炼厂',
     'machineNuclearPlant': '核电厂',
     'machineRocketSilo': '火箭筒仓',
+    'machineBioBurner1': '生物炉 1',
+    'machineSmelter': '冶炼厂',
+    'machineConstructor': '构造器',
     //---
     'storerChest': '箱子',
     'storerBarrel': '桶',
