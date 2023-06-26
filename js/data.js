@@ -1,7 +1,7 @@
 //---
 var DATA = {
     //---
-    scenarii:[
+    scenarios:[
         //---
         { id:'tut', label:'scenario_tut', desc:'scenarioDesc_tut', ready:true, data:{
             //---

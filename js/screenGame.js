@@ -4,7 +4,7 @@ var TplScreenGame = function(data) {
     let tabs = [
         { id:'missions', label:'tab_missions', img:'fas fa-dot-circle', },
         { id:'items', label:'tab_items', img:'fas fa-boxes', },
-        { id:'scenarii', label:'tab_scenarii', img:'fas fa-th', },
+        { id:'scenarios', label:'tab_scenarii', img:'fas fa-th', },
         { id:'options', label:'tab_options', img:'fas fa-cog', },
     ]
     //---
@@ -71,7 +71,7 @@ var TplScreenGame = function(data) {
                 html += '<div id="storerContainer" class="container py-2"></div>'
                 html += '<div id="itemContainer" class="container py-2"></div>'
             html += '</div>'
-            html += '<div class="container px-0 bg-dark tab-pane scrollbar fade' + (data.selectedTab == 'scenarii' ? ' show active' : '') + '" id="scenarii-tab-pane" role="tabpanel" aria-labelledby="scenarii-tab" tabindex="0">'
+            html += '<div class="container px-0 bg-dark tab-pane scrollbar fade' + (data.selectedTab == 'scenarios' ? ' show active' : '') + '" id="scenarios-tab-pane" role="tabpanel" aria-labelledby="scenarios-tab" tabindex="0">'
                 html += '<div class="container py-2">'
                     html += '<div class="h6">' + i18next.t('word_Scenarii') + '</div>'
                     html += '<div class="text-warning small mb-2"><i class="fa-fw fas fa-exclamation-triangle"></i> ' + i18next.t('text_scenarioWarning') + '</div>'
@@ -209,15 +209,15 @@ class ScreenGame {
     //---
     draw() {
         //---
-        let drawRecipe = function(recipe) {
+        let drawLine = function(line) {
             //---
-            if (recipe.inputs) {
+            if (line.inputs) {
                 //---
-                recipe.inputs.forEach(input => {
+                line.inputs.forEach(input => {
                     //---
                     let inputElem = window.App.game.getElem(input.id)
                     //---
-                    let node = document.getElementById('recipeInputCountValue-' + recipe.id + '-' + input.id)
+                    let node = document.getElementById('recipeInputCountValue-' + line.id + '-' + input.id)
                     //---
                     let html = formatNumber(input.count)
                     if (node.innerHTML != html) node.innerHTML = html
@@ -226,15 +226,15 @@ class ScreenGame {
                     if (input.count > window.App.game.getAvailableCount(input.id)) style += ' text-bg-danger'
                     else style += ' text-bg-light'
                     //---
-                    node = document.getElementById('recipeInputCount-' + recipe.id + '-' + input.id)
+                    node = document.getElementById('recipeInputCount-' + line.id + '-' + input.id)
                     if (node.className != style) node.className = style
                 })
                 //---
-                let outputElem = window.App.game.getElem(recipe.output.id)
+                let outputElem = window.App.game.getElem(line.output.id)
                 //---
-                let node = document.getElementById('recipeOutputCountValue-' + recipe.id + '-' + recipe.output.id)
+                let node = document.getElementById('recipeOutputCountValue-' + line.id + '-' + line.output.id)
                 //---
-                let html = formatNumber(recipe.output.count)
+                let html = formatNumber(line.output.count)
                 if (node.innerHTML != html) node.innerHTML = html
             }
         }
@@ -276,9 +276,9 @@ class ScreenGame {
                 node = document.getElementById('itemProd-' + item.id)
                 if (node.innerHTML != html) node.innerHTML = html
                 //---
-                style = 'w-100 badge text-bg-dark text-end'
-                if (item.prod > 0) style += ' text-white'
-                else if (item.prod < 0) style += ' text-danger'
+                style = 'w-100 badge text-end'
+                if (item.prod > 0) style += ' text-bg-success'
+                else if (item.prod < 0) style += ' text-bg-danger'
                 else style += ' text-normal'
                 if (node.className != style) node.className = style
                 //---
@@ -322,7 +322,7 @@ class ScreenGame {
                         node = document.getElementById('manualStopBtn-' + manual.id)
                         if (node.className != style) node.className = style
                         //---
-                        drawRecipe(manual)
+                        drawLine(manual)
                     }
                 }
                 //---
@@ -364,7 +364,7 @@ class ScreenGame {
                                 node = document.getElementById('lineAddBtn-' + line.id)
                                 if (node.className != style) node.className = style
                                 //---
-                                drawRecipe(line)
+                                drawLine(line)
                             }
                         })
                     }
@@ -491,12 +491,14 @@ class ScreenGame {
                 html += '</div>'
                 //---
                 let node = document.getElementById(containerId)                
-                if (node.innerHTML != html) node.innerHTML = html
+                node.className = 'container py-2'
+                node.innerHTML = html
             }
             else {
                 //---
                 let node = document.getElementById(containerId)
                 node.className = 'd-none'
+                node.innerHTML = ''
             }
         }
         //---
@@ -506,21 +508,21 @@ class ScreenGame {
     //---
     refreshTabItems() {
         //---
-        let displayRecipe = function(recipe) {
+        let displayLine = function(line) {
             //---
-            let machine = window.App.game.getElem(recipe.machineId)
+            let machine = window.App.game.getElem(line.machineId)
             //---
             let html = ''
             //---
             html += '<div class="col">'
                 html += '<div class="row g-1 align-items-center justify-content-end">'
-                    if (recipe.inputs) {
-                        recipe.inputs.forEach(input => {
+                    if (line.inputs) {
+                        line.inputs.forEach(input => {
                             let inputElem = window.App.game.getElem(input.id)
                             html += '<div class="col-auto" style="width:65px;">'
-                                html += '<span id="recipeInputCount-' + recipe.id + '-' + input.id + '" class="badge d-flex align-items-center" data-bs-toggle="tooltip" data-bs-html="true" data-bs-title="<span class=\'text-white\'>' + i18next.t(inputElem.label) + '</span>">'
+                                html += '<span id="recipeInputCount-' + line.id + '-' + input.id + '" class="badge d-flex align-items-center" data-bs-toggle="tooltip" data-bs-html="true" data-bs-title="<span class=\'text-white\'>' + i18next.t(inputElem.label) + '</span>">'
                                     html += '<img src="' + inputElem.img + '" width="16px" height="16px">'
-                                    html += '<span id="recipeInputCountValue-' + recipe.id + '-' + input.id + '" class="ms-1">' + formatNumber(input.count) + '</span>'
+                                    html += '<span id="recipeInputCountValue-' + line.id + '-' + input.id + '" class="ms-1">' + formatNumber(input.count) + '</span>'
                                 html += '</span>'
                             html += '</div>'
                         })
@@ -531,11 +533,11 @@ class ScreenGame {
                         html += '</div>'
                     }
                     html += '<div class="col-auto px-0"><span class="badge text-normal px-0"><i class="fas fa-fw fa-long-arrow-alt-right"></i></span></div>'
-                    let outputElem = window.App.game.getElem(recipe.output.id)
+                    let outputElem = window.App.game.getElem(line.output.id)
                     html += '<div class="col-auto" style="width:65px;">'
-                        html += '<span id="recipeOutputCount-' + recipe.id + '-' + recipe.output.id + '" class="badge text-bg-light d-flex align-items-center justify-content-between" data-bs-toggle="tooltip" data-bs-html="true" data-bs-title="<span class=\'text-white\'>' + i18next.t(outputElem.label) + '</span>">'
+                        html += '<span id="recipeOutputCount-' + line.id + '-' + line.output.id + '" class="badge text-bg-light d-flex align-items-center justify-content-between" data-bs-toggle="tooltip" data-bs-html="true" data-bs-title="<span class=\'text-white\'>' + i18next.t(outputElem.label) + '</span>">'
                             html += '<img src="' + outputElem.img + '" width="16px" height="16px">'
-                            html += '<span id="recipeOutputCountValue-' + recipe.id + '-' + recipe.output.id + '" class="ms-1">' + formatNumber(recipe.output.count) + '</span>'
+                            html += '<span id="recipeOutputCountValue-' + line.id + '-' + line.output.id + '" class="ms-1">' + formatNumber(line.output.count) + '</span>'
                         html += '</span>'
                     html += '</div>'
                 html += '</div>'
@@ -579,6 +581,7 @@ class ScreenGame {
                                 html += '<div id="collapse-' + item.id + '" class="collapse' + (item.collapsed ? '' : ' show') +'">'
                                     html += '<div class="card-body">'
                                         html += '<div class="row g-3">'
+                                            
                                             if (item.manualId) {
                                                 let manual = window.App.game.getElem(item.manualId)
                                                 if (manual && manual.unlocked) {
@@ -614,7 +617,7 @@ class ScreenGame {
                                                                                 html += '</div>'
                                                                             html += '</div>'
                                                                         html += '</div>'
-                                                                        html += displayRecipe(manual)
+                                                                        html += displayLine(manual)
                                                                     html += '</div>'
                                                                 html += '</div>'
                                                             html += '</div>'
@@ -684,7 +687,7 @@ class ScreenGame {
                                                                                 html += '</div>'
                                                                                 html += '<div class="col-12">'
                                                                                     html += '<div class="row gx-2 align-items-center">'
-                                                                                        html += displayRecipe(line)
+                                                                                        html += displayLine(line)
                                                                                     html += '</div>'
                                                                                 html += '</div>'
                                                                             html += '</div>'
@@ -756,9 +759,9 @@ class ScreenGame {
                                                                     html += '</div>'
                                                                 html += '</div>'
                                                             }
-                                                        html += '</div>'
+                                                        }
                                                     html += '</div>'
-                                                }
+                                                html += '</div>'
                                             }
                                         html += '</div>'
                                     html += '</div>'
@@ -769,6 +772,7 @@ class ScreenGame {
                 html += '</div>'
                 //---
                 let node = document.getElementById(containerId)                
+                node.className = 'container py-2'
                 node.innerHTML = html
             }
             else {
@@ -779,9 +783,9 @@ class ScreenGame {
             }
         }
         //---
-        displayContainer('itemContainer', i18next.t('word_Items'), window.App.game.elems.filter(elem => elem.type == 'item' && elem.unlocked), 'item')
         displayContainer('machineContainer', i18next.t('word_Machines'), window.App.game.elems.filter(elem => elem.id != 'machineManual' && elem.type == 'machine' && elem.unlocked), 'machine')
         displayContainer('storerContainer', i18next.t('word_Storers'), window.App.game.elems.filter(elem => elem.type == 'storer' && elem.unlocked), 'storer')
+        displayContainer('itemContainer', i18next.t('word_Items'), window.App.game.elems.filter(elem => elem.type == 'item' && elem.unlocked), 'item')
         //---
         let tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
         let tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
@@ -791,8 +795,8 @@ class ScreenGame {
         //---
         let html = ''
         //---
-        let scenarii = window.App.game.scenarii.filter(scenario => scenario.ready)
-        scenarii.forEach(scenario => {
+        let scenarios = window.App.game.scenarios.filter(scenario => scenario.ready)
+        scenarios.forEach(scenario => {
             html += '<div class="col-12 col-md-6 col-lg-6 col-xl-4">'
                 html += '<button type="button" class="w-100 btn btn-light text-start' + (scenario.id == window.App.game.scenario.id ? ' border-warning' : '') + '" onclick="if (confirm(\'' + i18next.t('text_changeScenarioConfirm') + '\')) window.App.doClick(\'selectScenario\', { scenarioId:\'' + scenario.id + '\' })">'
                     html += '<div class="row g-1 justify-content-center">'

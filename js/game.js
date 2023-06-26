@@ -77,7 +77,7 @@ class GameItem extends GameElem {
         this.rawProd = 0
         this.rawConsum = 0
         //---
-        this.collapsed = true
+        this.collapsed = false
         //---
         this.selectStorageCount = '1'
     }
@@ -215,17 +215,17 @@ class Game {
         this.victory = false
         this.victoryReqs = null
         //---
-        this.scenarii = []
-        DATA.scenarii.forEach(scenario => {
+        this.scenarios = []
+        DATA.scenarios.forEach(scenario => {
             //---
             let newScenario = new GameScenario(scenario)
-            this.scenarii.push(newScenario)
+            this.scenarios.push(newScenario)
         })
     }
     //---
     loadScenario(scenarioId) {
         //---
-        this.scenario = this.scenarii.find(scenario => scenario.id == scenarioId)
+        this.scenario = this.scenarios.find(scenario => scenario.id == scenarioId)
         //---
         this.elems = []
         this.lines = []
@@ -266,7 +266,7 @@ class Game {
         //---
         if (data.currentManualId) this.currentManualId = data.currentManualId
         //---
-        if (data.scenarii) this.scenarii.forEach(scenario => { if (data.scenarii[scenario.id]) scenario.load(data.scenarii[scenario.id]) })
+        if (data.scenarios) this.scenarios.forEach(scenario => { if (data.scenarios[scenario.id]) scenario.load(data.scenarios[scenario.id]) })
         //---
         this.refreshUnlocked()
     }
@@ -284,8 +284,8 @@ class Game {
         //---
         savedData.currentManualId = this.currentManualId
         //---
-        savedData.scenarii = {}
-        this.scenarii.forEach(scenario => savedData.scenarii[scenario.id] = scenario.getSaveData())
+        savedData.scenarios = {}
+        this.scenarios.forEach(scenario => savedData.scenarios[scenario.id] = scenario.getSaveData())
         //---
         return savedData
     }

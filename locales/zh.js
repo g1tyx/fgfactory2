@@ -99,16 +99,20 @@ var zh_translations = {
     'tutMission6Desc': '<div class="mb-2">有了机器和仓库，您的工厂可以变得越来越大。 现在你知道了玩所有场景的基本机制。 达到最终目标并完成教程。 享受！</div>',
     //---
     'scenario_factorio1': '逃离 1',
-    'scenarioDesc_factorio1': '坠毁在一个充满敌意的星球上，你必须逃脱。 受 Factorio 游戏启发的基本场景。',
+    'scenarioDesc_factorio1': '坠毁在一个充满敌意的星球上，你必须逃离. 基本场景的灵感来自 <span class="text-white">Factorio</span> 游戏.',
     //---
     'factorio1Obj': '逃离',
     'factorio1ObjDesc': '<div class="mb-2">你坠毁在一个充满敌意的星球上。 你的目标是逃离那里。 为此，您必须建造一个火箭（由 100 个火箭部件组成）、一个在旅行中保护您的装甲和一个导航回家的卫星。</div><div class="mb-2">下面，您将找到解锁必要物品、机器和储物柜的技术。 祝你好运！</div><div class="mb-2 small text-normal">灵感来自 <a href="https://factorio.com/" target="_blank">Factorio</a> 游戏</div>',
+    //---
+    'scenario_satisfactory1': '本月最佳员工 1',
+    'scenarioDesc_satisfactory1': '掉落到一个星球上，你必须实现公司的里程碑. 场景灵感来自 <span class="text-white">Satisfactory</span> 游戏.',
     //---
     'satisfactory1T0M1': '升级 1',
     'satisfactory1T0M1Desc': '<div class="mb-2">作为为我们工作的先驱者，您被降落到一个外星球上。 为了实现公司的里程碑，我们希望您以易于扩展和复杂化的方式建造工厂。 我们在这里创造历史！ 要么做大，要么回家！</div><div class="mb-2 small text-normal">灵感来自于 <a href="https://www.satisfactorygame.com/" target="_blank">Satisfactory</a> 游戏</div>',
     //---
     'satisfactory1T0M2': '升级 2',
     'satisfactory1T0M3': '升级 3',
+    'satisfactory1T0M4': '升级 4',
     //---
     'techAutomation1': '自动化 1',
     'techSteel': '钢',

@@ -99,16 +99,20 @@ var en_translations = {
     'tutMission6Desc': '<div class="mb-2">With machines and storers, your factory could grow bigger and bigger. Now you know basic mecanisms to play all the scenarios. Reach the final objective and complete the tutorial. Enjoy!</div>',
     //---
     'scenario_factorio1': 'Escape 1',
-    'scenarioDesc_factorio1': 'Crashed on an hostile planet, you have to escape. Basic scenario inspired by Factorio game.',
+    'scenarioDesc_factorio1': 'Crashed on an hostile planet, you have to escape. Basic scenario inspired by <span class="text-white">Factorio</span> game.',
     //---
     'factorio1Obj': 'Escape',
     'factorio1ObjDesc': '<div class="mb-2">You crashed on an hostile planet. Your goal is to escape from there. To do it you have to build a Rocket (composed by 100 Rocket Parts), an Armor to protect you during travel and a Satellite to navigate to home.</div><div class="mb-2">Below, you will find techs that unlock necessary items, machines and storers. Good luck!</div><div class="mb-2 small text-normal">Inspired by <a href="https://factorio.com/" target="_blank">Factorio</a> game</div>',
+    //---
+    'scenario_satisfactory1': 'Best employee of the month 1',
+    'scenarioDesc_satisfactory1': 'Dropped onto a planet, you have to achieve company milestones. Scenario inspired by <span class="text-white">Satisfactory</span> game.',
     //---
     'satisfactory1T0M1': 'Upgrade 1',
     'satisfactory1T0M1Desc': '<div class="mb-2">As a pioneer working for Us, you are dropped onto an alien planet. To achieve company milestones we expect you to construct a factory in such a way that it allows for easy expansion and complexion. We’re making history here! Go big or go home!</div><div class="mb-2 small text-normal">Inspired by <a href="https://www.satisfactorygame.com/" target="_blank">Satisfactory</a> game</div>',
     //---
     'satisfactory1T0M2': 'Upgrade 2',
     'satisfactory1T0M3': 'Upgrade 3',
+    'satisfactory1T0M4': 'Upgrade 4',
     //---
     'techAutomation1': 'Automation 1',
     'techSteel': 'Steel',
