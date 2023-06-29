@@ -372,7 +372,7 @@ class Game {
         let usedCount = 0
         //---
         let elem = this.getElem(elemId)
-        if (elem.cat == 'machine') {
+        if (elem.cat == 'machine' || (elem.cat == 'energy' && elem.id != 'itemElectricity')) {
             //---
             let lines = this.elems.filter(elem => elem.type == 'line' && elem.unlocked == true && elem.count > 0 && elem.machineId == elemId)
             lines.forEach(line => { usedCount += line.count })

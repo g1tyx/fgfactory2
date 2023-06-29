@@ -261,7 +261,7 @@ class ScreenGame {
                                             else {
                                                 if (elem.lines) html += '<div class="col-auto" style="width:75px;"><span id="itemProd-' + elem.id + '"></span></div>'
                                                 html += '<div class="col-auto" style="width:65px;"><span id="itemCount-' + elem.id + '"></span></div>'
-                                                if (elem.cat == 'machine' || elem.cat == 'storer') html += '<div class="col-auto" style="width:65px;"><span id="itemAvailableCount-' + elem.id + '"></span></div>'
+                                                if (elem.cat == 'machine' || elem.cat == 'storer' || (elem.cat == 'energy' && elem.id != 'itemElectricity')) html += '<div class="col-auto" style="width:65px;"><span id="itemAvailableCount-' + elem.id + '"></span></div>'
                                             }
                                         }
                                     html += '</div>'
@@ -400,7 +400,7 @@ class ScreenGame {
                                                 html += '<div class="row gy-3">'
                                                     html += '<div class="col-12 lh-1">'
                                                         html += '<div class="row gx-2 align-items-center justify-content-end">'
-                                                            if (elem.cat == 'machine' || elem.cat == 'storer') {
+                                                            if (elem.cat == 'machine' || elem.cat == 'storer' || (elem.cat == 'energy' && elem.id != 'itemElectricity')) {
                                                                 html += '<div class="col-auto">'
                                                                     html += '<span class="small opacity-50">' + i18next.t('word_UsedCount') + '</span>'
                                                                     html += '<span id="itemUsedCount-' + elem.id + '" class="small ms-1 text-white"></span>'
@@ -640,7 +640,7 @@ class ScreenGame {
                     else style += ' text-normal'
                     if (node.className != style) node.className = style
                     //---
-                    if (item.cat == 'machine' || item.cat == 'storer') {
+                    if (item.cat == 'machine' || item.cat == 'storer' || (item.cat == 'energy' && item.id != 'itemElectricity')) {
                         //---
                         let node = document.getElementById('itemAvailableCount-' + item.id)
                         let count = window.app.game.getAvailableCount(item.id)
@@ -753,7 +753,7 @@ class ScreenGame {
                         node = document.getElementById('itemMax-' + item.id)
                         if (node.innerHTML != html) node.innerHTML = html
                         //---
-                        if (item.cat == 'machine' || item.cat == 'storer') {
+                        if (item.cat == 'machine' || item.cat == 'storer' || (item.cat == 'energy' && item.id != 'itemElectricity')) {
                             //---
                             html = formatNumber(window.app.game.getUsedCount(item.id))
                             node = document.getElementById('itemUsedCount-' + item.id)
