@@ -12,9 +12,9 @@ var TplScreenGame = function(data) {
     //---
     html += '<div class="position-relative w-100 h-100">'
         html += '<div class="position-absolute" style="top:0; width:100%; height:48px;">'
-            html += '<div class="h-100 container col-12 bg-light border-bottom border-dark d-flex align-items-center">'
-                html += '<div class="flex-fill row gx-2 align-items-center">'
-                    html += '<div class="col-auto"><img src="logo.png" width="24px" height="24px" class="rounded"></div>'
+            html += '<div class="h-100 container px-3 col-12 bg-light border-bottom border-dark d-flex align-items-center">'
+                html += '<div class="flex-fill row gx-3 align-items-center">'
+                    html += '<div class="col-auto pe-0"><img src="logo.png" width="24px" height="24px" class="rounded"></div>'
                     html += '<div class="col"><span class="h6 text-white">' + i18next.t('game_title') + '</span></div>'
                     html += '<div class="col-auto">'
                         html += '<div class="dropdown">'
@@ -23,8 +23,12 @@ var TplScreenGame = function(data) {
                             html += '</button>'
                             html += '<div class="dropdown-menu">'
                                 html += '<div class="px-2 py-1 text-center small">'
+                                    html += '<span>' + i18next.t('text_imagesFrom') + '</span>'
+                                    html += ' <a href="https://game-icons.net/" target="_blank">Game-icons.net</a>'
+                                html += '</div>'
+                                html += '<div class="px-2 py-1 text-center small">'
                                     html += '<span>' + i18next.t('text_iconsBy') + '</span>'
-                                    html += ' <a href="https://icons8.com/" target="_blank">Icons8</a>'
+                                    html += ' <a href="https://fontawesome.com/" target="_blank">Fontawesome</a>'
                                 html += '</div>'
                                 html += '<div class="px-2 py-1 text-center small">'
                                     html += '<span>' + i18next.t('text_love') + '</span>'
@@ -63,60 +67,71 @@ var TplScreenGame = function(data) {
         html += '</div>'
         html += '<div class="position-absolute tab-content" style="top:48px; bottom:58px; width:100%; ">'
             html += '<div class="container px-0 bg-dark tab-pane scrollbar fade' + (data.selectedTab == 'missions' ? ' show active' : '') + '" id="missions-tab-pane" role="tabpanel" aria-labelledby="missions-tab" tabindex="0">'
-                html += '<div id="missionContainer" class="container py-2"></div>'
-                html += '<div id="techContainer" class="container py-2"></div>'
             html += '</div>'
             html += '<div class="container px-0 bg-dark tab-pane scrollbar fade' + (data.selectedTab == 'items' ? ' show active' : '') + '" id="items-tab-pane" role="tabpanel" aria-labelledby="items-tab" tabindex="0">'
-                html += '<div id="machineContainer" class="container py-2"></div>'
-                html += '<div id="storerContainer" class="container py-2"></div>'
-                html += '<div id="itemContainer" class="container py-2"></div>'
             html += '</div>'
             html += '<div class="container px-0 bg-dark tab-pane scrollbar fade' + (data.selectedTab == 'scenarios' ? ' show active' : '') + '" id="scenarios-tab-pane" role="tabpanel" aria-labelledby="scenarios-tab" tabindex="0">'
-                html += '<div class="container py-2">'
-                    html += '<div class="h6">' + i18next.t('word_Scenarii') + '</div>'
-                    html += '<div class="text-warning small mb-2"><i class="fa-fw fas fa-exclamation-triangle"></i> ' + i18next.t('text_scenarioWarning') + '</div>'
-                    html += '<div id="scenariiContainer" class="row g-2"></div>'
+                html += '<div class="p-3">'
+                    html += '<div class="h6 mb-3">' + i18next.t('word_Scenarii') + '</div>'
+                    html += '<div class="text-warning small mb-3"><i class="fa-fw fas fa-exclamation-triangle"></i> ' + i18next.t('text_scenarioWarning') + '</div>'
+                    html += '<div id="scenariiContainer" class="row g-3"></div>'
                 html += '</div>'
             html += '</div>'
             html += '<div class="container px-0 bg-dark tab-pane scrollbar fade' + (data.selectedTab == 'options' ? ' show active' : '') + '" id="options-tab-pane" role="tabpanel" aria-labelledby="options-tab" tabindex="0">'
-                html += '<div class="container py-2">'
-                    html += '<div class="h6">' + i18next.t('word_Language') + '</div>'
-                    html += '<div class="row g-2">'
+                html += '<div class="p-3">'
+                    html += '<div class="h6 mb-3">' + i18next.t('word_Language') + '</div>'
+                    html += '<div class="row g-3">'
                         html += '<div class="col-auto">'
-                            html += '<button type="button" class="btn btn-light' + (i18next.language == 'en-US' ? ' border-warning' : '') + '" onclick="window.App.changeLocale(\'en-US\')">'
+                            html += '<button type="button" class="btn btn-light' + (i18next.language == 'en-US' ? ' border-warning' : '') + '" onclick="window.app.changeLocale(\'en-US\')">'
                                 html += '<img src="img/en.png" height="24px">'
                             html += '</button>'
                         html += '</div>'
                         html += '<div class="col-auto">'
-                            html += '<button type="button" class="btn btn-light' + (i18next.language == 'fr-FR' ? ' border-warning' : '') + '" onclick="window.App.changeLocale(\'fr-FR\')">'
+                            html += '<button type="button" class="btn btn-light' + (i18next.language == 'fr-FR' ? ' border-warning' : '') + '" onclick="window.app.changeLocale(\'fr-FR\')">'
                                 html += '<img src="img/fr.png" height="24px">'
+                            html += '</button>'
+                        html += '</div>'
+                        html += '<div class="col-auto">'
+                            html += '<button type="button" class="btn btn-light' + (i18next.language == 'zh-CS' ? ' border-warning' : '') + '" onclick="window.app.changeLocale(\'zh-CS\')">'
+                                html += '<img src="img/zh.png" height="24px">'
                             html += '</button>'
                         html += '</div>'
                     html += '</div>'
                 html += '</div>'
-                html += '<div class="container py-2">'
-                    html += '<div class="h6">' + i18next.t('word_LocalData') + '</div>'
-                    html += '<div class="row g-2">'
+                html += '<div class="p-3">'
+                    html += '<div class="h6 mb-3">' + i18next.t('word_Options') + '</div>'
+                    html += '<div class="row g-3">'
+                        html += '<div class="col-12 col-md-6">'
+                            html += '<div class="form-check">'
+                                html += '<input class="form-check-input" type="checkbox" value="" id="checkShowLocked"' + (data.showLocked ? ' checked' : '') + ' onclick="window.app.doClick(\'toggleShowLocked\')">'
+                                html += '<label class="form-check-label text-white" for="checkShowLocked">' + i18next.t('word_ShowLocked') + '</label>'
+                            html += '</div>'
+                        html += '</div>'
+                    html += '</div>'
+                html += '</div>'
+                html += '<div class="p-3">'
+                    html += '<div class="h6 mb-3">' + i18next.t('word_LocalData') + '</div>'
+                    html += '<div class="row g-3">'
                         html += '<div class="col-12 col-md-6">'
                             html += '<div class="card card-body">'
                                 html += '<div class="mb-2 d-flex justify-content-center">'
-                                    html += '<textarea spellcheck="false" rows="3" class="w-100 form-control" disabled readonly>' + window.App.getLocalData() + '</textarea>'
+                                    html += '<textarea spellcheck="false" rows="3" class="w-100 form-control" disabled readonly>' + window.app.getLocalData() + '</textarea>'
                                 html += '</div>'
                                 html += '<div class="row g-2 align-items-center justify-content-center">'
                                     html += '<div class="col-4">'
-                                        html += '<button type="button" class="w-100 btn btn-danger" onclick="window.App.showModal(\'modalWipe\')">'
+                                        html += '<button type="button" class="w-100 btn btn-danger" onclick="window.app.showModal(\'modalWipe\')">'
                                             html += '<span><i class="fas fa-fw fa-skull"></i></span>'
                                             html += '<span class="ms-1">' + i18next.t('btn_wipeSave') + '</span>'
                                         html += '</button>'
                                     html += '</div>'
                                     html += '<div class="col-4">'
-                                        html += '<button type="button" class="w-100 btn btn-warning" onclick="window.App.exportSave()">'
+                                        html += '<button type="button" class="w-100 btn btn-warning" onclick="window.app.exportSave()">'
                                             html += '<span><i class="fas fa-fw fa-copy"></i></span>'
                                             html += '<span class="ms-1">' + i18next.t('btn_exportSave') + '</span>'
                                         html += '</button>'
                                     html += '</div>'
                                     html += '<div class="col-4">'
-                                        html += '<button type="button" class="w-100 btn btn-warning" onclick="window.App.downloadSave()">'
+                                        html += '<button type="button" class="w-100 btn btn-warning" onclick="window.app.downloadSave()">'
                                             html += '<span><i class="fas fa-fw fa-download"></i></span>'
                                             html += '<span class="ms-1">' + i18next.t('btn_downloadSave') + '</span>'
                                         html += '</button>'
@@ -130,7 +145,7 @@ var TplScreenGame = function(data) {
                                     html += '<textarea spellcheck="false" rows="3" id="importData" class="w-100 form-control"></textarea>'
                                 html += '</div>'
                                 html += '<div class="col-4 ms-auto">'
-                                    html += '<button type="button" class="w-100 btn btn-warning" onclick="window.App.importSave()">'
+                                    html += '<button type="button" class="w-100 btn btn-warning" onclick="window.app.importSave()">'
                                         html += '<span><i class="fas fa-fw fa-upload"></i></span>'
                                         html += '<span class="ms-1">' + i18next.t('btn_importSave') + '</span>'
                                     html += '</button>'
@@ -146,7 +161,7 @@ var TplScreenGame = function(data) {
                 html += '<div class="h-100 nav nav-tabs">'
                     tabs.forEach(tab => {
                         html += '<div class="col col-md-2 col-lg-1 nav-item">'
-                            html += '<button type="button" class="position-relative nav-link' + (data.selectedTab == tab.id ? ' active' : '') + '" data-bs-toggle="tab" data-bs-target="#' + tab.id + '-tab-pane"role="tab" aria-controls="' + tab.id + '-tab-pane" onclick="window.App.doClick(\'selectTab\', { tabId:\'' + tab.id + '\' })">'
+                            html += '<button type="button" class="position-relative nav-link' + (data.selectedTab == tab.id ? ' active' : '') + '" data-bs-toggle="tab" data-bs-target="#' + tab.id + '-tab-pane"role="tab" aria-controls="' + tab.id + '-tab-pane" onclick="window.app.doClick(\'selectTab\', { tabId:\'' + tab.id + '\' })">'
                                 html += '<div class="text-center"><i class="fs-6 ' + tab.img + '"></i></div>'
                                 html += '<div class="text-center small"><span>' + i18next.t(tab.label) + '</span></div>'
                             html += '</button>'
@@ -172,18 +187,21 @@ class ScreenGame {
     //---
     constructor() {
         //---
+        this.showLocked = false
         this.selectedTab = 'missions'
     }
     //---
     load(data) {
         //---
-        if (data.selectedTab) this.selectedTab = data.selectedTab
+        if (data.showLocked != null) this.showLocked = data.showLocked
+        if (data.selectedTab != null) this.selectedTab = data.selectedTab
     }
     //---
     getSaveData() {
         //---
         let savedData = {}
         //---
+        savedData.showLocked = this.showLocked
         savedData.selectedTab = this.selectedTab
         //---
         return savedData
@@ -202,585 +220,321 @@ class ScreenGame {
         let tabList = [...triggerTabList].map(tabTriggerEl => new bootstrap.Tab(tabTriggerEl))
     }
     //---
-    draw() {
+    getContainerHtml(containerName, elems, cat) {
         //---
-        let drawLine = function(line) {
-            //---
-            if (line.inputs) {
-                //---
-                line.inputs.forEach(input => {
-                    //---
-                    let inputElem = window.App.game.getElem(input.id)
-                    //---
-                    let node = document.getElementById('recipeInputCountValue-' + line.id + '-' + input.id)
-                    //---
-                    let html = formatNumber(input.count)
-                    if (node.innerHTML != html) node.innerHTML = html
-                    //---
-                    let style = 'badge d-flex align-items-center justify-content-between'
-                    if (input.count > window.App.game.getAvailableCount(input.id)) style += ' text-bg-danger'
-                    else style += ' text-bg-light'
-                    //---
-                    node = document.getElementById('recipeInputCount-' + line.id + '-' + input.id)
-                    if (node.className != style) node.className = style
-                })
-                //---
-                let outputElem = window.App.game.getElem(line.output.id)
-                //---
-                let node = document.getElementById('recipeOutputCountValue-' + line.id + '-' + line.output.id)
-                //---
-                let html = formatNumber(line.output.count)
-                if (node.innerHTML != html) node.innerHTML = html
-            }
-        }
+        let html = ''
         //---
-        if (this.selectedTab == 'missions') {
+        if (elems.length > 0) {
             //---
-            let elems = window.App.game.elems.filter(elem => (elem.type == 'mission' || elem.type == 'tech') && elem.unlocked)
-            elems.forEach(elem => {
-                //---
-                if (elem.count < 1) {
-                    //---
-                    elem.costs.forEach(cost => {
-                        //---
-                        let style = 'badge d-flex align-items-center justify-content-between'
-                        if (window.App.game.getAvailableCount(cost.id) < cost.count) style += ' text-bg-danger'
-                        else style += ' text-bg-light'
-                        //---
-                        let node = document.getElementById('missionNeedCount-' + elem.id + '-' + cost.id)
-                        if (node.className != style) node.className = style
-                    })
-                    //---
-                    let style = 'btn btn-warning'
-                    if (!window.App.game.canCompleteMission(elem.id)) style += ' disabled'
-                    //---
-                    let node = document.getElementById('missionBtn-' + elem.id)
-                    if (node.className != style) node.className = style
-                }
-            })
-        }
-        else if (this.selectedTab == 'items') {
-            //---
-            let items = window.App.game.elems.filter(elem => elem.id != 'machineManual' && elem.unlocked && (elem.type == 'item' || elem.type == 'machine' || elem.type == 'storer'))
-            items.forEach(item => {
-                //---
-                let html = '', style = '', node
-                //---
-                if (item.prod > 0) html = '+' + formatNumber(item.prod) + ' <small class="opacity-50">/s</small>'
-                else if (item.prod <= 0) html = formatNumber(item.prod) + ' <small class="opacity-50">/s</small>'
-                node = document.getElementById('itemProd-' + item.id)
-                if (node.innerHTML != html) node.innerHTML = html
-                //---
-                style = 'w-100 badge text-end'
-                if (item.prod > 0) style += ' text-bg-success'
-                else if (item.prod < 0) style += ' text-bg-danger'
-                else style += ' text-normal'
-                if (node.className != style) node.className = style
-                //---
-                html = formatNumber(item.count, 2)
-                node = document.getElementById('itemCount-' + item.id)
-                if (node.innerHTML != html) node.innerHTML = html
-                //---
-                let max = window.App.game.getMax(item.id)
-                style = 'w-100 badge text-end'
-                if (max > 0 && item.count >= max) style += ' text-bg-danger'
-                else if (item.count > 0) style += ' text-bg-dark'
-                else style += ' text-bg-dark text-normal'
-                if (node.className != style) node.className = style
-                //---
-                if (item.type == 'machine' || item.type == 'storer') {
-                    //---
-                    let node = document.getElementById('itemAvailableCount-' + item.id)
-                    let count = window.App.game.getAvailableCount(item.id)
-                    //---
-                    html = formatNumber(count, 2)
-                    if (node.innerHTML != html) node.innerHTML = html
-                    //---
-                    style = 'w-100 badge text-end'
-                    if (count > 0) style += ' text-bg-success'
-                    else style += ' text-bg-dark text-normal'
-                    if (node.className != style) node.className = style
-                }
-                //---
-                if (item.manualId) {
-                    //---
-                    let manual = window.App.game.getElem(item.manualId)
-                    if (manual.unlocked) {
-                        //---
-                        style = 'btn btn-warning'
-                        if (!window.App.game.canStartManual(manual.id)) style += ' disabled'
-                        node = document.getElementById('manualStartBtn-' + manual.id)
-                        if (node.className != style) node.className = style
-                        //---
-                        style = 'btn btn-danger'
-                        if (!window.App.game.canStopManual(manual.id)) style += ' disabled'
-                        node = document.getElementById('manualStopBtn-' + manual.id)
-                        if (node.className != style) node.className = style
-                        //---
-                        drawLine(manual)
-                    }
-                }
-                //---
-                if (item.lines && item.lines.length > 0) {
-                    let unlocked = 0
-                    item.lines.forEach(lineId => {
-                        let line = window.App.game.getElem(lineId)
-                        if (line.unlocked) unlocked += 1
-                    })
-                    if (unlocked > 0) {
-                        //---
-                        html = formatNumber(item.rawConsum) + ' <small class="opacity-50">/s</small>'
-                        node = document.getElementById('itemRawConsum-' + item.id)
-                        if (node.innerHTML != html) node.innerHTML = html
-                        //---
-                        html = formatNumber(item.rawProd) + ' <small class="opacity-50">/s</small>'
-                        node = document.getElementById('itemRawProd-' + item.id)
-                        if (node.innerHTML != html) node.innerHTML = html
-                        //---
-                        item.lines.forEach(lineId => {
-                            //---
-                            let line = window.App.game.getElem(lineId)
-                            if (line.unlocked) {
-                                //---
-                                html = formatNumber(line.count)
-                                node = document.getElementById('lineCount-' + line.id)
-                                if (node.innerHTML != html) node.innerHTML = html
-                                style = ''
-                                if (line.count > 0) style += 'text-white'
-                                if (node.className != style) node.className = style
-                                //---
-                                style = 'btn btn-danger'
-                                if (!window.App.game.canRemoveLine(line.id)) style += ' disabled'
-                                node = document.getElementById('lineRemoveBtn-' + line.id)
-                                if (node.className != style) node.className = style
-                                //---
-                                style = 'btn btn-warning'
-                                if (!window.App.game.canAddLine(line.id)) style += ' disabled'
-                                node = document.getElementById('lineAddBtn-' + line.id)
-                                if (node.className != style) node.className = style
-                                //---
-                                drawLine(line)
-                            }
-                        })
-                    }
-                }
-                //---
-                if (item.storage) {
-                    //---
-                    html = formatNumber(window.App.game.getMax(item.id))
-                    node = document.getElementById('itemMax-' + item.id)
-                    if (node.innerHTML != html) node.innerHTML = html
-                    //---
-                    if (item.type == 'machine' || item.type == 'storer') {
-                        //---
-                        html = formatNumber(window.App.game.getUsedCount(item.id))
-                        node = document.getElementById('itemUsedCount-' + item.id)
-                        if (node.innerHTML != html) node.innerHTML = html
-                    }
-                    //---
-                    if (item.storage.storerId) {
-                        let storer = window.App.game.getElem(item.storage.storerId)
-                        if (storer.unlocked) {
-                            //---
-                            html = formatNumber(item.storageCount)
-                            node = document.getElementById('itemStorageCount-' + item.id)
-                            if (node.innerHTML != html) node.innerHTML = html
-                            style = ''
-                            if (item.storageCount > 0) style += 'text-white'
-                            if (node.className != style) node.className = style                        
-                            //---
-                            style = 'btn btn-danger'
-                            if (!window.App.game.canRemoveStorer(item.id)) style += ' disabled'
-                            node = document.getElementById('itemRemoveStorerBtn-' + item.id)
-                            if (node.className != style) node.className = style
-                            //---
-                            style = 'btn btn-warning'
-                            if (!window.App.game.canAddStorer(item.id)) style += ' disabled'
-                            node = document.getElementById('itemAddStorerBtn-' + item.id)
-                            if (node.className != style) node.className = style
-                        }
-                    }
-                }
-            })
-        }
-    }
-    //---
-    refreshTabMissions() {
-        //---
-        let displayContainer = function(containerId, containerName, elems, type) {
-            //---
-            let html = ''
-            //---
-            if (elems.length > 0) {
-                //---
-                html += '<div class="h6">' + containerName + '</div>'
-                html += '<div class="row g-2">'
-                    elems.forEach(elem => {
-                        html += '<div class="col-12 col-md-6 col-lg-6 col-xl-4">'
-                            html += '<div class="card">'
-                                if (elem.count < 1) {
-                                    html += '<div class="card-header">'
-                                        html += '<div class="row gx-2 align-items-center">'
-                                            html += '<div class="col">'
-                                                html += '<span>' + i18next.t(elem.label) + '</span>'
-                                            html += '</div>'
-                                        html += '</div>'
-                                    html += '</div>'
-                                    html += '<div class="card-body">'
-                                        html += '<div class="row g-3">'
-                                            if (elem.desc) html += '<div class="col-12"><span class="text-white">' + i18next.t(elem.desc) + '</span></div>'
-                                            html += '<div class="col-12">'
-                                                html += '<div class="row g-2">'
-                                                    html += '<div class="col-12 lh-1">'
-                                                        html += '<span class="small">' + i18next.t('word_Objectives') + '</span>'
-                                                    html += '</div>'
-                                                    html += '<div class="col-12">'
-                                                        html += '<div class="rounded p-2 bg-dark">'
-                                                            html += '<div class="row g-1 align-items-center">'
-                                                                html += '<div class="col">'
-                                                                    html += '<div class="row g-1 align-items-center">'
-                                                                        elem.costs.forEach(cost => {
-                                                                            let costElem = window.App.game.getElem(cost.id)
-                                                                            html += '<div class="col-auto" style="width:65px;">'
-                                                                                html += '<span id="missionNeedCount-' + elem.id + '-' + cost.id + '" class="badge text-bg-light d-flex align-items-center justify-content-between" data-bs-toggle="tooltip" data-bs-html="true" data-bs-title="<span class=\'text-white\'>' + i18next.t(costElem.label) + '</span>">'
-                                                                                    html += '<img src="' + costElem.img + '" width="16px" height="16px">'
-                                                                                    html += '<span class="ms-1">' + formatNumber(cost.count) + '</span>'
-                                                                                html += '</span>'
-                                                                            html += '</div>'
-                                                                        })
-                                                                    html += '</div>'
-                                                                html += '</div>'
-                                                                html += '<div class="col-auto">'
-                                                                    html += '<button type="button" id="missionBtn-' + elem.id + '" class="btn btn-primary" onclick="window.App.doClick(\'completeMission\', { missionId:\'' + elem.id + '\' })">'
-                                                                        html += '<i class="fa-fw fas fa-check"></i>'
-                                                                    html += '</button>'
-                                                                html += '</div>'
-                                                            html += '</div>'
-                                                        html += '</div>'
-                                                    html += '</div>'
-                                                html += '</div>'
-                                            html += '</div>'
-                                        html += '</div>'
-                                    html += '</div>'
-                                }
-                                else {
-                                    html += '<div class="card-header">'
-                                        html += '<div class="row gx-2 align-items-center">'
-                                            html += '<div class="col">'
-                                                html += '<span>' + i18next.t(elem.label) + '</span>'
-                                            html += '</div>'
-                                            html += '<div class="col-auto">'
-                                                html += '<i class="text-success fa-fw fas fa-check-circle"></i>'
-                                            html += '</div>'
-                                        html += '</div>'
-                                    html += '</div>'
-                                    html += '<div id="collapse' + elem.id + '" class="collapse">'
-                                        html += '<div class="card-body">'
-                                            html += '<div><span>' + i18next.t(elem.desc) + '</span></div>'
-                                        html += '</div>'
-                                    html += '</div>'
-                                }
-                            html += '</div>'
-                        html += '</div>'
-                    })
-                html += '</div>'
-                //---
-                let node = document.getElementById(containerId)                
-                node.className = 'container py-2'
-                node.innerHTML = html
-            }
-            else {
-                //---
-                let node = document.getElementById(containerId)
-                node.className = 'd-none'
-                node.innerHTML = ''
-            }
-        }
-        //---
-        displayContainer('missionContainer', i18next.t('word_Missions'), window.App.game.elems.filter(elem => elem.type == 'mission' && elem.unlocked), 'mission')
-        displayContainer('techContainer', i18next.t('word_Techs'), window.App.game.elems.filter(elem => elem.type == 'tech' && elem.unlocked), 'tech')
-    }
-    //---
-    refreshTabItems() {
-        //---
-        let displayLine = function(line) {
-            //---
-            let machine = window.App.game.getElem(line.machineId)
-            //---
-            let html = ''
-            //---
-            html += '<div class="col">'
-                html += '<div class="row g-1 align-items-center justify-content-end">'
-                    if (line.inputs) {
-                        line.inputs.forEach(input => {
-                            let inputElem = window.App.game.getElem(input.id)
-                            html += '<div class="col-auto" style="width:65px;">'
-                                html += '<span id="recipeInputCount-' + line.id + '-' + input.id + '" class="badge d-flex align-items-center" data-bs-toggle="tooltip" data-bs-html="true" data-bs-title="<span class=\'text-white\'>' + i18next.t(inputElem.label) + '</span>">'
-                                    html += '<img src="' + inputElem.img + '" width="16px" height="16px">'
-                                    html += '<span id="recipeInputCountValue-' + line.id + '-' + input.id + '" class="ms-1">' + formatNumber(input.count) + '</span>'
-                                html += '</span>'
-                            html += '</div>'
-                        })
-                    }
-                    else {
-                        html += '<div class="col-auto">'
-                            html += '<span>&Oslash;</span>'
-                        html += '</div>'
-                    }
-                    html += '<div class="col-auto px-0"><span class="badge text-normal px-0"><i class="fas fa-fw fa-long-arrow-alt-right"></i></span></div>'
-                    let outputElem = window.App.game.getElem(line.output.id)
-                    html += '<div class="col-auto" style="width:65px;">'
-                        html += '<span id="recipeOutputCount-' + line.id + '-' + line.output.id + '" class="badge text-bg-light d-flex align-items-center justify-content-between" data-bs-toggle="tooltip" data-bs-html="true" data-bs-title="<span class=\'text-white\'>' + i18next.t(outputElem.label) + '</span>">'
-                            html += '<img src="' + outputElem.img + '" width="16px" height="16px">'
-                            html += '<span id="recipeOutputCountValue-' + line.id + '-' + line.output.id + '" class="ms-1">' + formatNumber(line.output.count) + '</span>'
-                        html += '</span>'
-                    html += '</div>'
-                html += '</div>'
-            html += '</div>'
-            //---
-            return html
-        }
-        //---
-        let displayContainer = function(containerId, containerName, items, type) {
-            //---
-            if (items.length > 0) {
-                //---
-                let html = ''
-                //---
-                html += '<div class="row g-2">'
+            html += '<div class="p-3">'
+                html += '<div class="row g-3">'
                     html += '<div class="col-12">'
                         html += '<div class="row gx-3 align-items-center">'
                             html += '<div class="col-auto">'
                                 html += '<span class="h6">' + containerName + '</span>'
                             html += '</div>'
                             html += '<div class="col-auto">'
-                                html += '<button class="btn btn-link" onclick="window.App.doClick(\'expandAll\', { type:\'' + type + '\' })">' + i18next.t('word_ExpandAll') + '</button>'
+                                html += '<button class="btn btn-link p-0 border-0" onclick="window.app.doClick(\'expandAll\', { cat:\'' + cat + '\' })">' + i18next.t('word_ExpandAll') + '</button>'
                             html += '</div>'
                             html += '<div class="col-auto">'
-                                html += '<button class="btn btn-link" onclick="window.App.doClick(\'collapseAll\', { type:\'' + type + '\' })">' + i18next.t('word_CollapseAll') + '</button>'
+                                html += '<button class="btn btn-link p-0 border-0" onclick="window.app.doClick(\'collapseAll\', { cat:\'' + cat + '\' })">' + i18next.t('word_CollapseAll') + '</button>'
                             html += '</div>'
                         html += '</div>'
                     html += '</div>'
-                    items.forEach(item => {
+                    elems.forEach(elem => {
                         html += '<div class="col-12 col-md-6 col-lg-6 col-xl-4">'
                             html += '<div class="card">'
-                                html += '<div class="card-header" data-bs-toggle="collapse" data-bs-target="#collapse-' + item.id + '" aria-expanded="false" aria-controls="collapseExample" onclick="window.App.doClick(\'toggleCollapse\', { elemId:\'' + item.id + '\' })">'
+                                html += '<div class="card-header" data-bs-toggle="collapse" data-bs-target="#collapse-' + elem.id + '" aria-expanded="false" aria-controls="collapseExample" onclick="window.app.doClick(\'toggleCollapse\', { elemId:\'' + elem.id + '\' })">'
                                     html += '<div class="row gx-1 align-items-center">'
-                                        html += '<div class="col-auto"><img src="' + item.img + '" width="24px" height="24px"></div>'
-                                        html += '<div class="col text-truncate text-start text-white">' + i18next.t(item.label) + '</div>'
-                                        html += '<div class="col-auto" style="width:75px;"><span id="itemProd-' + item.id + '"></span></div>'
-                                        html += '<div class="col-auto" style="width:65px;"><span id="itemCount-' + item.id + '"></span></div>'
-                                        if (item.type == 'machine' || item.type == 'storer') html += '<div class="col-auto" style="width:65px;"><span id="itemAvailableCount-' + item.id + '"></span></div>'
+                                        if (elem.unlocked == false) {
+                                            html += '<div class="col-auto">'
+                                                html += '<i class="fas fa-lock"></i>'
+                                            html += '</div>'
+                                            html += '<div class="col text-truncate text-start">' + i18next.t(elem.label) + '</div>'
+                                        }
+                                        else {
+                                            if (elem.img) html += '<div class="col-auto"><img src="' + elem.img + '" width="24px" height="24px"></div>'
+                                            html += '<div class="col text-truncate text-start text-white">' + i18next.t(elem.label) + '</div>'
+                                            if (elem.cat == 'mission' || elem.cat == 'tech') {
+                                                if (elem.count > 0) html += '<div class="col-auto"><i class="fas fa-fw fa-check-circle text-success"></i></div>'
+                                            }
+                                            else {
+                                                if (elem.lines) html += '<div class="col-auto" style="width:75px;"><span id="itemProd-' + elem.id + '"></span></div>'
+                                                html += '<div class="col-auto" style="width:65px;"><span id="itemCount-' + elem.id + '"></span></div>'
+                                                if (elem.cat == 'machine' || elem.cat == 'storer') html += '<div class="col-auto" style="width:65px;"><span id="itemAvailableCount-' + elem.id + '"></span></div>'
+                                            }
+                                        }
                                     html += '</div>'
                                 html += '</div>'
-                                html += '<div id="collapse-' + item.id + '" class="collapse' + (item.collapsed ? '' : ' show') +'">'
-                                    html += '<div class="card-body">'
-                                        html += '<div class="row g-3">'
-                                            
-                                            if (item.manualId) {
-                                                let manual = window.App.game.getElem(item.manualId)
-                                                if (manual && manual.unlocked) {
-                                                    html += '<div class="col-12">'
-                                                        html += '<div class="row g-2">'
-                                                            html += '<div class="col-12 lh-1">'
-                                                                html += '<span class="small">' + i18next.t('word_Manual') + '</span>'
-                                                            html += '</div>'
-                                                            html += '<div class="col-12">'
-                                                                html += '<div class="rounded p-2 bg-dark">'
-                                                                    html += '<div class="row g-2">'
-                                                                        html += '<div class="col-12">'
-                                                                            html += '<div class="row gx-1 align-items-center">'
-                                                                                html += '<div class="col-auto">'
-                                                                                    html += '<img src="img/machines/Manual.png" width="20px" height="20px">'
-                                                                                html += '</div>'
-                                                                                html += '<div class="col">'
-                                                                                    html += '<span class="small text-white">' + i18next.t('machineManual') + '</span>'
-                                                                                html += '</div>'
-                                                                                html += '<div class="col-auto">'
-                                                                                    html += '<div class="row g-1 align-items-center">'
-                                                                                        html += '<div class="col-auto">'
-                                                                                            html += '<button type="button" id="manualStopBtn-' + manual.id + '" class="btn btn-danger" onclick="window.App.doClick(\'stopManual\', { manualId:\'' + manual.id + '\' })">'
-                                                                                                html += '<i class="fas fa-fw fa-stop"></i>'
-                                                                                            html += '</button>'
-                                                                                        html += '</div>'
-                                                                                        html += '<div class="col-auto">'
-                                                                                            html += '<button type="button" id="manualStartBtn-' + manual.id + '" class="btn btn-warning" onclick="window.App.doClick(\'startManual\', { manualId:\'' + manual.id + '\' })">'
-                                                                                                html += '<i class="fas fa-fw fa-play"></i>'
-                                                                                            html += '</button>'
-                                                                                        html += '</div>'
-                                                                                    html += '</div>'
-                                                                                html += '</div>'
-                                                                            html += '</div>'
-                                                                        html += '</div>'
-                                                                        html += displayLine(manual)
-                                                                    html += '</div>'
+                                html += '<div id="collapse-' + elem.id + '" class="collapse' + (elem.collapsed ? '' : ' show') +'">'
+                                    if (elem.unlocked == true) {
+                                        if (elem.desc) html += '<div class="card-body"><span>' + i18next.t(elem.desc) + '</span></div>'
+                                        if (elem.recipeId) {
+                                            let recipe = window.app.game.scenario.data.elems.find(el => el.id == elem.recipeId)
+                                            if (recipe) {
+                                                html += '<div class="card-body">'
+                                                    html += '<div class="row g-1 align-items-center justify-content-end">'
+                                                        if (recipe.inputs) {
+                                                            recipe.inputs.forEach(input => {
+                                                                let inputElem = window.app.game.getElem(input.id)
+                                                                html += '<div class="col-auto" style="width:65px;">'
+                                                                    html += '<span id="recipeInputCount-' + recipe.id + '-' + input.id + '" class="badge d-flex align-items-center" data-bs-toggle="tooltip" data-bs-html="true" data-bs-title="<span class=\'text-white\'>' + i18next.t(inputElem.label) + '</span>">'
+                                                                        html += '<img src="' + inputElem.img + '" width="18px" height="18px">'
+                                                                        html += '<span id="recipeInputCountValue-' + recipe.id + '-' + input.id + '" class="ms-1">' + formatNumber(input.count) + '</span>'
+                                                                    html += '</span>'
                                                                 html += '</div>'
-                                                            html += '</div>'
-                                                        html += '</div>'
-                                                    html += '</div>'
-                                                }
-                                            }
-                                            if (item.lines && item.lines.length > 0) {
-                                                let unlocked = 0
-                                                item.lines.forEach(lineId => {
-                                                    let line = window.App.game.getElem(lineId)
-                                                    if (line.unlocked) unlocked += 1
-                                                })
-                                                if (unlocked > 0) {
-                                                    html += '<div class="col-12">'
-                                                        html += '<div class="row g-2">'
-                                                            html += '<div class="col-12 lh-1">'
-                                                                html += '<div class="row gx-2 align-items-center">'
-                                                                    html += '<div class="col">'
-                                                                        html += '<span class="small">' + i18next.t('word_Automation') + '</span>'
-                                                                    html += '</div>'
-                                                                    html += '<div class="col-auto">'
-                                                                        html += '<span class="small">' + i18next.t('word_RawProd') + '</span>'
-                                                                        html += '<span id="itemRawProd-' + item.id + '" class="small ms-1 text-white"></span>'
-                                                                    html += '</div>'
-                                                                    html += '<div class="col-auto">'
-                                                                        html += '<span class="small">' + i18next.t('word_RawConsum') + '</span>'
-                                                                        html += '<span id="itemRawConsum-' + item.id + '" class="small ms-1 text-white"></span>'
-                                                                    html += '</div>'
-                                                                html += '</div>'
-                                                            html += '</div>'
-                                                            item.lines.forEach(lineId => {
-                                                                let line = window.App.game.getElem(lineId)
-                                                                if (line.unlocked) {
-                                                                    html += '<div class="col-12">'
-                                                                        html += '<div class="rounded p-2 bg-dark">'
-                                                                            html += '<div class="row g-2">'
-                                                                                html += '<div class="col-12">'
-                                                                                    html += '<div class="row gx-1 align-items-center">'
-                                                                                        let machine = window.App.game.getElem(line.machineId)
-                                                                                        html += '<div class="col-auto">'
-                                                                                            html += '<img src="' + machine.img + '" width="20px" height="20px">'
-                                                                                        html += '</div>'
-                                                                                        html += '<div class="col text-truncate">'
-                                                                                            html += '<span class="small text-white">' + i18next.t(machine.label) + '</span>'
-                                                                                        html += '</div>'
-                                                                                        html += '<div class="col-auto small"><small class="opacity-50">x </small><span id="lineCount-' + line.id + '"></span></div>'
-                                                                                        html += '<div class="col-auto">'
-                                                                                            html += '<div class="row g-1 align-items-center">'
-                                                                                                html += '<div class="col-auto">'
-                                                                                                    html += '<select id="lineSelectCount-' + line.id + '" class="form-control form-control-sm" onchange="window.App.doClick(\'setLineSelectCount\', { elemId:\'' + lineId + '\', count:this.value })">'
-                                                                                                        html += '<option' + (line.selectCount == '1' ? ' selected' : '') + ' value="1">1</option>'
-                                                                                                        html += '<option' + (line.selectCount == '10' ? ' selected' : '') + ' value="10">10</option>'
-                                                                                                        html += '<option' + (line.selectCount == '100' ? ' selected' : '') + ' value="100">100</option>'
-                                                                                                        html += '<option' + (line.selectCount == 'max' ? ' selected' : '') + ' value="max">' + i18next.t('word_Max') + '</option>'
-                                                                                                    html += '</select>'
-                                                                                                html += '</div>'
-                                                                                                html += '<div class="col-auto">'
-                                                                                                    html += '<button id="lineRemoveBtn-' + line.id + '" class="btn btn-danger" type="button" onclick="window.App.doClick(\'removeLine\', { elemId:\'' + lineId + '\' })"><i class="fas fa-fw fa-minus-circle"></i></button>'
-                                                                                                html += '</div>'
-                                                                                                html += '<div class="col-auto">'
-                                                                                                    html += '<button id="lineAddBtn-' + line.id + '" class="btn btn-warning" type="button" onclick="window.App.doClick(\'addLine\', { elemId:\'' + lineId + '\' })"><i class="fas fa-fw fa-plus-circle"></i></button>'
-                                                                                                html += '</div>'
-                                                                                            html += '</div>'
-                                                                                        html += '</div>'
-                                                                                    html += '</div>'
-                                                                                html += '</div>'
-                                                                                html += '<div class="col-12">'
-                                                                                    html += '<div class="row gx-2 align-items-center">'
-                                                                                        html += displayLine(line)
-                                                                                    html += '</div>'
-                                                                                html += '</div>'
-                                                                            html += '</div>'
-                                                                        html += '</div>'
-                                                                    html += '</div>'
-                                                                }
                                                             })
-                                                        html += '</div>'
-                                                    html += '</div>'
-                                                }
-                                            }
-                                            if (item.storage) {
-                                                html += '<div class="col-12">'
-                                                    html += '<div class="row g-2">'
-                                                        html += '<div class="col-12 lh-1">'
-                                                            html += '<div class="row gx-2 align-items-center">'
-                                                                html += '<div class="col">'
-                                                                     html += '<span class="small">' + i18next.t('word_Storage') + '</span>'
-                                                                html += '</div>'
-                                                                if (item.type == 'machine' || item.type == 'storer') {
-                                                                    html += '<div class="col-auto">'
-                                                                        html += '<span class="small">' + i18next.t('word_UsedCount') + '</span>'
-                                                                        html += '<span id="itemUsedCount-' + item.id + '" class="small ms-1 text-white"></span>'
-                                                                    html += '</div>'
-                                                                }
-                                                                html += '<div class="col-auto">'
-                                                                    html += '<span class="small">' + i18next.t('word_Max') + '</span>'
-                                                                    html += '<span id="itemMax-' + item.id + '" class="small ms-1 text-white"></span>'
-                                                                html += '</div>'
-                                                            html += '</div>'
-                                                        html += '</div>'
-                                                        if (item.storage && item.storage.storerId) {
-                                                            let storer = window.App.game.getElem(item.storage.storerId)
-                                                            if (storer.unlocked) {
-                                                                html += '<div class="col-12">'
-                                                                    html += '<div class="rounded p-2 bg-dark">'
-                                                                        html += '<div class="row g-2">'
-                                                                            html += '<div class="col-12">'
-                                                                                html += '<div class="row g-2 align-items-center">'
-                                                                                    html += '<div class="col-auto">'
-                                                                                        html += '<img src="' + storer.img + '" width="20px" height="20px">'
-                                                                                    html += '</div>'
-                                                                                    html += '<div class="col text-truncate">'
-                                                                                        html += '<span class="small text-white">' + i18next.t(storer.label) + '</span>'
-                                                                                    html += '</div>'
-                                                                                    html += '<div class="col-auto small text-white">+' + formatNumber(item.storage.base) + '</div>'
-                                                                                    html += '<div class="col-auto small"><small class="opacity-50">x </small><span id="itemStorageCount-' + item.id + '"></span></div>'
-                                                                                    html += '<div class="col-auto">'
-                                                                                        html += '<div class="row g-1 align-items-center">'
-                                                                                            html += '<div class="col-auto">'
-                                                                                                html += '<select id="itemSelectStorageCount-' + item.id + '" class="form-control form-control-sm" onchange="window.App.doClick(\'setStorageSelectCount\', { elemId:\'' + item.id + '\', count:this.value })">'
-                                                                                                    html += '<option' + (item.selectStorageCount == '1' ? ' selected' : '') + ' value="1">1</option>'
-                                                                                                    html += '<option' + (item.selectStorageCount == '10' ? ' selected' : '') + ' value="10">10</option>'
-                                                                                                    html += '<option' + (item.selectStorageCount == '100' ? ' selected' : '') + ' value="100">100</option>'
-                                                                                                    html += '<option' + (item.selectStorageCount == 'max' ? ' selected' : '') + ' value="max">' + i18next.t('word_Max') + '</option>'
-                                                                                                html += '</select>'
-                                                                                            html += '</div>'                                                                
-                                                                                            html += '<div class="col-auto">'
-                                                                                                html += '<button id="itemRemoveStorerBtn-' + item.id + '" class="btn btn-danger" type="button" onclick="window.App.doClick(\'removeStorer\', { elemId:\'' + item.id + '\' })"><i class="fas fa-fw fa-minus-circle"></i></button>'
-                                                                                            html += '</div>'                                                                
-                                                                                            html += '<div class="col-auto">'
-                                                                                                html += '<button id="itemAddStorerBtn-' + item.id + '" class="btn btn-warning" type="button" onclick="window.App.doClick(\'addStorer\', { elemId:\'' + item.id + '\' })"><i class="fas fa-fw fa-plus-circle"></i></button>'
-                                                                                            html += '</div>'
-                                                                                        html += '</div>'
-                                                                                    html += '</div>'
-                                                                                html += '</div>'
-                                                                            html += '</div>'
-                                                                        html += '</div>'
-                                                                    html += '</div>'
-                                                                html += '</div>'
-                                                            }
                                                         }
+                                                        else {
+                                                            html += '<div class="col-auto" style="width:65px;">'
+                                                                html += '<span class="badge text-bg-light d-flex align-items-center justify-content-center">&Oslash;</span>'
+                                                            html += '</div>'
+                                                        }
+                                                        html += '<div class="col-auto">'
+                                                            html += '<span class="badge text-normal px-0">'
+                                                                html += '<div class="lh-1 small">' + formatTime(recipe.time) + '</div>'
+                                                                html += '<i class="fas fa-fw fa-long-arrow-alt-right"></i>'
+                                                            html += '</span>'
+                                                        html += '</div>'
+                                                        let outputElem = window.app.game.getElem(recipe.output.id)
+                                                        html += '<div class="col-auto" style="width:65px;">'
+                                                            html += '<span id="recipeOutputCount-' + recipe.id + '-' + recipe.output.id + '" class="badge text-bg-light d-flex align-items-center justify-content-center" data-bs-toggle="tooltip" data-bs-html="true" data-bs-title="<span class=\'text-white\'>' + i18next.t(outputElem.label) + '</span>">'
+                                                                html += '<img src="' + outputElem.img + '" width="18px" height="18px">'
+                                                                html += '<span id="recipeOutputCountValue-' + recipe.id + '-' + recipe.output.id + '" class="ms-1">' + formatNumber(recipe.output.count) + '</span>'
+                                                            html += '</span>'
+                                                        html += '</div>'
                                                     html += '</div>'
                                                 html += '</div>'
                                             }
+                                        }
+                                        if (elem.lines && elem.lines.length > 0) {
+                                            let unlocked = 0
+                                            elem.lines.forEach(lineId => {
+                                                let line = window.app.game.getElem(lineId)
+                                                if (line.unlocked) unlocked += 1
+                                            })
+                                            if (unlocked > 0) {
+                                                html += '<div class="card-body">'
+                                                    html += '<div class="lh-1 mb-3">'
+                                                        html += '<div class="row gx-2 align-items-center justify-content-end">'
+                                                            html += '<div class="col-auto">'
+                                                                html += '<span class="small opacity-50">' + i18next.t('word_RawProd') + '</span>'
+                                                                html += '<span id="itemRawProd-' + elem.id + '" class="small ms-1 text-white"></span>'
+                                                            html += '</div>'
+                                                            html += '<div class="col-auto">'
+                                                                html += '<span class="small opacity-50">' + i18next.t('word_RawConsum') + '</span>'
+                                                                html += '<span id="itemRawConsum-' + elem.id + '" class="small ms-1 text-white"></span>'
+                                                            html += '</div>'
+                                                        html += '</div>'
+                                                    html += '</div>'
+                                                    html += '<div class="row gy-3">'
+                                                        elem.lines.forEach(lineId => {
+                                                            let line = window.app.game.getElem(lineId)
+                                                            if (line.unlocked) {
+                                                                html += '<div class="col-12">'
+                                                                    html += '<div class="row gx-2 align-items-center">'
+                                                                        let machine = window.app.game.getElem(line.machineId)
+                                                                        html += '<div class="col-auto">'
+                                                                            html += '<img src="' + machine.img + '" width="24px" height="24px" data-bs-toggle="tooltip" data-bs-html="true" data-bs-title="<span class=\'text-white\'>' + i18next.t(machine.label) + '</span>">'
+                                                                        html += '</div>'
+                                                                        html += '<div class="col">'
+                                                                            html += '<div class="lh-1 small">' + i18next.t('word_speed') + '</div>'
+                                                                            html += '<div class="lh-1 small"><span class="small text-white">' + formatNumber(machine.speed) + '</span></div>'
+                                                                        html += '</div>'
+                                                                        html += '<div class="col-auto" style="width:65px;">'
+                                                                            if (machine.energy) {
+                                                                                let energyElem = window.app.game.getElem(machine.energy.id)
+                                                                                html += '<span id="lineEnergyCount-' + line.id + '" class="badge d-flex align-items-center" data-bs-toggle="tooltip" data-bs-html="true" data-bs-title="<span class=\'text-white\'>' + i18next.t(energyElem.label) + '</span>">'
+                                                                                    html += '<img src="' + energyElem.img + '" width="18px" height="18px">'
+                                                                                    html += '<span id="lineEnergyCountValue-' + line.id + '" class="ms-1">' + formatNumber(machine.energy.count) + '</span>'
+                                                                                html += '</span>'
+                                                                            }
+                                                                        html += '</div>'
+                                                                        if (machine.id == 'machineManual') {
+                                                                            html += '<div class="col-auto" style="width:145px;">'
+                                                                                html += '<div class="row g-1 align-items-center justify-content-end">'
+                                                                                    html += '<div class="col-auto">'
+                                                                                        html += '<button type="button" id="manualStopBtn-' + line.id + '" class="btn btn-danger" onclick="window.app.doClick(\'stopManual\', { manualId:\'' + line.id + '\' })">'
+                                                                                            html += '<i class="fas fa-fw fa-stop"></i>'
+                                                                                        html += '</button>'
+                                                                                    html += '</div>'
+                                                                                    html += '<div class="col-auto">'
+                                                                                        html += '<button type="button" id="manualStartBtn-' + line.id + '" class="btn btn-warning" onclick="window.app.doClick(\'startManual\', { manualId:\'' + line.id + '\' })">'
+                                                                                            html += '<i class="fas fa-fw fa-play"></i>'
+                                                                                        html += '</button>'
+                                                                                    html += '</div>'
+                                                                                html += '</div>'
+                                                                            html += '</div>'
+                                                                        }
+                                                                        else {
+                                                                            html += '<div class="col-auto small text-end"><small class="opacity-50">x </small><span id="lineCount-' + line.id + '"></span></div>'
+                                                                            html += '<div class="col-auto">'
+                                                                                html += '<div class="row g-1 align-items-center">'
+                                                                                    html += '<div class="col-auto">'
+                                                                                        html += '<select id="lineSelectCount-' + line.id + '" class="form-control form-control-sm" onchange="window.app.doClick(\'setLineSelectCount\', { elemId:\'' + lineId + '\', count:this.value })">'
+                                                                                            html += '<option' + (line.selectCount == '1' ? ' selected' : '') + ' value="1">1</option>'
+                                                                                            html += '<option' + (line.selectCount == '10' ? ' selected' : '') + ' value="10">10</option>'
+                                                                                            html += '<option' + (line.selectCount == '100' ? ' selected' : '') + ' value="100">100</option>'
+                                                                                            html += '<option' + (line.selectCount == 'max' ? ' selected' : '') + ' value="max">' + i18next.t('word_Max') + '</option>'
+                                                                                        html += '</select>'
+                                                                                    html += '</div>'
+                                                                                    html += '<div class="col-auto">'
+                                                                                        html += '<button id="lineRemoveBtn-' + line.id + '" class="btn btn-danger" type="button" onclick="window.app.doClick(\'removeLine\', { elemId:\'' + lineId + '\' })"><i class="fas fa-fw fa-minus-circle"></i></button>'
+                                                                                    html += '</div>'
+                                                                                    html += '<div class="col-auto">'
+                                                                                        html += '<button id="lineAddBtn-' + line.id + '" class="btn btn-warning" type="button" onclick="window.app.doClick(\'addLine\', { elemId:\'' + lineId + '\' })"><i class="fas fa-fw fa-plus-circle"></i></button>'
+                                                                                    html += '</div>'
+                                                                                html += '</div>'
+                                                                            html += '</div>'
+                                                                        }
+                                                                    html += '</div>'
+                                                                html += '</div>'
+                                                            }
+                                                        })
+                                                    html += '</div>'
+                                                html += '</div>'
+                                            }
+                                        }
+                                        if (elem.storage) {
+                                            html += '<div class="card-body">'
+                                                html += '<div class="row gy-3">'
+                                                    html += '<div class="col-12 lh-1">'
+                                                        html += '<div class="row gx-2 align-items-center justify-content-end">'
+                                                            if (elem.cat == 'machine' || elem.cat == 'storer') {
+                                                                html += '<div class="col-auto">'
+                                                                    html += '<span class="small opacity-50">' + i18next.t('word_UsedCount') + '</span>'
+                                                                    html += '<span id="itemUsedCount-' + elem.id + '" class="small ms-1 text-white"></span>'
+                                                                html += '</div>'
+                                                            }
+                                                            html += '<div class="col-auto">'
+                                                                html += '<span class="small opacity-50">' + i18next.t('word_Max') + '</span>'
+                                                                html += '<span id="itemMax-' + elem.id + '" class="small ms-1 text-white"></span>'
+                                                            html += '</div>'
+                                                        html += '</div>'
+                                                    html += '</div>'
+                                                    if (elem.storage && elem.storage.storerId) {
+                                                        let storer = window.app.game.getElem(elem.storage.storerId)
+                                                        if (storer.unlocked) {
+                                                            html += '<div class="col-12">'
+                                                                html += '<div class="row g-2 align-items-center">'
+                                                                    html += '<div class="col-auto">'
+                                                                        html += '<img src="' + storer.img + '" width="24px" height="24px" data-bs-toggle="tooltip" data-bs-html="true" data-bs-title="<span class=\'text-white\'>' + i18next.t(storer.label) + '</span>">'
+                                                                    html += '</div>'
+                                                                    html += '<div class="col small">+' + formatNumber(elem.storage.base) + '</div>'
+                                                                    html += '<div class="col-auto small text-end" style="width:35px;"><small class="opacity-50">x </small><span id="itemStorageCount-' + elem.id + '"></span></div>'
+                                                                    html += '<div class="col-auto">'
+                                                                        html += '<div class="row g-1 align-items-center">'
+                                                                            html += '<div class="col-auto">'
+                                                                                html += '<select id="itemSelectStorageCount-' + elem.id + '" class="form-control form-control-sm" onchange="window.app.doClick(\'setStorageSelectCount\', { elemId:\'' + elem.id + '\', count:this.value })">'
+                                                                                    html += '<option' + (elem.selectStorageCount == '1' ? ' selected' : '') + ' value="1">1</option>'
+                                                                                    html += '<option' + (elem.selectStorageCount == '10' ? ' selected' : '') + ' value="10">10</option>'
+                                                                                    html += '<option' + (elem.selectStorageCount == '100' ? ' selected' : '') + ' value="100">100</option>'
+                                                                                    html += '<option' + (elem.selectStorageCount == 'max' ? ' selected' : '') + ' value="max">' + i18next.t('word_Max') + '</option>'
+                                                                                html += '</select>'
+                                                                            html += '</div>'                                                                
+                                                                            html += '<div class="col-auto">'
+                                                                                html += '<button id="itemRemoveStorerBtn-' + elem.id + '" class="btn btn-danger" type="button" onclick="window.app.doClick(\'removeStorer\', { elemId:\'' + elem.id + '\' })"><i class="fas fa-fw fa-minus-circle"></i></button>'
+                                                                            html += '</div>'                                                                
+                                                                            html += '<div class="col-auto">'
+                                                                                html += '<button id="itemAddStorerBtn-' + elem.id + '" class="btn btn-warning" type="button" onclick="window.app.doClick(\'addStorer\', { elemId:\'' + elem.id + '\' })"><i class="fas fa-fw fa-plus-circle"></i></button>'
+                                                                            html += '</div>'
+                                                                        html += '</div>'
+                                                                    html += '</div>'
+                                                                html += '</div>'
+                                                            html += '</div>'
+                                                        }
+                                                    }
+                                                html += '</div>'
+                                            html += '</div>'
+                                        }
+                                        if (elem.costs && elem.count < 1) {
+                                            html += '<div class="card-body pt-auto">'
+                                                html += '<div class="row g-2">'
+                                                    html += '<div class="col-12 lh-1">'
+                                                        html += '<span class="small opacity-50">' + i18next.t('word_Objectives') + '</span>'
+                                                    html += '</div>'
+                                                    html += '<div class="col-12">'
+                                                        html += '<div class="row g-1 align-items-center">'
+                                                            html += '<div class="col">'
+                                                                html += '<div class="row g-1 align-items-center">'
+                                                                    elem.costs.forEach(cost => {
+                                                                        let costElem = window.app.game.getElem(cost.id)
+                                                                        html += '<div class="col-auto" style="width:65px;">'
+                                                                            html += '<span id="missionNeedCount-' + elem.id + '-' + cost.id + '" class="badge text-bg-light d-flex align-items-center justify-content-center" data-bs-toggle="tooltip" data-bs-html="true" data-bs-title="<span class=\'text-white\'>' + i18next.t(costElem.label) + '</span>">'
+                                                                                html += '<img src="' + costElem.img + '" width="18px" height="18px">'
+                                                                                html += '<span class="ms-1">' + formatNumber(cost.count) + '</span>'
+                                                                            html += '</span>'
+                                                                        html += '</div>'
+                                                                    })
+                                                                html += '</div>'
+                                                            html += '</div>'
+                                                            html += '<div class="col-auto">'
+                                                                html += '<button type="button" id="missionBtn-' + elem.id + '" class="btn btn-primary" onclick="window.app.doClick(\'completeMission\', { missionId:\'' + elem.id + '\' })">'
+                                                                    html += '<i class="fa-fw fas fa-check"></i>'
+                                                                html += '</button>'
+                                                            html += '</div>'
+                                                        html += '</div>'
+                                                    html += '</div>'
+                                                html += '</div>'
+                                            html += '</div>'
+                                        }
+                                    }
+                                    else {
+                                        html += '<div class="card-body">'
+                                            html += '<div class="row gy-1">'
+                                                html += '<div class="col-12 lh-1">'
+                                                    html += '<span class="small opacity-50">' + i18next.t('word_LockedBy') + '</span>'
+                                                html += '</div>'
+                                                html += '<div class="col-12">'
+                                                    html += '<div class="row g-1 align-items-center justify-content-center">'
+                                                        elem.reqs.forEach(req => {
+                                                            let reqElem = window.app.game.getElem(req.id)
+                                                            html += '<div class="col-auto">'
+                                                                html += '<span class="text-white">' + i18next.t(reqElem.label) + '</span>'
+                                                                html += ' <small>(' + i18next.t('cat_' + reqElem.cat) + ')</small>'
+                                                            html += '</div>'
+                                                        })
+                                                    html += '</div>'
+                                                html += '</div>'
+                                            html += '</div>'
                                         html += '</div>'
-                                    html += '</div>'
+                                    }
                                 html += '</div>'
                             html += '</div>'
                         html += '</div>'
                     })
                 html += '</div>'
-                //---
-                let node = document.getElementById(containerId)                
-                node.className = 'container py-2'
-                node.innerHTML = html
-            }
-            else {
-                //---
-                let node = document.getElementById(containerId)
-                node.className = 'd-none'
-                node.innerHTML = ''
-            }
+            html += '</div>'
         }
         //---
-        displayContainer('machineContainer', i18next.t('word_Machines'), window.App.game.elems.filter(elem => elem.id != 'machineManual' && elem.type == 'machine' && elem.unlocked), 'machine')
-        displayContainer('storerContainer', i18next.t('word_Storers'), window.App.game.elems.filter(elem => elem.type == 'storer' && elem.unlocked), 'storer')
-        displayContainer('itemContainer', i18next.t('word_Items'), window.App.game.elems.filter(elem => elem.type == 'item' && elem.unlocked), 'item')
+        return html
+    }
+    //---
+    refreshTabMissions() {
+        //---
+        let html = ''
+        //---
+        window.app.game.scenario.data.catMissions.forEach(cat => {
+            html += this.getContainerHtml(i18next.t('cat_' + cat), window.app.game.elems.filter(elem => elem.cat == cat && (this.showLocked ? true : elem.unlocked)), cat)
+        })
+        //---
+        let node = document.getElementById('missions-tab-pane')                
+        node.innerHTML = html
+        //---
+        let tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
+        let tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
+    }
+    //---
+    refreshTabItems() {
+        //---
+        let html = ''
+        //---
+        window.app.game.scenario.data.catItems.forEach(cat => {
+            html += this.getContainerHtml(i18next.t('cat_' + cat), window.app.game.elems.filter(elem => elem.cat == cat && (this.showLocked ? true : elem.unlocked)), cat)
+        })
+        //---
+        let node = document.getElementById('items-tab-pane')                
+        node.innerHTML = html
         //---
         let tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
         let tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
@@ -790,10 +544,10 @@ class ScreenGame {
         //---
         let html = ''
         //---
-        let scenarios = window.App.game.scenarios.filter(scenario => scenario.ready)
+        let scenarios = window.app.game.scenarios.filter(scenario => scenario.ready)
         scenarios.forEach(scenario => {
             html += '<div class="col-12 col-md-6 col-lg-6 col-xl-4">'
-                html += '<button type="button" class="w-100 btn btn-light text-start' + (scenario.id == window.App.game.scenario.id ? ' border-warning' : '') + '" onclick="if (confirm(\'' + i18next.t('text_changeScenarioConfirm') + '\')) window.App.doClick(\'selectScenario\', { scenarioId:\'' + scenario.id + '\' })">'
+                html += '<button type="button" class="w-100 btn btn-light text-start' + (scenario.id == window.app.game.scenario.id ? ' border-warning' : '') + '" onclick="if (confirm(\'' + i18next.t('text_changeScenarioConfirm') + '\')) window.app.doClick(\'selectScenario\', { scenarioId:\'' + scenario.id + '\' })">'
                     html += '<div class="row g-1 justify-content-center">'
                         html += '<div class="col-12">'
                             html += '<span class="h6 text-white">' + i18next.t(scenario.label) + '</span>'
@@ -811,7 +565,7 @@ class ScreenGame {
                             else {
                                 html += '<span class="text-normal">'
                                     html += i18next.t('word_StartDate') + ' '
-                                    if (scenario.id == window.App.game.scenario.id && scenario.startDate) html += '<span class="text-white">' + new Date(scenario.startDate).toLocaleString() + '</span>'
+                                    if (scenario.id == window.app.game.scenario.id && scenario.startDate) html += '<span class="text-white">' + new Date(scenario.startDate).toLocaleString() + '</span>'
                                     else html += '<span class="text-danger">' + i18next.t('word_NotYetWon') + '</span>'
                                 html += '</span>'
                             }
@@ -825,66 +579,280 @@ class ScreenGame {
         if (node.innerHTML != html) node.innerHTML = html
     }
     //---
+    draw() {
+        //---
+        if (this.selectedTab == 'missions') {
+            //---
+            let elems = window.app.game.elems.filter(elem => window.app.game.scenario.data.catMissions.includes(elem.cat) && (this.showLocked ? true : elem.unlocked))
+            elems.forEach(elem => {
+                //---
+                if (elem.count < 1 && elem.unlocked == true) {
+                    //---
+                    elem.costs.forEach(cost => {
+                        //---
+                        let style = 'badge d-flex align-items-center justify-content-center'
+                        if (window.app.game.getAvailableCount(cost.id) < cost.count) style += ' text-bg-danger'
+                        else style += ' text-bg-light'
+                        //---
+                        let node = document.getElementById('missionNeedCount-' + elem.id + '-' + cost.id)
+                        if (node.className != style) node.className = style
+                    })
+                    //---
+                    let style = 'btn btn-warning'
+                    if (!window.app.game.canCompleteMission(elem.id)) style += ' disabled'
+                    //---
+                    let node = document.getElementById('missionBtn-' + elem.id)
+                    if (node.className != style) node.className = style
+                }
+            })
+        }
+        else if (this.selectedTab == 'items') {
+            //---
+            let items = window.app.game.elems.filter(elem => elem.id != 'machineManual' && (this.showLocked ? true : elem.unlocked) && window.app.game.scenario.data.catItems.includes(elem.cat))
+            items.forEach(item => {
+                //---
+                if (item.unlocked == true) {
+                    //---
+                    let html = '', style = '', node, count
+                    //---
+                    if (item.lines) {
+                        //---
+                        if (item.prod > 0) html = '+' + formatNumber(item.prod) + ' <small class="opacity-50">/s</small>'
+                        else if (item.prod <= 0) html = formatNumber(item.prod) + ' <small class="opacity-50">/s</small>'
+                        node = document.getElementById('itemProd-' + item.id)
+                        if (node.innerHTML != html) node.innerHTML = html
+                        //---
+                        style = 'w-100 badge text-end'
+                        if (item.prod > 0) style += ' text-success'
+                        else if (item.prod < 0) style += ' text-bg-danger'
+                        else style += ' text-normal'
+                        if (node.className != style) node.className = style
+                    }
+                    //---
+                    html = formatNumber(item.count, 2)
+                    node = document.getElementById('itemCount-' + item.id)
+                    if (node.innerHTML != html) node.innerHTML = html
+                    //---
+                    let max = window.app.game.getMax(item.id)
+                    style = 'w-100 badge text-end'
+                    if (max > 0 && item.count >= max) style += ' text-bg-danger'
+                    else if (item.count > 0) style += ' text-bg-light'
+                    else style += ' text-normal'
+                    if (node.className != style) node.className = style
+                    //---
+                    if (item.cat == 'machine' || item.cat == 'storer') {
+                        //---
+                        let node = document.getElementById('itemAvailableCount-' + item.id)
+                        let count = window.app.game.getAvailableCount(item.id)
+                        //---
+                        html = formatNumber(count, 2)
+                        if (node.innerHTML != html) node.innerHTML = html
+                        //---
+                        style = 'w-100 badge text-end'
+                        if (count > 0) style += ' text-success'
+                        else style += ' text-bg-light text-normal'
+                        if (node.className != style) node.className = style
+                    }
+                    //---
+                    if (item.recipeId) {
+                        let recipe = window.app.game.scenario.data.elems.find(elem => elem.id == item.recipeId)
+                        if (recipe) {
+                            if (recipe.inputs) {
+                                //---
+                                recipe.inputs.forEach(input => {
+                                    //---
+                                    let inputElem = window.app.game.getElem(input.id)
+                                    //---
+                                    let node = document.getElementById('recipeInputCountValue-' + recipe.id + '-' + input.id)
+                                    //---
+                                    let style = 'badge d-flex align-items-center justify-content-center'
+                                    if (input.count > window.app.game.getAvailableCount(input.id)) style += ' text-bg-danger'
+                                    else style += ' text-bg-light'
+                                    //---
+                                    node = document.getElementById('recipeInputCount-' + recipe.id + '-' + input.id)
+                                    if (node.className != style) node.className = style
+                                })
+                            }
+                        }
+                    }
+                    //---
+                    if (item.lines && item.lines.length > 0) {
+                        let unlocked = 0
+                        item.lines.forEach(lineId => {
+                            let line = window.app.game.getElem(lineId)
+                            if (line.unlocked) unlocked += 1
+                        })
+                        if (unlocked > 0) {
+                            //---
+                            html = formatNumber(item.rawConsum) + ' <small class="opacity-50">/s</small>'
+                            node = document.getElementById('itemRawConsum-' + item.id)
+                            if (node.innerHTML != html) node.innerHTML = html
+                            //---
+                            html = formatNumber(item.rawProd) + ' <small class="opacity-50">/s</small>'
+                            node = document.getElementById('itemRawProd-' + item.id)
+                            if (node.innerHTML != html) node.innerHTML = html
+                            //---
+                            item.lines.forEach(lineId => {
+                                //---
+                                let line = window.app.game.getElem(lineId)
+                                if (line.unlocked) {
+                                    let machine = window.app.game.getElem(line.machineId)
+                                    if (machine.id == 'machineManual') {
+                                        //---
+                                        style = 'btn btn-warning'
+                                        if (!window.app.game.canStartManual(line.id)) style += ' disabled'
+                                        node = document.getElementById('manualStartBtn-' + line.id)
+                                        if (node.className != style) node.className = style
+                                        //---
+                                        style = 'btn btn-danger'
+                                        if (!window.app.game.canStopManual(line.id)) style += ' disabled'
+                                        node = document.getElementById('manualStopBtn-' + line.id)
+                                        if (node.className != style) node.className = style
+                                    }
+                                    else {
+                                        //---
+                                        if (machine.energy) {
+                                            //---
+                                            node = document.getElementById('lineEnergyCountValue-' + line.id)
+                                            count = line.getMachineCount() * machine.energy.count
+                                            html = formatNumber(count)
+                                            if (node.innerHTML != html) node.innerHTML = html
+                                            //---
+                                            node = document.getElementById('lineEnergyCount-' + line.id)
+                                            style = 'badge d-flex align-items-center justify-content-center'
+                                            if (count > window.app.game.getAvailableCount(machine.energy.id)) style += ' text-bg-danger'
+                                            else style += ' text-bg-light'
+                                            if (node.className != style) node.className = style
+                                        }
+                                        //---
+                                        html = formatNumber(line.count)
+                                        node = document.getElementById('lineCount-' + line.id)
+                                        if (node.innerHTML != html) node.innerHTML = html
+                                        style = ''
+                                        if (line.count > 0) style += 'text-white'
+                                        if (node.className != style) node.className = style
+                                        //---
+                                        style = 'btn btn-danger'
+                                        if (!window.app.game.canRemoveLine(line.id)) style += ' disabled'
+                                        node = document.getElementById('lineRemoveBtn-' + line.id)
+                                        if (node.className != style) node.className = style
+                                        //---
+                                        style = 'btn btn-warning'
+                                        if (!window.app.game.canAddLine(line.id)) style += ' disabled'
+                                        node = document.getElementById('lineAddBtn-' + line.id)
+                                        if (node.className != style) node.className = style
+                                    }
+                                }
+                            })
+                        }
+                    }
+                    //---
+                    if (item.storage) {
+                        //---
+                        html = formatNumber(window.app.game.getMax(item.id))
+                        node = document.getElementById('itemMax-' + item.id)
+                        if (node.innerHTML != html) node.innerHTML = html
+                        //---
+                        if (item.cat == 'machine' || item.cat == 'storer') {
+                            //---
+                            html = formatNumber(window.app.game.getUsedCount(item.id))
+                            node = document.getElementById('itemUsedCount-' + item.id)
+                            if (node.innerHTML != html) node.innerHTML = html
+                        }
+                        //---
+                        if (item.storage.storerId) {
+                            let storer = window.app.game.getElem(item.storage.storerId)
+                            if (storer.unlocked) {
+                                //---
+                                html = formatNumber(item.storageCount)
+                                node = document.getElementById('itemStorageCount-' + item.id)
+                                if (node.innerHTML != html) node.innerHTML = html
+                                style = ''
+                                if (item.storageCount > 0) style += 'text-white'
+                                if (node.className != style) node.className = style                        
+                                //---
+                                style = 'btn btn-danger'
+                                if (!window.app.game.canRemoveStorer(item.id)) style += ' disabled'
+                                node = document.getElementById('itemRemoveStorerBtn-' + item.id)
+                                if (node.className != style) node.className = style
+                                //---
+                                style = 'btn btn-warning'
+                                if (!window.app.game.canAddStorer(item.id)) style += ' disabled'
+                                node = document.getElementById('itemAddStorerBtn-' + item.id)
+                                if (node.className != style) node.className = style
+                            }
+                        }
+                    }
+                }
+            })
+        }
+    }
+    //---
     doClick(action, data) {
         //---
-        if (action == 'selectTab') this.selectTab(data)
+        if (action == 'selectTab') this.selectedTab = data.tabId
         //---
-        else if (action == 'toggleCollapse') window.App.game.toggleCollapse(data.elemId)
-        //---
-        else if (action == 'completeMission') {
+        else if (action == 'toggleShowLocked') {
             //---
-            window.App.game.completeMission(data.missionId)
+            this.showLocked = !this.showLocked
             //---
             this.refreshTabMissions()
             this.refreshTabItems()
         }
         //---
-        else if (action == 'startManual') window.App.game.startManual(data.manualId)
-        else if (action == 'stopManual') window.App.game.stopManual(data.manualId)
+        else if (action == 'toggleCollapse') window.app.game.toggleCollapse(data.elemId)
         //---
-        else if (action == 'addLine') window.App.game.addLine(data.elemId)
-        else if (action == 'removeLine') window.App.game.removeLine(data.elemId)
+        else if (action == 'completeMission') {
+            //---
+            window.app.game.completeMission(data.missionId)
+            //---
+            this.refreshTabMissions()
+            this.refreshTabItems()
+        }
         //---
-        else if (action == 'addStorer') window.App.game.addStorer(data.elemId)
-        else if (action == 'removeStorer') window.App.game.removeStorer(data.elemId)
+        else if (action == 'startManual') window.app.game.startManual(data.manualId)
+        else if (action == 'stopManual') window.app.game.stopManual(data.manualId)
+        //---
+        else if (action == 'addLine') window.app.game.addLine(data.elemId)
+        else if (action == 'removeLine') window.app.game.removeLine(data.elemId)
+        //---
+        else if (action == 'addStorer') window.app.game.addStorer(data.elemId)
+        else if (action == 'removeStorer') window.app.game.removeStorer(data.elemId)
         //---
         else if (action == 'selectScenario') {
             //---
-            window.App.game.loadScenario(data.scenarioId)
-            window.App.game.scenario.startDate = Date.now()
+            window.app.game.loadScenario(data.scenarioId)
+            window.app.game.scenario.startDate = Date.now()
             //---
             this.refreshTabMissions()
             this.refreshTabItems()
             //---
             this.selectedTab = 'missions'
             //---
-            window.App.save()
+            window.app.save()
             //---
             window.location.replace('')
         }
         //---
-        else if (action == 'setLineSelectCount') window.App.game.setLineSelectCount(data)
+        else if (action == 'setLineSelectCount') window.app.game.setLineSelectCount(data)
         //---
-        else if (action == 'setStorageSelectCount') window.App.game.setStorageSelectCount(data)
+        else if (action == 'setStorageSelectCount') window.app.game.setStorageSelectCount(data)
         //---
         else if (action == 'expandAll') {
             //---
-            let items = window.App.game.elems.filter(elem => elem.id != 'machineManual' && elem.type == data.type && elem.unlocked)
+            let items = window.app.game.elems.filter(elem => elem.cat == data.cat && (this.showLocked ? true : elem.unlocked))
             items.forEach(item => { item.collapsed = false })
             //---
             this.refreshTabItems()
+            this.refreshTabMissions()
         }
         else if (action == 'collapseAll') {
             //---
-            let items = window.App.game.elems.filter(elem => elem.id != 'machineManual' && elem.type == data.type && elem.unlocked)
+            let items = window.app.game.elems.filter(elem => elem.cat == data.cat && (this.showLocked ? true : elem.unlocked))
             items.forEach(item => { item.collapsed = true })
             //---
             this.refreshTabItems()
+            this.refreshTabMissions()
         }
-    }
-    //---
-    selectTab(data) {
-        //---
-        this.selectedTab = data.tabId
     }
 }

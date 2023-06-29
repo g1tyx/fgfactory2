@@ -199,6 +199,11 @@ class GameLine extends GameElem {
         else if (this.selectCount == '100') return 100
         else if (this.selectCount == 'max') return this.count
     }
+    //---
+    getMachineCount() {
+        //---
+        return this.count > 0 ? this.count : 1
+    }
 }
 //---
 class Game {
@@ -241,11 +246,6 @@ class Game {
             //---
             let el = null
             if (elem.type == 'item') el = new GameItem(elem)
-            else if (elem.type == 'storer') el = new GameItem(elem)
-            else if (elem.type == 'mission') el = new GameItem(elem)
-            else if (elem.type == 'tech') el = new GameItem(elem)
-            else if (elem.type == 'machine') el = new GameItem(elem)
-            else if (elem.type == 'manual') el = new GameLine(elem)
             else if (elem.type == 'line') el = new GameLine(elem)
             //---
             if (el) {
@@ -313,7 +313,7 @@ class Game {
         //---
         let seconds = stepMs / 1000
         //---
-        let elems = this.elems.filter(elem => elem.id != 'machineManual' && elem.unlocked == true && (elem.type == 'item' || elem.type == 'machine' || elem.type == 'storer'))
+        let elems = this.elems.filter(elem => elem.id != 'machineManual' && elem.unlocked == true && elem.type == 'item')
         elems.forEach(elem => {
             //---
             elem.prod = 0
@@ -322,7 +322,7 @@ class Game {
             elem.rawConsum = 0
         })
         //---
-        let lines = this.elems.filter(elem => (elem.type == 'line' || elem.type == 'manual') && elem.unlocked == true && elem.count > 0)
+        let lines = this.elems.filter(elem => elem.type == 'line' && elem.unlocked == true && elem.count > 0)
         lines.forEach(line => {
             //---
             let outputElem = this.elems.find(elem => elem.id == line.output.id)
@@ -372,14 +372,14 @@ class Game {
         let usedCount = 0
         //---
         let elem = this.getElem(elemId)
-        if (elem.type == 'machine') {
+        if (elem.cat == 'machine') {
             //---
             let lines = this.elems.filter(elem => elem.type == 'line' && elem.unlocked == true && elem.count > 0 && elem.machineId == elemId)
             lines.forEach(line => { usedCount += line.count })
             //---
             if (usedCount > elem.count) elem.count = usedCount
         }
-        else if (elem.type == 'storer') {
+        else if (elem.cat == 'storer') {
             //---
             let items = this.elems.filter(el => el.storage && el.storage.storerId == elemId)
             items.forEach(item => { usedCount += item.storageCount })
@@ -408,7 +408,7 @@ class Game {
             if (line.inputs && line.inputs.length > 0) {
                 //---
                 line.inputs.forEach(input => {
-                    if (this.getAvailableCount(input.id) <= input.count) canProduce = false
+                    if (this.getAvailableCount(input.id) < input.count / window.app.fps) canProduce = false
                 })
             }
             //---
@@ -650,6 +650,7 @@ class Game {
             if (mission) {
                 //---
                 mission.count = 1
+                mission.collapsed = true
                 //---
                 if (mission.costs) {
                     //---
