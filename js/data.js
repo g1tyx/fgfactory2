@@ -898,7 +898,7 @@ var DATA = {
                                 
                 // Machines
                 //---
-                {	id:'machineManual',	                    type:'item',	    label:'machineManual', img:'img/icons/Manual.png', storage:{ base:1 }, speed:0.5, initCount:1 },
+                {	id:'machineManual',	                    type:'item',	    label:'machineManual', img:'img/icons/manual.png', storage:{ base:1 }, speed:0.5, initCount:1 },
                 //---
                 {	id:'machineMiner0',	                    type:'item',	    cat:'machine', reqs:[{ id:'satisfactory1T0M1', count:1 }], label:'machineMiner0', img:'img/icons/drill_0.png', storage:{ base:2 }, speed:0.5 },
                 //---
