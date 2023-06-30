@@ -915,7 +915,7 @@ var DATA = {
                 {	id:'manualMiner1',	                    type:'line',        reqs:[{ id:'satisfactory1T0M4', count:1 }], machineId:'machineManual', recipeId:'recipeMiner1' },
                 //---
                 {	id:'machineAssembler',	                type:'item',	    cat:'machine', reqs:[{ id:'satisfactory1T2M1', count:1 }], label:'machineAssembler', img:'img/icons/factory_1.png', recipeId:'recipeAssembler', lines:[ 'manualAssembler' ], speed:1, energy:{ id:'itemElectricity', count:15 } },
-                {	id:'recipeAssembler',	                type:'recipe',	    reqs:[{ id:'satisfactory1T2M1', count:1 }], time:1, output:{ id:'machineAssembler', count:1 }, inputs:[{ id:'itemFoundation', count:2.5 },{ id:'itemReinforcedPlate', count:8 },{ id:'itemMotor', count:4 },{ id:'itemCable', count:10 }] },
+                {	id:'recipeAssembler',	                type:'recipe',	    reqs:[{ id:'satisfactory1T2M1', count:1 }], time:1, output:{ id:'machineAssembler', count:1 }, inputs:[{ id:'itemFoundation', count:2.5 },{ id:'itemReinforcedPlate', count:8 },{ id:'itemRotor', count:4 },{ id:'itemCable', count:10 }] },
                 {	id:'manualAssembler',	                type:'line',        reqs:[{ id:'satisfactory1T2M1', count:1 }], machineId:'machineManual', recipeId:'recipeAssembler' },
                 //---
                 {	id:'machinePump',	                    type:'item',	    cat:'machine', reqs:[{ id:'satisfactory1T3M1', count:1 }], label:'machinePump', img:'img/icons/pump.png', recipeId:'recipePump', lines:[ 'manualPump' ], speed:1, energy:{ id:'itemElectricity', count:20 } },
