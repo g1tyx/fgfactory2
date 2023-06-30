@@ -425,7 +425,7 @@ var DATA = {
                 //---
                 {	id:'machineRocketSilo',     type:'item',	    cat:'machine', reqs:[{ id:'techRocket', count:1 }], label:'machineRocketSilo', img:'img/machines/RocketSilo.png', storage:{ base:50, storerId:'storerChest' }, recipeId:'recipeRocketSilo', lines:[ 'manualRocketSilo', 'lineRocketSilo1', 'lineRocketSilo2', 'lineRocketSilo3' ], speed:1, energy:{ id:'itemElectricity', count:4e3 } },
                 {	id:'recipeRocketSilo',	    type:'recipe',	    reqs:[{ id:'techRocket', count:1 }], time:30, output:{ id:'machineRocketSilo', count:1 }, inputs:[{ id:'itemConcrete', count:1e3 },{ id:'itemEngine2', count:200 },{ id:'itemIronPlate', count:100 },{ id:'itemCircuit3', count:200 },{ id:'itemSteel', count:1e3 }] },
-                {	id:'manualRocketSilo',	    type:'manual',      reqs:[{ id:'techRocket', count:1 }], machineId:'machineManual', recipeId:'recipeRocketSilo' },
+                {	id:'manualRocketSilo',	    type:'line',        reqs:[{ id:'techRocket', count:1 }], machineId:'machineManual', recipeId:'recipeRocketSilo' },
                 {	id:'lineRocketSilo1',       type:'line',	    reqs:[{ id:'techRocket', count:1 },{ id:'techAutomation1', count:1 }], machineId:'machineAssembler1', recipeId:'recipeRocketSilo' },
                 {	id:'lineRocketSilo2',       type:'line',	    reqs:[{ id:'techRocket', count:1 },{ id:'techAutomation2', count:1 }], machineId:'machineAssembler2', recipeId:'recipeRocketSilo' },
                 {	id:'lineRocketSilo3',       type:'line',	    reqs:[{ id:'techRocket', count:1 },{ id:'techAutomation3', count:1 }], machineId:'machineAssembler3', recipeId:'recipeRocketSilo' },
