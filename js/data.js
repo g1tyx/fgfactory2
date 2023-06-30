@@ -508,35 +508,31 @@ var DATA = {
                 
                 // Energy
                 //---
-                {	id:'machineBioBurner1',	                type:'item',	    cat:'energy',    reqs:[{ id:'satisfactory1T0M2', count:1 }], label:'machineBioBurner1', img:'img/icons/generator_1.png', storage:{ base:2 }, speed:1 },
+                {	id:'machineBioBurner1',	                type:'item',	    cat:'energy',    reqs:[{ id:'satisfactory1T0M2', count:1 }], label:'machineBioBurner1', img:'img/icons/generator_1.png', storage:{ base:2 }, speed:0.15 },
                 //---
-                {	id:'machineBioBurner2',	                type:'item',	    cat:'energy',    reqs:[{ id:'satisfactory1T0M5', count:1 }], label:'machineBioBurner2', img:'img/icons/generator_2.png', recipeId:'recipeBioBurner2', lines:[ 'manualBioBurner2' ], speed:1 },
+                {	id:'machineBioBurner2',	                type:'item',	    cat:'energy',    reqs:[{ id:'satisfactory1T0M5', count:1 }], label:'machineBioBurner2', img:'img/icons/generator_2.png', recipeId:'recipeBioBurner2', lines:[ 'manualBioBurner2' ], speed:0.3, energy:{ id:'itemBiomass', count:0.16 } },
                 {	id:'recipeBioBurner2',	                type:'recipe',	                        reqs:[{ id:'satisfactory1T0M5', count:1 }], time:1, output:{ id:'machineBioBurner2', count:1 }, inputs:[{ id:'itemFoundation', count:1 },{ id:'itemIronRod', count:15 },{ id:'itemIronPlate', count:15 },{ id:'itemWire', count:25 }] },
                 {	id:'manualBioBurner2',	                type:'line',                            reqs:[{ id:'satisfactory1T0M5', count:1 }], machineId:'machineManual', recipeId:'recipeBioBurner2' },
                 //---
-                {	id:'machineCoalGenerator',	            type:'item',	    cat:'energy',    reqs:[{ id:'satisfactory1T3M1', count:1 }], label:'machineCoalGenerator', img:'img/icons/generator_3.png', recipeId:'recipeCoalGenerator', lines:[ 'manualCoalGenerator' ], speed:1 },
+                {	id:'machineCoalGenerator',	            type:'item',	    cat:'energy',    reqs:[{ id:'satisfactory1T3M1', count:1 }], label:'machineCoalGenerator', img:'img/icons/generator_3.png', recipeId:'recipeCoalGenerator', lines:[ 'manualCoalGenerator' ], speed:0.5, energy:{ id:'itemCoal', count:0.25 } },
                 {	id:'recipeCoalGenerator',	            type:'recipe',	                        reqs:[{ id:'satisfactory1T3M1', count:1 }], time:1, output:{ id:'machineCoalGenerator', count:1 }, inputs:[{ id:'itemFoundation', count:4 },{ id:'itemReinforcedPlate', count:20 },{ id:'itemRotor', count:10 },{ id:'itemCable', count:30 }] },
                 {	id:'manualCoalGenerator',	            type:'line',                            reqs:[{ id:'satisfactory1T3M1', count:1 }], machineId:'machineManual', recipeId:'recipeCoalGenerator' },
                 //---
-                {	id:'machineFuelGenerator',	            type:'item',	    cat:'energy',    reqs:[{ id:'satisfactory1T6M1', count:1 }], label:'machineFuelGenerator', img:'img/icons/generator_4.png', recipeId:'recipeFuelGenerator', lines:[ 'manualFuelGenerator' ], speed:1 },
+                {	id:'machineFuelGenerator',	            type:'item',	    cat:'energy',    reqs:[{ id:'satisfactory1T6M1', count:1 }], label:'machineFuelGenerator', img:'img/icons/generator_4.png', recipeId:'recipeFuelGenerator', lines:[ 'manualFuelGenerator' ], speed:1, energy:{ id:'itemFuel', count:2.4 } },
                 {	id:'recipeFuelGenerator',	            type:'recipe',	                        reqs:[{ id:'satisfactory1T6M1', count:1 }], time:1, output:{ id:'machineFuelGenerator', count:1 }, inputs:[{ id:'itemFoundation', count:6.25 },{ id:'itemComputer', count:5 },{ id:'itemHeavyModularFrame', count:10 },{ id:'itemMotor', count:15 },{ id:'itemRubber', count:50 },{ id:'itemQuickwire', count:50 }] },
                 {	id:'manualFuelGenerator',	            type:'line',                            reqs:[{ id:'satisfactory1T6M1', count:1 }], machineId:'machineManual', recipeId:'recipeFuelGenerator' },
                 //---
-                {	id:'machineNuclearPlant',	            type:'item',	    cat:'energy',    reqs:[{ id:'satisfactory1T8M1', count:1 }], label:'machineNuclearPlant', img:'img/icons/nuclear_plant.png', recipeId:'recipeNuclearPlant', lines:[ 'manualNuclearPlant' ], speed:1 },
+                {	id:'machineNuclearPlant',	            type:'item',	    cat:'energy',    reqs:[{ id:'satisfactory1T8M1', count:1 }], label:'machineNuclearPlant', img:'img/icons/nuclear_plant.png', recipeId:'recipeNuclearPlant', lines:[ 'manualNuclearPlant' ], speed:16, energy:{ id:'itemUraniumFuelRod', count:0.01 } },
                 {	id:'recipeNuclearPlant',	            type:'recipe',	                        reqs:[{ id:'satisfactory1T8M1', count:1 }], time:1, output:{ id:'machineNuclearPlant', count:1 }, inputs:[{ id:'itemFoundation', count:24 },{ id:'itemConcrete', count:250 },{ id:'itemHeavyModularFrame', count:25 },{ id:'itemSupercomputer', count:5 },{ id:'itemCable', count:100 },{ id:'itemAlcladAluminumSheet', count:100 }] },
                 {	id:'manualNuclearPlant',	            type:'line',                            reqs:[{ id:'satisfactory1T8M1', count:1 }], machineId:'machineManual', recipeId:'recipeNuclearPlant' },
                 //---
-                {	id:'itemElectricity',	                type:'item',        cat:'energy', reqs:[{ id:'satisfactory1T0M2', count:1 }], label:'itemElectricity', img:'img/icons/energy.png', storage:{ base:100, storerId:'storerPowerStorage' }, recipeId:'recipePower1', lines:[ 'linePower1' ] },
-                {	id:'recipePower1',	                    type:'recipe',	    reqs:[{ id:'satisfactory1T0M2', count:1 }], time:1, output:{ id:'itemElectricity', count:20 } },
-                {	id:'recipePower2',	                    type:'recipe',	    reqs:[{ id:'satisfactory1T0M5', count:1 }], time:1, output:{ id:'itemElectricity', count:30 }, inputs:[{ id:'itemBiomass', count:0.16 }] },
-                {	id:'recipePower3',	                    type:'recipe',	    reqs:[{ id:'satisfactory1T3M1', count:1 }], time:1, output:{ id:'itemElectricity', count:75 }, inputs:[{ id:'itemCoal', count:0.25 },{ id:'itemWater', count:0.75 }] },
-                {	id:'recipePower4',	                    type:'recipe',	    reqs:[{ id:'satisfactory1T6M1', count:1 }], time:1, output:{ id:'itemElectricity', count:150 }, inputs:[{ id:'itemFuel', count:2.4 }] },
-                {	id:'recipePower5',	                    type:'recipe',	    reqs:[{ id:'satisfactory1T8M1', count:1 }], time:1, output:{ id:'itemElectricity', count:2500 }, inputs:[{ id:'itemUraniumFuelRod', count:0.01 },{ id:'itemWater', count:4 }] },
+                {	id:'itemElectricity',	                type:'item',        cat:'energy', reqs:[{ id:'satisfactory1T0M2', count:1 }], label:'itemElectricity', img:'img/icons/energy.png', storage:{ base:100, storerId:'storerPowerStorage' }, recipeId:'recipePower1', lines:[ 'linePower1', 'linePower2', 'linePower3', 'linePower4', 'linePower5' ] },
+                {	id:'recipePower1',	                    type:'recipe',	    reqs:[{ id:'satisfactory1T0M2', count:1 }], time:1, output:{ id:'itemElectricity', count:150 } },
                 {	id:'linePower1',                        type:'line',	    reqs:[{ id:'satisfactory1T0M2', count:1 }], machineId:'machineBioBurner1', recipeId:'recipePower1' },
-                {	id:'linePower2',                        type:'line',	    reqs:[{ id:'satisfactory1T0M5', count:1 }], machineId:'machineBioBurner2', recipeId:'recipePower2' },
-                {	id:'linePower3',                        type:'line',	    reqs:[{ id:'satisfactory1T3M1', count:1 }], machineId:'machineCoalGenerator', recipeId:'recipePower3' },
-                {	id:'linePower4',                        type:'line',	    reqs:[{ id:'satisfactory1T6M1', count:1 }], machineId:'machineFuelGenerator', recipeId:'recipePower4' },
-                {	id:'linePower5',                        type:'line',	    reqs:[{ id:'satisfactory1T8M1', count:1 }], machineId:'machineNuclearPlant', recipeId:'recipePower5' },
+                {	id:'linePower2',                        type:'line',	    reqs:[{ id:'satisfactory1T0M5', count:1 }], machineId:'machineBioBurner2', recipeId:'recipePower1' },
+                {	id:'linePower3',                        type:'line',	    reqs:[{ id:'satisfactory1T3M1', count:1 }], machineId:'machineCoalGenerator', recipeId:'recipePower1' },
+                {	id:'linePower4',                        type:'line',	    reqs:[{ id:'satisfactory1T6M1', count:1 }], machineId:'machineFuelGenerator', recipeId:'recipePower1' },
+                {	id:'linePower5',                        type:'line',	    reqs:[{ id:'satisfactory1T8M1', count:1 }], machineId:'machineNuclearPlant', recipeId:'recipePower1' },
                 
                 // Raw                
                 //---
