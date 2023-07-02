@@ -275,7 +275,7 @@ var cnItems = {
     "popup is displayed, you have to select the": "弹出窗口，您必须选择",
     "recipe then click on": "配方然后点击",
     "Run": "运行",
-    "Satisfactory": "满意",
+    "Satisfactory": "Satisfactory",
     "Select a recipe": "选择配方",
     "Start a new Run": "开始新游戏",
     "Starting Date": "开始日期",
