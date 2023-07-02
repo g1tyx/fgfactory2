@@ -296,7 +296,7 @@ var zh_translations = {
     'itemModularFrame': '模块化框架',
     'itemMotor': '发动机',
     'itemNitrogen': '氮',
-    'itemNuclearPasta': '核意大利面', 
+    'itemNuclearPasta': '核面食', 
     'itemPressureConversionCube': '压力转换立方体', 
     'itemQuartz': '石英',
     'itemQuickwire': '快速导线',
