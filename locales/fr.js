@@ -1,4 +1,7 @@
 var fr_translations = {
+
+    /* GENERAL */
+
     //---
     'game_title': 'FG Factory 2',
     //---
@@ -31,6 +34,7 @@ var fr_translations = {
     'btn_importSave': 'Importer',
     'btn_wipeSave': 'Effacer',
     //---
+    'text_imagesFrom': 'Images generated from',
     'text_iconsBy': 'Icônes fournis par',
     'text_love': 'Ce jeu a été conçu et réalisé avec tout l\'amour <i class="fa-fw fas fa-heart text-danger"></i> du monde par <span class="text-white">Freddec</span>',
     //---
@@ -48,20 +52,15 @@ var fr_translations = {
     'tab_options': 'Options',
     //---
     'word_Count': 'Nombre',
-    'word_Missions': 'Missions',
     'word_Scenarii': 'Scénarios',
     'word_LocalData': 'Données locales',
-    'word_Items': 'Objets',
     'word_Objectives': 'Objectifs',
     'word_Storage': 'Stockage',
     'word_Prod': 'Prod',
     'word_Manual': 'Manuel',
-    'word_Machines': 'Machines',
-    'word_Automation': 'Automatisation',
-    'word_Storers': 'Conteneurs',
+    'word_Production': 'Production',
     'word_StartDate': 'Début',
     'word_Language': 'Langue',
-    'word_Techs': 'Technologies',
     'word_Max': 'Max',
     'word_Recipe': 'Recette',
     'word_Close': 'Fermer',
@@ -75,6 +74,30 @@ var fr_translations = {
     'word_TotalCount': 'Total',
     'word_UsedCount': 'Utilisé',
     'word_NotYetWon': 'Pas encore gagné',
+    'word_Options': 'Options',
+    'word_ShowLocked': 'Show locked items and missions',
+    'word_LockedBy': 'Locked by',
+    'word_mission': 'mission',
+    'word_tech': 'tech',
+    'word_speed': 'speed',
+
+    /* FACTORIO SCENARIOS */
+
+    //---
+    'cat_mission': 'Missions',
+    'cat_tech': 'Technologies',
+    //---
+    'cat_machine': 'Machines',
+    'cat_storer': 'Containeurs',
+    'cat_energy': 'Energie',
+    'cat_raw': 'Minerais',
+    'cat_level1': 'Niveau 1',
+    'cat_level2': 'Niveau 2',
+    'cat_level3': 'Niveau 3',
+    'cat_level4': 'Niveau 4',
+    'cat_level5': 'Niveau 5',
+    'cat_science': 'Science',
+    
     //---
     'scenario_tut': 'Tutoriel',
     'scenarioDesc_tut': 'Apprendre les bases avant de jouer les autres scénarios. Fortement récommandé pour les nouveaux joueurs.',
@@ -96,15 +119,14 @@ var fr_translations = {
     //---
     'tutMission6': 'Ce n\'est pas la fin',
     'tutMission6Desc': '<div class="mb-2">Avec toutes ces machines et ces conteneurs, votre usine pourrait devenir de plus en plus grande. Vous connaissez maintenant les bases pour jouer tous les scénarios. Remplissez l\'objectif final et terminez le tutoriel. Bon jeu !</div>',
+
     //---
     'scenario_factorio1': 'Evasion 1',
     'scenarioDesc_factorio1': 'Ecrasé sur une planète hostile, vous allez devoir en réchapper. Scénario basique inspiré du jeu Factorio.',
     //---
     'factorio1Obj': 'Evasion',
     'factorio1ObjDesc': '<div class="mb-2">Vous vous êtes écrasé sur une planète hostile. Votre objectif est de vous échapper de là. Pour ce faire, vous devez construire une Fusée (composée de 100 Pièces de fusée), une Armure pour vous protéger pendant le voyage et un Satellite pour naviguer jusqu\'à votre maison.</div><div class="mb-2">Ci-dessous, vous trouverez les technologies qui débloquent les objets, machines et conteneurs nécessaires. Bonne chance !</div><div class="mb-2 small text-normal">Inspiré du jeu <a href="https://factorio.com/" target="_blank">Factorio</a></div>',
-    //---
-    'satisfactory1T0M1': 'Amélioration 1',
-    'satisfactory1T0M1Desc': '<div class="mb-2">En tant que pionnier travaillant pour Nous, vous êtes déposé sur une planète extraterrestre. Pour atteindre les jalons de l\'entreprise, nous attendons de vous que vous construisiez une usine de manière à permettre une expansion et une conplexification faciles. Nous faisons l\'histoire ici! Visez grand ou rentrez chez vous !</div><div class="mb-2 small text-normal">Inspiré du jeu <a href="https://www.satisfactorygame.com/" target="_blank">Satisfactory</a></div>',
+
     //---
     'techAutomation1': 'Automatisation 1',
     'techSteel': 'Acier',
@@ -171,15 +193,6 @@ var fr_translations = {
     'itemRocketPart': 'Pièce de fusée',
     'itemArmor': 'Armure',
     'itemSatellite': 'Satellite',
-    'itemIronIngot': 'Lingot de fer',
-    'itemIronRod': 'Barre de fer',
-    'itemWire': 'Bobine',
-    'itemLeaves': 'Feuilles',
-    'itemBiomass': 'Biomasse',
-    'itemCopperIngot': 'Lingot de cuivre',
-    'itemScrew': 'Vis',
-    'itemReinforcedPlate': 'Plaque renforcée',
-    'itemCable': 'Cable',
     //---
     'machineManual': 'Ouvrier',    
     'machineFurnace1': 'Four 1',
@@ -199,12 +212,126 @@ var fr_translations = {
     'machineRefinery': 'Raffinerie',
     'machineNuclearPlant': 'Centrale nucléaire',
     'machineRocketSilo': 'Silo à fusée',
-    'machineBioBurner1': 'Incinérateur Bio 1',
-    'machineSmelter': 'Fondrie',
-    'machineConstructor': 'Construteur',
     //---
     'storerChest': 'Coffre',
     'storerBarrel': 'Fût',
     'storerTank': 'Réservoir',
     'storerAccumulator': 'Accumulateur',
+
+    /* SATISFACTORY SCENARIOS */
+    
+    //---
+    'cat_level6': 'Tier 6',
+    'cat_level7': 'Tier 7',
+    'cat_level8': 'Tier 8',
+    'cat_level9': 'Tier 9',
+
+    //---
+    'scenario_satisfactory1': 'Employee of the planet 1',
+    'scenarioDesc_satisfactory1': 'Dropped onto a planet, you have to achieve company milestones to gain a fabulous cup. Scenario inspired by <span class="text-white">Satisfactory</span> game.',
+    //---
+    'satisfactory1T0M1': 'HUB Upgrade 1',
+    'satisfactory1T0M1Desc': '<div class="mb-2">As a pioneer working for Us, you are dropped onto an alien planet. To achieve company milestones we expect you to construct a factory in such a way that it allows for easy expansion and complexion. We’re making history here! Go big or go home!</div><div class="small text-normal">Inspired by <a href="https://www.satisfactorygame.com/" target="_blank">Satisfactory</a> game</div>',
+    //---
+    'satisfactory1T0M2': 'HUB Upgrade 2',
+    'satisfactory1T0M3': 'HUB Upgrade 3',
+    'satisfactory1T0M4': 'HUB Upgrade 4',
+    'satisfactory1T0M5': 'HUB Upgrade 5',
+    'satisfactory1T0M6': 'HUB Upgrade 6',
+    //---
+    'satisfactory1Space0': 'Space Elevator',
+    'satisfactory1Space1': 'Phase #1 - Platform',
+    'satisfactory1Space2': 'Phase #2 - Framework',
+    'satisfactory1Space3': 'Phase #3 - Systems',
+    'satisfactory1Space4': 'Phase #4 - Propulsion',
+    //---
+    'satisfactory1T2M1': 'Part Assembly',
+    'satisfactory1T3M1': 'Coal Power',
+    'satisfactory1T3M3': 'Basic Steel Production',
+    'satisfactory1T4M1': 'Advanced Steel Production',
+    'satisfactory1T5M1': 'Oil Processing',
+    'satisfactory1T5M2': 'Industrial Manufacturing',
+    'satisfactory1T6M1': 'Expanded Power Infrastructure',
+    'satisfactory1T7M1': 'Bauxite Refinement',
+    'satisfactory1T7M3': 'Aeronautical Engineering',
+    'satisfactory1T8M1': 'Nuclear Power',
+    'satisfactory1T8M2': 'Advanced Aluminum Production',
+    'satisfactory1T8M3': 'Leading-edge Production',
+    'satisfactory1T8M4': 'Particle Enrichment',
+
+    //---
+    'itemAdaptiveControlUnit': 'Adaptive Control Unit', 
+    'itemAILimiter': 'A.I. Limiter',
+    'itemAlcladAluminumSheet': 'Alclad Aluminum Sheet',
+    'itemAluminumCasing': 'Aluminum Casing',
+    'itemAluminumIngot': 'Aluminum Ingot',
+    'itemAluminumScrap': 'Aluminum Scrap',
+    'itemAluminaSolution': 'Alumina Solution',
+    'itemAssemblyDirectorSystem': 'Assembly Director System', 
+    'itemAutomatedWiring': 'Automated Wiring',
+    'itemBauxite': 'Bauxite',
+    'itemBiomass': 'Biomass',
+    'itemCable': 'Cable',
+    'itemCaterium': 'Caterium',
+    'itemCateriumIngot': 'Caterium Ingot',
+    'itemComputer': 'Computer',
+    'itemCopperIngot': 'Copper Ingot',
+    'itemCopperPowder': 'Copper Powder',
+    'itemCopperSheet': 'Copper Sheet',
+    'itemCoolingSystem': 'Cooling System', 
+    'itemCrystal': 'Crystal',
+    'itemCrystalOscillator': 'Crystal Oscillator',
+    'itemElectromagneticControlRod': 'Electromagnetic Control Rod',
+    'itemMagneticFieldGenerator': 'Magnetic Field Generator', 
+    'itemFoundation': 'Foundation',
+    'itemFuel': 'Fuel',
+    'itemFusedModularFrame': 'Fused Modular Frame', 
+    'itemHeatSink': 'Heat Sink',
+    'itemHeavyModularFrame': 'Heavy Modular Frame', 
+    'itemHighSpeedConnector': 'High-Speed Connector', 
+    'itemIndustrialBeam': 'IndustrialBeam',
+    'itemIronIngot': 'Iron Ingot',
+    'itemIronRod': 'Iron Rod',
+    'itemLeaves': 'Leaves',
+    'itemModularEngine': 'Modular Engine', 
+    'itemModularFrame': 'Modular Frame',
+    'itemMotor': 'Motor',
+    'itemNitrogen': 'Nitrogen',
+    'itemNuclearPasta': 'Nuclear Pasta', 
+    'itemPressureConversionCube': 'Pressure Conversion Cube', 
+    'itemQuartz': 'Quartz',
+    'itemQuickwire': 'Quickwire',
+    'itemRadioControlUnit': 'Radio Control Unit', 
+    'itemReinforcedPlate': 'Reinforced Plate',
+    'itemRotor': 'Rotor',
+    'itemRubber': 'Rubber',
+    'itemScrew': 'Screw',
+    'itemSilica': 'Silica',
+    'itemSmartPlating': 'Smart Plating',
+    'itemStator': 'Stator',
+    'itemSteelBeam': 'Steel Beam',
+    'itemSteelIngot': 'Steel Ingot',
+    'itemSteelPipe': 'Steel Pipe',
+    'itemSupercomputer': 'Supercomputer',
+    'itemThermalPropulsionRocket': 'Thermal Propulsion Rocket', 
+    'itemTurboMotor': 'Turbo Motor', 
+    'itemUraniumCell': 'Uranium Cell',
+    'itemUraniumFuelRod': 'Uranium Fuel Rod',
+    'itemVersatileFramework': 'Versatile Framework',
+    'itemWire': 'Wire',
+    //---
+    'machineAssembler': 'Assembler',
+    'machineBioBurner1': 'Bio Burner 1',
+    'machineBioBurner2': 'Bio Burner 2',
+    'machineBlender': 'Blender',
+    'machineCoalGenerator': 'Coal Generator',
+    'machineConstructor': 'Constructor',
+    'machineFoundry': 'Foundry',
+    'machineFuelGenerator': 'Fuel Generator',
+    'machineManufacturer': 'Manufacturer',
+    'machineMiner0': 'Portable Miner',
+    'machineParticleAccelerator': 'Particle Accelerator',
+    'machineSmelter': 'Smelter',
+    //---
+    'storerBox': 'Box',
 }

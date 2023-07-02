@@ -1,8 +1,8 @@
 //---
 window.onload = function() {
     //---
-    window.App = new App()
-    window.App.start()
+    window.app = new App()
+    window.app.start()
 }
 //---
 class App {
@@ -38,6 +38,7 @@ class App {
                 'zh-CS': { translation:zh_translations },
                 'en-US': { translation:en_translations },
                 'fr-FR': { translation:fr_translations },
+                'zh-CS': { translation:zh_translations },
             }
         })
         //---
@@ -82,7 +83,7 @@ class App {
                 if (this.saveInterval) clearInterval(this.saveInterval)
             }
             //---
-            this.saveInterval = setInterval(() => { window.App.save() }, 30000)
+            this.saveInterval = setInterval(() => { window.app.save() }, 30000)
             //---
             setTimeout(() => {
                 //---
@@ -100,8 +101,8 @@ class App {
     //---
     mainloop() {
         //---
-        window.App.update()
-        window.App.rafHandle = requestAnimationFrame(window.App.mainloop)
+        window.app.update()
+        window.app.rafHandle = requestAnimationFrame(window.app.mainloop)
     }
     //---
     update() {

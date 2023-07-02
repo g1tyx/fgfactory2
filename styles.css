@@ -17,7 +17,7 @@
     
     --bs-body-font-family: "Segoe UI", "Roboto";
     --bs-body-font-size: 0.85rem;
-    --bs-body-font-weight: 400;
+    --bs-body-font-weight: 600;
     --bs-body-line-height: 1.5;
     --bs-body-color: #a2afbb;
     --bs-body-bg: var(--bs-secondary);
@@ -74,6 +74,12 @@ a { text-decoration: none; }
 .text-bg-info { color: #fff!important; background-color: var(--bs-info)!important; }
 .text-bg-warning { color: #000!important; background-color: var(--bs-warning)!important; }
 .text-bg-danger { color: #fff!important; background-color: var(--bs-danger)!important; }
+
+.h1, .h2, .h3, .h4, .h5, .h6, h1, h2, h3, h4, h5, h6 {
+    margin-top: 0; margin-bottom: 0.5rem;
+    font-weight: var(--bs-body-font-weight);
+    line-height: var(--bs-body-line-height);
+}
 
 .small, small { font-size: .875em; }
 
@@ -275,6 +281,20 @@ a { text-decoration: none; }
     opacity: .5;
 }
 
+.form-check-input {
+    margin-top: 0.325em;
+}
+
+.form-check-input:focus {
+    border-color: var(--bs-warning);
+    outline: 0; box-shadow: none;
+}
+
+.form-check-input:checked {
+    background-color: var(--bs-warning);
+    border-color: var(--bs-warning);
+}
+
 .toast {
     --bs-toast-padding-x: 0.75rem;
     --bs-toast-padding-y: 0.5rem;
@@ -304,7 +324,7 @@ a { text-decoration: none; }
 
 .card {
     --bs-card-spacer-x: 0.5rem;
-    --bs-card-spacer-y: 0.5rem;
+    --bs-card-spacer-y: 0.75rem;
     --bs-card-title-spacer-y: 0.25rem;
     --bs-card-border-width: var(--bs-border-width);
     --bs-card-border-color: var(--bs-border-color);
@@ -315,7 +335,15 @@ a { text-decoration: none; }
     --bs-card-bg: var(--bs-secondary);
     --bs-card-group-margin: 0.75rem;
 }
+/*
+.card-body {
+    border-bottom: var(--bs-border-width) solid var(--bs-border-color);
+}
 
+.card-body:last-child {
+    border-bottom: 0
+}
+*/
 .dropdown-menu {
     --bs-dropdown-padding-x: 0;
     --bs-dropdown-padding-y: 0.5rem;
@@ -381,6 +409,8 @@ a { text-decoration: none; }
     --bs-tooltip-color: #fff;
     --bs-tooltip-opacity: 1;
     --bs-tooltip-max-width: auto;
+    
+    font-weight: var(--bs-body-font-weight);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
