@@ -221,10 +221,10 @@ var zh_translations = {
     /* SATISFACTORY SCENARIOS */
     
     //---
-    'cat_level6': 'Tier 6',
-    'cat_level7': 'Tier 7',
-    'cat_level8': 'Tier 8',
-    'cat_level9': 'Tier 9',
+    'cat_level6': '层级 6',
+    'cat_level7': '层级 7',
+    'cat_level8': '层级 8',
+    'cat_level9': '层级 9',
 
     //---
     'scenario_satisfactory1': '星球员工 1',
