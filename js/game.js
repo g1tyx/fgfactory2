@@ -448,11 +448,10 @@ class Game {
         if (manual) {
             //---
             if (manual.inputs) {
-                //---
                 for (let input of manual.inputs) {
-                    //---
-                    let inputElem = this.elems.find(elem => elem.id == input.id)
-                    if (input.count > inputElem.count) return false
+                    if (this.getAvailableCount(input.id) < input.count / window.app.fps) {
+                        return false
+                    }
                 }
             }
             //---
