@@ -759,9 +759,10 @@ var DATA = {
                 
                 // Level 4
                 //---
-                {	id:'itemReinforcedPlate',               type:'item',        cat:'level4', reqs:[{ id:'satisfactory1T0M3', count:1 }], label:'itemReinforcedPlate', img:'img/icons/item4_0.png', storage:{ base:100, storerId:'storerStorageContainer' }, recipeId:'recipeReinforcedPlate', lines:[ 'manualReinforcedPlate' ] },
+                {	id:'itemReinforcedPlate',               type:'item',        cat:'level4', reqs:[{ id:'satisfactory1T0M3', count:1 }], label:'itemReinforcedPlate', img:'img/icons/item4_0.png', storage:{ base:100, storerId:'storerStorageContainer' }, recipeId:'recipeReinforcedPlate', lines:[ 'manualReinforcedPlate', 'lineReinforcedPlate' ] },
                 {	id:'recipeReinforcedPlate',             type:'recipe',	    reqs:[{ id:'satisfactory1T0M3', count:1 }], time:12, output:{ id:'itemReinforcedPlate', count:1 }, inputs:[{ id:'itemIronPlate', count:6 },{ id:'itemScrew', count:12 }] },
                 {	id:'manualReinforcedPlate',             type:'line',        reqs:[{ id:'satisfactory1T0M3', count:1 }], machineId:'machineManual', recipeId:'recipeReinforcedPlate' },
+                {	id:'lineReinforcedPlate',               type:'line',        reqs:[{ id:'satisfactory1T0M3', count:1 }], machineId:'machineAssembler', recipeId:'recipeReinforcedPlate' },
                 //---
                 {	id:'itemRotor',	                        type:'item',        cat:'level4', reqs:[{ id:'satisfactory1T2M1', count:1 }], label:'itemRotor', img:'img/icons/item4_1.png', storage:{ base:100, storerId:'storerStorageContainer' }, recipeId:'recipeRotor', lines:[ 'manualRotor', 'lineRotor' ] },
                 {	id:'recipeRotor',	                    type:'recipe',	    reqs:[{ id:'satisfactory1T2M1', count:1 }], time:15, output:{ id:'itemRotor', count:1 }, inputs:[{ id:'itemIronRod', count:5 },{ id:'itemScrew', count:25 }] },
