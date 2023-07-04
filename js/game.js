@@ -335,7 +335,7 @@ class Game {
             //---
             if (line.inputs.every(input => this.getElem(input.id).count > 0)) {
                 //---
-                let ratio = Math.min(...line.inputs.map(input => Math.min(x.count, this.getElem(input.id).count) / input.count))
+                let ratio = Math.min(...line.inputs.map(input => Math.min(input.count, this.getElem(input.id).count) / input.count))
                 line.inputs.forEach(input => {
                     //---
                     let inputElem = this.getElem(input.id)
