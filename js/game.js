@@ -5,11 +5,8 @@ class GameScenario {
         //---
         this.initData = data
         //---
-        let names = Object.getOwnPropertyNames(data)
-        names.forEach(name=>{
-            Object.defineProperty(this, name, Object.getOwnPropertyDescriptor(data, name))
-        }
-        )
+        let names = Object.getOwnPropertyNames(data) 
+        names.forEach(name => { Object.defineProperty(this, name, Object.getOwnPropertyDescriptor(data, name)) })
     }
     //---
     reset(game) {
@@ -20,10 +17,8 @@ class GameScenario {
     //---
     load(data) {
         //---
-        if (data.startDate != null)
-            this.startDate = data.startDate
-        if (data.victoryDate != null)
-            this.victoryDate = data.victoryDate
+        if (data.startDate != null) this.startDate = data.startDate
+        if (data.victoryDate != null) this.victoryDate = data.victoryDate
     }
     //---
     getSaveData() {
@@ -43,11 +38,8 @@ class GameElem {
         //---
         this.initData = data
         //---
-        let names = Object.getOwnPropertyNames(data)
-        names.forEach(name=>{
-            Object.defineProperty(this, name, Object.getOwnPropertyDescriptor(data, name))
-        }
-        )
+        let names = Object.getOwnPropertyNames(data) 
+        names.forEach(name => { Object.defineProperty(this, name, Object.getOwnPropertyDescriptor(data, name)) })
     }
     //---
     reset(game) {
@@ -55,7 +47,8 @@ class GameElem {
         this.unlocked = this.initData.reqs ? false : true
     }
     //---
-    load(data) {}
+    load(data) {
+    }
     //---
     getSaveData() {
         //---
@@ -93,16 +86,12 @@ class GameItem extends GameElem {
         //---
         super.load(data)
         //---
-        if (data.count != null)
-            this.count = data.count
-        if (data.storageCount != null)
-            this.storageCount = data.storageCount
+        if (data.count != null) this.count = data.count
+        if (data.storageCount != null) this.storageCount = data.storageCount
         //---
-        if (data.collapsed != null)
-            this.collapsed = data.collapsed
+        if (data.collapsed != null) this.collapsed = data.collapsed
         //---
-        if (data.selectStorageCount != null)
-            this.selectStorageCount = data.selectStorageCount
+        if (data.selectStorageCount != null) this.selectStorageCount = data.selectStorageCount
     }
     //---
     getSaveData() {
@@ -121,26 +110,18 @@ class GameItem extends GameElem {
     //---
     getAddStorageCount(game) {
         //---
-        if (this.selectStorageCount == '1')
-            return 1
-        else if (this.selectStorageCount == '10')
-            return 10
-        else if (this.selectStorageCount == '100')
-            return 100
-        else if (this.selectStorageCount == 'max')
-            return game.getAvailableCount(this.storage.storerId)
+        if (this.selectStorageCount == '1') return 1
+        else if (this.selectStorageCount == '10') return 10
+        else if (this.selectStorageCount == '100') return 100
+        else if (this.selectStorageCount == 'max') return game.getAvailableCount(this.storage.storerId)
     }
     //---
     getRemoveStorageCount() {
         //---
-        if (this.selectStorageCount == '1')
-            return 1
-        else if (this.selectStorageCount == '10')
-            return 10
-        else if (this.selectStorageCount == '100')
-            return 100
-        else if (this.selectStorageCount == 'max')
-            return this.storageCount
+        if (this.selectStorageCount == '1') return 1
+        else if (this.selectStorageCount == '10') return 10
+        else if (this.selectStorageCount == '100') return 100
+        else if (this.selectStorageCount == 'max') return this.storageCount
     }
 }
 //---
@@ -159,31 +140,21 @@ class GameLine extends GameElem {
         //---
         this.selectCount = '1'
         //---
-        let machine = game.scenario.data.elems.find(elem=>elem.id == this.machineId)
+        let machine = game.scenario.data.elems.find(elem => elem.id == this.machineId)
         if (machine.energy && this.id != 'manualCoal' && this.id != 'lineCoal1') {
             //---
             this.inputs = []
-            this.inputs.push({
-                id: machine.energy.id,
-                count: machine.energy.count,
-                coeff: 1.0
-            })
+            this.inputs.push({ id:machine.energy.id, count:machine.energy.count, coeff:1.0 })
         }
         //---
-        let recipe = game.scenario.data.elems.find(elem=>elem.id == this.recipeId)
+        let recipe =  game.scenario.data.elems.find(elem => elem.id == this.recipeId)
         if (recipe.inputs) {
             //---
-            if (!this.inputs)
-                this.inputs = []
-            recipe.inputs.forEach(input=>{
+            if (!this.inputs) this.inputs = []
+            recipe.inputs.forEach(input => {
                 //---
-                this.inputs.push({
-                    id: input.id,
-                    count: (input.count / recipe.time * machine.speed).toFixed(2),
-                    coeff: 1.0
-                })
-            }
-            )
+                this.inputs.push({ id:input.id, count:(input.count / recipe.time * machine.speed).toFixed(2), coeff:1.0 })
+            })
         }
         //---
         this.output = {}
@@ -197,11 +168,9 @@ class GameLine extends GameElem {
         //---
         super.load(data)
         //---
-        if (data.count != null)
-            this.count = data.count
+        if (data.count != null) this.count = data.count
         //---
-        if (data.selectCount != null)
-            this.selectCount = data.selectCount
+        if (data.selectCount != null) this.selectCount = data.selectCount
     }
     //---
     getSaveData() {
@@ -217,26 +186,18 @@ class GameLine extends GameElem {
     //---
     getAddCount(game) {
         //---
-        if (this.selectCount == '1')
-            return 1
-        else if (this.selectCount == '10')
-            return 10
-        else if (this.selectCount == '100')
-            return 100
-        else if (this.selectCount == 'max')
-            return game.getAvailableCount(this.machineId)
+        if (this.selectCount == '1') return 1
+        else if (this.selectCount == '10') return 10
+        else if (this.selectCount == '100') return 100
+        else if (this.selectCount == 'max') return game.getAvailableCount(this.machineId)
     }
     //---
     getRemoveCount() {
         //---
-        if (this.selectCount == '1')
-            return 1
-        else if (this.selectCount == '10')
-            return 10
-        else if (this.selectCount == '100')
-            return 100
-        else if (this.selectCount == 'max')
-            return this.count
+        if (this.selectCount == '1') return 1
+        else if (this.selectCount == '10') return 10
+        else if (this.selectCount == '100') return 100
+        else if (this.selectCount == 'max') return this.count
     }
     //---
     getMachineCount() {
@@ -260,17 +221,16 @@ class Game {
         this.victoryReqs = null
         //---
         this.scenarios = []
-        DATA.scenarios.forEach(scenario=>{
+        DATA.scenarios.forEach(scenario => {
             //---
             let newScenario = new GameScenario(scenario)
             this.scenarios.push(newScenario)
-        }
-        )
+        })
     }
     //---
     loadScenario(scenarioId) {
         //---
-        this.scenario = this.scenarios.find(scenario=>scenario.id == scenarioId)
+        this.scenario = this.scenarios.find(scenario => scenario.id == scenarioId)
         //---
         this.elems = []
         this.lines = []
@@ -282,47 +242,31 @@ class Game {
         //---
         this.victoryReqs = this.scenario.data.victoryReqs ? this.scenario.data.victoryReqs : null
         //---
-        this.scenario.data.elems.forEach(elem=>{
+        this.scenario.data.elems.forEach(elem => {
             //---
             let el = null
-            if (elem.type == 'item')
-                el = new GameItem(elem)
-            else if (elem.type == 'line')
-                el = new GameLine(elem)
+            if (elem.type == 'item') el = new GameItem(elem)
+            else if (elem.type == 'line') el = new GameLine(elem)
             //---
             if (el) {
                 //---
                 this.elems.push(el)
                 el.reset(this)
             }
-        }
-        )
+        })
     }
     //---
     load(data) {
         //---
-        if (data.scenarioId)
-            this.loadScenario(data.scenarioId)
+        if (data.scenarioId) this.loadScenario(data.scenarioId)
         //---
-        if (data.victory)
-            this.victory = data.victory
+        if (data.victory) this.victory = data.victory
         //---
-        if (data.elems)
-            this.elems.forEach(elem=>{
-                if (data.elems[elem.id])
-                    elem.load(data.elems[elem.id])
-            }
-            )
+        if (data.elems) this.elems.forEach(elem => { if (data.elems[elem.id]) elem.load(data.elems[elem.id]) })
         //---
-        if (data.currentManualId)
-            this.currentManualId = data.currentManualId
+        if (data.currentManualId) this.currentManualId = data.currentManualId
         //---
-        if (data.scenarios)
-            this.scenarios.forEach(scenario=>{
-                if (data.scenarios[scenario.id])
-                    scenario.load(data.scenarios[scenario.id])
-            }
-            )
+        if (data.scenarios) this.scenarios.forEach(scenario => { if (data.scenarios[scenario.id]) scenario.load(data.scenarios[scenario.id]) })
         //---
         this.refreshUnlocked()
     }
@@ -336,42 +280,33 @@ class Game {
         savedData.victory = this.victory
         //---
         savedData.elems = {}
-        this.elems.forEach(elem=>savedData.elems[elem.id] = elem.getSaveData())
+        this.elems.forEach(elem => savedData.elems[elem.id] = elem.getSaveData())
         //---
         savedData.currentManualId = this.currentManualId
         //---
         savedData.scenarios = {}
-        this.scenarios.forEach(scenario=>savedData.scenarios[scenario.id] = scenario.getSaveData())
+        this.scenarios.forEach(scenario => savedData.scenarios[scenario.id] = scenario.getSaveData())
         //---
         return savedData
     }
     //---
-    getElem(elemId) {
-        return this.elems.find(elem=>elem.id == elemId)
-    }
+    getElem(elemId) { return this.elems.find(elem => elem.id == elemId) }
     //---
-    getElemsBy(name, value) {
-        return this.elems.filter(elem=>elem[name] == value)
-    }
+    getElemsBy(name, value) { return this.elems.filter(elem => elem[name] == value) }
     //---
     refreshUnlocked() {
         //---
-        this.elems.forEach(elem=>{
+        this.elems.forEach(elem => {
             //---
-            if (elem.reqs)
-                elem.unlocked = this.checkElems(elem.reqs)
-        }
-        )
+            if (elem.reqs) elem.unlocked = this.checkElems(elem.reqs)
+        })
     }
     //---
     isVictoryReached() {
         //---
-        if (this.victory)
-            return false
-        else if (this.victoryReqs)
-            return this.checkElems(this.victoryReqs)
-        else
-            return false
+        if (this.victory) return false
+        else if (this.victoryReqs) return this.checkElems(this.victoryReqs)
+        else return false
     }
     //---
     doTick(stepMs) {
@@ -432,8 +367,7 @@ class Game {
         //---
         for (let el of elems) {
             let elem = this.getElem(el.id)
-            if (elem.count < el.count)
-                return false
+            if (elem.count < el.count) return false
         }
         //---
         return true
@@ -446,24 +380,17 @@ class Game {
         let elem = this.getElem(elemId)
         if (elem.cat == 'machine' || (elem.cat == 'energy' && elem.id != 'itemElectricity')) {
             //---
-            let lines = this.elems.filter(elem=>elem.type == 'line' && elem.unlocked == true && elem.count > 0 && elem.machineId == elemId)
-            lines.forEach(line=>{
-                usedCount += line.count
-            }
-            )
+            let lines = this.elems.filter(elem => elem.type == 'line' && elem.unlocked == true && elem.count > 0 && elem.machineId == elemId)
+            lines.forEach(line => { usedCount += line.count })
             //---
-            if (usedCount > elem.count)
-                elem.count = usedCount
-        } else if (elem.cat == 'storer') {
+            if (usedCount > elem.count) elem.count = usedCount
+        }
+        else if (elem.cat == 'storer') {
             //---
-            let items = this.elems.filter(el=>el.storage && el.storage.storerId == elemId)
-            items.forEach(item=>{
-                usedCount += item.storageCount
-            }
-            )
+            let items = this.elems.filter(el => el.storage && el.storage.storerId == elemId)
+            items.forEach(item => { usedCount += item.storageCount })
             //---
-            if (usedCount > elem.count)
-                elem.count = usedCount
+            if (usedCount > elem.count) elem.count = usedCount
         }
         //---
         return usedCount
@@ -479,18 +406,16 @@ class Game {
     //---
     canProduce(elemId) {
         //---
-        let line = this.elems.find(elem=>elem.id == elemId && elem.unlocked)
+        let line = this.elems.find(elem => elem.id == elemId && elem.unlocked)
         if (line) {
             //---
             let canProduce = true
             //---
             if (line.inputs && line.inputs.length > 0) {
                 //---
-                line.inputs.forEach(input=>{
-                    if (this.getAvailableCount(input.id) < input.count / window.app.fps)
-                        canProduce = false
-                }
-                )
+                line.inputs.forEach(input => {
+                    if (this.getAvailableCount(input.id) < input.count / window.app.fps) canProduce = false
+                })
             }
             //---
             return canProduce
@@ -514,7 +439,7 @@ class Game {
     //---
     toggleCollapse(elemId) {
         //---
-        let elem = this.elems.find(elem=>elem.id == elemId)
+        let elem = this.elems.find(elem => elem.id == elemId)
         if (elem) {
             //---
             elem.collapsed = !elem.collapsed
@@ -523,10 +448,9 @@ class Game {
     //---
     canStartManual(manualId) {
         //---
-        if (this.currentManualId && this.currentManualId == manualId)
-            return false
+        if (this.currentManualId && this.currentManualId == manualId) return false
         //---
-        let manual = this.elems.find(elem=>elem.id == manualId)
+        let manual = this.elems.find(elem => elem.id == manualId)
         if (manual) {
             //---
             if (manual.inputs) {
@@ -547,12 +471,12 @@ class Game {
         //---
         if (this.canStartManual(manualId)) {
             //---
-            let manual = this.elems.find(elem=>elem.id == manualId)
+            let manual = this.elems.find(elem => elem.id == manualId)
             if (manual) {
                 //---
                 if (this.currentManualId) {
                     //---
-                    let currentManualElem = this.elems.find(elem=>elem.id == this.currentManualId)
+                    let currentManualElem = this.elems.find(elem => elem.id == this.currentManualId)
                     currentManualElem.count = 0
                     this.currentManualId = null
                 }
@@ -565,8 +489,7 @@ class Game {
     //---
     canStopManual(manualId) {
         //---
-        if (this.currentManualId && this.currentManualId == manualId)
-            return true
+        if (this.currentManualId && this.currentManualId == manualId) return true
         //---
         return false
     }
@@ -575,7 +498,7 @@ class Game {
         //---
         if (this.canStopManual(manualId)) {
             //---
-            let currentManualElem = this.elems.find(elem=>elem.id == this.currentManualId)
+            let currentManualElem = this.elems.find(elem => elem.id == this.currentManualId)
             currentManualElem.count = 0
             this.currentManualId = null
         }
@@ -583,15 +506,13 @@ class Game {
     //---
     canAddLine(lineId) {
         //---
-        let line = this.elems.find(elem=>elem.id == lineId)
+        let line = this.elems.find(elem => elem.id == lineId)
         if (line) {
             //---
             let addCount = line.getAddCount(this)
-            if (addCount <= 0)
-                return false
+            if (addCount <= 0) return false
             //---
-            if (this.getAvailableCount(line.machineId) < addCount)
-                return false
+            if (this.getAvailableCount(line.machineId) < addCount) return false
             //---
             return true
         }
@@ -603,7 +524,7 @@ class Game {
         //---
         if (this.canAddLine(lineId)) {
             //---
-            let line = this.elems.find(elem=>elem.id == lineId)
+            let line = this.elems.find(elem => elem.id == lineId)
             if (line) {
                 //---
                 let addCount = line.getAddCount(this)
@@ -615,13 +536,12 @@ class Game {
     //---
     canRemoveLine(lineId) {
         //---
-        let line = this.elems.find(elem=>elem.id == lineId)
+        let line = this.elems.find(elem => elem.id == lineId)
         if (line) {
             //---
             let removeCount = line.getRemoveCount()
             //---
-            if (line.count < removeCount)
-                return false
+            if (line.count < removeCount) return false
             //---
             return true
         }
@@ -633,7 +553,7 @@ class Game {
         //---
         if (this.canRemoveLine(lineId)) {
             //---
-            let line = this.elems.find(elem=>elem.id == lineId)
+            let line = this.elems.find(elem => elem.id == lineId)
             if (line) {
                 //---
                 let removeCount = line.getRemoveCount()
@@ -645,13 +565,12 @@ class Game {
     //---
     canAddStorer(itemId) {
         //---
-        let item = this.elems.find(elem=>elem.id == itemId)
+        let item = this.elems.find(elem => elem.id == itemId)
         if (item) {
             //---
             let addStorageCount = item.getAddStorageCount(this)
             //---
-            if (this.getAvailableCount(item.storage.storerId) < addStorageCount)
-                return false
+            if (this.getAvailableCount(item.storage.storerId) < addStorageCount) return false
             //---
             return true
         }
@@ -663,7 +582,7 @@ class Game {
         //---
         if (this.canAddStorer(itemId)) {
             //---
-            let item = this.elems.find(elem=>elem.id == itemId)
+            let item = this.elems.find(elem => elem.id == itemId)
             if (item) {
                 //---
                 let addStorageCount = item.getAddStorageCount(this)
@@ -675,17 +594,15 @@ class Game {
     //---
     canRemoveStorer(itemId) {
         //---
-        let item = this.elems.find(elem=>elem.id == itemId)
+        let item = this.elems.find(elem => elem.id == itemId)
         if (item) {
             //---
             let removeStorageCount = item.getRemoveStorageCount()
             //---
-            if (item.storageCount < removeStorageCount)
-                return false
+            if (item.storageCount < removeStorageCount) return false
             //---
             let max = this.getMax(item.id)
-            if (max - (item.storage.base * removeStorageCount) < item.count)
-                return false
+            if (max - (item.storage.base * removeStorageCount) < item.count) return false
             //---
             return true
         }
@@ -697,7 +614,7 @@ class Game {
         //---
         if (this.canRemoveStorer(itemId)) {
             //---
-            let item = this.elems.find(elem=>elem.id == itemId)
+            let item = this.elems.find(elem => elem.id == itemId)
             if (item) {
                 //---
                 let removeStorageCount = item.getRemoveStorageCount()
@@ -709,22 +626,19 @@ class Game {
     //---
     canCompleteMission(missionId) {
         //---
-        let mission = this.elems.find(elem=>elem.id == missionId)
+        let mission = this.elems.find(elem => elem.id == missionId)
         if (mission) {
             //---
-            if (mission.count >= 1)
-                return false
+            if (mission.count >= 1) return false
             //---
             let canComplete = true
             if (mission.costs) {
                 //---
-                mission.costs.forEach(cost=>{
+                mission.costs.forEach(cost => {
                     //---
                     let elem = this.getElem(cost.id)
-                    if (cost.count > elem.count)
-                        canComplete = false
-                }
-                )
+                    if (cost.count > elem.count) canComplete = false
+                })
             }
             //---
             return canComplete
@@ -737,7 +651,7 @@ class Game {
         //---
         if (this.canCompleteMission(missionId)) {
             //---
-            let mission = this.elems.find(elem=>elem.id == missionId)
+            let mission = this.elems.find(elem => elem.id == missionId)
             if (mission) {
                 //---
                 mission.count = 1
@@ -745,22 +659,20 @@ class Game {
                 //---
                 if (mission.costs) {
                     //---
-                    mission.costs.forEach(cost=>{
+                    mission.costs.forEach(cost => {
                         //---
                         let elem = this.getElem(cost.id)
                         elem.count -= cost.count
-                    }
-                    )
+                    })
                 }
                 //---
                 if (mission.rewards) {
                     //---
-                    mission.rewards.forEach(reward=>{
+                    mission.rewards.forEach(reward => {
                         //---
                         let elem = this.getElem(reward.id)
                         elem.count += reward.count
-                    }
-                    )
+                    })
                 }
                 //---
                 this.refreshUnlocked()
@@ -770,7 +682,7 @@ class Game {
     //---
     setLineSelectCount(data) {
         //---
-        let line = this.elems.find(elem=>elem.id == data.elemId)
+        let line = this.elems.find(elem => elem.id == data.elemId)
         if (line) {
             //---
             line.selectCount = data.count
@@ -779,7 +691,7 @@ class Game {
     //---
     setStorageSelectCount(data) {
         //---
-        let item = this.elems.find(elem=>elem.id == data.elemId)
+        let item = this.elems.find(elem => elem.id == data.elemId)
         if (item) {
             //---
             item.selectStorageCount = data.count
