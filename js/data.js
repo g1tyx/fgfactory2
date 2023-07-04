@@ -699,7 +699,7 @@ var DATA = {
                 {	id:'lineSteelPipe',                     type:'line',	    reqs:[{ id:'satisfactory1T3M3', count:1 }], machineId:'machineConstructor', recipeId:'recipeSteelPipe' },
                 //---
                 {	id:'itemQuickwire',	                    type:'item',        cat:'level2', reqs:[{ id:'satisfactory1T6M1', count:1 }], label:'itemQuickwire', img:'img/icons/item2_6.png', storage:{ base:500, storerId:'storerStorageContainer' }, recipeId:'recipeQuickwire', lines:[ 'manualQuickwire', 'lineQuickwire' ] },
-                {	id:'recipeQuickwire',	                type:'recipe',	    reqs:[{ id:'satisfactory1T6M1', count:1 }], ime:5, output:{ id:'itemQuickwire', count:5 }, inputs:[{ id:'itemCateriumIngot', count:1 }] },
+                {	id:'recipeQuickwire',	                type:'recipe',	    reqs:[{ id:'satisfactory1T6M1', count:1 }], time:5, output:{ id:'itemQuickwire', count:5 }, inputs:[{ id:'itemCateriumIngot', count:1 }] },
                 {	id:'manualQuickwire',	                type:'line',        reqs:[{ id:'satisfactory1T6M1', count:1 }], machineId:'machineManual', recipeId:'recipeQuickwire' },
                 {	id:'lineQuickwire',                     type:'line',	    reqs:[{ id:'satisfactory1T6M1', count:1 }], machineId:'machineConstructor', recipeId:'recipeQuickwire' },
                 //---
