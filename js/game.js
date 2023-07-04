@@ -238,8 +238,6 @@ class Game {
         this.currentManualId = null
         //---
         this.victory = false
-        this.victoryReqs = null
-        //---
         this.victoryReqs = this.scenario.data.victoryReqs ? this.scenario.data.victoryReqs : null
         //---
         this.scenario.data.elems.forEach(elem => {
@@ -304,7 +302,7 @@ class Game {
     //---
     isVictoryReached() {
         //---
-        if (this.victory) return false
+        if (this.victory && this.scenario.victoryDate) return false
         else if (this.victoryReqs) return this.checkElems(this.victoryReqs)
         else return false
     }
