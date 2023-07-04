@@ -378,70 +378,54 @@ class Game {
         //---
         let seconds = stepMs / 1000
         //---
-        let elems = this.elems.filter(elem=>elem.id != 'machineManual' && elem.unlocked == true && elem.type == 'item')
-        let iterations = 1000
-        elems.forEach(elem=>{
-            elem.prodArray = new Array(iterations).fill(0)
-            elem.rawConsumArray = new Array(iterations).fill(0)
-            elem.rawCount = elem.count
+        let elems = this.elems.filter(elem => elem.id != 'machineManual' && elem.unlocked == true && elem.type == 'item')
+        elems.forEach(elem => {
             //---
             elem.prod = 0
             //---
-            elem.rawProdArray = new Array(iterations).fill(0)
+            elem.rawProd = 0
             elem.rawConsum = 0
-        }
-        )
+        })
         //---
-        let lines = this.elems.filter(elem=>elem.type == 'line' && elem.unlocked == true && elem.count > 0)
-        for (let i = 0; i < iterations; i++) {
-            lines.forEach(line=>{
-                //---
-                let outputElem = this.elems.find(elem=>elem.id == line.output.id)
-                if (!line.inputs || line.inputs.length == 0) {
-                    outputElem.prodArray[i] += line.output.count * line.count / iterations
-                    outputElem.rawCount += line.output.count * line.count * seconds / iterations
-                    outputElem.rawProdArray[i] += line.output.count * line.count / iterations
-                    return
-                }
-                if (line.inputs.every(x=>this.getElem(x.id).rawCount >= x.count * line.count * seconds) && outputElem.count < this.getMax(outputElem.id)) {
-                    //---
-                    //---
-                    line.inputs.forEach(input=>{
-                        //---
-                        let inputElem = this.elems.find(elem=>elem.id == input.id)
-                        inputElem.prodArray[i] -= input.count * line.count / iterations
-                        inputElem.rawConsumArray[i] += input.count * line.count / iterations
-                        inputElem.rawCount -= input.count * line.count * seconds / iterations
-                    }
-                    )
-                    //---
-                    outputElem.prodArray[i] += line.output.count * line.count / iterations
-                    outputElem.rawCount += line.output.count * line.count * seconds / iterations
-                    outputElem.rawProdArray[i] += line.output.count * line.count / iterations
-                }
+        let lines = this.elems.filter(elem => elem.type == 'line' && elem.unlocked == true && elem.count > 0)
+        lines.forEach(line => {
+            //---
+            let outputElem = this.getElem(line.output.id)
+            //--- The combination of lines with and without inputs made everything 100x harder so I split it out
+            if (!line.inputs || line.inputs.length == 0) {
+                outputElem.prod += line.output.count * line.count
+                outputElem.rawProd += line.output.count * line.count
+                return
             }
-            )
-        }
+            //---
+            if (line.inputs.every(x => this.getElem(x.id).count > 0)) {
+                //---
+                let ratio = Math.min(...line.inputs.map(x => Math.min(x.count, this.getElem(x.id).count) / x.count))
+                line.inputs.forEach(input => {
+                    //---
+                    let inputElem = this.getElem(input.id)
+                    inputElem.prod -= input.count * line.count * ratio
+                    inputElem.rawConsum += input.count * line.count * ratio
+                })
+                //---
+                outputElem.prod += line.output.count * line.count * ratio
+                outputElem.rawProd += line.output.count * line.count * ratio
+            }
+        })
         //---
-        elems.forEach(elem=>{
-            //---
-            elem.prod = Math.trunc(elem.prodArray.reduce((a,b)=>a + b, 0) * 100) / 100
-            elem.rawConsum = Math.trunc(elem.rawConsumArray.reduce((a,b)=>a+b,0)*100)/100
-            elem.rawProd = Math.trunc(elem.rawProdArray.reduce((a,b)=>a+b,0)*100)/100
+        elems.forEach(elem => {
+            //--- Without rounding floating point starts causing issues, especially around 0
+            elem.prod = Math.round(elem.prod * 100) / 100
             let prod = elem.prod * seconds
-            let newCount = elem.rawCount
+            let newCount = elem.count + prod
             //---
-            if (newCount != elem.count)
-                elem.count = newCount
+            if (newCount != elem.count) elem.count = newCount
             //---
             let max = this.getMax(elem.id)
-            if (max > 0 && elem.count > max)
-                elem.count = max
+            if (max > 0 && elem.count > max) elem.count = max
             //---
-            if (elem.count < 0)
-                elem.count = 0
-        }
-        )
+            if (elem.count < 0) elem.count = 0
+        })
     }
     //---
     checkElems(elems) {
