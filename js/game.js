@@ -325,26 +325,32 @@ class Game {
         let lines = this.elems.filter(elem => elem.type == 'line' && elem.unlocked == true && elem.count > 0)
         lines.forEach(line => {
             //---
-            let outputElem = this.elems.find(elem => elem.id == line.output.id)
-            if (this.canProduce(line.id)) {
-                //---
-                if (line.inputs && line.inputs.length > 0) {
-                    //---
-                    line.inputs.forEach(input => {
-                        //---
-                        let inputElem = this.elems.find(elem => elem.id == input.id)
-                        inputElem.prod -= input.count * line.count
-                        inputElem.rawConsum += input.count * line.count
-                    })
-                }
-                //---
+            let outputElem = this.getElem(line.output.id)
+            //--- The combination of lines with and without inputs made everything 100x harder so I split it out
+            if (!line.inputs || line.inputs.length == 0) {
                 outputElem.prod += line.output.count * line.count
                 outputElem.rawProd += line.output.count * line.count
+                return
+            }
+            //---
+            if (line.inputs.every(input => this.getElem(input.id).count > 0)) {
+                //---
+                let ratio = Math.min(...line.inputs.map(input => Math.min(input.count, this.getElem(input.id).count) / input.count))
+                line.inputs.forEach(input => {
+                    //---
+                    let inputElem = this.getElem(input.id)
+                    inputElem.prod -= input.count * line.count * ratio
+                    inputElem.rawConsum += input.count * line.count * ratio
+                })
+                //---
+                outputElem.prod += line.output.count * line.count * ratio
+                outputElem.rawProd += line.output.count * line.count * ratio
             }
         })
         //---
         elems.forEach(elem => {
-            //---
+            //--- Without rounding floating point starts causing issues, especially around 0
+            elem.prod = Math.round(elem.prod * 100) / 100
             let prod = elem.prod * seconds
             let newCount = elem.count + prod
             //---
