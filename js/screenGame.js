@@ -24,11 +24,12 @@ var TplScreenGame = function(data) {
                             html += '<div class="dropdown-menu">'
                                 html += '<div class="px-2 py-1 text-center small">'
                                     html += '<span>' + i18next.t('text_imagesFrom') + '</span>'
-                                    html += ' <a href="https://game-icons.net/" target="_blank">Game-icons.net</a>'
+                                    html += '<div><a href="https://game-icons.net/" target="_blank">Game-icons.net</a></div>'
                                 html += '</div>'
                                 html += '<div class="px-2 py-1 text-center small">'
                                     html += '<span>' + i18next.t('text_iconsBy') + '</span>'
-                                    html += ' <a href="https://fontawesome.com/" target="_blank">Fontawesome</a>'
+                                    html += '<div><a href="https://fontawesome.com/" target="_blank">Fontawesome</a>'
+                                    html += ' + <a href="https://icons8.com/" target="_blank">Icons8</a></div>'
                                 html += '</div>'
                                 html += '<div class="px-2 py-1 text-center small">'
                                     html += '<span>' + i18next.t('text_love') + '</span>'
@@ -259,9 +260,9 @@ class ScreenGame {
                                                 if (elem.count > 0) html += '<div class="col-auto"><i class="fas fa-fw fa-check-circle text-success"></i></div>'
                                             }
                                             else {
-                                                if (elem.lines) html += '<div class="col-auto" style="width:75px;"><span id="itemProd-' + elem.id + '"></span></div>'
-                                                html += '<div class="col-auto" style="width:65px;"><span id="itemCount-' + elem.id + '"></span></div>'
-                                                if (elem.cat == 'machine' || elem.cat == 'storer' || (elem.cat == 'energy' && elem.id != 'itemElectricity')) html += '<div class="col-auto" style="width:65px;"><span id="itemAvailableCount-' + elem.id + '"></span></div>'
+                                                if (elem.lines) html += '<div class="col-auto text-end" style="width:75px;"><span id="itemProd-' + elem.id + '"></span></div>'
+                                                html += '<div class="col-auto text-end" style="width:65px;"><span id="itemCount-' + elem.id + '"></span></div>'
+                                                if (elem.cat == 'machine' || elem.cat == 'storer' || (elem.cat == 'energy' && elem.id != 'itemElectricity')) html += '<div class="col-auto text-end" style="width:65px;"><span id="itemAvailableCount-' + elem.id + '"></span></div>'
                                             }
                                         }
                                     html += '</div>'
@@ -273,6 +274,9 @@ class ScreenGame {
                                             let recipe = window.app.game.scenario.data.elems.find(el => el.id == elem.recipeId)
                                             if (recipe) {
                                                 html += '<div class="card-body">'
+                                                    html += '<div class="lh-1 mb-3">'
+                                                        html += '<small>' + i18next.t('word_Recipe') + '</small>'
+                                                    html += '</div>'
                                                     html += '<div class="row g-1 align-items-center justify-content-end">'
                                                         if (recipe.inputs) {
                                                             recipe.inputs.forEach(input => {
@@ -280,21 +284,13 @@ class ScreenGame {
                                                                 html += '<div class="col-auto" style="width:65px;">'
                                                                     html += '<span id="recipeInputCount-' + recipe.id + '-' + input.id + '" class="badge d-flex align-items-center" data-bs-toggle="tooltip" data-bs-html="true" data-bs-title="<span class=\'text-white\'>' + i18next.t(inputElem.label) + '</span>">'
                                                                         html += '<img src="' + inputElem.img + '" width="18px" height="18px">'
-                                                                        html += '<span id="recipeInputCountValue-' + recipe.id + '-' + input.id + '" class="ms-1">' + formatNumber(input.count) + '</span>'
+                                                                        html += '<span id="recipeInputCountValue-' + recipe.id + '-' + input.id + '" class="ms-2" style="line-height:18px;">' + formatNumber(input.count) + '</span>'
                                                                     html += '</span>'
                                                                 html += '</div>'
                                                             })
                                                         }
-                                                        else {
-                                                            html += '<div class="col-auto" style="width:65px;">'
-                                                                html += '<span class="badge text-bg-light d-flex align-items-center justify-content-center">&Oslash;</span>'
-                                                            html += '</div>'
-                                                        }
                                                         html += '<div class="col-auto">'
-                                                            html += '<span class="badge text-normal px-0">'
-                                                                html += '<div class="lh-1 small">' + formatTime(recipe.time) + '</div>'
-                                                                html += '<i class="fas fa-fw fa-long-arrow-alt-right"></i>'
-                                                            html += '</span>'
+                                                            html += '<small class="text-normal">' + formatTime(recipe.time) + '</small>'
                                                         html += '</div>'
                                                         let outputElem = window.app.game.getElem(recipe.output.id)
                                                         html += '<div class="col-auto" style="width:65px;">'
@@ -316,13 +312,16 @@ class ScreenGame {
                                             if (unlocked > 0) {
                                                 html += '<div class="card-body">'
                                                     html += '<div class="lh-1 mb-3">'
-                                                        html += '<div class="row gx-2 align-items-center justify-content-end">'
+                                                        html += '<div class="row gx-3 align-items-center justify-content-end">'
+                                                            html += '<div class="col">'
+                                                                html += '<small>' + i18next.t('word_Production') + '</small>'
+                                                            html += '</div>'
                                                             html += '<div class="col-auto">'
-                                                                html += '<span class="small opacity-50">' + i18next.t('word_RawProd') + '</span>'
+                                                                html += '<span class="small">' + i18next.t('word_RawProd') + '</span>'
                                                                 html += '<span id="itemRawProd-' + elem.id + '" class="small ms-1 text-white"></span>'
                                                             html += '</div>'
                                                             html += '<div class="col-auto">'
-                                                                html += '<span class="small opacity-50">' + i18next.t('word_RawConsum') + '</span>'
+                                                                html += '<span class="small">' + i18next.t('word_RawConsum') + '</span>'
                                                                 html += '<span id="itemRawConsum-' + elem.id + '" class="small ms-1 text-white"></span>'
                                                             html += '</div>'
                                                         html += '</div>'
@@ -335,18 +334,17 @@ class ScreenGame {
                                                                     html += '<div class="row gx-2 align-items-center">'
                                                                         let machine = window.app.game.getElem(line.machineId)
                                                                         html += '<div class="col-auto">'
-                                                                            html += '<img src="' + machine.img + '" width="24px" height="24px" data-bs-toggle="tooltip" data-bs-html="true" data-bs-title="<span class=\'text-white\'>' + i18next.t(machine.label) + '</span>">'
+                                                                            html += '<div class="badge">'
+                                                                                html += '<img src="' + machine.img + '" width="18px" height="18px" data-bs-toggle="tooltip" data-bs-html="true" data-bs-title="<span class=\'text-white\'>' + i18next.t(machine.label) + '</span>">'
+                                                                                html += '<span class="ms-2">+' + formatNumber(line.output.count) + ' <small class="opacity-50">/s</small></span>'
+                                                                            html += '</div>'
                                                                         html += '</div>'
                                                                         html += '<div class="col">'
-                                                                            html += '<div class="lh-1 small">' + i18next.t('word_speed') + '</div>'
-                                                                            html += '<div class="lh-1 small"><span class="small text-white">' + formatNumber(machine.speed) + '</span></div>'
-                                                                        html += '</div>'
-                                                                        html += '<div class="col-auto" style="width:65px;">'
                                                                             if (machine.energy) {
                                                                                 let energyElem = window.app.game.getElem(machine.energy.id)
-                                                                                html += '<span id="lineEnergyCount-' + line.id + '" class="badge d-flex align-items-center" data-bs-toggle="tooltip" data-bs-html="true" data-bs-title="<span class=\'text-white\'>' + i18next.t(energyElem.label) + '</span>">'
+                                                                                html += '<span id="lineEnergyCount-' + line.id + '" class="badge" data-bs-toggle="tooltip" data-bs-html="true" data-bs-title="<span class=\'text-white\'>' + i18next.t(energyElem.label) + '</span>">'
                                                                                     html += '<img src="' + energyElem.img + '" width="18px" height="18px">'
-                                                                                    html += '<span id="lineEnergyCountValue-' + line.id + '" class="ms-1">' + formatNumber(machine.energy.count) + '</span>'
+                                                                                    html += '<span id="lineEnergyCountValue-' + line.id + '" class="ms-2">' + formatNumber(machine.energy.count) + '</span>'
                                                                                 html += '</span>'
                                                                             }
                                                                         html += '</div>'
@@ -400,14 +398,17 @@ class ScreenGame {
                                                 html += '<div class="row gy-3">'
                                                     html += '<div class="col-12 lh-1">'
                                                         html += '<div class="row gx-2 align-items-center justify-content-end">'
+                                                            html += '<div class="col">'
+                                                                html += '<small>' + i18next.t('word_Storage') + '</small>'
+                                                            html += '</div>'
                                                             if (elem.cat == 'machine' || elem.cat == 'storer' || (elem.cat == 'energy' && elem.id != 'itemElectricity')) {
                                                                 html += '<div class="col-auto">'
-                                                                    html += '<span class="small opacity-50">' + i18next.t('word_UsedCount') + '</span>'
+                                                                    html += '<span class="small">' + i18next.t('word_UsedCount') + '</span>'
                                                                     html += '<span id="itemUsedCount-' + elem.id + '" class="small ms-1 text-white"></span>'
                                                                 html += '</div>'
                                                             }
                                                             html += '<div class="col-auto">'
-                                                                html += '<span class="small opacity-50">' + i18next.t('word_Max') + '</span>'
+                                                                html += '<span class="small">' + i18next.t('word_Max') + '</span>'
                                                                 html += '<span id="itemMax-' + elem.id + '" class="small ms-1 text-white"></span>'
                                                             html += '</div>'
                                                         html += '</div>'
@@ -417,10 +418,12 @@ class ScreenGame {
                                                         if (storer.unlocked) {
                                                             html += '<div class="col-12">'
                                                                 html += '<div class="row g-2 align-items-center">'
-                                                                    html += '<div class="col-auto">'
-                                                                        html += '<img src="' + storer.img + '" width="24px" height="24px" data-bs-toggle="tooltip" data-bs-html="true" data-bs-title="<span class=\'text-white\'>' + i18next.t(storer.label) + '</span>">'
+                                                                    html += '<div class="col">'
+                                                                        html += '<div class="badge">'
+                                                                            html += '<img src="' + storer.img + '" width="18px" height="18px" data-bs-toggle="tooltip" data-bs-html="true" data-bs-title="<span class=\'text-white\'>' + i18next.t(storer.label) + '</span>">'
+                                                                            html += '<span class="ms-2">+' + formatNumber(elem.storage.base) + '</span>'
+                                                                        html += '</div>'
                                                                     html += '</div>'
-                                                                    html += '<div class="col small">+' + formatNumber(elem.storage.base) + '</div>'
                                                                     html += '<div class="col-auto small text-end" style="width:35px;"><small class="opacity-50">x </small><span id="itemStorageCount-' + elem.id + '"></span></div>'
                                                                     html += '<div class="col-auto">'
                                                                         html += '<div class="row g-1 align-items-center">'
@@ -451,7 +454,7 @@ class ScreenGame {
                                             html += '<div class="card-body pt-auto">'
                                                 html += '<div class="row g-2">'
                                                     html += '<div class="col-12 lh-1">'
-                                                        html += '<span class="small opacity-50">' + i18next.t('word_Objectives') + '</span>'
+                                                        html += '<span class="small">' + i18next.t('word_Objectives') + '</span>'
                                                     html += '</div>'
                                                     html += '<div class="col-12">'
                                                         html += '<div class="row g-1 align-items-center">'
@@ -622,7 +625,7 @@ class ScreenGame {
                         node = document.getElementById('itemProd-' + item.id)
                         if (node.innerHTML != html) node.innerHTML = html
                         //---
-                        style = 'w-100 badge text-end'
+                        style = 'badge justify-content-end'
                         if (item.prod > 0) style += ' text-success'
                         else if (item.prod < 0) style += ' text-bg-danger'
                         else style += ' text-normal'
@@ -634,7 +637,7 @@ class ScreenGame {
                     if (node.innerHTML != html) node.innerHTML = html
                     //---
                     let max = window.app.game.getMax(item.id)
-                    style = 'w-100 badge text-end'
+                    style = 'badge justify-content-end'
                     if (max > 0 && item.count >= max) style += ' text-bg-danger'
                     else if (item.count > 0) style += ' text-bg-light'
                     else style += ' text-normal'
@@ -648,7 +651,7 @@ class ScreenGame {
                         html = formatNumber(count, 2)
                         if (node.innerHTML != html) node.innerHTML = html
                         //---
-                        style = 'w-100 badge text-end'
+                        style = 'badge justify-content-end'
                         if (count > 0) style += ' text-success'
                         else style += ' text-bg-light text-normal'
                         if (node.className != style) node.className = style
@@ -715,13 +718,12 @@ class ScreenGame {
                                             //---
                                             node = document.getElementById('lineEnergyCountValue-' + line.id)
                                             count = line.getMachineCount() * machine.energy.count
-                                            html = formatNumber(count)
+                                            html = '-' + formatNumber(count) + ' <small class="opacity-50">/s</small>'
                                             if (node.innerHTML != html) node.innerHTML = html
                                             //---
                                             node = document.getElementById('lineEnergyCount-' + line.id)
-                                            style = 'badge d-flex align-items-center justify-content-center'
+                                            style = 'badge'
                                             if (count > window.app.game.getAvailableCount(machine.energy.id)) style += ' text-bg-danger'
-                                            else style += ' text-bg-light'
                                             if (node.className != style) node.className = style
                                         }
                                         //---

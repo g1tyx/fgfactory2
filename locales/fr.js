@@ -36,7 +36,7 @@ var fr_translations = {
     //---
     'text_imagesFrom': 'Images generated from',
     'text_iconsBy': 'Icônes fournis par',
-    'text_love': 'Ce jeu a été conçu et réalisé avec tout l\'amour <i class="fa-fw fas fa-heart text-danger"></i> du monde par <span class="text-white">Freddec</span>',
+    'text_love': 'Ce jeu a été conçu et réalisé avec tout l\'amour <i class="fa-fw fas fa-heart text-danger"></i> du monde par <div class="fs-6 text-white">Freddec</div>',
     //---
     'text_patreon': 'Devenez un supporter',
     'text_kofi': 'Achetez moi un Ko-fi',

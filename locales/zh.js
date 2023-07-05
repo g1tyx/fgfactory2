@@ -36,7 +36,7 @@ var zh_translations = {
     //---
     'text_imagesFrom': 'Images generated from',
     'text_iconsBy': '图标提供者',
-    'text_love': '这个游戏是用所有的爱设计和建造的 <i class="fa-fw fas fa-heart text-danger"></i> 在世界上 <span class="text-white">Freddec</span>',
+    'text_love': '这个游戏是用所有的爱设计和建造的 <i class="fa-fw fas fa-heart text-danger"></i> 在世界上 <<div class="fs-6 text-white">Freddec</div>',
     //---
     'text_patreon': '成为支持者',
     'text_kofi': '给我买杯 Ko-fi',
