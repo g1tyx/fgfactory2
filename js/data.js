@@ -627,7 +627,7 @@ var DATA = {
                 {	id:'manualSteelIngot',	                type:'line',        reqs:[{ id:'satisfactory1T3M3', count:1 }], machineId:'machineManual', recipeId:'recipeSteelIngot' },
                 {	id:'lineSteelIngot',                    type:'line',	    reqs:[{ id:'satisfactory1T3M3', count:1 }], machineId:'machineFoundry', recipeId:'recipeSteelIngot' },
                 //---
-                {	id:'itemFuel',	                        type:'item',        cat:'fluid', reqs:[{ id:'satisfactory1T5M1', count:1 }], label:'itemFuel', img:'img/icons/item1_5.png', storage:{ base:100, storerId:'storerFluidBuffer' }, recipeId:'recipeFuel', lines:[ 'lineFuel' ] },
+                {	id:'itemFuel',	                        type:'item',        cat:'level1', reqs:[{ id:'satisfactory1T5M1', count:1 }], label:'itemFuel', img:'img/icons/item1_5.png', storage:{ base:100, storerId:'storerFluidBuffer' }, recipeId:'recipeFuel', lines:[ 'lineFuel' ] },
                 {	id:'recipeFuel',	                    type:'recipe',	    reqs:[{ id:'satisfactory1T5M1', count:1 }], time:6, output:{ id:'itemFuel', count:4 }, inputs:[{ id:'itemOil', count:6 }] },
                 {	id:'lineFuel',                          type:'line',	    reqs:[{ id:'satisfactory1T5M1', count:1 }], machineId:'machineRefinery', recipeId:'recipeFuel' },
                 //---
