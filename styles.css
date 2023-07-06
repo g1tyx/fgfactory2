@@ -314,6 +314,7 @@ a { text-decoration: none; }
     --bs-badge-color: #fff;
     --bs-badge-border-radius: var(--bs-border-radius);
     
+    display: inline-flex; align-items: center;
     border: var(--bs-border-width) solid transparent;
 }
 
@@ -335,7 +336,7 @@ a { text-decoration: none; }
     --bs-card-bg: var(--bs-secondary);
     --bs-card-group-margin: 0.75rem;
 }
-/*
+
 .card-body {
     border-bottom: var(--bs-border-width) solid var(--bs-border-color);
 }
@@ -343,7 +344,7 @@ a { text-decoration: none; }
 .card-body:last-child {
     border-bottom: 0
 }
-*/
+
 .dropdown-menu {
     --bs-dropdown-padding-x: 0;
     --bs-dropdown-padding-y: 0.5rem;
