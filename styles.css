@@ -316,6 +316,7 @@ a { text-decoration: none; }
     
     display: inline-flex; align-items: center;
     border: var(--bs-border-width) solid transparent;
+    line-height: 18px;
 }
 
 .progress {
@@ -335,14 +336,6 @@ a { text-decoration: none; }
     --bs-card-cap-bg: var(--bs-light);
     --bs-card-bg: var(--bs-secondary);
     --bs-card-group-margin: 0.75rem;
-}
-
-.card-body {
-    border-bottom: var(--bs-border-width) solid var(--bs-border-color);
-}
-
-.card-body:last-child {
-    border-bottom: 0
 }
 
 .dropdown-menu {
@@ -377,6 +370,10 @@ a { text-decoration: none; }
     --bs-modal-footer-padding: 0.25rem 0.5rem;
     --bs-modal-footer-border-color: transparent;
     --bs-modal-footer-border-width: var(--bs-border-width);
+}
+
+.modal-header {
+    background-color: var(--bs-light);
 }
 
 .modal-footer {
