@@ -972,64 +972,43 @@ var DATA = {
             victoryReqs:null,
             //---
             catMissions:[ 'mission' ],
-            catItems:[ 'machine', 'raw' ],
+            catItems:[ 'machine', 'raw', 'level1', 'level2' ],
             //---
             elems:[
+            
+                // Missions
+                //---
+                {	id:'dsp1M1',	                        type:'item',	    cat:'mission',  label:'dsp1M1', desc:'dsp1M1Desc', costs:[{ id:'itemMagneticCoil', count:10 }] },
                 
                 // Raw                
                 //---
-                {	id:'itemCopper',	                    type:'item',        cat:'raw',      label:'itemCopper', img:'img/icons/item0_1.png', storage:{ base:100, storerId:'storerBox' }, recipeId:'recipeCopper', lines:[ 'copperManual', 'copperLine1', 'copperLine2' ] },
-                {	id:'recipeCopper',	                    type:'recipe',	                    time:1, output:{ id:'itemCopper', count:1 } },
+                {	id:'itemCopper',	                    type:'item',        cat:'raw',      label:'itemCopper', img:'img/items/Copper.png', storage:{ base:100 }, recipeId:'recipeCopper', lines:[ 'copperManual' ] },
+                {	id:'recipeCopper',	                    type:'recipe',	                    time:2, output:{ id:'itemCopper', count:1 } },
                 {	id:'copperManual',	                    type:'line',                        machineId:'machineManual', recipeId:'recipeCopper' },
-                {	id:'copperLine1',                       type:'line',	                    machineId:'machineMiner1', recipeId:'recipeCopper' },
-                {	id:'copperLine2',                       type:'line',	                    machineId:'machineMiner2', recipeId:'recipeCopper' },
+                //---
+                {	id:'itemIron',	                        type:'item',        cat:'raw',      label:'itemIron', img:'img/items/Iron.png', storage:{ base:100 }, recipeId:'recipeIron', lines:[ 'ironManual' ] },
+                {	id:'recipeIron',	                    type:'recipe',	                    time:2, output:{ id:'itemIron', count:1 } },
+                {	id:'ironManual',	                    type:'line',                        machineId:'machineManual', recipeId:'recipeIron' },
 
                 // Level 1
                 //---
-                {	id:'itemCopperIngot',	                type:'item',        cat:'raw',      label:'itemCopperIngot', img:'img/icons/item1_1.png', storage:{ base:100, storerId:'storerBox' }, recipeId:'recipeCopperIngot', lines:[ 'copperIngotManual', 'copperIngotLine1', 'copperIngotLine2' ] },
+                {	id:'itemCopperIngot',	                type:'item',        cat:'level1',   label:'itemCopperIngot', img:'img/items/CopperIngot.png', storage:{ base:100 }, recipeId:'recipeCopperIngot', lines:[ 'copperIngotManual' ] },
                 {	id:'recipeCopperIngot',	                type:'recipe',	                    time:1, output:{ id:'itemCopperIngot', count:1 }, inputs:[{ id:'itemCopper', count:1 }] },
                 {	id:'copperIngotManual',	                type:'line',                        machineId:'machineManual', recipeId:'recipeCopperIngot' },
-                {	id:'copperIngotLine1',                  type:'line',	                    machineId:'machineSmelter1', recipeId:'recipeCopperIngot' },
-                {	id:'copperIngotLine2',                  type:'line',	                    machineId:'machineSmelter2', recipeId:'recipeCopperIngot' },
+                //---
+                {	id:'itemMagnet',	                    type:'item',        cat:'level1',   label:'itemMagnet', img:'img/items/Magnet.png', storage:{ base:100 }, recipeId:'recipeMagnet', lines:[ 'magnetManual' ] },
+                {	id:'recipeMagnet',	                    type:'recipe',	                    time:1.5, output:{ id:'itemMagnet', count:1 }, inputs:[{ id:'itemIron', count:1 }] },
+                {	id:'magnetManual',	                    type:'line',                        machineId:'machineManual', recipeId:'recipeMagnet' },
+
+                // Level 2
+                //---
+                {	id:'itemMagneticCoil',	                type:'item',        cat:'level2',   label:'itemMagneticCoil', img:'img/items/MagneticCoil.png', storage:{ base:200 }, recipeId:'recipeMagneticCoil', lines:[ 'magneticCoilManual' ] },
+                {	id:'recipeMagneticCoil',	            type:'recipe',	                    time:1, output:{ id:'itemMagneticCoil', count:1 }, inputs:[{ id:'itemMagnet', count:2 },{ id:'itemCopperIngot', count:1 }] },
+                {	id:'magneticCoilManual',	            type:'line',                        machineId:'machineManual', recipeId:'recipeMagneticCoil' },
                 
                 // Machines
                 //---
                 {	id:'machineManual',	                    type:'item',	                    label:'machineManual', img:'img/icons/manual.png', storage:{ base:1 }, speed:0.5, initCount:1 },
-                //---
-                {	id:'machineMiner1',	                    type:'item',	    cat:'machine',  reqs:[{ id:'techElectromagnetism', count:1 }], label:'machineMiner1', img:'img/icons/drill_1.png', storage:{ base:50, storerId:'storerBox' }, recipeId:'recipeMiner1', lines:[ 'miner1Manual', 'miner1Line1', 'miner1Line2', 'miner1Line3' ], speed:1, energy:{ id:'itemPower', count:420 } },
-                {	id:'recipeMiner1',	                    type:'recipe',	                    time:3, output:{ id:'machineMiner1', count:1 }, inputs:[{ id:'itemIronIngot', count:4 },{ id:'itemCircuit', count:2 },{ id:'itemMagneticCoil', count:2 },{ id:'itemGear', count:2 }] },
-                {	id:'miner1Manual',	                    type:'line',                        machineId:'machineManual', recipeId:'recipeMiner1' },
-                {	id:'miner1Line1',                       type:'line',	                    machineId:'machineAssembler1', recipeId:'recipeMiner1' },
-                {	id:'miner1Line2',                       type:'line',	                    machineId:'machineAssembler2', recipeId:'recipeMiner1' },
-                {	id:'miner1Line3',                       type:'line',	                    machineId:'machineAssembler3', recipeId:'recipeMiner1' },
-                //---
-                {	id:'machineMiner2',	                    type:'item',	    cat:'machine',  reqs:[{ id:'techPhotonSpotlightMining', count:1 }], label:'machineMiner2', img:'img/icons/drill_2.png', storage:{ base:30, storerId:'storerBox' }, recipeId:'recipeMiner2', lines:[ 'miner2Manual', 'miner2Line1', 'miner2Line2', 'miner2Line3' ], speed:2, energy:{ id:'itemPower', count:750 } },
-                {	id:'recipeMiner2',	                    type:'recipe',	                    time:20, output:{ id:'machineMiner2', count:1 }, inputs:[{ id:'itemTitaniumAlloy', count:20 },{ id:'itemFrameMaterial', count:10 },{ id:'itemSuperMagneticRing', count:10 },{ id:'itemQuantumChip', count:4 },{ id:'itemOpticalGratingCrystal', count:40 }] },
-                {	id:'miner2Manual',	                    type:'line',                        machineId:'machineManual', recipeId:'recipeMiner2' },
-                {	id:'miner2Line1',                       type:'line',	                    machineId:'machineAssembler1', recipeId:'recipeMiner2' },
-                {	id:'miner2Line2',                       type:'line',	                    machineId:'machineAssembler2', recipeId:'recipeMiner2' },
-                {	id:'miner2Line3',                       type:'line',	                    machineId:'machineAssembler3', recipeId:'recipeMiner2' },
-                //---
-                {	id:'machineAssembler1',                 type:'item',	    cat:'machine',  reqs:[{ id:'techBasicAssembling', count:1 }], label:'machineAssembler1', img:'img/icons/factory_1.png', storage:{ base:50, storerId:'storerBox' }, recipeId:'recipeAssembler1', lines:[ 'assembler1Manual', 'assembler1Line1', 'assembler1Line2', 'assembler1Line3' ], speed:0.75, energy:{ id:'itemPower', count:270 } },
-                {	id:'recipeAssembler1',	                type:'recipe',	                    time:2, output:{ id:'machineAssembler1', count:1 }, inputs:[{ id:'itemIronIngot', count:4 },{ id:'itemGear', count:8 },{ id:'itemCircuit', count:4 }] },
-                {	id:'assembler1Manual',                  type:'line',                        machineId:'machineManual', recipeId:'recipeAssembler1' },
-                {	id:'assembler1Line1',                   type:'line',	                    machineId:'machineAssembler1', recipeId:'recipeAssembler1' },
-                {	id:'assembler1Line2',                   type:'line',	                    machineId:'machineAssembler2', recipeId:'recipeAssembler1' },
-                {	id:'assembler1Line3',                   type:'line',	                    machineId:'machineAssembler3', recipeId:'recipeAssembler1' },
-                //---
-                {	id:'machineAssembler2',                 type:'item',	    cat:'machine',  reqs:[{ id:'techHighSpeedAssembling', count:1 }], label:'machineAssembler2', img:'img/icons/factory_2.png', storage:{ base:50, storerId:'storerBox' }, recipeId:'recipeAssembler2', lines:[ 'assembler2Manual', 'assembler2Line1', 'assembler2Line2', 'assembler2Line3' ], speed:1, energy:{ id:'itemPower', count:320 } },
-                {	id:'recipeAssembler2',	                type:'recipe',	                    time:3, output:{ id:'machineAssembler2', count:1 }, inputs:[{ id:'machineAssembler1', count:1 },{ id:'itemGraphene', count:8 },{ id:'itemProcessor', count:4 }] },
-                {	id:'assembler2Manual',                  type:'line',                        machineId:'machineManual', recipeId:'recipeAssembler2' },
-                {	id:'assembler2Line1',                   type:'line',	                    machineId:'machineAssembler1', recipeId:'recipeAssembler2' },
-                {	id:'assembler2Line2',                   type:'line',	                    machineId:'machineAssembler2', recipeId:'recipeAssembler2' },
-                {	id:'assembler2Line3',                   type:'line',	                    machineId:'machineAssembler3', recipeId:'recipeAssembler2' },
-                //---
-                {	id:'machineAssembler3',                 type:'item',	    cat:'machine',  reqs:[{ id:'techQuantumPrinting', count:1 }], label:'machineAssembler3', img:'img/icons/factory_3.png', storage:{ base:50, storerId:'storerBox' }, recipeId:'recipeAssembler3', lines:[ 'assembler3Manual', 'assembler3Line1', 'assembler3Line2', 'assembler3Line3' ], speed:1.5, energy:{ id:'itemPower', count:440 } },
-                {	id:'recipeAssembler3',	                type:'recipe',	                    time:4, output:{ id:'machineAssembler3', count:1 }, inputs:[{ id:'machineAssembler2', count:1 },{ id:'itemParticleBroadband', count:8 },{ id:'itemQuantumChip', count:2 }] },
-                {	id:'assembler3Manual',                  type:'line',                        machineId:'machineManual', recipeId:'recipeAssembler3' },
-                {	id:'assembler3Line1',                   type:'line',	                    machineId:'machineAssembler1', recipeId:'recipeAssembler3' },
-                {	id:'assembler3Line2',                   type:'line',	                    machineId:'machineAssembler3', recipeId:'recipeAssembler3' },
-                {	id:'assembler3Line3',                   type:'line',	                    machineId:'machineAssembler3', recipeId:'recipeAssembler3' },
             ]
         }},
     ]

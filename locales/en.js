@@ -336,4 +336,14 @@ var en_translations = {
     'machineSmelter': 'Smelter',
     //---
     'storerBox': 'Box',
+
+    /* DSP SCENARIOS */
+
+    //---
+    'dsp1M1': 'Electromagnetism',
+    'dsp1M1Desc': '<div class="mb-2">Maxwell\'s equations poetically describe electricity and magnetism intertwining. With a deeper understanding, machines can be created for acquiring and using electrical energy with high efficiency.</div><div class="small text-normal">Inspired by <a href="https://store.steampowered.com/app/1366540/Dyson_Sphere_Program/" target="_blank">Dyson Sphere Program</a> game</div>',
+
+    //---
+    'itemMagnet': 'Magnet', 
+    'itemMagneticCoil': 'Magnetic Coil',
 }

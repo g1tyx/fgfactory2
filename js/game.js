@@ -141,10 +141,10 @@ class GameLine extends GameElem {
         this.selectCount = '1'
         //---
         let machine = game.scenario.data.elems.find(elem => elem.id == this.machineId)
-        if (machine.energy && this.id != 'manualCoal' && this.id != 'lineCoal1') {
+        if (machine.energy) {
             //---
             this.inputs = []
-            this.inputs.push({ id:machine.energy.id, count:machine.energy.count, coeff:1.0 })
+            this.inputs.push({ id:machine.energy.id, count:machine.energy.count })
         }
         //---
         let recipe =  game.scenario.data.elems.find(elem => elem.id == this.recipeId)
@@ -153,15 +153,13 @@ class GameLine extends GameElem {
             if (!this.inputs) this.inputs = []
             recipe.inputs.forEach(input => {
                 //---
-                this.inputs.push({ id:input.id, count:(input.count / recipe.time * machine.speed).toFixed(2), coeff:1.0 })
+                this.inputs.push({ id:input.id, count:(input.count / recipe.time * machine.speed).toFixed(2) })
             })
         }
         //---
         this.output = {}
         this.output.id = recipe.output.id
         this.output.count = (recipe.output.count / recipe.time * machine.speed).toFixed(2)
-        //---
-        this.img = game.getElem(recipe.output.id).img
     }
     //---
     load(data) {
@@ -433,19 +431,22 @@ class Game {
             elem.rawConsum = 0
         })
         //---
-        let lines = this.elems.filter(elem => elem.type == 'line' && elem.count > 0)
+        let lines = this.elems.filter(elem => elem.type == 'line')
         lines.forEach(line => {
             //---
-            if (line.inputs) {
-                line.inputs.forEach(input => {
-                    //---
-                    let inputElem = this.getElem(input.id)
-                    inputElem.rawConsum += input.count * line.count
-                })
+            if (line.count > 0) {
+                //---
+                if (line.inputs) {
+                    line.inputs.forEach(input => {
+                        //---
+                        let inputElem = this.getElem(input.id)
+                        inputElem.rawConsum += input.count * line.count
+                    })
+                }
+                //---
+                let outputElem = this.getElem(line.output.id)
+                outputElem.rawProd += line.output.count * line.count
             }
-            //---
-            let outputElem = this.getElem(line.output.id)
-            outputElem.rawProd += line.output.count * line.count            
         })
         //---
         items.forEach(elem => {
@@ -457,7 +458,8 @@ class Game {
         lines.forEach(line => {
             //---
             line.efficiency = 1.0
-            if (line.machineId != 'machineManual') {
+            //---
+            if (line.count > 0 && line.machineId != 'machineManual') {
                 //---
                 let outputElem = this.getElem(line.output.id)
                 //---
