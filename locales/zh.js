@@ -333,4 +333,14 @@ var zh_translations = {
     'machineSmelter': '冶炼厂',
     //---
     'storerBox': '箱子',
+
+    /* DSP SCENARIOS */
+
+    //---
+    'dsp1M1': '电磁学',
+    'dsp1M1Desc': '<div class="mb-2">麦克斯韦方程诗意地描述了电和磁的交织。 通过更深入的了解，可以创建用于高效获取和使用电能的机器.</div><div class="small text-normal">灵感来自 <a href="https://store.steampowered.com/app/1366540/Dyson_Sphere_Program/" target="_blank">Dyson Sphere Program</a> 游戏</div>',
+
+    //---
+    'itemMagnet': '磁体', 
+    'itemMagneticCoil': '磁性线圈',
 }

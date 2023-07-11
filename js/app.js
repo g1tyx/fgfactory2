@@ -67,13 +67,7 @@ class App {
                 //---
                 if (loadedData.game) this.game.load(loadedData.game)
             }
-            else {
-                //---
-                this.game.loadScenario('tut')
-                this.game.scenario.startDate = Date.now()
-                //---
-                this.game.refreshUnlocked()
-            }
+            else this.game.start('tut')
             //---            
             window.onbeforeunload = () => {
                 //---
@@ -119,12 +113,10 @@ class App {
             //---
             if (this.game.isVictoryReached()) {
                 //---
-                this.game.victory = true
+                this.game.doVictory()
+                //---
                 this.showModal('modalVictory')
-                //---
-                this.game.scenario.victoryDate = Date.now()
-                //---
-                this.screens['game'].refreshTabScenarii()
+                this.screens['game'].refreshTabScenarios()
             }
             //---
             this.screens['game'].draw()

@@ -141,10 +141,10 @@ class GameLine extends GameElem {
         this.selectCount = '1'
         //---
         let machine = game.scenario.data.elems.find(elem => elem.id == this.machineId)
-        if (machine.energy && this.id != 'manualCoal' && this.id != 'lineCoal1') {
+        if (machine.energy) {
             //---
             this.inputs = []
-            this.inputs.push({ id:machine.energy.id, count:machine.energy.count, coeff:1.0 })
+            this.inputs.push({ id:machine.energy.id, count:machine.energy.count })
         }
         //---
         let recipe =  game.scenario.data.elems.find(elem => elem.id == this.recipeId)
@@ -153,15 +153,13 @@ class GameLine extends GameElem {
             if (!this.inputs) this.inputs = []
             recipe.inputs.forEach(input => {
                 //---
-                this.inputs.push({ id:input.id, count:(input.count / recipe.time * machine.speed).toFixed(2), coeff:1.0 })
+                this.inputs.push({ id:input.id, count:(input.count / recipe.time * machine.speed).toFixed(2) })
             })
         }
         //---
         this.output = {}
         this.output.id = recipe.output.id
         this.output.count = (recipe.output.count / recipe.time * machine.speed).toFixed(2)
-        //---
-        this.img = game.getElem(recipe.output.id).img
     }
     //---
     load(data) {
@@ -254,6 +252,16 @@ class Game {
         })
     }
     //---
+    start(scenarioId) {
+        //---
+        this.loadScenario(scenarioId)
+        //---
+        this.scenario.startDate = Date.now()
+        //---
+        this.refreshUnlocked()
+        this.refreshEfficiencies()
+    }
+    //---
     load(data) {
         //---
         if (data.scenarioId) this.loadScenario(data.scenarioId)
@@ -267,6 +275,7 @@ class Game {
         if (data.scenarios) this.scenarios.forEach(scenario => { if (data.scenarios[scenario.id]) scenario.load(data.scenarios[scenario.id]) })
         //---
         this.refreshUnlocked()
+        this.refreshEfficiencies()
     }
     //---
     getSaveData() {
@@ -290,8 +299,6 @@ class Game {
     //---
     getElem(elemId) { return this.elems.find(elem => elem.id == elemId) }
     //---
-    getElemsBy(name, value) { return this.elems.filter(elem => elem[name] == value) }
-    //---
     refreshUnlocked() {
         //---
         this.elems.forEach(elem => {
@@ -307,52 +314,43 @@ class Game {
         else return false
     }
     //---
+    doVictory() {
+        //---
+        this.victory = true
+        this.scenario.victoryDate = Date.now()
+    }
+    //---
     doTick(stepMs) {
         //---
         let seconds = stepMs / 1000
         //---
-        let elems = this.elems.filter(elem => elem.id != 'machineManual' && elem.unlocked == true && elem.type == 'item')
-        elems.forEach(elem => {
-            //---
-            elem.prod = 0
-            //---
-            elem.rawProd = 0
-            elem.rawConsum = 0
-        })
+        let items = this.elems.filter(elem => elem.type == 'item')
+        items.forEach(elem => { elem.prod = 0 })
         //---
-        let lines = this.elems.filter(elem => elem.type == 'line' && elem.unlocked == true && elem.count > 0)
+        let lines = this.elems.filter(elem => elem.type == 'line' && elem.count > 0)
         lines.forEach(line => {
             //---
-            let outputElem = this.getElem(line.output.id)
-            //--- The combination of lines with and without inputs made everything 100x harder so I split it out
-            if (!line.inputs || line.inputs.length == 0) {
-                outputElem.prod += line.output.count * line.count
-                outputElem.rawProd += line.output.count * line.count
-                return
-            }
-            //---
-            if (line.inputs.every(input => this.getElem(input.id).count > 0)) {
-                //---
-                let ratio = Math.min(...line.inputs.map(input => Math.min(input.count, this.getElem(input.id).count) / input.count))
+            if (line.inputs) {
                 line.inputs.forEach(input => {
                     //---
                     let inputElem = this.getElem(input.id)
-                    inputElem.prod -= input.count * line.count * ratio
-                    inputElem.rawConsum += input.count * line.count * ratio
+                    inputElem.prod -= input.count * line.count * line.efficiency
+                    inputElem.count -= input.count * line.count * line.efficiency * seconds
                 })
+            }
+            //---
+            let outputElem = this.getElem(line.output.id)
+            outputElem.prod += line.output.count * line.count * line.efficiency
+            outputElem.count += line.output.count * line.count * line.efficiency * seconds
+            //---
+            if (!this.canProduce(line.id)) {
                 //---
-                outputElem.prod += line.output.count * line.count * ratio
-                outputElem.rawProd += line.output.count * line.count * ratio
+                if (line.machineId == 'machineManual') this.stopManual(line.id)
+                else this.refreshEfficiencies()
             }
         })
         //---
-        elems.forEach(elem => {
-            //--- Without rounding floating point starts causing issues, especially around 0
-            elem.prod = Math.round(elem.prod * 100) / 100
-            let prod = elem.prod * seconds
-            let newCount = elem.count + prod
-            //---
-            if (newCount != elem.count) elem.count = newCount
+        items.forEach(elem => {
             //---
             let max = this.getMax(elem.id)
             if (max > 0 && elem.count > max) elem.count = max
@@ -422,6 +420,75 @@ class Game {
         return false
     }
     //---
+    refreshEfficiencies() {
+        //---
+        let items = this.elems.filter(elem => elem.type == 'item')
+        items.forEach(elem => {
+            //---
+            elem.efficiency = 1.0
+            //---
+            elem.rawProd = 0
+            elem.rawConsum = 0
+        })
+        //---
+        let lines = this.elems.filter(elem => elem.type == 'line')
+        lines.forEach(line => {
+            //---
+            if (line.count > 0) {
+                //---
+                if (line.inputs) {
+                    line.inputs.forEach(input => {
+                        //---
+                        let inputElem = this.getElem(input.id)
+                        inputElem.rawConsum += input.count * line.count
+                    })
+                }
+                //---
+                let outputElem = this.getElem(line.output.id)
+                outputElem.rawProd += line.output.count * line.count
+            }
+        })
+        //---
+        items.forEach(elem => {
+            //---
+            if (elem.rawProd + elem.count <= 0) elem.efficiency = 0
+            else if (elem.rawConsum > 0 && elem.rawConsum > elem.rawProd) elem.efficiency = Math.min(1.0, (elem.rawProd + elem.count) / elem.rawConsum)
+        })
+        //---
+        lines.forEach(line => {
+            //---
+            line.efficiency = 1.0
+            //---
+            if (line.count > 0 && line.machineId != 'machineManual') {
+                //---
+                let outputElem = this.getElem(line.output.id)
+                //---
+                if (line.inputs) {
+                    line.inputs.forEach(input => {
+                        //---
+                        let inputElem = this.getElem(input.id)
+                        line.efficiency = Math.min(line.efficiency, inputElem.efficiency)
+                        //---
+                        if (outputElem.efficiency > line.efficiency) outputElem.efficiency = line.efficiency
+                    })
+                }
+            }
+        })
+        //---
+        items.forEach(elem => {
+            //---
+            elem.efficiency = 1.0
+            //---
+            if (elem.lines) {
+                elem.lines.forEach(lineId => {
+                    //---
+                    let line = this.getElem(lineId)
+                    if (line.efficiency < elem.efficiency) elem.efficiency = line.efficiency
+                })
+            }
+        })
+    }
+    //---
     getMax(elemId) {
         //---
         let max = 0
@@ -481,6 +548,8 @@ class Game {
                 //---
                 manual.count = 1
                 this.currentManualId = manualId
+                //---
+                this.refreshEfficiencies()
             }
         }
     }
@@ -499,6 +568,8 @@ class Game {
             let currentManualElem = this.elems.find(elem => elem.id == this.currentManualId)
             currentManualElem.count = 0
             this.currentManualId = null
+            //---
+            this.refreshEfficiencies()
         }
     }
     //---
@@ -526,8 +597,9 @@ class Game {
             if (line) {
                 //---
                 let addCount = line.getAddCount(this)
-                //---
                 line.count += addCount
+                //---
+                this.refreshEfficiencies()
             }
         }
     }
@@ -555,8 +627,9 @@ class Game {
             if (line) {
                 //---
                 let removeCount = line.getRemoveCount()
-                //---
                 line.count -= removeCount
+                //---
+                this.refreshEfficiencies()
             }
         }
     }

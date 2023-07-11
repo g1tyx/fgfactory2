@@ -215,7 +215,7 @@ class ScreenGame {
         //---
         this.refreshTabMissions()
         this.refreshTabItems()
-        this.refreshTabScenarii()
+        this.refreshTabScenarios()
         //---
         let triggerTabList = document.querySelectorAll('[data-bs-toggle="tab"]')
         let tabList = [...triggerTabList].map(tabTriggerEl => new bootstrap.Tab(tabTriggerEl))
@@ -262,10 +262,10 @@ class ScreenGame {
                                             else {
                                                 if (elem.lines) html += '<div class="col-auto text-end" style="width:75px;"><span id="itemProd-' + elem.id + '"></span></div>'
                                                 html += '<div class="col-auto text-end" style="width:65px;"><span id="itemCount-' + elem.id + '"></span></div>'
-                                                if (elem.cat == 'machine' || elem.cat == 'storer' || (elem.cat == 'energy' && elem.id != 'itemElectricity')) html += '<div class="col-auto text-end" style="width:65px;"><span id="itemAvailableCount-' + elem.id + '"></span></div>'
                                             }
                                         }
                                     html += '</div>'
+                                    if (elem.unlocked && (elem.cat == 'machine' || elem.cat == 'storer')) html += '<div id="itemAvailableCount-' + elem.id + '" style="top:-.5rem; left:-.5rem;"></div>'
                                 html += '</div>'
                                 html += '<div id="collapse-' + elem.id + '" class="collapse' + (elem.collapsed ? '' : ' show') +'">'
                                     if (elem.unlocked == true) {
@@ -274,30 +274,34 @@ class ScreenGame {
                                             let recipe = window.app.game.scenario.data.elems.find(el => el.id == elem.recipeId)
                                             if (recipe) {
                                                 html += '<div class="card-body">'
-                                                    html += '<div class="lh-1 mb-3">'
-                                                        html += '<small>' + i18next.t('word_Recipe') + '</small>'
-                                                    html += '</div>'
-                                                    html += '<div class="row g-1 align-items-center justify-content-end">'
-                                                        if (recipe.inputs) {
-                                                            recipe.inputs.forEach(input => {
-                                                                let inputElem = window.app.game.getElem(input.id)
-                                                                html += '<div class="col-auto" style="width:65px;">'
-                                                                    html += '<span id="recipeInputCount-' + recipe.id + '-' + input.id + '" class="badge d-flex align-items-center" data-bs-toggle="tooltip" data-bs-html="true" data-bs-title="<span class=\'text-white\'>' + i18next.t(inputElem.label) + '</span>">'
-                                                                        html += '<img src="' + inputElem.img + '" width="18px" height="18px">'
-                                                                        html += '<span id="recipeInputCountValue-' + recipe.id + '-' + input.id + '" class="ms-2" style="line-height:18px;">' + formatNumber(input.count) + '</span>'
+                                                    html += '<div class="row gx-2">'
+                                                        html += '<div class="col" style="line-height:25px;">'
+                                                            html += '<small>' + i18next.t('word_Recipe') + '</small>'
+                                                        html += '</div>'
+                                                        html += '<div class="col-auto">'
+                                                            html += '<div class="row g-1 align-items-center justify-content-end">'
+                                                                if (recipe.inputs) {
+                                                                    recipe.inputs.forEach(input => {
+                                                                        let inputElem = window.app.game.getElem(input.id)
+                                                                        html += '<div class="col-auto">'
+                                                                            html += '<span id="recipeInputCount-' + recipe.id + '-' + input.id + '" class="badge d-flex align-items-center" data-bs-toggle="tooltip" data-bs-html="true" data-bs-title="<span class=\'text-white\'>' + i18next.t(inputElem.label) + '</span>">'
+                                                                                html += '<img src="' + inputElem.img + '" width="18px" height="18px">'
+                                                                                html += '<span id="recipeInputCountValue-' + recipe.id + '-' + input.id + '" class="ms-1" style="line-height:18px;">' + formatNumber(input.count) + '</span>'
+                                                                            html += '</span>'
+                                                                        html += '</div>'
+                                                                    })
+                                                                }
+                                                                html += '<div class="col-auto">'
+                                                                    html += '<small class="text-normal">' + formatTime(recipe.time) + '</small>'
+                                                                html += '</div>'
+                                                                let outputElem = window.app.game.getElem(recipe.output.id)
+                                                                html += '<div class="col-auto">'
+                                                                    html += '<span id="recipeOutputCount-' + recipe.id + '-' + recipe.output.id + '" class="badge text-bg-light d-flex align-items-center justify-content-center" data-bs-toggle="tooltip" data-bs-html="true" data-bs-title="<span class=\'text-white\'>' + i18next.t(outputElem.label) + '</span>">'
+                                                                        html += '<img src="' + outputElem.img + '" width="18px" height="18px">'
+                                                                        html += '<span id="recipeOutputCountValue-' + recipe.id + '-' + recipe.output.id + '" class="ms-1">' + formatNumber(recipe.output.count) + '</span>'
                                                                     html += '</span>'
                                                                 html += '</div>'
-                                                            })
-                                                        }
-                                                        html += '<div class="col-auto">'
-                                                            html += '<small class="text-normal">' + formatTime(recipe.time) + '</small>'
-                                                        html += '</div>'
-                                                        let outputElem = window.app.game.getElem(recipe.output.id)
-                                                        html += '<div class="col-auto" style="width:65px;">'
-                                                            html += '<span id="recipeOutputCount-' + recipe.id + '-' + recipe.output.id + '" class="badge text-bg-light d-flex align-items-center justify-content-center" data-bs-toggle="tooltip" data-bs-html="true" data-bs-title="<span class=\'text-white\'>' + i18next.t(outputElem.label) + '</span>">'
-                                                                html += '<img src="' + outputElem.img + '" width="18px" height="18px">'
-                                                                html += '<span id="recipeOutputCountValue-' + recipe.id + '-' + recipe.output.id + '" class="ms-1">' + formatNumber(recipe.output.count) + '</span>'
-                                                            html += '</span>'
+                                                            html += '</div>'
                                                         html += '</div>'
                                                     html += '</div>'
                                                 html += '</div>'
@@ -311,78 +315,71 @@ class ScreenGame {
                                             })
                                             if (unlocked > 0) {
                                                 html += '<div class="card-body">'
-                                                    html += '<div class="lh-1 mb-3">'
-                                                        html += '<div class="row gx-3 align-items-center justify-content-end">'
-                                                            html += '<div class="col">'
-                                                                html += '<small>' + i18next.t('word_Production') + '</small>'
-                                                            html += '</div>'
-                                                            html += '<div class="col-auto">'
-                                                                html += '<span class="small">' + i18next.t('word_RawProd') + '</span>'
-                                                                html += '<span id="itemRawProd-' + elem.id + '" class="small ms-1 text-white"></span>'
-                                                            html += '</div>'
-                                                            html += '<div class="col-auto">'
-                                                                html += '<span class="small">' + i18next.t('word_RawConsum') + '</span>'
-                                                                html += '<span id="itemRawConsum-' + elem.id + '" class="small ms-1 text-white"></span>'
+                                                    html += '<div class="row gy-2">'
+                                                        html += '<div class="col-12 lh-1">'
+                                                            html += '<div class="row gx-3 align-items-center justify-content-end">'
+                                                                html += '<div class="col">'
+                                                                    html += '<small>' + i18next.t('word_Production') + '</small>'
+                                                                html += '</div>'
+                                                                html += '<div class="col-auto">'
+                                                                    html += '<span class="small">' + i18next.t('word_RawProd') + '</span>'
+                                                                    html += '<span id="itemRawProd-' + elem.id + '" class="small ms-1 text-white"></span>'
+                                                                html += '</div>'
+                                                                html += '<div class="col-auto">'
+                                                                    html += '<span class="small">' + i18next.t('word_RawConsum') + '</span>'
+                                                                    html += '<span id="itemRawConsum-' + elem.id + '" class="small ms-1 text-white"></span>'
+                                                                html += '</div>'
                                                             html += '</div>'
                                                         html += '</div>'
-                                                    html += '</div>'
-                                                    html += '<div class="row gy-3">'
                                                         elem.lines.forEach(lineId => {
                                                             let line = window.app.game.getElem(lineId)
                                                             if (line.unlocked) {
                                                                 html += '<div class="col-12">'
-                                                                    html += '<div class="row gx-2 align-items-center">'
+                                                                    html += '<div class="row gx-1 align-items-center">'
                                                                         let machine = window.app.game.getElem(line.machineId)
-                                                                        html += '<div class="col-auto">'
-                                                                            html += '<div class="badge">'
+                                                                        html += '<div class="col-auto position-relative">'
+                                                                            html += '<div class="badge text-bg-light">'
                                                                                 html += '<img src="' + machine.img + '" width="18px" height="18px" data-bs-toggle="tooltip" data-bs-html="true" data-bs-title="<span class=\'text-white\'>' + i18next.t(machine.label) + '</span>">'
-                                                                                html += '<span class="ms-2">+' + formatNumber(line.output.count) + ' <small class="opacity-50">/s</small></span>'
+                                                                                html += '<span class="ms-1">+' + formatNumber(line.output.count) + ' <small class="opacity-50">/s</small></span>'
                                                                             html += '</div>'
+                                                                            html += '<div id="lineEfficiency-' + line.id + '" style="top:-0.5rem; left:-0.5rem;"></div>'
                                                                         html += '</div>'
-                                                                        html += '<div class="col">'
-                                                                            if (machine.energy) {
+                                                                        if (machine.energy) {
+                                                                            html += '<div class="col-auto">'
                                                                                 let energyElem = window.app.game.getElem(machine.energy.id)
                                                                                 html += '<span id="lineEnergyCount-' + line.id + '" class="badge" data-bs-toggle="tooltip" data-bs-html="true" data-bs-title="<span class=\'text-white\'>' + i18next.t(energyElem.label) + '</span>">'
                                                                                     html += '<img src="' + energyElem.img + '" width="18px" height="18px">'
-                                                                                    html += '<span id="lineEnergyCountValue-' + line.id + '" class="ms-2">' + formatNumber(machine.energy.count) + '</span>'
+                                                                                    html += '<span id="lineEnergyCountValue-' + line.id + '" class="ms-1">' + formatNumber(machine.energy.count) + '</span>'
                                                                                 html += '</span>'
-                                                                            }
-                                                                        html += '</div>'
+                                                                            html += '</div>'
+                                                                        }
                                                                         if (machine.id == 'machineManual') {
-                                                                            html += '<div class="col-auto" style="width:145px;">'
-                                                                                html += '<div class="row g-1 align-items-center justify-content-end">'
-                                                                                    html += '<div class="col-auto">'
-                                                                                        html += '<button type="button" id="manualStopBtn-' + line.id + '" class="btn btn-danger" onclick="window.app.doClick(\'stopManual\', { manualId:\'' + line.id + '\' })">'
-                                                                                            html += '<i class="fas fa-fw fa-stop"></i>'
-                                                                                        html += '</button>'
-                                                                                    html += '</div>'
-                                                                                    html += '<div class="col-auto">'
-                                                                                        html += '<button type="button" id="manualStartBtn-' + line.id + '" class="btn btn-warning" onclick="window.app.doClick(\'startManual\', { manualId:\'' + line.id + '\' })">'
-                                                                                            html += '<i class="fas fa-fw fa-play"></i>'
-                                                                                        html += '</button>'
-                                                                                    html += '</div>'
-                                                                                html += '</div>'
+                                                                            html += '<div class="ms-auto col-auto">'
+                                                                                html += '<button type="button" id="manualStopBtn-' + line.id + '" class="btn btn-danger" onclick="window.app.doClick(\'stopManual\', { manualId:\'' + line.id + '\' })">'
+                                                                                    html += '<i class="fas fa-fw fa-stop"></i>'
+                                                                                html += '</button>'
+                                                                            html += '</div>'
+                                                                            html += '<div class="col-auto">'
+                                                                                html += '<button type="button" id="manualStartBtn-' + line.id + '" class="btn btn-warning" onclick="window.app.doClick(\'startManual\', { manualId:\'' + line.id + '\' })">'
+                                                                                    html += '<i class="fas fa-fw fa-play"></i>'
+                                                                                html += '</button>'
                                                                             html += '</div>'
                                                                         }
                                                                         else {
-                                                                            html += '<div class="col-auto small text-end"><small class="opacity-50">x </small><span id="lineCount-' + line.id + '"></span></div>'
+                                                                            html += '<div class="col small text-end"><small class="opacity-50">x </small><span id="lineCount-' + line.id + '"></span></div>'
                                                                             html += '<div class="col-auto">'
-                                                                                html += '<div class="row g-1 align-items-center">'
-                                                                                    html += '<div class="col-auto">'
-                                                                                        html += '<select id="lineSelectCount-' + line.id + '" class="form-control form-control-sm" onchange="window.app.doClick(\'setLineSelectCount\', { elemId:\'' + lineId + '\', count:this.value })">'
-                                                                                            html += '<option' + (line.selectCount == '1' ? ' selected' : '') + ' value="1">1</option>'
-                                                                                            html += '<option' + (line.selectCount == '10' ? ' selected' : '') + ' value="10">10</option>'
-                                                                                            html += '<option' + (line.selectCount == '100' ? ' selected' : '') + ' value="100">100</option>'
-                                                                                            html += '<option' + (line.selectCount == 'max' ? ' selected' : '') + ' value="max">' + i18next.t('word_Max') + '</option>'
-                                                                                        html += '</select>'
-                                                                                    html += '</div>'
-                                                                                    html += '<div class="col-auto">'
-                                                                                        html += '<button id="lineRemoveBtn-' + line.id + '" class="btn btn-danger" type="button" onclick="window.app.doClick(\'removeLine\', { elemId:\'' + lineId + '\' })"><i class="fas fa-fw fa-minus-circle"></i></button>'
-                                                                                    html += '</div>'
-                                                                                    html += '<div class="col-auto">'
-                                                                                        html += '<button id="lineAddBtn-' + line.id + '" class="btn btn-warning" type="button" onclick="window.app.doClick(\'addLine\', { elemId:\'' + lineId + '\' })"><i class="fas fa-fw fa-plus-circle"></i></button>'
-                                                                                    html += '</div>'
-                                                                                html += '</div>'
+                                                                                html += '<select id="lineSelectCount-' + line.id + '" class="form-control form-control-sm" onchange="window.app.doClick(\'setLineSelectCount\', { elemId:\'' + lineId + '\', count:this.value })">'
+                                                                                    html += '<option' + (line.selectCount == '1' ? ' selected' : '') + ' value="1">1</option>'
+                                                                                    html += '<option' + (line.selectCount == '10' ? ' selected' : '') + ' value="10">10</option>'
+                                                                                    html += '<option' + (line.selectCount == '100' ? ' selected' : '') + ' value="100">100</option>'
+                                                                                    html += '<option' + (line.selectCount == 'max' ? ' selected' : '') + ' value="max">' + i18next.t('word_Max') + '</option>'
+                                                                                html += '</select>'
+                                                                            html += '</div>'
+                                                                            html += '<div class="col-auto">'
+                                                                                html += '<button id="lineRemoveBtn-' + line.id + '" class="btn btn-danger" type="button" onclick="window.app.doClick(\'removeLine\', { elemId:\'' + lineId + '\' })"><i class="fas fa-fw fa-minus-circle"></i></button>'
+                                                                            html += '</div>'
+                                                                            html += '<div class="col-auto">'
+                                                                                html += '<button id="lineAddBtn-' + line.id + '" class="btn btn-warning" type="button" onclick="window.app.doClick(\'addLine\', { elemId:\'' + lineId + '\' })"><i class="fas fa-fw fa-plus-circle"></i></button>'
                                                                             html += '</div>'
                                                                         }
                                                                     html += '</div>'
@@ -395,7 +392,7 @@ class ScreenGame {
                                         }
                                         if (elem.storage) {
                                             html += '<div class="card-body">'
-                                                html += '<div class="row gy-3">'
+                                                html += '<div class="row gy-2">'
                                                     html += '<div class="col-12 lh-1">'
                                                         html += '<div class="row gx-2 align-items-center justify-content-end">'
                                                             html += '<div class="col">'
@@ -419,12 +416,12 @@ class ScreenGame {
                                                             html += '<div class="col-12">'
                                                                 html += '<div class="row g-2 align-items-center">'
                                                                     html += '<div class="col">'
-                                                                        html += '<div class="badge">'
+                                                                        html += '<div class="badge text-bg-light">'
                                                                             html += '<img src="' + storer.img + '" width="18px" height="18px" data-bs-toggle="tooltip" data-bs-html="true" data-bs-title="<span class=\'text-white\'>' + i18next.t(storer.label) + '</span>">'
-                                                                            html += '<span class="ms-2">+' + formatNumber(elem.storage.base) + '</span>'
+                                                                            html += '<span class="ms-1">+' + formatNumber(elem.storage.base) + '</span>'
                                                                         html += '</div>'
                                                                     html += '</div>'
-                                                                    html += '<div class="col-auto small text-end" style="width:35px;"><small class="opacity-50">x </small><span id="itemStorageCount-' + elem.id + '"></span></div>'
+                                                                    html += '<div class="col-auto small text-end"><small class="opacity-50">x </small><span id="itemStorageCount-' + elem.id + '"></span></div>'
                                                                     html += '<div class="col-auto">'
                                                                         html += '<div class="row g-1 align-items-center">'
                                                                             html += '<div class="col-auto">'
@@ -462,7 +459,7 @@ class ScreenGame {
                                                                 html += '<div class="row g-1 align-items-center">'
                                                                     elem.costs.forEach(cost => {
                                                                         let costElem = window.app.game.getElem(cost.id)
-                                                                        html += '<div class="col-auto" style="width:65px;">'
+                                                                        html += '<div class="col-auto">'
                                                                             html += '<span id="missionNeedCount-' + elem.id + '-' + cost.id + '" class="badge text-bg-light d-flex align-items-center justify-content-center" data-bs-toggle="tooltip" data-bs-html="true" data-bs-title="<span class=\'text-white\'>' + i18next.t(costElem.label) + '</span>">'
                                                                                 html += '<img src="' + costElem.img + '" width="18px" height="18px">'
                                                                                 html += '<span class="ms-1">' + formatNumber(cost.count) + '</span>'
@@ -543,7 +540,7 @@ class ScreenGame {
         let tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
     }
     //---
-    refreshTabScenarii() {
+    refreshTabScenarios() {
         //---
         let html = ''
         //---
@@ -622,12 +619,14 @@ class ScreenGame {
                         //---
                         if (item.prod > 0) html = '+' + formatNumber(item.prod) + ' <small class="opacity-50">/s</small>'
                         else if (item.prod <= 0) html = formatNumber(item.prod) + ' <small class="opacity-50">/s</small>'
+                        if (item.efficiency < 1) html += '<i class="ms-1 fas fa-exclamation-triangle"></i>'
                         node = document.getElementById('itemProd-' + item.id)
                         if (node.innerHTML != html) node.innerHTML = html
                         //---
                         style = 'badge justify-content-end'
-                        if (item.prod > 0) style += ' text-success'
-                        else if (item.prod < 0) style += ' text-bg-danger'
+                        if (item.efficiency < 1) style += ' text-bg-danger'
+                        else if (item.prod < 0) style += ' text-danger'
+                        else if (item.prod > 0) style += ' text-success'
                         else style += ' text-normal'
                         if (node.className != style) node.className = style
                     }
@@ -638,22 +637,22 @@ class ScreenGame {
                     //---
                     let max = window.app.game.getMax(item.id)
                     style = 'badge justify-content-end'
-                    if (max > 0 && item.count >= max) style += ' text-bg-danger'
-                    else if (item.count > 0) style += ' text-bg-light'
+                    if (max > 0 && item.count >= max) style += ' text-danger'
+                    else if (item.count > 0) style += ' text-white'
                     else style += ' text-normal'
                     if (node.className != style) node.className = style
                     //---
-                    if (item.cat == 'machine' || item.cat == 'storer' || (item.cat == 'energy' && item.id != 'itemElectricity')) {
+                    if (item.cat == 'machine' || item.cat == 'storer') {
                         //---
                         let node = document.getElementById('itemAvailableCount-' + item.id)
-                        let count = window.app.game.getAvailableCount(item.id)
+                        let count = Math.floor(window.app.game.getAvailableCount(item.id))
                         //---
-                        html = formatNumber(count, 2)
+                        html = formatNumber(count)
                         if (node.innerHTML != html) node.innerHTML = html
                         //---
-                        style = 'badge justify-content-end'
-                        if (count > 0) style += ' text-success'
-                        else style += ' text-bg-light text-normal'
+                        style = 'position-absolute badge'
+                        if (count > 0) style += ' text-bg-success'
+                        else style += ' d-none'
                         if (node.className != style) node.className = style
                     }
                     //---
@@ -714,6 +713,18 @@ class ScreenGame {
                                     }
                                     else {
                                         //---
+                                        node = document.getElementById('lineEfficiency-' + line.id)
+                                        count = Math.floor(line.efficiency * 100)
+                                        if (count < 100) {
+                                            //---
+                                            html = count + '%'
+                                            if (node.innerHTML != html) node.innerHTML = html
+                                            //---
+                                            style = 'position-absolute badge text-bg-danger'
+                                            if (node.className != style) node.className = style
+                                        }
+                                        else if (node.className != 'd-none') node.className = 'd-none'
+                                        //---
                                         if (machine.energy) {
                                             //---
                                             node = document.getElementById('lineEnergyCountValue-' + line.id)
@@ -724,6 +735,7 @@ class ScreenGame {
                                             node = document.getElementById('lineEnergyCount-' + line.id)
                                             style = 'badge'
                                             if (count > window.app.game.getAvailableCount(machine.energy.id)) style += ' text-bg-danger'
+                                            else style += ' text-bg-light'
                                             if (node.className != style) node.className = style
                                         }
                                         //---
